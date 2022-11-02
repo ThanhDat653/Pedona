@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.1.2-web/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>Pedona Shop</title>
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="grid wide">
+                <div class="row no-gutters header-container">
+                    <div class="col l-3 m-0 c-0 header-item header--search">
+                        <form action="" class="form-input">
+                            <input type="text" placeholder="Search products" class="header--search__input">
+                            <button class="header--search__btn">
+                                <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="col l-3 m-2 c-3 header-item header-logo" title="Pedona Shop">
+                        <a href="#" class="header-logo__link">
+                            <img src="./assets/image/logo.png" class="header-logo__img" alt="Pedona logo"></img>
+                        </a>
+                    </div>
+
+                    <div class="col l-0 m-6 c-6 tablet-header--search">
+                        <form action="" class="form-input">
+                            <input type="text" placeholder="Search products" class="c-10 header--search__input">
+                            <div class="c-2 header--search__btn">
+                                <i class="search-icon fa-solid fa-magnifying-glass"></i>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="col l-3 m-2 c-2 header-item header--top-navbar">
+                        <ul class="header--top-navbar__list">
+                            <li class="m-0 c-0 header--top-navbar__item">
+                                <a href="#" class="li header--top-navbar__item-link">
+                                    <i class="top-navbar__icon fa-regular fa-heart"></i>
+                                </a>
+                            </li>
+                            
+                            <li class="header--top-navbar__item navbar__item-cart">
+                                <a href="#" class="li header--top-navbar__item-link">
+                                    <i class="top-navbar__icon fa-solid fa-bag-shopping"></i>
+                                </a>
+                                <span class="cart-number-badge">
+                                    <span class="cart-quantity">2</span>
+                                </span>
+                            </li>
+                            
+                            <li class="c-0 header--top-navbar__item">
+                                <a href="#" class="li header--top-navbar__item-link">
+                                    <i class="top-navbar__icon fa-regular fa-user"></i>
+                                </a>
+                            </li>
+
+                            <li class="m-0 c-0 header--top-navbar__item">
+                                <a href="#" class="li header--top-navbar__item-link">
+                                    <i class="top-navbar__icon fa-solid fa-globe"></i>
+                                </a>
+                            </li>
+
+                            <li class="l-0 header--top-navbar__item mobile-menu__icon">
+                                <a href="#" class="li header--top-navbar__item-link">
+                                    <i class="top-navbar__icon fa-solid fa-bars"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row header__navbar">
+                    <ul class="header__navbar-list">
+                        <li class="header__navbar-item">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">home</span>
+                            </a>
+                        </li>
+
+                        <li class="header__navbar-item header--shop__category">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">shop</span>
+                                <i class="header__navbar-more-icon fa-solid fa-chevron-down"></i>
+                            </a>
+
+                            <div class="header__sub-navbar">
+                                <ul class="header__sub-navbar-list">
+                                    <li class="header__sub-navbar-item">
+                                        <a href="" class="header__sub-navbar-item__link">
+                                            <span class="header__sub-navbar-item__lable">Shoes</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="header__sub-navbar-item">
+                                        <a href="" class="header__sub-navbar-item__link">
+                                            <span class="header__sub-navbar-item__lable">T-shirt</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="header__sub-navbar-item">
+                                        <a href="" class="header__sub-navbar-item__link">
+                                            <span class="header__sub-navbar-item__lable">Short</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="header__navbar-item">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">sale</span>
+                            </a>
+                        </li>
+
+                        <li class="header__navbar-item">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">contact</span>
+                            </a>
+                        </li>
+
+                        <li class="header__navbar-item">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">log in</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="header-sticky">
+            <div class="grid wide row header-sticky__container">
+                <div class="col l-2 header-sticky__logo">
+                    <a href="#" class="header-sticky__logo-link">
+                        <img src="./assets/image/logo.png" class="header-logo__img" alt="Pedona logo"></img>
+                    </a>
+                </div>
+    
+                <div class="col l-6 header-sticky__navbar">
+                    <ul class="header-sticky__navbar-list">
+                        <li class="header__navbar-item header-sticky__navbar-item">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">home</span>
+                            </a>
+                        </li>
+    
+                        <li class="header__navbar-item header-sticky__navbar-item header--shop__category">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">shop</span>
+                                <i class="header__navbar-more-icon fa-solid fa-chevron-down"></i>
+                            </a>
+    
+                            <div class="header__sub-navbar">
+                                <ul class="header__sub-navbar-list">
+                                    <li class="header__sub-navbar-item">
+                                        <a href="" class="header__sub-navbar-item__link">
+                                            <span class="header__sub-navbar-item__lable">Shoes</span>
+                                        </a>
+                                    </li>
+    
+                                    <li class="header__sub-navbar-item">
+                                        <a href="" class="header__sub-navbar-item__link">
+                                            <span class="header__sub-navbar-item__lable">T-shirt</span>
+                                        </a>
+                                    </li>
+    
+                                    <li class="header__sub-navbar-item">
+                                        <a href="" class="header__sub-navbar-item__link">
+                                            <span class="header__sub-navbar-item__lable">Short</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+    
+                        <li class="header__navbar-item header-sticky__navbar-item">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">sale</span>
+                            </a>
+                        </li>
+    
+                        <li class="header__navbar-item header-sticky__navbar-item">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">contact</span>
+                            </a>
+                        </li>
+    
+                        <li class="header__navbar-item header-sticky__navbar-item">
+                            <a href="#" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">log in</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="header__side-menu-container">
+            <div class="header__side-menu">
+                <div class="user">
+                    <div class="user-img">
+                        <a href="" class="user-img__link">
+                            <img src="./assets/image/user.png" alt="user image">
+                        </a>
+                    </div>
+    
+                    <div class="user-name">
+                        <span>Nguyen Thanh Dat</span>
+                    </div>
+    
+    
+                </div>
+    
+                <div class="side-menu__list-wrapper">
+                    <ul class="side-menu__list">
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-user"></i>
+                            <a href="" class="side-menu-item--link">Tài Khoản Của Tôi</a>
+                        </li>
+    
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-bag-shopping"></i>
+                            <a href="" class="side-menu-item--link">Đơn Mua</a>
+                        </li>
+                    </ul>
+    
+                    <ul class="side-menu__list">
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-house"></i>
+                            <a href="" class="side-menu-item--link">Trang Chủ</a>
+                        </li>
+    
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-bell"></i>
+                            <a href="" class="side-menu-item--link">Thông Báo</a>
+                        </li>
+    
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-circle-exclamation"></i>
+                            <a href="" class="side-menu-item--link">Giới Thiệu</a>
+                        </li>
+                    </ul>
+    
+                    <ul class="side-menu__list">
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-cloud-arrow-down"></i>
+                            <a href="" class="side-menu-item--link">Tải Ứng Dụng</a>
+                        </li>
+                        
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-circle-question"></i>
+                            <a href="" class="side-menu-item--link">Trung Tâm Trợ Giúp</a>
+                        </li>
+    
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-phone"></i>
+                            <a href="" class="side-menu-item--link">Chăm Sóc Khách Hàng</a>
+                        </li>
+                    </ul>
+    
+                    <ul class="side-menu__list">
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-brands fa-facebook"></i>
+                            <a href="" class="side-menu-item--link">Facebook</a>
+                        </li>
+                        
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-brands fa-square-instagram"></i>
+                            <a href="" class="side-menu-item--link">Instagram</a>
+                        </li>
+    
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-brands fa-linkedin"></i>
+                            <a href="" class="side-menu-item--link">Likedln</a>
+                        </li>
+                    </ul>
+    
+                    <ul class="side-menu__list">
+                        <li class="side-menu-item">
+                            <i class="side-menu__icon fa-solid fa-right-from-bracket"></i>
+                            <a href="" class="side-menu-item--link">Đăng Xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-sign">
+            <div class="modal-form">
+                <div class="close-modal">
+                    <button class="close-btn">
+                        <i class="close-modal--icon fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                
+
+                <div class="modal--sign-in-form">
+                    <div class="sign-in-form--content">
+                        <div class="sign-in-form--content__header">
+                            <div class="content-heding">
+                                <h2>Sign in</h2>
+                            </div>
+                        </div>
+    
+                        <div class="sign-in-form--content__body">
+                            <form action="">
+                                <div class="form-item">
+                                    <label for="username">Username</label>
+                                    <input id="username" class="sign-in-input" type="text" value="" name="user-name" placeholder="Type your username">
+                                </div>
+
+                                <div class="form-item">
+                                    <label for="password">Password</label>
+                                    <input id="pasword" class="sign-in-input" type="text" value="" name="password" placeholder="Type your password">
+                                    <a href="" class="forgot-password">
+                                        <span>Forgot password ?</span>
+                                    </a>
+                                </div>
+                            </form>
+
+                        </div>
+    
+                        <div class="sign-in-form--content__footer">
+                            <button class="sign-in--btn">Sign In</button>
+                            <div class="move-to-sign-up">
+                                <span>Not a member?</span>
+                                <a href="" class="sign-up__link">Sign up now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <div class="modal--sign-up-form">
+                    <div class="sign-up-form--content">
+                        <div class="sign-up-form--content__header">
+    
+                        </div>
+    
+                        <div class="sign-up-form--content__body">
+    
+                        </div>
+    
+                        <div class="sign-up-form--content__footer">
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="slider">
+            <img src="./assets/image/slider_img1.jpg" alt="" class="slider-img">
+        </div>
+
+        <div class="distance"></div>
+
+        <div id="container">
+            <h2 class="container-title">our products</h2>
+            <div class="grid wide">
+                <div class="row l-0 m-0 mobile-filter-bar">
+                    <div class="l-0 m-0 c-3 mobile-filter--btn">
+                        <a href="" class="mobile-filter__link">
+                            Color
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+                    </div>
+
+                    <div class="l-0 m-0 c-3 mobile-filter--btn">
+                        <a href="" class="mobile-filter__link">
+                            Sort By
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+                    </div>
+
+                    <div class="l-0 m-0 c-3 mobile-filter--btn">
+                        <a href="" class="mobile-filter__link">
+                            Sale
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+                    </div>
+
+                    <div class="l-0 m-0 c-3 mobile-filter--btn">
+                        <a href="" class="mobile-filter__link">
+                            Price
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row no-gutters shop-content">
+                    <div class="col l-2-4 m-2-4 filter-bar">
+                        <div class="filter-bar__container">
+                            <h2 class="filter-bar__title">Categories</h2>
+                            <ul class="product-category">
+                                <li class="category-item">
+                                    <a href="#" class="category-item__link">
+                                        <span class="category-item__lable">White</span>
+                                        <span class="item-amount">(2)</span>
+                                    </a>
+                                </li>
+
+                                <li class="category-item">
+                                    <a href="#" class="category-item__link">
+                                        <span class="category-item__lable">Black</span>
+                                        <span class="item-amount">(2)</span>
+                                    </a>
+                                </li>
+
+                                <li class="category-item">
+                                    <a href="#" class="category-item__link">
+                                        <span class="category-item__lable">Low</span>
+                                        <span class="item-amount">(2)</span>
+                                    </a>
+                                </li>
+
+                                <li class="category-item filter-by-price">
+                                    <span class="category-item__lable">Filter By Price</span>
+                                    <input type="range" name="filter-price"  class="filter-price__input" id="" min="1" max="100">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col l-9 m-9 list-product">
+                        <div class="tool-bar">
+                            <div class="view-mode">
+                                <a href="#" class="view-mode__grid">
+                                    <i class="fa-solid fa-border-all"></i>
+                                    Grid
+                                </a>
+
+                                <a href="#" class="view-mode__list">
+                                    <i class="fa-solid fa-list"></i>
+                                    List
+                                </a>
+                            </div>
+
+                            <div class="sort">
+                                <span>Sort by:</span>
+                                <select name="sort-box__option" title="selection" id="box__option" class="sort-box__option">
+                                    <option value="1" class="sort-option1">Low To Height</option>
+                                    <option value="2" class="sort-option2">Height To Low</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row list-product__grid">
+                            <div class="l-4 m-6 c-12 product">
+                                <div class="product__link">
+                                    <div class="product-item">
+                                        <div class="product-item__img">
+                                            <div class="product__img"><input type="radio" name="color" id="khaki" checked><img src="./assets/image/jordan_delta_3_khaki.png" alt=""></div>
+                                            <div class="product__img"><input type="radio" name="color" id="black" checked><img src="./assets/image/jordan_delta_3_black.png" alt=""></div>
+                                        </div>
+
+                                        <div class="product-option__color">
+                                            <label for="khaki">
+                                                <div class="circle-check" style="background-color: #c1b293;"></div>
+                                            </label>
+
+                                            <label for="black">
+                                                <div class="circle-check" style="background-color: #000;"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="product__description">
+                                        <div class="product-item">
+                                            <div class="product-item__img">
+                                                <div class="dscr--product__img">
+                                                    <input type="radio" name="dsc--color" id="dscr--khaki" checked>
+                                                    <img src="./assets/image/jordan_delta_3_khaki_copy.png" alt="">
+                                                </div>
+
+                                                <div class="dscr--product__img">
+                                                    <input type="radio" name="dsc--color" id="dscr--black" checked>
+                                                    <img src="./assets/image/jordan_delta_3_black_copy.png" alt="">
+                                                </div>
+                                            </div>
+    
+                                            <div class="dscr--product-option__color">
+                                                <label for="dscr--khaki">
+                                                    <div class="dscr--circle-check" style="background-color: #c1b293;"></div>
+                                                </label>
+    
+                                                <label for="dscr--black">
+                                                    <div class="dscr--circle-check" style="background-color: #000;"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="product__information">
+                                            <div class="product-item dscr--product__name">Jordan Delta 3 Mid</div>
+                                            <p class="dscr--product__detail">Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow.</p>
+                                            <div class="product-item product__price">$ 200</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-item product__name">Jordan Delta 3 Mid</div>
+                                    <div class="product-item product__rating">
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon"></i>
+                                    </div>
+                                    <div class="product-item product__price">$ 200</div>
+                                </div>
+                            </div>
+
+                            <div class="l-4 m-6 c-12 product">
+                                <div class="product__link">
+                                    <img class="product-item product__img" src="./assets/image/product_img_01.jpg"></img>
+                                    <div class="product-item product__name">Nike</div>
+                                    <div class="product-item product__rating">
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon"></i>
+                                    </div>
+                                    <div class="product-item product__price">$ 200</div>
+                                </div>
+                            </div>
+
+                            <div class="l-4 m-6 c-12 product">
+                                <div class="product__link">
+                                    <img class="product-item product__img" src="./assets/image/product_img_01.jpg"></img>
+                                    <div class="product-item product__name">Nike</div>
+                                    <div class="product-item product__rating">
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon"></i>
+                                    </div>
+                                    <div class="product-item product__price">$ 200</div>
+                                </div>
+                            </div>
+
+                            <div class="l-4 m-6 c-12 product">
+                                <div class="product__link">
+                                    <img class="product-item product__img" src="./assets/image/product_img_01.jpg"></img>
+                                    <div class="product-item product__name">Nike</div>
+                                    <div class="product-item product__rating">
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon"></i>
+                                    </div>
+                                    <div class="product-item product__price">$ 200</div>
+                                </div>
+                            </div>
+
+                            <div class="l-4 m-6 c-12 product">
+                                <div class="product__link">
+                                    <img class="product-item product__img" src="./assets/image/product_img_01.jpg"></img>
+                                    <div class="product-item product__name">Nike</div>
+                                    <div class="product-item product__rating">
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon"></i>
+                                    </div>
+                                    <div class="product-item product__price">$ 200</div>
+                                </div>
+                            </div>
+
+                            <div class="l-4 m-6 c-12 product">
+                                <div class="product__link">
+                                    <img class="product-item product__img" src="./assets/image/product_img_01.jpg"></img>
+                                    <div class="product-item product__name">Nike</div>
+                                    <div class="product-item product__rating">
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon"></i>
+                                    </div>
+                                    <div class="product-item product__price">$ 200</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="pagination">
+                            <li class="pagination-item pagination-item__active">
+                                <a href="#" class="pagination__link">1</a>
+                            </li>
+
+                            <li class="pagination-item">
+                                <a href="#" class="pagination__link">2</a>
+                            </li>
+
+                            <li class="pagination-item">
+                                <a href="#" class="pagination__link">
+                                    <i class="fa-solid fa-right-long"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="distance"></div>
+            <div class="grid footer-container">
+                <div class="row wide">
+                    <div class="col l-4 m-4 footer-item">
+                        <img src="./assets/image/footer_logo.png" alt="" class="footer__logo">
+
+                        <p class="footer-item__sub-heading">
+                            We are a team of designers and developers that create
+                            high quality Magento, Wordpress, Prestashop, Opencart
+                        </p>
+
+                        <p class="footer-item__sub-heading">
+                            ADDRESS: 6688Princess Road, London, Greater London
+                        </p>
+
+                        <p class="footer-item__sub-heading">
+                            PHONE: (012) 800 456 789-987
+                        </p>
+
+                        <p class="footer-item__sub-heading">
+                            EMAIL: Nhom03@gmail.com
+                        </p>
+                    </div>
+
+                    <div class="col l-3 m-3 footer-item">
+                        <h2 class="footer-item__heading">Customer Care</h2>
+
+                        <a href="#" class="footer-item__link">Clothing</a>
+                        <a href="#" class="footer-item__link">Shoes</a>
+                        <a href="#" class="footer-item__link">Handbag</a>
+                        <a href="#" class="footer-item__link">Accessories</a>
+                        <a href="#" class="footer-item__link">Fashion</a>
+
+                    </div>
+
+                    <div class="col l-3 m-3 footer-item">
+                        <h2 class="footer-item__heading">Information</h2>
+
+                        <a href="#" class="footer-item__link">About Us</a>
+                        <a href="#" class="footer-item__link">Contact Us</a>
+                        <a href="#" class="footer-item__link">My orders</a>
+                        <a href="#" class="footer-item__link">Terms & Conditions</a>
+                        <a href="#" class="footer-item__link">Returns & Exchanges</a>
+                    </div>
+
+                    <div class="col l-2 m-2 footer-item">
+                        <h2 class="footer-item__heading">Follow Us</h2>
+                        <p class="footer-item__sub-heading">
+                            Follow us to be notificated of sales
+                        </p>
+
+                        <div class="social-list">
+                            <a href="#" class="footer-item__link">
+                                <div class="social-icon social-icon__facebook">
+                                    <i class="fa-brands fa-facebook-f"></i>
+                                </div>
+                            </a>
+
+                            <a href="#" class="footer-item__link">
+                                <div class="social-icon social-icon__twitter">
+                                    <i class="fa-brands fa-twitter"></i>
+                                </div>
+                            </a>
+
+                            <a href="#" class="footer-item__link">
+                                <div class="social-icon social-icon__instagram">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </div>
+                            </a>
+
+                            <a href="#" class="footer-item__link">
+                                <div class="social-icon social-icon__pinterest">
+                                    <i class="fa-brands fa-pinterest-p"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-to-top" onclick="">
+            <i class="back-to-top__icon fa-solid fa-caret-up"></i>
+        </div>
+    </div>
+
+    <script src="./assets/js/javascript.js"></script>
+</body>
+</html>

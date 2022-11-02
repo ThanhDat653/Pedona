@@ -1,0 +1,24 @@
+:root {
+    --primary-color : #cc2121;
+    --text-color: #242424;
+    --white-color: #fff;
+    --sub-text-color: #707070;
+    --border-color: #d7d7d7
+}
+
+html {
+    font-family: 'Rubik', Helvetica, sans-serif;
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #fff;
+}           
+
+.main {
+    position: relative;
+    overflow: hidden;
+}
