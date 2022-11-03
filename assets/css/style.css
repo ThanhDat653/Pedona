@@ -650,7 +650,7 @@
 }
 
 .product__description {
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -746,6 +746,46 @@
 
 .product__description .product__price {
     font-size: 1.8rem;
+}
+
+.buttons__added {
+    display: flex;
+    white-space: nowrap;
+}
+
+.quantity-btn {
+    overflow: hidden;
+    background-color: #f9f9f9;
+    height: 22px;
+    width: 19px;
+    padding: 0;
+    text-shadow: 1px 1px 1px var(--white-color);
+    border: 1px solid #ddd;
+}
+
+.quantity-btn:focus,.input-text:focus {
+    outline:none;
+}
+
+.input-qty {
+    background-color: var(--white-color);
+    text-align: center;
+    width: 25px;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-left: 0;
+    border-right: 0;
+}
+
+.minus {
+    border-radius: 2px 0 0 2px;
+}
+
+.plus {
+    border-radius: 0 2px 2px 0;
 }
 
 .buy-btn {
