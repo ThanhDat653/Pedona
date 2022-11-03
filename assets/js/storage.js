@@ -22,9 +22,9 @@ var products = [
 
 var users = [
     {
-        username: "abc",
+        username: "admin",
         pass: "123",
-        userID: 1,
+        userID: 0,
         name: "nguyen van a"
     }
 ]
