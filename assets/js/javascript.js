@@ -38,3 +38,29 @@ function hideMenu() {
     overlaySideMenu.classList.toggle('open');
     sideMenu.classList.toggle('open');
 }
+
+// ----- PRODUCT DESCRIPTION -----
+
+var productImageElement = document.querySelector(".product-item__img");
+var descriptionLayer = document.querySelector(".product__description-layer");
+var productDescriptionElement = document.querySelector(".product__description");
+var closeDescription = document.querySelector(".product__description--close");
+
+function open_closeDescription() {
+    productDescriptionElement.classList.toggle("open-description");
+    descriptionLayer.classList.toggle("open-description--layer");
+    stopPropagation();
+}
+
+productImageElement.addEventListener("click", open_closeDescription);
+
+productDescriptionElement.addEventListener("click", function() {
+    stopPropagation();
+})
+
+function noClosing(event) {
+    event.stopPropagation();
+}
+
+closeDescription.addEventListener("click", open_closeDescription);
+descriptionLayer.addEventListener("click", open_closeDescription);
