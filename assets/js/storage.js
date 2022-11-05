@@ -7,7 +7,7 @@ var products = [
         id: "jd3-black",
         color: "black",
         price: 200,
-        img: "./assets/image/jordan_delta_3_khaki_copy.png",
+        img: "./assets/image/jordan_delta_3_black.png",
         desc: ""
     },
 
@@ -77,7 +77,7 @@ var products = [
 var productGridList = document.querySelector(".list-product__grid");
 
 products.forEach(function(product) {
-    productGridList.innerText = 
+    var productElement = 
     `<div class="l-4 m-6 c-12 product">
         <div class="product__link">
             <div class="product-item product__img">
@@ -120,9 +120,18 @@ products.forEach(function(product) {
             
 
             <div class="product-item product__name">${product.name}</div>
+            <div class="product-item product__rating">
+                <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                <i class="fa-solid fa-star star-icon"></i>
+            </div>
             <div class="product-item product__price">$${product.price}</div>
         </div>
     </div>`
+    productGridList.insertAdjacentHTML("beforeend", productElement)
+    
 })
 
 
