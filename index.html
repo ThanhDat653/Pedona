@@ -440,7 +440,7 @@
                     <div class="col l-9 m-9 list-product">
                         <div class="tool-bar">
                             <div class="view-mode">
-                                <a href="#" class="view-mode__grid">
+                                <a href="#" class="view-mode__grid current-view">
                                     <i class="fa-solid fa-border-all"></i>
                                     Grid
                                 </a>
@@ -463,23 +463,10 @@
                         <div class="row list-product__grid">
                             <div class="l-4 m-6 c-12 product">
                                 <div class="product__link">
-                                    <div class="product-item">
-                                        <div class="product-item__img">
-                                            <div class="product__img"><input type="radio" name="color" id="khaki" checked><img src="./assets/image/jordan_delta_3_khaki.png" alt=""></div>
-                                            <div class="product__img"><input type="radio" name="color" id="black" checked><img src="./assets/image/jordan_delta_3_black.png" alt=""></div>
-                                        </div>
-
-                                        <div class="product-option__color">
-                                            <label for="khaki">
-                                                <div class="circle-check" style="background-color: #c1b293;"></div>
-                                            </label>
-
-                                            <label for="black">
-                                                <div class="circle-check" style="background-color: #000;"></div>
-                                            </label>
-                                        </div>
+                                    <div class="product-item product__img">
+                                        <img src="./assets/image/jordan_delta_3_black.png"></img>
                                     </div>
-                                    
+                    
                                     <div class="product__description-layer">
                                         <div class="product__description" onclick="noClosing(event)">
                                             <div class="product__description--close">
@@ -489,36 +476,22 @@
                                             <div class="product-item">
                                                 <div class="product-item__img">
                                                     <div class="dscr--product__img">
-                                                        <input type="radio" name="dsc--color" id="dscr--khaki" checked>
-                                                        <img src="./assets/image/jordan_delta_3_khaki_copy.png" alt="">
-                                                    </div>
-    
-                                                    <div class="dscr--product__img">
-                                                        <input type="radio" name="dsc--color" id="dscr--black" checked>
                                                         <img src="./assets/image/jordan_delta_3_black_copy.png" alt="">
                                                     </div>
-                                                </div>
-        
-                                                <div class="dscr--product-option__color">
-                                                    <label for="dscr--khaki">
-                                                        <div class="dscr--circle-check" style="background-color: #c1b293;"></div>
-                                                    </label>
-        
-                                                    <label for="dscr--black">
-                                                        <div class="dscr--circle-check" style="background-color: #000;"></div>
-                                                    </label>
                                                 </div>
                                             </div>
     
                                             <div class="product__information">
                                                 <div class="product-item dscr--product__name">Jordan Delta 3 Mid</div>
                                                 <p class="dscr--product__detail">Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow.</p>
-                                                <div class="product-item product__price">$ 200</div>
-
-                                                <div class="buttons__added">
-                                                    <input class="minus quantity-btn" type="button" value="-">
-                                                    <input class="input-qty" name="" type="number" value="1">
-                                                    <input class="plus quantity-btn" type="button" value="+">
+                                                
+                                                <div class="wrap-price">
+                                                    <div class="product-item product__price">$ 200</div>
+                                                    <div class="buttons__added">
+                                                        <input class="minus quantity-btn" type="button" value="-">
+                                                        <input class="input-qty" name="" type="number" value="1">
+                                                        <input class="plus quantity-btn" type="button" value="+">
+                                                    </div>
                                                 </div>
 
                                                 <div class="buy-btn">
@@ -540,6 +513,60 @@
                                     <div class="product-item product__price">$ 200</div>
                                 </div>
                             </div>
+
+                            <div class="l-4 m-6 c-12 product">
+                                <div class="product__link">
+                                    <div class="product-item product__img">
+                                        <img src="./assets/image/jordan_delta_3_khaki.png"></img>
+                                    </div>
+                    
+                                    <div class="product__description-layer">
+                                        <div class="product__description" onclick="noClosing(event)">
+                                            <div class="product__description--close">
+                                                <i class="fa-solid fa-xmark"></i>
+                                            </div>
+    
+                                            <div class="product-item">
+                                                <div class="product-item__img">
+                                                    <div class="dscr--product__img">
+                                                        <img src="./assets/image/jordan_delta_3_khaki_copy.png" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="product__information">
+                                                <div class="product-item dscr--product__name">Jordan Delta 3 Mid</div>
+                                                <p class="dscr--product__detail">Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow.</p>
+                                                
+                                                <div class="wrap-price">
+                                                    <div class="product-item product__price">$ 200</div>
+                                                    <div class="buttons__added">
+                                                        <input class="minus quantity-btn" type="button" value="-">
+                                                        <input class="input-qty" name="" type="number" value="1">
+                                                        <input class="plus quantity-btn" type="button" value="+">
+                                                    </div>
+                                                </div>
+
+                                                <div class="buy-btn">
+                                                    <button type="submit">Add to Cart</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="product-item product__name">Jordan Delta 3 Mid</div>
+                                    <div class="product-item product__rating">
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon--rate star-icon"></i>
+                                        <i class="fa-solid fa-star star-icon"></i>
+                                    </div>
+                                    <div class="product-item product__price">$ 200</div>
+                                </div>
+                            </div>
+
 
                             <div class="l-4 m-6 c-12 product">
                                 <div class="product__link">

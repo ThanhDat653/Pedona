@@ -27,7 +27,6 @@ menuIcon.addEventListener('click', function() {
 overlaySideMenu.addEventListener('click', function() {
     sideMenu.classList.toggle('hide');
     setTimeout(hideMenu, 450);
-    
 })
 
 sideMenu.addEventListener('click', function(event) {
@@ -41,26 +40,35 @@ function hideMenu() {
 
 // ----- PRODUCT DESCRIPTION -----
 
-var productImageElement = document.querySelector(".product-item__img");
-var descriptionLayer = document.querySelector(".product__description-layer");
-var productDescriptionElement = document.querySelector(".product__description");
-var closeDescription = document.querySelector(".product__description--close");
+var productImageElement = document.querySelectorAll(".product__img");
+var descriptionLayer = document.querySelectorAll(".product__description-layer");
+var productDescriptionElement = document.querySelectorAll(".product__description");
+var closeDescription = document.querySelectorAll(".product__description--close");
 
 function open_closeDescription() {
-    productDescriptionElement.classList.toggle("open-description");
-    descriptionLayer.classList.toggle("open-description--layer");
-    stopPropagation();
+    productImageElement.forEach(function(index) {
+        console.log(index)
+        productImageElement[index].addEventListener("click", function() {
+            productDescriptionElement[index].classList.toggle("open-description");
+            descriptionLayer[index].classList.toggle("open-description--layer");
+            stopPropagation();
+        });
+    })
 }
 
-productImageElement.addEventListener("click", open_closeDescription);
+open_closeDescription();
 
-productDescriptionElement.addEventListener("click", function() {
-    stopPropagation();
-})
+// productDescriptionElement.addEventListener("click", function() {
+//     stopPropagation();
+// })
 
-function noClosing(event) {
-    event.stopPropagation();
-}
+// function noClosing(event) {
+//     event.stopPropagation();
+// }
 
-closeDescription.addEventListener("click", open_closeDescription);
-descriptionLayer.addEventListener("click", open_closeDescription);
+// closeDescription.addEventListener("click", open_closeDescription);
+// descriptionLayer.addEventListener("click", open_closeDescription);
+
+console.log(productImageElement);
+console.log(productDescriptionElement);
+console.log(descriptionLayer);
