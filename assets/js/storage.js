@@ -22,20 +22,40 @@ var products = [
     },
 
     {
-        name: "Jordan Delta 1",
+        name: "Air Jordan 1",
         type: "jd1",
-        id: "jd1-black-white",
-        color: "black-white",
+        id: "jd1-white",
+        color: "white",
         price: 200,
         img: "./assets/image/jordan_1_black_white.png",
         desc: ""
     },
 
     {
-        name: "Jordan Delta 1",
+        name: "Air Jordan 1",
         type: "jd1",
-        id: "jd1-black-white",
-        color: "black-white",
+        id: "jd1-yellow",
+        color: "yellow",
+        price: 200,
+        img: "./assets/image/jordan_1_yellow.png",
+        desc: ""
+    },
+
+    {
+        name: "Air Jordan 1",
+        type: "jd1",
+        id: "jd1-orange",
+        color: "orange",
+        price: 200,
+        img: "./assets/image/jordan_1_orange.png",
+        desc: ""
+    },
+
+    {
+        name: "Air Jordan 1",
+        type: "jd1",
+        id: "jd1-violet",
+        color: "violet",
         price: 200,
         img: "./assets/image/jordan_1_violet.png",
         desc: ""
@@ -54,7 +74,7 @@ var products = [
     {
         name: "Nike Air Max 270",
         type: "AirMax",
-        id: "AM270-white-black",
+        id: "AM270-white",
         color: "white",
         price: 200,
         img: "./assets/image/nike_airmax_270_white.png",
@@ -65,7 +85,7 @@ var products = [
         name: "Nike Air Max 270",
         type: "AirMax",
         id: "AM270-black",
-        color: "white",
+        color: "black",
         price: 200,
         img: "./assets/image/nike_airmax_270_black.png",
         desc: ""
