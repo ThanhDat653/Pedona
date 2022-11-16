@@ -1,7 +1,7 @@
 import {
   products as defaultProducts,
   carts as defaultCarts,
-  users as userList,
+  users as defaultUsers,
 } from "./storage.js";
 
 function gItem(key) {
@@ -551,9 +551,12 @@ function setQuantityOfProduct() {
   });
 }
 
-const userKey = "userList";
+// CARTS STORAGE
 
-// sItem(cartKey, JSON.stringify(cartList));
+sItem(cartKey, JSON.stringify(cartList));
+
+const userKey = "userList";
+const userList = JSON.parse(gItem(userKey)) || defaultCarts;
 sItem(userKey, JSON.stringify(userList));
 
 // find a cart of userCurrent from cartList by ID
