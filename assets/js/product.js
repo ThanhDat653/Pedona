@@ -325,20 +325,21 @@ function searchProductList() {
       area.addEventListener("change", () => {
         change = true;
         let path = input.value;
-        var temparr = path.split("\\");
-        var filename = temparr.slice(-1)[0];
+        let temparr = path.split("\\");
+        let filename = temparr.slice(-1)[0];
         if (checkImg(filename)) {
           //Check for valid filetype
 
-          var src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
-
+          let src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
+          //
           preview.src = src;
           preview.style.display = "block";
           preview.style.border = "1px solid #cc2424";
-
+          //
           sItem("imgconfig", src);
         } else {
           alert("Vui lòng Chọn File là Hình Ảnh");
+          imgReset();
         }
       });
     }

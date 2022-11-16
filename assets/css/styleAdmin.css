@@ -132,7 +132,7 @@ a {
 
 .center-text {
 
-  text-align: center;
+  text-align: center!important;
 
 }
 
@@ -782,7 +782,6 @@ a {
   border-radius: 5px;
   position: relative;
   margin: auto;
-  max-width: 900px;
   height: auto;
   background-color: #fff;
 
@@ -835,6 +834,17 @@ a {
   /* margin: auto 0; */
   padding: 5px 10px;
 
+}
+
+.col.invalid-input {
+  display: none;
+}
+
+.row.invalid .invalid-input {
+  display: block;
+  color:#cc2424;
+  font-size: 12px;
+  text-align: end;
 }
 
 #img-area {

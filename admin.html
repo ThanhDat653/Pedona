@@ -214,7 +214,7 @@
         <div class="modal__body">
           <div class="row no-gutters grid">
             <div class="col l-6 modal__left">
-              <label class="row no-gutters spc-btw mt-16" id="id__label" for="product__id">
+              <label class="row no-gutters spc-btw mt-16 " id="id__label" for="product__id">
                 <span class="col l-4 modal__text">Mã Sản Phẩm </span>
                 <input
                   class="col l-4 input"
@@ -222,8 +222,9 @@
                   name="name"
                   id="product__id"
                 />
+                <span class="col l-12 invalid-input id">Vui lòng nhập mã sản phẩm</span>
               </label>
-              <label class="row no-gutters spc-btw mt-16" id="name__label" for="product__name">
+              <label class="row no-gutters spc-btw mt-16 " id="name__label" for="product__name">
                 <span class="modal__text">Tên Sản Phẩm </span>
                 <input
                   class="input"
@@ -231,6 +232,8 @@
                   name="name"
                   id="product__name"
                 />
+                <span class="col l-12 invalid-input ">Vui lòng nhập tên sản phẩm</span>
+
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__color">
                 <span class="col l-2 modal__text">Màu</span>
@@ -278,12 +281,14 @@
                   rows="10"
                   placeholder="Mô Tả Sản Phẩm"
                 ></textarea>
+                <span class="col l-12 invalid-input ">Vui lòng nhập mô tả sản phẩm</span>
+
               </label>
             </div>
             <div class="col l-6 modal__right">
               <div class="row no-gutters js-mid">
                 <span class="modal__text">Hình Sản Phẩm</span>
-                <label for="img-input" class="fake-input mt-16">
+                <label for="img-input" id="img__label" class=" row no-gutters fake-input mt-16">
                   <div id="img-show">
                     <input
                       type="file"
@@ -302,6 +307,8 @@
                       <span class="icon__text">Chọn hình ảnh</span>
                     </div>
                   </div>
+                <span class="col l-12 invalid-input center-text ">Vui lòng không để trống hình sản phẩm</span>
+
                 </label>
               </div>
             </div>
