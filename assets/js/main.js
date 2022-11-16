@@ -64,7 +64,6 @@ sideBar.addEventListener("mouseover", hoverIn);
 sideBar.addEventListener("mouseout", hoverOut);
 
 //         Sidebar Size Change :End
-const tableHeader = document.getElementById("");
 
 let list = document.querySelectorAll(".side-bar__item");
 
@@ -125,8 +124,6 @@ export function createArr(node) {
 //           test();
 //       }
 //   }
-window.scrollY;
-console.log("🚀 ~ file: main.js ~ line 129 ~ window.scrollY", window.scrollY);
 
 const body = document.querySelector("body");
 body.onscroll = function () {

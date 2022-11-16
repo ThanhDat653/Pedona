@@ -48,17 +48,11 @@ export function outputUsers() {
   const fixSubmitButtonUser = createArr(
     document.querySelectorAll(".user.table__fix-submit")
   );
-  console.log(
-    "🚀 ~ file: users.js ~ line 49 ~ outputUsers ~ fixSubmitButtonUser",
-    fixSubmitButtonUser
-  );
+
   const editableUserName = createArr(document.querySelectorAll(".username"));
   const editablePassword = createArr(document.querySelectorAll(".password"));
   const editableName = createArr(document.querySelectorAll(".user.name"));
-  console.log(
-    "🚀 ~ file: users.js ~ line 56 ~ outputUsers ~ editableName",
-    editableName
-  );
+
   function toggleButton(index) {
     fixButtonUser[index].classList.toggle("close");
     delButtonUser[index].classList.toggle("close");
@@ -93,7 +87,7 @@ export function outputUsers() {
       }
       if (confirm("Bạn có chắc muốn thay đổi sản phẩm này?")) {
         let changedArea = createArr(document.querySelectorAll(".textarea"));
-        console.log(userList[index]);
+
         userList[index].username = changedArea[0].value;
         userList[index].pass = changedArea[1].value;
         userList[index].name = changedArea[2].value;
@@ -146,17 +140,11 @@ function searchUserList() {
     const fixSubmitButtonUser = createArr(
       document.querySelectorAll(".user.table__fix-submit")
     );
-    console.log(
-      "🚀 ~ file: users.js ~ line 49 ~ outputUsers ~ fixSubmitButtonUser",
-      fixSubmitButtonUser
-    );
+
     const editableUserName = createArr(document.querySelectorAll(".username"));
     const editablePassword = createArr(document.querySelectorAll(".password"));
     const editableName = createArr(document.querySelectorAll(".user.name"));
-    console.log(
-      "🚀 ~ file: users.js ~ line 56 ~ outputUsers ~ editableName",
-      editableName
-    );
+
     function toggleButton(index) {
       fixButtonUser[index].classList.toggle("close");
       delButtonUser[index].classList.toggle("close");
@@ -192,7 +180,7 @@ function searchUserList() {
         }
         if (confirm("Bạn có chắc muốn thay đổi sản phẩm này?")) {
           let changedArea = createArr(document.querySelectorAll(".textarea"));
-          console.log(userList[index]);
+
           userList[parseInt(userNumber[index].innerHTML) - 1].username =
             changedArea[0].value;
           userList[parseInt(userNumber[index].innerHTML) - 1].pass =

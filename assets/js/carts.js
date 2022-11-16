@@ -12,6 +12,8 @@ function displayCheck(item) {
 }
 const cartList = gItem("cartList") || defaultCarts;
 
+// =================================================================== render =================================================================//
+
 export function outputCarts() {
   tableBodyCart.innerHTML = "";
 
@@ -117,10 +119,7 @@ export function outputCarts() {
         item.classList.toggle("active");
       }
       const checkView = createArr(document.querySelectorAll(".col.check"));
-      console.log(
-        "🚀 ~ file: carts.js ~ line 129 ~ viewButton.forEach ~ checkView",
-        checkView
-      );
+
       checkView.forEach((itemCheck, indexCheck) => {
         itemCheck.onclick = () => {
           if (cartList[indexButton].productList[indexCheck].check == true) {
@@ -166,7 +165,7 @@ function searchCartList() {
   </div>
   <div class="col l-2">
   <button class="mt-16 order-full btn"><i class="fa-solid fa-caret-left fa-xl"></i></button>
-    ` + // <button class="order-full--close btn"><i class="fa-solid fa-caret-down"></i></button>`
+    ` +
         `</div>
     </div>
     <div class="content details-view no-gutters">
@@ -253,10 +252,7 @@ function searchCartList() {
             item.classList.toggle("active");
           }
           const checkView = createArr(document.querySelectorAll(".col.check"));
-          console.log(
-            "🚀 ~ file: carts.js ~ line 129 ~ viewButton.forEach ~ checkView",
-            checkView
-          );
+
           checkView.forEach((itemCheck, indexCheck) => {
             itemCheck.onclick = () => {
               if (cartList[indexButton].productList[indexCheck].check == true) {
