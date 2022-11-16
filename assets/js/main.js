@@ -64,7 +64,6 @@ sideBar.addEventListener("mouseover", hoverIn);
 sideBar.addEventListener("mouseout", hoverOut);
 
 //         Sidebar Size Change :End
-const tableHeader = document.getElementById("");
 
 let list = document.querySelectorAll(".side-bar__item");
 
