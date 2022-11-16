@@ -1,0 +1,126 @@
+
+/* PC  */
+@media (min-width:1024px) {
+
+    .side-bar {
+
+   
+
+    }
+
+}
+
+/* Tablet & Mobile  */
+
+@media (max-width:1023px) {
+    .black-layout {
+
+        /* display: block; */
+    }
+    .container{
+        width: 100%;
+    }
+    .btn {
+        padding: 10px 15px;
+    }
+
+    .config__button, .delete__button {
+        display: block;
+    }
+
+
+}
+
+
+/* Tablet */
+@media (min-width:740px) and (max-width : 1023px){
+   
+    .side-bar {
+        width: 225px; ;
+
+    }
+
+    .side-bar__logo {
+
+        width: 50%;
+
+    }
+    .side-bar__image {
+
+        width: 100%;
+        height: 40px;
+
+    }
+    .show-select,.search-bar {
+        width: 50%;
+    }
+
+    .select,.search-input{
+
+    }
+
+}
+
+/* Mobile  */
+
+@media (max-width:740px) {
+
+    .side-bar--mobile {
+        display: none;
+    }
+    .spc-even--mobile {
+        justify-content: space-evenly;
+    }
+
+    .side-bar__item {
+
+        padding: 16px 0px;
+    }
+
+    .side-bar__item:hover {
+
+        background-color: rgba(0, 0, 0, 0.4);
+      
+    }
+    
+    .side-bar__item a {
+        display: block;
+        width: 100%;
+        
+    }
+
+    .content--mobile,.container--mobile {
+        margin-left: 0;
+    }
+
+    .body__util.row {
+        flex-direction: column;
+    }
+    .color--price {
+        background-color: #00A39E;
+        color: #e7e7e7;
+        line-height: 42px;
+        font-size: large;
+    }
+    .color--id {
+        background-color: #e7e7e7;
+        color:  #cc2424;
+        line-height: 42px;
+    }
+    .select,.search-input {
+
+        padding: 10px 0px;
+    }
+    .show-select::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #242424;
+    }
+
+    .table__header {
+        display: none!important;
+    }
+
+}

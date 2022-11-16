@@ -124,7 +124,7 @@
                         </li>
 
                         <li class="header__navbar-item">
-                            <a href="#" class="header__navbar-item__link">
+                            <a href="./admin.html" class="header__navbar-item__link">
                                 <span class="header__navbar-item__lable">contact</span>
                             </a>
                         </li>
@@ -391,7 +391,6 @@
                     <div class="l-0 m-0 c-3 mobile-filter--btn">
                         <a href="" class="mobile-filter__link">
                             Sale
-                            <i class="fa-solid fa-chevron-down"></i>
                         </a>
                     </div>
 
@@ -440,15 +439,15 @@
                     <div class="col l-9 m-9 list-product">
                         <div class="tool-bar">
                             <div class="view-mode">
-                                <a href="#" class="view-mode__grid current-view">
+                                <div class="view-mode__grid current-view">
                                     <i class="fa-solid fa-border-all"></i>
                                     Grid
-                                </a>
+                                </div>
 
-                                <a href="#" class="view-mode__list">
+                                <div class="view-mode__list">
                                     <i class="fa-solid fa-list"></i>
                                     List
-                                </a>
+                                </div>
                             </div>
 
                             <div class="sort">
@@ -463,19 +462,28 @@
                         <div class="row list-product__grid">
                         </div>
 
+                        <div class="row list-product__list close-view-mode">
+                        </div>
+
                         <ul class="pagination">
-                            <li class="pagination-item pagination-item__active">
-                                <a href="#" class="pagination__link">1</a>
+                            <li class="pagination-item pagination-prev close-view-mode">
+                                <div class="pagination__link">
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </div>
                             </li>
 
-                            <li class="pagination-item">
-                                <a href="#" class="pagination__link">2</a>
+                            <li class="pagination-item pagination-1 pagination-item__active">
+                                <div class="pagination__link">1</div>
                             </li>
-
-                            <li class="pagination-item">
-                                <a href="#" class="pagination__link">
-                                    <i class="fa-solid fa-right-long"></i>
-                                </a>
+                            
+                            <li class="pagination-item pagination-2">
+                                <div class="pagination__link">2</div>
+                            </li>
+                            
+                            <li class="pagination-item pagination-next">
+                                <div class="pagination__link">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -570,7 +578,7 @@
         </div>
     </div>
 
-    <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/storage.js"></script>
+    <script type="module" src="./assets/js/storage.js"></script>
+    <script type="module" src="./assets/js/app.js"></script>
 </body>
 </html>
