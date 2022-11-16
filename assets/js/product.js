@@ -105,15 +105,12 @@ export function outputProd() {
       }
       if (confirm("Bạn có chắc muốn thay đổi sản phẩm này?")) {
         let changedArea = createArr(document.querySelectorAll(".textarea"));
-        console.log(
-          "🚀 ~ file: product.js ~ line 176 ~ fixSubmitButton.forEach ~  changedArea",
-          changedArea
-        );
+
         productList[index].id = changedArea[0].value;
         productList[index].name = changedArea[1].value;
         productList[index].price = changedArea[2].value;
         productList[index].desc = changedArea[3].value;
-        console.log(productList[index]);
+
         if (change) {
           productList[index].img = gItem("imgconfig");
         }
@@ -150,7 +147,7 @@ export function outputProd() {
     area.htmlFor = "productImg";
     img.replaceWith(area);
     const preview = document.getElementById("img");
-    console.log(preview);
+
     const input = document.getElementById("productImg");
     preview.style.display = "block";
 
@@ -165,10 +162,7 @@ export function outputProd() {
         //Check for valid filetype
 
         var src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
-        console.log(
-          "🚀 ~ file: product.js ~ line 236 ~ area.addEventListener ~ src",
-          src
-        );
+
         preview.src = src;
         preview.style.display = "block";
         preview.style.border = "1px solid #cc2424";
@@ -188,10 +182,7 @@ function searchProductList() {
   const searchValue = searchInput.value;
   tableBodyProduct.innerHTML = "";
   productList = gItem(prodKey) || defaultProducts;
-  console.log(
-    "🚀 ~ file: product.js ~ line 176 ~ searchProductList ~ productList",
-    productList
-  );
+
   productList.filter((item, i) => {
     // if (item.name.includes(searchValue)) {
     if (
@@ -257,7 +248,6 @@ function searchProductList() {
 
     fixButton.forEach((item, index) => {
       item.onclick = () => {
-        console.log(parseInt(prodNumber[index].innerHTML) - 1);
         if (check) {
           alert("chỉ được sửa 1 đối tượng một lần ");
         } else {
@@ -290,7 +280,6 @@ function searchProductList() {
             changedArea[2].value;
           productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
             changedArea[3].value;
-          console.log(productList[index]);
           if (change) {
             productList[parseInt(prodNumber[index].innerHTML) - 1].img =
               gItem("imgconfig");
@@ -328,7 +317,6 @@ function searchProductList() {
       area.htmlFor = "productImg";
       img.replaceWith(area);
       const preview = document.getElementById("img");
-      console.log(preview);
       const input = document.getElementById("productImg");
       preview.style.display = "block";
 
@@ -343,10 +331,7 @@ function searchProductList() {
           //Check for valid filetype
 
           var src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
-          console.log(
-            "🚀 ~ file: product.js ~ line 236 ~ area.addEventListener ~ src",
-            src
-          );
+
           preview.src = src;
           preview.style.display = "block";
           preview.style.border = "1px solid #cc2424";

@@ -117,10 +117,7 @@ export function outputCarts() {
         item.classList.toggle("active");
       }
       const checkView = createArr(document.querySelectorAll(".col.check"));
-      console.log(
-        "🚀 ~ file: carts.js ~ line 129 ~ viewButton.forEach ~ checkView",
-        checkView
-      );
+
       checkView.forEach((itemCheck, indexCheck) => {
         itemCheck.onclick = () => {
           if (cartList[indexButton].productList[indexCheck].check == true) {
@@ -253,10 +250,7 @@ function searchCartList() {
             item.classList.toggle("active");
           }
           const checkView = createArr(document.querySelectorAll(".col.check"));
-          console.log(
-            "🚀 ~ file: carts.js ~ line 129 ~ viewButton.forEach ~ checkView",
-            checkView
-          );
+
           checkView.forEach((itemCheck, indexCheck) => {
             itemCheck.onclick = () => {
               if (cartList[indexButton].productList[indexCheck].check == true) {

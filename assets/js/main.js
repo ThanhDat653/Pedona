@@ -125,8 +125,6 @@ export function createArr(node) {
 //           test();
 //       }
 //   }
-window.scrollY;
-console.log("🚀 ~ file: main.js ~ line 129 ~ window.scrollY", window.scrollY);
 
 const body = document.querySelector("body");
 body.onscroll = function () {
