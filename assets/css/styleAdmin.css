@@ -60,7 +60,7 @@ a {
 
 
 .wrapper {
-  background-image: url(../images/Pedona-zoomed.png);
+  /* background-image: url(../images/Pedona-zoomed.png; */
   background-attachment: fixed;
   background-size: auto;
   position: absolute;
