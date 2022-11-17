@@ -40,6 +40,7 @@ button,
 select,
 textarea {
   outline: none;
+  border: none;
 }
 
 p,
@@ -115,7 +116,9 @@ a {
 }
 
 .center-text {
+
   text-align: center;
+
 }
 
 .end-row {
@@ -516,7 +519,15 @@ a {
 .textarea {
   resize: none;
   border: none;
+  text-align: center;
   background: transparent;
+
+}
+
+.desc .textarea {
+  width: 320px;
+  overflow: hidden;
+
 }
 
 .textarea:focus {
@@ -697,7 +708,6 @@ a {
   border-radius: 5px;
   position: relative;
   margin: auto;
-  max-width: 900px;
   height: auto;
   background-color: #fff;
 }
@@ -745,6 +755,18 @@ a {
   padding: 5px 10px;
 
 }
+
+.col.invalid-input {
+  display: none;
+}
+
+.row.invalid .invalid-input,.invalid.invalid-input {
+  display: block;
+  color:#cc2424;
+  font-size: 12px;
+  text-align: end;
+}
+
 
 #img-area {
   max-width: 50%;

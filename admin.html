@@ -215,25 +215,28 @@
           <div class="row no-gutters grid">
             <div class="col l-6 modal__left">
               <label class="row no-gutters spc-btw mt-16" id="id__label" for="product__id">
-                <span class="col l-4 modal__text">Product ID</span>
+                <span class="col l-4 modal__text">Mã Sản Phẩm </span>
                 <input
                   class="col l-4 input"
                   type="text"
                   name="name"
                   id="product__id"
                 />
+                <span class="col l-12 invalid-input id">Vui lòng nhập mã sản phẩm</span>
               </label>
               <label class="row no-gutters spc-btw mt-16" id="name__label" for="product__name">
-                <span class="modal__text">Name</span>
+                <span class="modal__text">Tên Sản Phẩm </span>
                 <input
                   class="input"
                   type="text"
                   name="name"
                   id="product__name"
                 />
+                <span class="col l-12 invalid-input ">Vui lòng nhập tên sản phẩm</span>
+
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__color">
-                <span class="col l-2 modal__text">Color</span>
+                <span class="col l-2 modal__text">Màu</span>
                 <label for="product__color--black" class="col l-2 l-o-3">
                   <input
                     type="radio"
@@ -244,7 +247,7 @@
                   />
                   <span class="modal__text">Black</span>
                 </label>
-                <label for="product__color--orthers" class="col l-2">
+                <label for="product__color--orthers" class="col l-4 spc-btw">
                   <input
                     type="radio"
                     name="color"
@@ -255,7 +258,7 @@
                 </label>
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__price">
-                <span class="modal__text">Price</span>
+                <span class="modal__text">Giá </span>
                 <input
                   class="input"
                   type="text"
@@ -268,21 +271,23 @@
                 />
               </label>
               <label class="row no-gutters spc-btw mt-16" id="desc__label" for="product__desc">
-                <span class="modal__text">Description</span>
+                <span class="modal__text">Mô Tả</span>
                 <textarea
                   form="modal-wrapper"
                   class="input"
                   name="desc"
                   id="product__desc"
-                  cols="30"
-                  rows="10"
+                  cols="25"
+                  rows="9"
                   placeholder="Mô Tả Sản Phẩm"
                 ></textarea>
+                <span class="col l-12 invalid-input ">Vui lòng nhập mô tả sản phẩm</span>
+
               </label>
             </div>
             <div class="col l-6 modal__right">
               <div class="row no-gutters js-mid">
-                <span class="modal__text">Image</span>
+                <span class="modal__text">Hình Sản Phẩm</span>
                 <label for="img-input" class="fake-input mt-16">
                   <div id="img-show">
                     <input
@@ -296,20 +301,22 @@
                     <img src="" alt="" id="img-preview" />
                     <div id="upload-icon" class="">
                       <i
-                        id="icon"
-                        class="fa-solid fa-arrow-up-from-bracket fa-2xl"
+                      id="icon"
+                      class="fa-solid fa-arrow-up-from-bracket fa-2xl"
                       ></i>
                       <span class="icon__text">Chọn hình ảnh</span>
                     </div>
                   </div>
+                  <span class="col l-8 invalid-input center-text ">Vui lòng không để trống hình sản phẩm</span>
                 </label>
+                  
               </div>
             </div>
           </div>
         </div>
         <div class="modal__footer mt-16 grid">
           <div class="row no-gutters submit-btn js-mid">
-            <button type="submit" id="submit-prod" class="col">ADD</button>
+            <button type="submit" id="submit-prod" class="col">xác nhận</button>
           </div>
         </div>
       </div>

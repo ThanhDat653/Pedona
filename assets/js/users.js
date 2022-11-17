@@ -16,7 +16,7 @@ export function outputUsers() {
 
   for (let i = 0; i < userList.length; i++) {
     tableBodyUser.innerHTML +=
-      '<div class="row table__row js-mid no-gutters spc-even--mobile"><div class="col l-2 m-2 c-2">' +
+      '<div class="row table__row js-mid no-gutters spc-even--mobile"><div class="col l-2 m-2 c-2 user number">' +
       (i + 1) +
       "</div>" +
       '<div class="col l-2 m-12 c-12">' +
@@ -38,7 +38,7 @@ export function outputUsers() {
       "</div>" +
       "</div>";
   }
-  var check = false;
+  let check = false;
   const fixButtonUser = createArr(
     document.querySelectorAll(".user.table__fix-btn")
   );
@@ -48,17 +48,13 @@ export function outputUsers() {
   const fixSubmitButtonUser = createArr(
     document.querySelectorAll(".user.table__fix-submit")
   );
-  console.log(
-    "🚀 ~ file: users.js ~ line 49 ~ outputUsers ~ fixSubmitButtonUser",
-    fixSubmitButtonUser
-  );
+
+  const userNumber = createArr(document.querySelectorAll(".user.number"));
+
   const editableUserName = createArr(document.querySelectorAll(".username"));
   const editablePassword = createArr(document.querySelectorAll(".password"));
   const editableName = createArr(document.querySelectorAll(".user.name"));
-  console.log(
-    "🚀 ~ file: users.js ~ line 56 ~ outputUsers ~ editableName",
-    editableName
-  );
+
   function toggleButton(index) {
     fixButtonUser[index].classList.toggle("close");
     delButtonUser[index].classList.toggle("close");
@@ -73,37 +69,63 @@ export function outputUsers() {
     };
   });
   fixButtonUser.forEach((item, index) => {
+    let valid = true;
     item.onclick = () => {
       if (check) {
-        alert("Chỉ được chỉnh 1 đối tượng 1 lần");
+        alert("Only change one item per time");
       } else {
         toggleButton(index);
         fixSubmitButtonUser[index].style.animation = "button-full .25s linear";
-        createEditable(editableUserName[index], index);
-        createEditable(editableName[index], index);
-        createEditable(editablePassword[index], index);
+        createEditable(
+          editableUserName[parseInt(userNumber[index].innerHTML) - 1]
+        );
+        createEditable(editableName[parseInt(userNumber[index].innerHTML) - 1]);
+        createEditable(
+          editablePassword[parseInt(userNumber[index].innerHTML) - 1]
+        );
         check = true;
-      }
-    };
-  });
-  fixSubmitButtonUser.forEach((item, index) => {
-    item.onclick = () => {
-      if (!check) {
-        toggleButton(index);
-      }
-      if (confirm("Bạn có chắc muốn thay đổi sản phẩm này?")) {
         let changedArea = createArr(document.querySelectorAll(".textarea"));
-        console.log(userList[index]);
-        userList[index].username = changedArea[0].value;
-        userList[index].pass = changedArea[1].value;
-        userList[index].name = changedArea[2].value;
-        localStorage.setItem("userList", JSON.stringify(userList));
-        location.reload();
+        const errorShow = createArr(
+          document.querySelectorAll("textarea.textarea + span")
+        );
+        fixSubmitButtonUser.forEach((item, index) => {
+          changedArea.forEach(function (itemCheck, index) {
+            itemCheck.onblur = function () {
+              if (itemCheck.value == null || itemCheck.value == "") {
+                errorShow[index].classList.add("invalid");
+
+                valid = false;
+              } else {
+                errorShow[index].classList.remove("invalid");
+                valid = true;
+              }
+            };
+          });
+          item.onclick = () => {
+            if (!check) {
+              toggleButton(index);
+            }
+            if (
+              confirm(
+                "Do you want to change user No." +
+                  parseInt(userNumber[index].innerHTML) +
+                  " in the Data ?"
+              ) &&
+              valid
+            ) {
+              userList[index].username = changedArea[0].value;
+              userList[index].pass = changedArea[1].value;
+              userList[index].name = changedArea[2].value;
+              localStorage.setItem("userList", JSON.stringify(userList));
+              location.reload();
+            } else {
+              alert("Please input all user values");
+            }
+          };
+        });
       }
     };
   });
-
-  sItem("userList", userList);
 }
 const searchInput = document.querySelector(".user.search-input");
 
@@ -135,8 +157,7 @@ function searchUserList() {
         "</div>" +
         "</div>";
     }
-    const userNumber = document.querySelectorAll(".user.number");
-    var check = false;
+    let check = false;
     const fixButtonUser = createArr(
       document.querySelectorAll(".user.table__fix-btn")
     );
@@ -146,17 +167,12 @@ function searchUserList() {
     const fixSubmitButtonUser = createArr(
       document.querySelectorAll(".user.table__fix-submit")
     );
-    console.log(
-      "🚀 ~ file: users.js ~ line 49 ~ outputUsers ~ fixSubmitButtonUser",
-      fixSubmitButtonUser
-    );
+    const userNumber = createArr(document.querySelectorAll(".user.number"));
+
     const editableUserName = createArr(document.querySelectorAll(".username"));
     const editablePassword = createArr(document.querySelectorAll(".password"));
     const editableName = createArr(document.querySelectorAll(".user.name"));
-    console.log(
-      "🚀 ~ file: users.js ~ line 56 ~ outputUsers ~ editableName",
-      editableName
-    );
+
     function toggleButton(index) {
       fixButtonUser[index].classList.toggle("close");
       delButtonUser[index].classList.toggle("close");
@@ -171,36 +187,63 @@ function searchUserList() {
       };
     });
     fixButtonUser.forEach((item, index) => {
+      let valid = true;
       item.onclick = () => {
         if (check) {
-          alert("Chỉ được chỉnh 1 đối tượng 1 lần");
+          alert("Only change one item per time");
         } else {
           toggleButton(index);
           fixSubmitButtonUser[index].style.animation =
             "button-full .25s linear";
-          createEditable(editableUserName[index], index);
-          createEditable(editableName[index], index);
-          createEditable(editablePassword[index], index);
+          createEditable(
+            editableUserName[parseInt(userNumber[index].innerHTML) - 1]
+          );
+          createEditable(
+            editableName[parseInt(userNumber[index].innerHTML) - 1]
+          );
+          createEditable(
+            editablePassword[parseInt(userNumber[index].innerHTML) - 1]
+          );
           check = true;
-        }
-      };
-    });
-    fixSubmitButtonUser.forEach((item, index) => {
-      item.onclick = () => {
-        if (!check) {
-          toggleButton(index);
-        }
-        if (confirm("Bạn có chắc muốn thay đổi sản phẩm này?")) {
           let changedArea = createArr(document.querySelectorAll(".textarea"));
-          console.log(userList[index]);
-          userList[parseInt(userNumber[index].innerHTML) - 1].username =
-            changedArea[0].value;
-          userList[parseInt(userNumber[index].innerHTML) - 1].pass =
-            changedArea[1].value;
-          userList[parseInt(userNumber[index].innerHTML) - 1].name =
-            changedArea[2].value;
-          localStorage.setItem("userList", JSON.stringify(userList));
-          location.reload();
+          const errorShow = createArr(
+            document.querySelectorAll("textarea.textarea + span")
+          );
+          fixSubmitButtonUser.forEach((item, index) => {
+            changedArea.forEach(function (itemCheck, index) {
+              itemCheck.onblur = function () {
+                if (itemCheck.value == null || itemCheck.value == "") {
+                  errorShow[index].classList.add("invalid");
+
+                  valid = false;
+                } else {
+                  errorShow[index].classList.remove("invalid");
+                  valid = true;
+                }
+              };
+            });
+            item.onclick = () => {
+              if (!check) {
+                toggleButton(index);
+              }
+              if (
+                confirm(
+                  "Do you want to change user No." +
+                    parseInt(userNumber[index].innerHTML) +
+                    " in the Data ?"
+                ) &&
+                valid
+              ) {
+                userList[index].username = changedArea[0].value;
+                userList[index].pass = changedArea[1].value;
+                userList[index].name = changedArea[2].value;
+                localStorage.setItem("userList", JSON.stringify(userList));
+                location.reload();
+              } else {
+                alert("Please input all user values");
+              }
+            };
+          });
         }
       };
     });

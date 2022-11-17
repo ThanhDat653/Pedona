@@ -10,8 +10,14 @@ let exitModal = document.querySelectorAll(".toggle-modal");
 
 for (let i = 0; i < exitModal.length; i++) {
   exitModal[i].onclick = () => {
+    const validModal = document.querySelectorAll(".modal__body label");
+    validModal.forEach(function (item) {
+      item.classList.remove("invalid");
+    });
+    form_add.reset();
     modal.classList.toggle("open-flex");
     modal.classList.toggle("close");
+    imgReset();
   };
 }
 // :End
@@ -59,8 +65,10 @@ prodImg.addEventListener("change", function showPre(event) {
     showImg.style.border = "3px solid #242424";
     localStorage.setItem("imgsrc", JSON.stringify(src));
   } else {
+    //
     alert("Vui lòng Chọn File là Hình Ảnh");
     imgReset();
+    //
   }
 });
 
@@ -82,17 +90,19 @@ function checkInput() {
   // if max value is less than input value means that value is out of range
 }
 // :End
-
+let validInput = false;
 function addObject() {
   const productList =
     JSON.parse(localStorage.getItem("productList")) || defaultProducts;
 
-  const id = validId(document.getElementById("product__id").value);
+  const id = document.getElementById("product__id").value;
   const name = document.getElementById("product__name").value;
   const color = document.form_add.name.value;
   const price = document.getElementById("product__price").value;
   const desc = document.getElementById("product__desc").value;
-  if (validId(id) && validName(name) && validDesc(desc)) {
+
+  if (validInput) {
+    // if (validName(name)) {
     const temp = {
       name,
       id,
@@ -101,56 +111,85 @@ function addObject() {
       desc,
       img: JSON.parse(localStorage.getItem("imgsrc")) || "null",
     };
-
     productList.push(temp);
+
+    imgReset();
+    form_add.reset();
+    modal.classList.toggle("close");
+
     localStorage.setItem(prodKey, JSON.stringify(productList));
     outputProd();
+  } else {
+    validImg();
+    validId();
+    validDesc();
+    validName();
   }
 }
 
-function validId(idValue) {
-  if (idValue == null || idValue == "") {
-    const id = document.getElementById("id__label");
-    let area = document.createElement("span");
-    // area.style.display = "inline-block";
-    area.textContent = "Vui lòng nhập mã sản phẩm";
-    area.className = "col mt-4 l-5 l-o-7 end-row ";
-    area.style.fontSize = "13px";
-    area.style.color = "#cc2424";
-    id.after(area);
+function validId() {
+  const id = document.getElementById("id__label");
+  if (idInput.value == null || idInput.value == "") {
+    id.classList.add("invalid");
+    validInput = false;
     return false;
+  } else {
+    id.classList.remove("invalid");
+    validInput = true;
+
+    return true;
   }
-  return true;
 }
-function validName(nameValue) {
-  if (nameValue == null || nameValue == "") {
-    const name = document.getElementById("name__label");
-    let area = document.createElement("span");
-    // area.style.display = "inline-block";
-    area.textContent = "Vui lòng nhập tên sản phẩm";
-    area.className = "col mt-4 l-5 l-o-7 end-row ";
-    area.style.fontSize = "13px";
-    area.style.color = "#cc2424";
-    name.after(area);
+function validName() {
+  const name = document.getElementById("name__label");
+  if (nameInput.value == null || nameInput.value == "") {
+    name.classList.add("invalid");
+    validInput = false;
     return false;
+  } else {
+    name.classList.remove("invalid");
+    validInput = true;
+    return true;
   }
-  return true;
 }
-function validDesc(descValue) {
-  if (descValue == null || descValue == "") {
-    const desc = document.getElementById("desc__label");
-    let area = document.createElement("span");
-    // area.style.display = "inline-block";
-    area.textContent = "Vui lòng nhập mô tả sản phẩm";
-    area.className = "col mt-4 l-5 l-o-7 end-row ";
-    area.style.fontSize = "13px";
-    area.style.color = "#cc2424";
-    desc.after(area);
+function validDesc() {
+  const desc = document.getElementById("desc__label");
+  if (descInput.value == null || descInput.value == "") {
+    desc.classList.add("invalid");
+    validInput = false;
     return false;
+  } else {
+    desc.classList.remove("invalid");
+    validInput = true;
+
+    return true;
   }
-  return true;
+}
+
+function validImg() {
+  const img = document.getElementById("img__label");
+  if (prodImg.files[0] == undefined) {
+    img.classList.add("invalid");
+
+    validInput = false;
+
+    return false;
+  } else {
+    img.classList.remove("invalid");
+    validInput = true;
+
+    return true;
+  }
 }
 
 const submitButton = document.getElementById("submit-prod");
 
 submitButton.addEventListener("click", addObject);
+
+let descInput = document.getElementById("product__desc");
+let nameInput = document.getElementById("product__name");
+let idInput = document.getElementById("product__id");
+
+descInput.addEventListener("blur", validDesc);
+nameInput.addEventListener("blur", validName);
+idInput.addEventListener("blur", validId);
