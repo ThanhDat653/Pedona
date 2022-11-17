@@ -587,13 +587,32 @@ function addToCart() {
             var n = cartOfUserCurrent[0].productList.length;
             cartOfUserCurrent[0].productList[n] = temp;
             console.clear();
+            checkProductList(cartOfUserCurrent[0].productList)
+
             updateProductListOfUserCurrent();
         
             console.log(cartOfUserCurrent);
-            console.log(cartList);
+            // console.log(cartList);
         })
     
     });
+}
+
+// check product list 
+function checkProductList(productList) {
+
+    productList.forEach(function(item, index) {
+        // let temp = item.product.id;
+        for (let i = index + 1; i < productList.length; i++) {
+            if (productList[i].product.id === item.product.id) {
+                item.amount += productList[i].amount;
+                productList[i] = productList[i + 1];
+
+                if(i == productList.length - 1)
+                    productList.pop();
+            }
+        }
+    })
 }
 
 // update cartList to localStorage

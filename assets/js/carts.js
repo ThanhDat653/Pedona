@@ -17,26 +17,24 @@ export function outputCarts() {
 
   for (let i = 0; i < cartList.length; i++) {
     tableBodyCart.innerHTML +=
-      `<div class="row mt-32 mb-32 table__row shadow-wrap js-mid no-gutters">
-    <div class="col l-2">
+      `<div class="row mb-32 table__row shadow-wrap js-mid no-gutters">
+    <div class="col l-1">
       ` +
       (i + 1) +
       `
     </div>
-    <div class="col l-8">
-      <div class="row">Tên Khách Hàng:` +
-      cartList[i].name +
+    <div class="col l-9">
+      <div class="row">User Name:  ` + cartList[i].name +
       `</div>
-      <div class="row mt-16">Mã Đơn Hàng:` +
-      cartList[i].cartID +
+      <div class="row mt-16">Cart ID:  ` + cartList[i].cartID +
       `</div>
     </div>
-    <div class="col l-2">
-      <button class="mt-16 order-full btn"><i class="fa-solid fa-caret-left fa-xl"></i></button>
+    <div class="col l-1 cart-detail__btn">
+      <button class="order-full btn"><i class="fa-solid fa-caret-left fa-xl"></i></button>
       ` + // <button class="order-full--close btn"><i class="fa-solid fa-caret-down"></i></button>`
       `</div>
     </div>
-  <div class="content details-view no-gutters">
+  <div class="details-view no-gutters">
     
   </div>`;
   }
@@ -59,13 +57,13 @@ export function outputCarts() {
         cartView[indexButton].innerHTML = "";
         cartList[indexButton].productList.forEach((item, indexList) => {
           cartView[indexButton].innerHTML +=
-            `<div class="row mt-16 mr-16 no-gutters pt-16 order-view ">
-            <div class=" col l-9 l-o-3">
-                <div class="row no-gutters js-mid">
-                  <div class="col l-3">Sản phẩm</div>
-                        <div class="col l-3">Số Lượng</div>
-                        <div class="col l-3">Giá</div>
-                        <div class="col l-3">Trạng Thái</div>
+            `<div class="row order-view ">
+            <div class=" col l-9 l-o-3 ">
+                <div class="row no-gutters js-mid order-view__header">
+                  <div class="col l-3">Product</div>
+                        <div class="col l-3">Amount</div>
+                        <div class="col l-3">Price</div>
+                        <div class="col l-3">Condition</div>
                 </div>
                 <div class="row table__row  no-gutters js-mid">
                   <div class="col l-3 ">
@@ -101,8 +99,8 @@ export function outputCarts() {
           </div>`;
         });
         cartView[indexButton].innerHTML += `<div class="row no-gutters js-mid">
-      <div class="col l-3">Thời Gian :</div>
-      <div class="col l-3 l-o-6">Tổng Đơn Hàng</div>
+      <div class="col l-3">Thời GianTime:  </div>
+      <div class="col l-3 l-o-6">Total:  </div>
       </div>`;
         let h = cartView[indexButton].scrollHeight;
         let i = 0;

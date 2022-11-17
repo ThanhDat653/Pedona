@@ -75,15 +75,15 @@
           class="container container--mobile shadow-wrap products-page"
         >
           <div class="content__header">
-            <h2 class="header__text">Sản Phẩm</h2>
+            <h2 class="header__text">products</h2>
           </div>
 
           <div class="content__body">
             <div class="body__util grid mb-16">
-              <div class="row no-gutters end-row">
+              <div class="row no-gutters">
                 
                 <div class="col search-bar">
-                  <label for="search-text">Tìm kiếm</label>
+                  <i class="fa-solid fa-magnifying-glass"></i>
 
                   <input
                     id="search-text"
@@ -99,19 +99,20 @@
               class="content__table table--bordered grid"
             >
               <div class="row table__header js-mid no-gutters">
-                <div class="col l-1 m-1 c-2">Stt</div>
-                <div class="col l-2 m-2 c-2">Mã Sản Phẩm</div>
-                <div class="col l-2 m-3 c-2">Tên Sản Phẩm</div>
-                <div class="col l-1 m-3 c-2">Hình Ảnh</div>
-                <div class="col l-1 m-1 c-2">Giá</div>
-                <div class="col l-3 m-0 c-2">Mô Tả</div>
-                <div class="col l-2 m-1 c-2"></div>
+                <div class="col l-1 m-1 c-2">no.</div>
+                <div class="col l-2 m-2 c-2">product id</div>
+                <div class="col l-2 m-3 c-2">name</div>
+                <div class="col l-1 m-3 c-2">image</div>
+                <div class="col l-1 m-1 c-2">price</div>
+                <div class="col l-3 m-0 c-2">description</div>
+                <div class="col l-2 m-1 c-2">edit</div>
               </div>
               <div id="table__body--products" class="table__body"></div>
             </div>
             <div class="row no-gutters">
               <button class="toggle-modal table__add-btn">
-                Thêm Sản Phẩm +
+                new product 
+                <i class="fa-solid fa-upload"></i>
               </button>
             </div>
           </div>
@@ -122,14 +123,14 @@
           class="container container--mobile shadow-wrap users-page"
         >
           <div class="content__header">
-            <h2 class="header__text">Khách Hàng</h2>
+            <h2 class="header__text">uses</h2>
           </div>
 
           <div class="content__body">
             <div class="body__util grid mb-16">
-              <div class="row no-gutters end-row">
+              <div class="row no-gutters">
                 <div class="col search-bar">
-                  <label for="search-text">Tìm kiếm</label>
+                  <i class="fa-solid fa-magnifying-glass"></i>
 
                   <input
                     id="search-text"
@@ -145,11 +146,11 @@
               class="content__table table--bordered grid"
             >
               <div class="row table__header js-mid no-gutters">
-                <div class="col l-2 m-2 c-2">Stt</div>
-                <div class="col l-2 m-2 c-2">Mã Người Dùng</div>
-                <div class="col l-2 m-3 c-2">Tên Tài Khoản</div>
-                <div class="col l-2 m-3 c-2">Mật Khẩu</div>
-                <div class="col l-2 m-2 c-2">Tên Khách Hàng</div>
+                <div class="col l-2 m-2 c-2">no.</div>
+                <div class="col l-2 m-2 c-2">user id</div>
+                <div class="col l-2 m-3 c-2">account</div>
+                <div class="col l-2 m-3 c-2">password</div>
+                <div class="col l-2 m-2 c-2">user name</div>
                 <div class="col l-2 m-2 c-2"></div>
               </div>
               <div id="table__body--users" class="table__body"></div>
@@ -161,14 +162,14 @@
           class="container container--mobile shadow-wrap carts-page"
         >
           <div class="content__header">
-            <h2 class="header__text">Đơn Hàng</h2>
+            <h2 class="header__text">orders</h2>
           </div>
 
           <div class="content__body">
             <div class="body__util grid mb-16">
-              <div class="row no-gutters end-row">
+              <div class="row no-gutters">
                 <div class="col search-bar">
-                  <label for="search-text">Tìm kiếm</label>
+                  <i class="fa-solid fa-magnifying-glass"></i>
 
                   <input
                     id="search-text"
@@ -184,9 +185,8 @@
               class="content__table table--bordered grid"
             >
               <div class="row table__header js-mid no-gutters">
-                <div class="col l-2 m-2 c-2">Stt</div>
-                <div class="col l-8 m-2 c-2">Thông Tin Đơn Hàng</div>
-                <div class="col l-2 m-2 c-2"></div>
+                <div class="col l-1 m-2 c-2">no.</div>
+                <div class="col l-11 m-2 c-2">orders information</div>
               </div>
               <div id="table__body--carts" class="table__body">
             </div>
@@ -205,8 +205,8 @@
       onsubmit="return false"
     >
       <div id="modal" class="modal__container shadow-wrap">
-        <div class="modal__header row grid wide">
-          <span class="col l-12 header__text">Sản Phẩm Mới</span>
+        <div class="modal__header row grid">
+          <span class="col l-12 header__text">new product</span>
           <button id="exit-add" class="toggle-modal">
             <i class="fa-solid fa-xmark fa-2xl"></i>
           </button>
@@ -215,7 +215,7 @@
           <div class="row no-gutters grid">
             <div class="col l-6 modal__left">
               <label class="row no-gutters spc-btw mt-16" id="id__label" for="product__id">
-                <span class="col l-4 modal__text">Mã Sản Phẩm </span>
+                <span class="col l-4 modal__text">Product ID</span>
                 <input
                   class="col l-4 input"
                   type="text"
@@ -224,7 +224,7 @@
                 />
               </label>
               <label class="row no-gutters spc-btw mt-16" id="name__label" for="product__name">
-                <span class="modal__text">Tên Sản Phẩm </span>
+                <span class="modal__text">Name</span>
                 <input
                   class="input"
                   type="text"
@@ -233,7 +233,7 @@
                 />
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__color">
-                <span class="col l-2 modal__text">Màu</span>
+                <span class="col l-2 modal__text">Color</span>
                 <label for="product__color--black" class="col l-2 l-o-3">
                   <input
                     type="radio"
@@ -242,7 +242,7 @@
                     value="1"
                     checked
                   />
-                  <span class="modal__text">Màu đen</span>
+                  <span class="modal__text">Black</span>
                 </label>
                 <label for="product__color--orthers" class="col l-2">
                   <input
@@ -251,11 +251,11 @@
                     id="product__color--orthers"
                     value="2"
                   />
-                  <span class="modal__text">Màu Khác</span>
+                  <span class="modal__text">Others</span>
                 </label>
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__price">
-                <span class="modal__text">Giá </span>
+                <span class="modal__text">Price</span>
                 <input
                   class="input"
                   type="text"
@@ -268,7 +268,7 @@
                 />
               </label>
               <label class="row no-gutters spc-btw mt-16" id="desc__label" for="product__desc">
-                <span class="modal__text">Mô Tả</span>
+                <span class="modal__text">Description</span>
                 <textarea
                   form="modal-wrapper"
                   class="input"
@@ -282,7 +282,7 @@
             </div>
             <div class="col l-6 modal__right">
               <div class="row no-gutters js-mid">
-                <span class="modal__text">Hình Sản Phẩm</span>
+                <span class="modal__text">Image</span>
                 <label for="img-input" class="fake-input mt-16">
                   <div id="img-show">
                     <input
@@ -309,7 +309,7 @@
         </div>
         <div class="modal__footer mt-16 grid">
           <div class="row no-gutters submit-btn js-mid">
-            <button type="submit" id="submit-prod" class="col">xác nhận</button>
+            <button type="submit" id="submit-prod" class="col">ADD</button>
           </div>
         </div>
       </div>
