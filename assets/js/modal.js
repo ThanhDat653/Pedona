@@ -10,6 +10,11 @@ let exitModal = document.querySelectorAll(".toggle-modal");
 
 for (let i = 0; i < exitModal.length; i++) {
   exitModal[i].onclick = () => {
+    const validModal = document.querySelectorAll(".modal__body label");
+    validModal.forEach(function (item) {
+      item.classList.remove("invalid");
+    });
+    form_add.reset();
     modal.classList.toggle("open-flex");
     modal.classList.toggle("close");
     imgReset();
