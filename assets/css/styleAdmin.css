@@ -605,7 +605,15 @@ a {
   
   resize: none;
   border: none;
+  text-align: center;
   background: transparent;
+  width: 100%;
+  
+}
+
+.desc .textarea {
+  width: 320px;
+  overflow: hidden;
 
 }
 
@@ -841,12 +849,13 @@ a {
   display: none;
 }
 
-.row.invalid .invalid-input {
+.row.invalid .invalid-input,.invalid.invalid-input {
   display: block;
   color:#cc2424;
   font-size: 12px;
   text-align: end;
 }
+
 
 #img-area {
 

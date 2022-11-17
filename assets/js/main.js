@@ -79,11 +79,40 @@ for (let i = 0; i < list.length; i++) {
     list[i].classList.add("side-bar__item--active");
   };
 }
-
-export function createEditable(item, index) {
-  let area = document.createElement("textarea");
-  area.className = item.className + " textarea " + item.innerHTML;
-  area.value = item.innerHTML;
+function textAreaStyle(item) {
+  if (item.classList.contains("id")) {
+    return "Please input product id";
+  }
+  if (item.classList.contains("name")) {
+    if (item.classList.contains("product")) {
+      return "Please input product name";
+    }
+    if (item.classList.contains("user")) {
+      return "Please input user name";
+    }
+  }
+  if (item.classList.contains("desc")) {
+    return "Please input product desciption";
+  }
+  if (item.classList.contains("password")) {
+    return "Please input user password";
+  }
+  if (item.classList.contains("username")) {
+    return "Please input user username";
+  }
+}
+export function createEditable(item, col) {
+  let area = document.createElement("div");
+  area.className = item.className;
+  area.innerHTML =
+    `<textarea class="textarea 
+  " rows="4"> ` +
+    item.innerHTML +
+    `</textarea>` +
+    `<span class="col l-12 invalid-input ">` +
+    textAreaStyle(item) +
+    `</span>
+  `;
   item.replaceWith(area);
 }
 
@@ -95,35 +124,6 @@ export function deleteObject(index, array, key) {
 export function createArr(node) {
   return Array.from(node);
 }
-
-// function search() {
-//   const searchInput = document.querySelector(".header_searchbar-input");
-//   const searchBtn = document.querySelector(".search_btn");
-
-//   function test(){
-//       let searchValue = searchInput.value;
-//       let searchResultProducts = products.filter(function(item) {
-//           return item.name.includes(searchValue);
-//       })
-//       start = 0;
-//       end = itemPerPage;
-//       totalPages = Math.ceil(searchResultProducts.length / itemPerPage);
-//       renderPagesList(totalPages);
-//       renderProduct(searchResultProducts, start, end);
-//       changePage(searchResultProducts);
-//       filterByPrice(searchResultProducts, ".price_items");
-//       filterByPrice(searchResultProducts, ".filter_item-priceOption");
-//       productDetailNaviagte()
-//   }
-
-//   searchBtn.onclick = function() {
-//       test();
-//   }
-//   searchInput.onkeydown = function(event) {
-//       if(event.key=='Enter'){
-//           test();
-//       }
-//   }
 
 const body = document.querySelector("body");
 body.onscroll = function () {
