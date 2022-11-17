@@ -19,7 +19,7 @@ export function outputProd() {
       '<div class="col l-1 m-1 c-12 prod number ">' +
       (i + 1) +
       "</div>" +
-      '<div class="col l-2 m-2 c-10 c-o-2  color--id id">' +
+      '<div class="col l-2 m-2 c-10 c-o-2  id">' +
       productList[i].id +
       "</div>" +
       '<div class="col l-2 m-3 c-12 product name ">' +
@@ -30,7 +30,7 @@ export function outputProd() {
       productList[i].img +
       '" alt="">' +
       "</div>" +
-      '<div class="col l-1 m-1 c-10 c-o-2 color--price price">' +
+      '<div class="col l-1 m-1 c-10 c-o-2 price">' +
       (productList[i].price || 200) +
       "$" +
       "</div>" +
@@ -40,7 +40,7 @@ export function outputProd() {
       '<div class="col l-2 m-1 m-o-2 c-12">' +
       '<button class="product table__fix-btn"><i class="fa-solid fa-pencil"></i></button>' +
       '<button class="product table__del-btn"><i class="fa-solid fa-trash-can"></i></button>' +
-      '<button class="table__fix-submit close">Submit</button>' +
+      '<button class="product table__fix-submit close">Submit</button>' +
       "</div>" +
       "</div>";
   }
@@ -52,11 +52,18 @@ export function outputProd() {
     document.querySelectorAll(".product.table__del-btn")
   );
   const fixSubmitButton = createArr(
-    document.querySelectorAll(".table__fix-submit")
+    document.querySelectorAll(".product.table__fix-submit")
   );
+
   delButton.forEach((item, index) => {
     item.onclick = () => {
-      if (confirm("Chắc chưa ?")) {
+      if (
+        confirm(
+          "Do you want to delete product No." +
+            parseInt(prodNumber[index].innerHTML) +
+            " in the Store?"
+        )
+      ) {
         deleteObject(index, productList, prodKey);
         location.reload();
       }
@@ -69,53 +76,69 @@ export function outputProd() {
 
   fixButton.forEach((item, index) => {
     item.onclick = () => {
+      let valid = true;
       if (check) {
         alert("chỉ được sửa 1 đối tượng một lần ");
       } else {
         toggleButton(index);
-        createEditable(
-          editableId[parseInt(prodNumber[index].innerHTML) - 1],
-          parseInt(prodNumber[index].innerHTML) - 1
-        );
-        createEditable(
-          editableName[parseInt(prodNumber[index].innerHTML) - 1],
-          parseInt(prodNumber[index].innerHTML) - 1
-        );
-        createEditable(
-          editableDesc[parseInt(prodNumber[index].innerHTML) - 1],
-          parseInt(prodNumber[index].innerHTML) - 1
-        );
+        fixSubmitButton[index].style.animation = "button-full .25s linear";
+        createEditable(editableId[parseInt(prodNumber[index].innerHTML) - 1]);
+        createEditable(editableName[parseInt(prodNumber[index].innerHTML) - 1]);
+        createEditable(editableDesc[parseInt(prodNumber[index].innerHTML) - 1]);
         createEditablePrice(
-          editablePrice[parseInt(prodNumber[index].innerHTML) - 1],
-          parseInt(prodNumber[index].innerHTML) - 1
+          editablePrice[parseInt(prodNumber[index].innerHTML) - 1]
         );
         createEditableImg(
-          editableImg[parseInt(prodNumber[index].innerHTML) - 1],
+          editableImg[index],
           parseInt(prodNumber[index].innerHTML) - 1
         );
-        check = true;
-      }
-    };
-  });
 
-  fixSubmitButton.forEach((item, index) => {
-    item.onclick = () => {
-      if (!check) {
-        toggleButton(index);
-      }
-      if (confirm("Bạn có chắc muốn thay đổi sản phẩm này?")) {
+        check = true;
         let changedArea = createArr(document.querySelectorAll(".textarea"));
 
-        productList[index].id = changedArea[0].value;
-        productList[index].name = changedArea[1].value;
-        productList[index].price = changedArea[2].value;
-        productList[index].desc = changedArea[3].value;
+        const errorShow = createArr(
+          document.querySelectorAll("textarea.textarea + span")
+        );
 
-        if (change) {
-          productList[index].img = gItem("imgconfig");
-        }
-        localStorage.setItem(prodKey, JSON.stringify(productList));
-        location.reload();
+        fixSubmitButton.forEach((item) => {
+          changedArea.forEach(function (itemCheck, index) {
+            itemCheck.onblur = function () {
+              if (itemCheck.value == null || itemCheck.value == "") {
+                errorShow[index].classList.add("invalid");
+
+                valid = false;
+              } else {
+                errorShow[index].classList.remove("invalid");
+                valid = true;
+              }
+            };
+          });
+          item.onclick = () => {
+            if (!check) {
+              toggleButton(index);
+            }
+            if (
+              confirm(
+                "Do you want to change product No." +
+                  parseInt(prodNumber[index].innerHTML) +
+                  " in the Store ?"
+              ) &&
+              valid
+            ) {
+              productList[index].id = changedArea[0].value;
+              productList[index].name = changedArea[1].value;
+              productList[index].price = changedArea[2].value;
+              productList[index].desc = changedArea[3].value;
+              if (change) {
+                productList[index].img = gItem("imgconfig");
+              }
+              localStorage.setItem(prodKey, JSON.stringify(productList));
+              location.reload();
+            } else {
+              alert("Please input all product values");
+            }
+          };
+        });
       }
     };
   });
@@ -132,9 +155,15 @@ export function outputProd() {
   const editablePrice = createArr(document.querySelectorAll(".price"));
 
   function createEditablePrice(item, index) {
-    let area = document.createElement("textarea");
-    area.className = item.className + " textarea";
-    area.value = item.innerHTML.split("$")[0];
+    let area = document.createElement("div");
+    area.className = item.className;
+    area.innerHTML =
+      `<textarea class="textarea" rows="2" col="1"> ` +
+      item.innerHTML.split("$")[0] +
+      `</textarea>` +
+      `<span class="col l-12 invalid-input ">Please input product price</span>
+  `;
+
     item.replaceWith(area);
   }
 
@@ -215,7 +244,7 @@ function searchProductList() {
         '<div class="col l-2 m-1 m-o-2 c-12">' +
         '<button class="product table__fix-btn"><i class="fa-solid fa-pencil"></i></button>' +
         '<button class="product table__del-btn"><i class="fa-solid fa-trash-can"></i></button>' +
-        '<button class="table__fix-submit close">Submit</button>' +
+        '<button class="product table__fix-submit close">Submit</button>' +
         "</div>" +
         "</div>";
     }
@@ -227,11 +256,17 @@ function searchProductList() {
       document.querySelectorAll(".product.table__del-btn")
     );
     const fixSubmitButton = createArr(
-      document.querySelectorAll(".table__fix-submit")
+      document.querySelectorAll(".product.table__fix-submit")
     );
     delButton.forEach((item, index) => {
       item.onclick = () => {
-        if (confirm("Chắc chưa ?")) {
+        if (
+          confirm(
+            "Do you want to delete product No." +
+              parseInt(prodNumber[index].innerHTML) +
+              " in the Store?"
+          )
+        ) {
           deleteObject(
             parseInt(prodNumber[index].innerHTML) - 1,
             productList,
@@ -248,44 +283,73 @@ function searchProductList() {
 
     fixButton.forEach((item, index) => {
       item.onclick = () => {
+        let valid = true;
         if (check) {
-          alert("chỉ được sửa 1 đối tượng một lần ");
+          alert("Only change one item per time");
         } else {
           toggleButton(index);
-          createEditable(editableId[index], index);
-          createEditable(editableName[index], index);
-          createEditable(editableDesc[index], index);
-          createEditablePrice(editablePrice[index], index);
+          fixSubmitButton[index].style.animation = "button-full .25s linear";
+          createEditable(editableId[parseInt(prodNumber[index].innerHTML) - 1]);
+          createEditable(
+            editableName[parseInt(prodNumber[index].innerHTML) - 1]
+          );
+          createEditable(
+            editableDesc[parseInt(prodNumber[index].innerHTML) - 1]
+          );
+          createEditablePrice(
+            editablePrice[parseInt(prodNumber[index].innerHTML) - 1]
+          );
           createEditableImg(
             editableImg[index],
             parseInt(prodNumber[index].innerHTML) - 1
           );
-          check = true;
-        }
-      };
-    });
 
-    fixSubmitButton.forEach((item, index) => {
-      item.onclick = () => {
-        if (!check) {
-          toggleButton(index);
-        }
-        if (confirm("Bạn có chắc muốn thay đổi sản phẩm này?")) {
+          check = true;
           let changedArea = createArr(document.querySelectorAll(".textarea"));
-          productList[parseInt(prodNumber[index].innerHTML) - 1].id =
-            changedArea[0].value;
-          productList[parseInt(prodNumber[index].innerHTML) - 1].name =
-            changedArea[1].value;
-          productList[parseInt(prodNumber[index].innerHTML) - 1].price =
-            changedArea[2].value;
-          productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
-            changedArea[3].value;
-          if (change) {
-            productList[parseInt(prodNumber[index].innerHTML) - 1].img =
-              gItem("imgconfig");
-          }
-          localStorage.setItem(prodKey, JSON.stringify(productList));
-          location.reload();
+
+          const errorShow = createArr(
+            document.querySelectorAll("textarea.textarea + span")
+          );
+
+          fixSubmitButton.forEach((item) => {
+            changedArea.forEach(function (itemCheck, index) {
+              itemCheck.onblur = function () {
+                if (itemCheck.value == null || itemCheck.value == "") {
+                  errorShow[index].classList.add("invalid");
+
+                  valid = false;
+                } else {
+                  errorShow[index].classList.remove("invalid");
+                  valid = true;
+                }
+              };
+            });
+            item.onclick = () => {
+              if (!check) {
+                toggleButton(index);
+              }
+              if (
+                confirm(
+                  "Do you want to change product No." +
+                    parseInt(prodNumber[index].innerHTML) +
+                    " in the Store ?"
+                ) &&
+                valid
+              ) {
+                productList[index].id = changedArea[0].value;
+                productList[index].name = changedArea[1].value;
+                productList[index].price = changedArea[2].value;
+                productList[index].desc = changedArea[3].value;
+                if (change) {
+                  productList[index].img = gItem("imgconfig");
+                }
+                localStorage.setItem(prodKey, JSON.stringify(productList));
+                location.reload();
+              } else {
+                alert("Please input all product values");
+              }
+            };
+          });
         }
       };
     });
@@ -301,7 +365,7 @@ function searchProductList() {
     const editableDesc = createArr(document.querySelectorAll(".desc"));
     const editablePrice = createArr(document.querySelectorAll(".price"));
 
-    function createEditablePrice(item, index) {
+    function createEditablePrice(item) {
       let area = document.createElement("textarea");
       area.className = item.className + " textarea";
       area.value = item.innerHTML.split("$")[0];
@@ -338,7 +402,7 @@ function searchProductList() {
           //
           sItem("imgconfig", src);
         } else {
-          alert("Vui lòng Chọn File là Hình Ảnh");
+          alert("Only images are supported");
           imgReset();
         }
       });
