@@ -710,6 +710,8 @@ a {
   margin: auto;
   height: auto;
   background-color: #fff;
+  height: 605px;
+  width: 1100px;
 }
 
 .modal__header {
