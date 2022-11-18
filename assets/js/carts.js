@@ -26,9 +26,11 @@ export function outputCarts() {
       `
     </div>
     <div class="col l-9">
-      <div class="row">User Name:  ` + cartList[i].name +
+      <div class="row">User Name:  ` +
+      cartList[i].name +
       `</div>
-      <div class="row mt-16">Cart ID:  ` + cartList[i].cartID +
+      <div class="row mt-16">Cart ID:  ` +
+      cartList[i].cartID +
       `</div>
     </div>
     <div class="col l-1 cart-detail__btn">
@@ -101,7 +103,7 @@ export function outputCarts() {
           </div>`;
         });
         cartView[indexButton].innerHTML += `<div class="row no-gutters js-mid">
-      <div class="col l-3">Thời GianTime:  </div>
+      <div class="col l-3">Thời Gian:  </div>
       <div class="col l-3 l-o-6">Total:  </div>
       </div>`;
         let h = cartView[indexButton].scrollHeight;
