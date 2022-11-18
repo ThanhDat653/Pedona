@@ -433,122 +433,124 @@ const gridList = document.querySelector(".list-product__grid");
 const listList = document.querySelector(".list-product__list");
 
 function viewMode() {
-  gridList.classList.toggle("close-view-mode");
-  gridModeOption.classList.toggle("current-view");
+   gridList.classList.toggle("close-view-mode");
+   gridModeOption.classList.toggle("current-view");
 
-  listList.classList.toggle("close-view-mode");
-  listModeOption.classList.toggle("current-view");
+   listList.classList.toggle("close-view-mode");
+   listModeOption.classList.toggle("current-view");
 }
 
 gridModeOption.addEventListener("click", viewMode);
 listModeOption.addEventListener("click", viewMode);
 
 // DESCRIPTION
-var productElement;
-var descriptionLayer;
-var productDescriptionElement;
-var closeDescriptionBtn;
 
 function description() {
-  productElement = document.querySelectorAll(".product__link");
-  descriptionLayer = document.querySelectorAll(".product__description-layer");
-  productDescriptionElement = document.querySelectorAll(
-    ".product__description"
-  );
-  closeDescriptionBtn = document.querySelectorAll(
-    ".product__description--close"
-  );
+   let productElement = document.querySelectorAll(".product__link");
+   let descriptionLayer = document.querySelectorAll(".product__description-layer");
+   let productDescriptionElement = document.querySelectorAll(
+      ".product__description"
+   );
+   let closeDescriptionBtn = document.querySelectorAll(
+      ".product__description--close"
+   );
 
-  productElement.forEach(function (item, index) {
-    item.addEventListener("click", function () {
-      descriptionLayer[index].classList.toggle("open-description--layer");
-    });
+   productElement.forEach(function (item, index) {
+      item.addEventListener("click", function () {
+         descriptionLayer[index].classList.toggle("open-description--layer");
+      });
 
-    closeDescriptionBtn[index].addEventListener("click", function () {
-      descriptionLayer[index].classList.remove("open-description--layer");
-    });
+      closeDescriptionBtn[index].addEventListener("click", function () {
+         descriptionLayer[index].classList.remove("open-description--layer");
+      });
 
-    descriptionLayer[index].addEventListener("click", function () {
-      item.classList.remove("open-description--layer");
-    });
-  });
+      descriptionLayer[index].addEventListener("click", function () {
+         item.classList.remove("open-description--layer");
+      });
 
-  productDescriptionElement.forEach(function (item) {
-    item.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-  });
+      let buyBtn = document.querySelector(".list-product__grid .buy-btn");
+      buyBtn.addEventListener("click", function () {
+         item.classList.remove("open-description--layer");
+      });
+   });
 
-  closeDescriptionBtn.forEach(function (item) {
-    item.addEventListener("click", function (event) {
-      event.stopPropagation();
-    });
-  });
+   productDescriptionElement.forEach(function (item) {
+      item.addEventListener("click", function (event) {
+         event.stopPropagation();
+      });
+   });
+
+   closeDescriptionBtn.forEach(function (item) {
+      item.addEventListener("click", function (event) {
+         event.stopPropagation();
+      });
+   });
 }
 
 // Quantity input
 
 const pcQuantityInput = document.querySelectorAll(
-  ".product__description .input-qty"
+   ".product__description .input-qty"
 );
+
 pcQuantityInput.forEach(function (item) {
-  item.addEventListener("keypress", checkInput);
-  item.addEventListener("input", checkInput);
-  item.addEventListener("paste", checkInput);
-  item.addEventListener("change", checkInput);
+   item.addEventListener("keypress", checkInput);
+   item.addEventListener("input", checkInput);
+   item.addEventListener("paste", checkInput);
+   item.addEventListener("change", checkInput);
 });
 
 const mobileQuantityInput = document.querySelectorAll(
-  ".mobile-product__information .input-qty"
+   ".mobile-product__information .input-qty"
 );
 mobileQuantityInput.forEach(function (item) {
-  item.addEventListener("keypress", checkInput);
-  item.addEventListener("input", checkInput);
-  item.addEventListener("paste", checkInput);
-  item.addEventListener("change", checkInput);
+   item.addEventListener("keypress", checkInput);
+   item.addEventListener("input", checkInput);
+   item.addEventListener("paste", checkInput);
+   item.addEventListener("change", checkInput);
 });
 
 function checkInput() {
-  if (this.max)
-    this.value = Math.min(parseInt(this.max), parseInt(this.value) || 1);
+   if (this.max)
+      this.value = Math.min(parseInt(this.max), parseInt(this.value) || 1);
 }
 
 //  QUANTITY BUTTON
 
 function plus(value) {
-  var temp = Math.floor(value);
+   var temp = Math.floor(value);
 
-  if (temp < 10) {
-    return String(temp + 1);
-  } else return value;
+   if (temp < 10) {
+      return String(temp + 1);
+   } else return value;
 }
 
 function minus(value) {
-  var temp = Math.floor(value);
+   var temp = Math.floor(value);
 
-  if (temp > 1) {
-    return String(temp - 1);
-  } else return value;
+   if (temp > 1) {
+      return String(temp - 1);
+   } else return value;
 }
 
 function setQuantityOfProduct() {
-  const minusBtn = document.querySelectorAll(".minus");
-  const plusBtn = document.querySelectorAll(".plus");
-  const quantityInput = document.querySelectorAll(".input-qty");
+   const minusBtn = document.querySelectorAll(".minus");
+   const plusBtn = document.querySelectorAll(".plus");
+   const quantityInput = document.querySelectorAll(".input-qty");
 
-  minusBtn.forEach(function (item, index) {
-    item.addEventListener("click", function () {
-      quantityInput[index].value = minus(quantityInput[index].value);
-      console.log(quantityInput[index].value);
-    });
-  });
+   minusBtn.forEach(function (item, index) {
+      item.addEventListener("click", function () {
+         quantityInput[index].value = minus(quantityInput[index].value);
+         console.log(quantityInput[index].value);
+      });
+   });
 
-  plusBtn.forEach(function (item, index) {
-    item.addEventListener("click", function () {
-      quantityInput[index].value = plus(quantityInput[index].value);
-      console.log(quantityInput[index].value);
-    });
-  });
+   plusBtn.forEach(function (item, index) {
+      item.addEventListener("click", function () {
+         quantityInput[index].value = plus(quantityInput[index].value);
+         console.log(quantityInput[index].value);
+      });
+   });
 }
 
 // CARTS STORAGE
@@ -564,65 +566,64 @@ var cartOfUserCurrent;
 
 // add new product to productList of userCurrent
 function addToCart() {
-  sItem(
-    "userCurrent",
-    JSON.stringify({ name: "Nguyen Thanh Dat", cartID: "1" })
-  );
-  let buyBtn = document.querySelectorAll(".buy-btn > button");
-  let quantityInput = document.querySelectorAll(".input-qty");
+   sItem(
+      "userCurrent",
+      JSON.stringify({ name: "Nguyen Thanh Dat", cartID: "1" })
+   );
+   let buyBtn = document.querySelectorAll(".buy-btn > button");
+   let quantityInput = document.querySelectorAll(".input-qty");
+   let descriptionLayer = document.querySelectorAll(".product__description-layer");
 
-  cartOfUserCurrent = cartList.filter(function (item) {
-    return item.cartID == JSON.parse(gItem("userCurrent")).cartID;
-  });
+   cartOfUserCurrent = cartList.filter(function (item) {
+      return item.cartID == JSON.parse(gItem("userCurrent")).cartID;
+   });
 
-    buyBtn.forEach(function(item, index) {
-        item.addEventListener("click", function() {
-            var amount = parseInt(quantityInput[index].value);
-            var temp = {
-                product: products[item.value],
-                amount: amount,
-                total: products[item.value].price * amount,
-                check: false
-            }
-            
-            var n = cartOfUserCurrent[0].productList.length;
-            cartOfUserCurrent[0].productList[n] = temp;
-            console.clear();
-            checkProductList(cartOfUserCurrent[0].productList)
+   buyBtn.forEach(function(item, index) {
+      item.addEventListener("click", function() {
+         var amount = parseInt(quantityInput[index].value);
+         var temp = {
+            product: products[item.value],
+            amount: amount,
+            total: products[item.value].price * amount,
+            check: false
+         }
+         
+         var n = cartOfUserCurrent[0].productList.length;
+         cartOfUserCurrent[0].productList[n] = temp;
+         console.clear();
 
-            updateProductListOfUserCurrent();
-        
-            console.log(cartOfUserCurrent);
-            // console.log(cartList);
-        })
+         checkProductList(cartOfUserCurrent[0].productList)
+         updateProductListOfUserCurrent();
       })
+   })
 }
 
 
 // check product list 
 function checkProductList(productList) {
 
-    productList.forEach(function(item, index) {
+   productList.forEach(function(item, index) {
         // let temp = item.product.id;
-        for (let i = index + 1; i < productList.length; i++) {
-            if (productList[i].product.id === item.product.id) {
-                item.amount += productList[i].amount;
-                productList[i] = productList[i + 1];
+      for (let i = index + 1; i < productList.length; i++) {
+         if (productList[i].product.id === item.product.id) {
+            item.amount += productList[i].amount;
+            item.total += productList[i].total;
 
-                if(i == productList.length - 1)
-                    productList.pop();
-            }
-        }
-    })
+            productList[i] = productList[i + 1];
+
+            if(i == productList.length - 1)
+               productList.pop();
+         }
+      }
+   })
 }
 
 // update cartList to localStorage
 function updateProductListOfUserCurrent() {
+   cartList.forEach(function (item) {
+      if (item.cartID === cartOfUserCurrent[0].cartID)
+         item = cartOfUserCurrent[0];
+   });
 
-  cartList.forEach(function (item) {
-    if (item.cartID === cartOfUserCurrent[0].cartID)
-      item = cartOfUserCurrent[0];
-  });
-
-  sItem(cartKey, JSON.stringify(cartList));
+   sItem(cartKey, JSON.stringify(cartList));
 }
