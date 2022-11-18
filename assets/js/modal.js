@@ -49,7 +49,7 @@ function imgReset() {
 //*================================================ Image Reset :End =============================================================
 
 //*======================================= Check for valid filetype================================//
-function checkImg(filename) {
+export function checkImg(filename) {
   let filetype = "." + filename.split(".").splice(-1)[0];
 
   if (valid.indexOf(filetype) != -1) {

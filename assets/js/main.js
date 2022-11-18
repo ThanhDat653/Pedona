@@ -67,9 +67,6 @@ sideBar.addEventListener("mouseout", hoverOut);
 
 let list = document.querySelectorAll(".side-bar__item");
 
-function test() {
-  if (window.scrollY);
-}
 for (let i = 0; i < list.length; i++) {
   list[i].onclick = function () {
     let j = 0;
@@ -101,18 +98,19 @@ function textAreaStyle(item) {
     return "Please input user username";
   }
 }
-export function createEditable(item, col) {
+export function createEditable(item) {
   let area = document.createElement("div");
   area.className = item.className;
   area.innerHTML =
     `<textarea class="textarea 
-  " rows="4"> ` +
-    item.innerHTML +
+  " rows="4">` +
+    item.innerHTML.trim() +
     `</textarea>` +
     `<span class="col l-12 invalid-input ">` +
     textAreaStyle(item) +
     `</span>
   `;
+  console.log(item.innerHTML.trim());
   item.replaceWith(area);
 }
 

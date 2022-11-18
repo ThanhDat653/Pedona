@@ -521,7 +521,10 @@ a {
   border: none;
   text-align: center;
   background: transparent;
-
+  width: 200px;
+}
+.price.textarea {
+  width: auto;
 }
 
 .desc .textarea {

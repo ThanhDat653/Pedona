@@ -2,6 +2,7 @@ import { tableBodyProduct } from "./main.js";
 import { products as defaultProducts } from "./storage.js";
 import { sItem, gItem } from "./storage.js";
 import { deleteObject, createEditable, createArr, prodKey } from "./main.js";
+import { checkImg } from "./modal.js";
 
 // Extract product list:Start
 let productList = gItem("productList") || defaultProducts;
@@ -76,7 +77,6 @@ export function outputProd() {
 
   fixButton.forEach((item, index) => {
     item.onclick = () => {
-      let valid = true;
       if (check) {
         alert("chỉ được sửa 1 đối tượng một lần ");
       } else {
@@ -99,17 +99,23 @@ export function outputProd() {
         const errorShow = createArr(
           document.querySelectorAll("textarea.textarea + span")
         );
+        function validCheck() {
+          for (let i = 0; i < errorShow.length; i++) {
+            if (errorShow[i].classList.contains("invalid")) {
+              return false;
+            }
+          }
+          return true;
+        }
 
         fixSubmitButton.forEach((item) => {
           changedArea.forEach(function (itemCheck, index) {
             itemCheck.onblur = function () {
-              if (itemCheck.value == null || itemCheck.value == "") {
+              const itemValue = itemCheck.value.trim();
+              if (itemValue == null || itemValue == "") {
                 errorShow[index].classList.add("invalid");
-
-                valid = false;
               } else {
                 errorShow[index].classList.remove("invalid");
-                valid = true;
               }
             };
           });
@@ -123,12 +129,12 @@ export function outputProd() {
                   parseInt(prodNumber[index].innerHTML) +
                   " in the Store ?"
               ) &&
-              valid
+              validCheck()
             ) {
-              productList[index].id = changedArea[0].value;
-              productList[index].name = changedArea[1].value;
-              productList[index].price = changedArea[2].value;
-              productList[index].desc = changedArea[3].value;
+              productList[index].id = changedArea[0].value.trim();
+              productList[index].name = changedArea[1].value.trim();
+              productList[index].price = changedArea[2].value.trim();
+              productList[index].desc = changedArea[3].value.trim();
               if (change) {
                 productList[index].img = gItem("imgconfig");
               }
@@ -158,8 +164,8 @@ export function outputProd() {
     let area = document.createElement("div");
     area.className = item.className;
     area.innerHTML =
-      `<textarea class="textarea" rows="2" col="1"> ` +
-      item.innerHTML.split("$")[0] +
+      `<textarea class="textarea price" rows="2" cols="1">` +
+      item.innerHTML.split("$")[0].trim() +
       `</textarea>` +
       `<span class="col l-12 invalid-input ">Please input product price</span>
   `;
@@ -283,22 +289,15 @@ function searchProductList() {
 
     fixButton.forEach((item, index) => {
       item.onclick = () => {
-        let valid = true;
         if (check) {
           alert("Only change one item per time");
         } else {
           toggleButton(index);
           fixSubmitButton[index].style.animation = "button-full .25s linear";
-          createEditable(editableId[parseInt(prodNumber[index].innerHTML) - 1]);
-          createEditable(
-            editableName[parseInt(prodNumber[index].innerHTML) - 1]
-          );
-          createEditable(
-            editableDesc[parseInt(prodNumber[index].innerHTML) - 1]
-          );
-          createEditablePrice(
-            editablePrice[parseInt(prodNumber[index].innerHTML) - 1]
-          );
+          createEditable(editableId[index]);
+          createEditable(editableName[index]);
+          createEditable(editableDesc[index]);
+          createEditablePrice(editablePrice[index]);
           createEditableImg(
             editableImg[index],
             parseInt(prodNumber[index].innerHTML) - 1
@@ -310,17 +309,22 @@ function searchProductList() {
           const errorShow = createArr(
             document.querySelectorAll("textarea.textarea + span")
           );
-
+          function validCheck() {
+            for (let i = 0; i < errorShow.length; i++) {
+              if (errorShow[i].classList.contains("invalid")) {
+                return false;
+              }
+            }
+            return true;
+          }
           fixSubmitButton.forEach((item) => {
             changedArea.forEach(function (itemCheck, index) {
               itemCheck.onblur = function () {
-                if (itemCheck.value == null || itemCheck.value == "") {
+                const itemValue = itemCheck.value.trim();
+                if (itemValue == null || itemValue == "") {
                   errorShow[index].classList.add("invalid");
-
-                  valid = false;
                 } else {
                   errorShow[index].classList.remove("invalid");
-                  valid = true;
                 }
               };
             });
@@ -334,14 +338,19 @@ function searchProductList() {
                     parseInt(prodNumber[index].innerHTML) +
                     " in the Store ?"
                 ) &&
-                valid
+                validCheck()
               ) {
-                productList[index].id = changedArea[0].value;
-                productList[index].name = changedArea[1].value;
-                productList[index].price = changedArea[2].value;
-                productList[index].desc = changedArea[3].value;
+                productList[parseInt(prodNumber[index].innerHTML) - 1].id =
+                  changedArea[0].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].name =
+                  changedArea[1].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].price =
+                  changedArea[2].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
+                  changedArea[3].value.trim();
                 if (change) {
-                  productList[index].img = gItem("imgconfig");
+                  productList[parseInt(prodNumber[index].innerHTML) - 1].img =
+                    gItem("imgconfig");
                 }
                 localStorage.setItem(prodKey, JSON.stringify(productList));
                 location.reload();
@@ -368,7 +377,7 @@ function searchProductList() {
     function createEditablePrice(item) {
       let area = document.createElement("textarea");
       area.className = item.className + " textarea";
-      area.value = item.innerHTML.split("$")[0];
+      area.value = item.innerHTML.split("$")[0].trim();
       item.replaceWith(area);
     }
 
