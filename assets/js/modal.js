@@ -1,7 +1,10 @@
 import { products as defaultProducts } from "./storage.js";
 import { outputProd } from "./product.js";
 import { prodKey } from "./main.js";
-//         Modal
+//*================================================================================================================//
+//*==================================================Modal=========================================================//
+//*================================================================================================================//
+
 let modal = document.getElementById("modal-wrapper");
 
 // Turn on off Modal :Start
@@ -21,15 +24,20 @@ for (let i = 0; i < exitModal.length; i++) {
   };
 }
 // :End
-
-// Preview Img when upload :Start
+//*===============================================================================================================================//
+//*================================================ Preview Img when upload :Start =================================================//
+//*===============================================================================================================================//
 
 let prodImg = document.getElementById("img-input");
 let showImg = document.getElementById("img-show");
 var preview = document.getElementById("img-preview");
 let uploadIcon = document.getElementById("upload-icon");
 
-var valid = [".png", ".jpec", ".jpg"]; // valid values for images
+//*================================================ valid values for images ================================================//
+
+var valid = [".png", ".jpec", ".jpg"];
+
+//*================================================ Image Reset :Start ================================================//
 
 function imgReset() {
   preview.style.display = "none";
@@ -38,6 +46,9 @@ function imgReset() {
   showImg.style.border = "3px solid #e7e7e7";
 }
 
+//*================================================ Image Reset :End =============================================================
+
+//*======================================= Check for valid filetype================================//
 function checkImg(filename) {
   let filetype = "." + filename.split(".").splice(-1)[0];
 
@@ -48,17 +59,17 @@ function checkImg(filename) {
   }
 }
 
-//Preview Image before upload to server:Start
+//*Preview Image before upload to server:Start
 
 prodImg.addEventListener("change", function showPre(event) {
   let path = prodImg.value;
   var temparr = path.split("\\");
   var filename = temparr.slice(-1)[0];
   if (checkImg(filename)) {
-    //Check for valid filetype
-
-    var src = URL.createObjectURL(prodImg.files[0]); // URL object create upon Media-Src
-
+    //*====================================== Create Blob object ================================//
+    //
+    var src = URL.createObjectURL(prodImg.files[0]); //* URL object create upon Media-Src
+    //
     preview.src = src;
     preview.style.display = "block";
     uploadIcon.style.display = "none";
@@ -71,10 +82,17 @@ prodImg.addEventListener("change", function showPre(event) {
     //
   }
 });
+//*===============================================================================================================================//
+//*================================================ Preview Img when upload :End =================================================//
+//*===============================================================================================================================//
 
-// Preview Image before upload to server:End
+//
+//
 
-//Price_check  :Start
+//*==============================================================================================================================//
+//*====================================================Price input check :Start =================================================//
+//*==============================================================================================================================//
+
 const inputPrice = document.getElementById("product__price");
 
 // Check every case :Start
@@ -89,7 +107,14 @@ function checkInput() {
     this.value = Math.min(parseInt(this.max), parseInt(this.value) || 200);
   // if max value is less than input value means that value is out of range
 }
-// :End
+
+//*==============================================================================================================================//
+//*==================================================== Price input check :End =================================================//
+//*==============================================================================================================================//
+
+//!================================================================================================================
+//!============================================== IS BEING FIXED =================================================//
+//!============================================================================================================================
 let validInput = false;
 function addObject() {
   const productList =
@@ -120,10 +145,10 @@ function addObject() {
     localStorage.setItem(prodKey, JSON.stringify(productList));
     outputProd();
   } else {
-    validImg();
     validId();
     validDesc();
     validName();
+    validImg();
   }
 }
 
@@ -182,6 +207,9 @@ function validImg() {
   }
 }
 
+//!================================================================================================================================
+//!================================================================================================================================
+//!================================================================================================================================
 const submitButton = document.getElementById("submit-prod");
 
 submitButton.addEventListener("click", addObject);
