@@ -1,15 +1,15 @@
 import {
-  products as defaultProducts,
-  carts as defaultCarts,
-  users as defaultUsers,
+    products as defaultProducts,
+    carts as defaultCarts,
+    users as defaultUsers,
 } from "./storage.js";
 
 function gItem(key) {
-  return localStorage.getItem(key);
+    return localStorage.getItem(key);
 }
 
 function sItem(key, value) {
-  return localStorage.setItem(key, value);
+    return localStorage.setItem(key, value);
 }
 
 // CARTS STORAGE
@@ -22,14 +22,14 @@ const headerElement = document.querySelector(".header");
 const stickyHeaderElement = document.querySelector(".header-sticky");
 
 window.onscroll = function () {
-  if (
-    document.body.scrollTop > 150 ||
-    document.documentElement.scrollTop > 150
-  ) {
-    stickyHeaderElement.style.top = "0";
-  } else {
-    stickyHeaderElement.style.top = "-60px";
-  }
+    if (
+        document.body.scrollTop > 150 ||
+        document.documentElement.scrollTop > 150
+    ) {
+        stickyHeaderElement.style.top = "0";
+    } else {
+        stickyHeaderElement.style.top = "-60px";
+    }
 };
 
 // MOBILE SIDE MENU
@@ -39,23 +39,23 @@ const overlaySideMenu = document.querySelector(".header__side-menu-container");
 const sideMenu = document.querySelector(".header__side-menu");
 
 menuIcon.addEventListener("click", function () {
-  overlaySideMenu.classList.toggle("open");
-  sideMenu.classList.toggle("open");
-  sideMenu.classList.remove("hide");
+    overlaySideMenu.classList.toggle("open");
+    sideMenu.classList.toggle("open");
+    sideMenu.classList.remove("hide");
 });
 
 overlaySideMenu.addEventListener("click", function () {
-  sideMenu.classList.toggle("hide");
-  setTimeout(hideMenu, 450);
+    sideMenu.classList.toggle("hide");
+    setTimeout(hideMenu, 450);
 });
 
 sideMenu.addEventListener("click", function (event) {
-  event.stopPropagation();
+    event.stopPropagation();
 });
 
 function hideMenu() {
-  overlaySideMenu.classList.toggle("open");
-  sideMenu.classList.toggle("open");
+    overlaySideMenu.classList.toggle("open");
+    sideMenu.classList.toggle("open");
 }
 
 // CONTENT PRODUCT LIST
@@ -99,7 +99,7 @@ products.forEach(function (product, index) {
                                     </div>
                                 </div>
     
-                                <div class="buy-btn">
+                                <div class="buy-btn grid_buy-btn">
                                     <button type="submit" value=${index}>Add to Cart</button>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@ products.forEach(function (product, index) {
                             </div>
                         </div>
     
-                        <div class="buy-btn">
+                        <div class="buy-btn grid_buy-btn">
                             <button type="submit" value=${index}>Add to Cart</button>
                         </div>
                     </div>
@@ -225,8 +225,7 @@ function clickOnPage1() {
                                         </div>
                                     </div>
         
-                                    <div class="buy-btn">
-                                    
+                                    <div class="buy-btn grid_buy-btn">
                                         <button type="submit" value=${index}>Add to Cart</button>
                                     </div>
                                 </div>
@@ -345,7 +344,7 @@ function clickOnPage2() {
                                         </div>
                                     </div>
         
-                                    <div class="buy-btn">
+                                    <div class="buy-btn grid_buy-btn">
                                         <button type="submit" value=${index}>Add to Cart</button>
                                     </div>
                                 </div>
@@ -446,45 +445,35 @@ listModeOption.addEventListener("click", viewMode);
 // DESCRIPTION
 
 function description() {
-   let productElement = document.querySelectorAll(".product__link");
-   let descriptionLayer = document.querySelectorAll(".product__description-layer");
-   let productDescriptionElement = document.querySelectorAll(
-      ".product__description"
-   );
-   let closeDescriptionBtn = document.querySelectorAll(
-      ".product__description--close"
-   );
+    let productElement = document.querySelectorAll(".product__link");
+    let descriptionLayer = document.querySelectorAll(".product__description-layer");
+    let productDescriptionElement = document.querySelectorAll(".product__description");
+    let closeDescriptionBtn = document.querySelectorAll(".product__description--close");
+    let buyBtn = document.querySelectorAll(".product__description .grid_buy-btn");
 
-   productElement.forEach(function (item, index) {
-      item.addEventListener("click", function () {
-         descriptionLayer[index].classList.toggle("open-description--layer");
-      });
+    productElement.forEach(function (item, index) {
+        item.addEventListener("click", function () {
+            descriptionLayer[index].classList.toggle("open-description--layer");
+        });
+        
+        closeDescriptionBtn[index].addEventListener("click", function () {
+            descriptionLayer[index].classList.remove("open-description--layer");
+        });
+        
+        descriptionLayer[index].addEventListener("click", function () {
+            item.classList.remove("open-description--layer");
+        });
+       
+        buyBtn[index].addEventListener("click", function () {
+            descriptionLayer[index].classList.remove("open-description--layer");
+        });
+    });
 
-      closeDescriptionBtn[index].addEventListener("click", function () {
-         descriptionLayer[index].classList.remove("open-description--layer");
-      });
-
-      descriptionLayer[index].addEventListener("click", function () {
-         item.classList.remove("open-description--layer");
-      });
-
-      let buyBtn = document.querySelector(".list-product__grid .buy-btn");
-      buyBtn.addEventListener("click", function () {
-         item.classList.remove("open-description--layer");
-      });
-   });
-
-   productDescriptionElement.forEach(function (item) {
-      item.addEventListener("click", function (event) {
-         event.stopPropagation();
-      });
-   });
-
-   closeDescriptionBtn.forEach(function (item) {
-      item.addEventListener("click", function (event) {
-         event.stopPropagation();
-      });
-   });
+    productDescriptionElement.forEach(function (item) {
+        item.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    });
 }
 
 // Quantity input
@@ -562,7 +551,12 @@ const userList = JSON.parse(gItem(userKey)) || defaultCarts;
 sItem(userKey, JSON.stringify(userList));
 
 // find a cart of userCurrent from cartList by ID
-var cartOfUserCurrent;
+var temp= cartList.filter(function (item) {
+   return item.cartID == JSON.parse(gItem("userCurrent")).cartID;
+});
+
+let cartOfUserCurrent = temp[0];
+
 
 // add new product to productList of userCurrent
 function addToCart() {
@@ -572,46 +566,41 @@ function addToCart() {
    );
    let buyBtn = document.querySelectorAll(".buy-btn > button");
    let quantityInput = document.querySelectorAll(".input-qty");
-   let descriptionLayer = document.querySelectorAll(".product__description-layer");
-
-   cartOfUserCurrent = cartList.filter(function (item) {
-      return item.cartID == JSON.parse(gItem("userCurrent")).cartID;
-   });
 
    buyBtn.forEach(function(item, index) {
       item.addEventListener("click", function() {
          var amount = parseInt(quantityInput[index].value);
          var temp = {
-            product: products[item.value],
-            amount: amount,
-            total: products[item.value].price * amount,
-            check: false
+               product: products[item.value],
+               amount: amount,
+               total: products[item.value].price * amount,
+               check: false
          }
          
-         var n = cartOfUserCurrent[0].productList.length;
-         cartOfUserCurrent[0].productList[n] = temp;
-         console.clear();
+         var n = cartOfUserCurrent.productList.length;
+         cartOfUserCurrent.productList[n] = temp;
+         // console.clear();
 
-         checkProductList(cartOfUserCurrent[0].productList)
+         checkProductList(cartOfUserCurrent.productList)
          updateProductListOfUserCurrent();
+         renderAmountOfCart();
       })
    })
 }
 
-
-// check product list 
+// check product list have a same product 
 function checkProductList(productList) {
 
    productList.forEach(function(item, index) {
-        // let temp = item.product.id;
+         // let temp = item.product.id;
       for (let i = index + 1; i < productList.length; i++) {
          if (productList[i].product.id === item.product.id) {
-            item.amount += productList[i].amount;
-            item.total += productList[i].total;
+               item.amount += productList[i].amount;
+               item.total += productList[i].total;
 
-            productList[i] = productList[i + 1];
+               productList[i] = productList[i + 1];
 
-            if(i == productList.length - 1)
+               if(i == productList.length - 1)
                productList.pop();
          }
       }
@@ -621,9 +610,18 @@ function checkProductList(productList) {
 // update cartList to localStorage
 function updateProductListOfUserCurrent() {
    cartList.forEach(function (item) {
-      if (item.cartID === cartOfUserCurrent[0].cartID)
-         item = cartOfUserCurrent[0];
+      if (item.cartID === cartOfUserCurrent.cartID)
+         item = cartOfUserCurrent;
    });
 
    sItem(cartKey, JSON.stringify(cartList));
 }
+
+//  render amount of products in cart
+
+function renderAmountOfCart() {
+   document.querySelector(".cart-quantity").innerText = cartOfUserCurrent.productList.length;
+   
+
+}
+
