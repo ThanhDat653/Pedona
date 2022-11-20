@@ -123,12 +123,7 @@ const carts = [
     name: "nguyen thanh dat", // carts[0].name = users[0].name;
     cartID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
     productList: [
-      {
-        product: products[1],
-        amount: 2,
-        total: 200,
-        check: true,
-      },
+      
     ],
   },
 
@@ -136,19 +131,7 @@ const carts = [
     name: "nguyen van a", // carts[0].name = users[0].name;
     cartID: "2", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
     productList: [
-      {
-        product: products[1],
-        amount: 2,
-        total: 200,
-        check: false,
-      },
-
-      {
-        product: products[2],
-        amount: 2,
-        total: 200,
-        check: true,
-      },
+      
     ],
   },
 ];
