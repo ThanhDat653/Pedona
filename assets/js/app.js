@@ -60,6 +60,7 @@ function hideMenu() {
 
 // CONTENT PRODUCT LIST
 
+
 // Render product view-mode grid
 const productGridList = document.querySelector(".list-product__grid");
 const products = JSON.parse(gItem("productList")) || defaultProducts;
@@ -556,6 +557,7 @@ var temp= cartList.filter(function (item) {
 });
 
 let cartOfUserCurrent = temp[0];
+renderCartlistOfUserCurrent();
 
 
 // add new product to productList of userCurrent
@@ -584,13 +586,13 @@ function addToCart() {
          checkProductList(cartOfUserCurrent.productList)
          updateProductListOfUserCurrent();
          renderAmountOfCart();
+         renderCartlistOfUserCurrent();
       })
    })
 }
 
 // check product list have a same product 
 function checkProductList(productList) {
-
    productList.forEach(function(item, index) {
          // let temp = item.product.id;
       for (let i = index + 1; i < productList.length; i++) {
@@ -621,7 +623,34 @@ function updateProductListOfUserCurrent() {
 
 function renderAmountOfCart() {
    document.querySelector(".cart-quantity").innerText = cartOfUserCurrent.productList.length;
-   
-
 }
 
+function renderCartlistOfUserCurrent() {
+   const headerCartListElement = document.querySelector(".cart-list-item");
+   headerCartListElement.innerHTML = "";
+   console.log(headerCartListElement);
+   cartOfUserCurrent.productList.forEach(function(item) {
+      let temp = 
+      `<li class="cart-item" value="">
+         <div class="cart-item__img">
+            <img src="${item.product.img}" alt="">
+         </div>
+         
+         <div class="cart-item__info">
+            <div class="cart-item__heading">
+               <div class="cart-item__name">${item.product.name}</div>
+               <div class="cart-item__price-wrap">
+                     <div class="cart-item__price">$${item.product.price}</div>
+                     <div class="cart-item__quantity">x ${item.amount}</div>
+               </div>
+            </div>
+            <div class="cart-item__detail">
+               <span class="cart-item__type">Color: ${item.product.color}</span>
+               <button type="button" class="cart-item__remove-btn">Remove</button>
+            </div>
+         </div>
+      </li>`
+
+      headerCartListElement.insertAdjacentHTML("beforeend", temp);
+   })
+}
