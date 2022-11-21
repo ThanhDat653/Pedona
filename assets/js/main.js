@@ -110,7 +110,7 @@ export function createEditable(item) {
     textAreaStyle(item) +
     `</span>
   `;
-  console.log(item.innerHTML.trim());
+
   item.replaceWith(area);
 }
 

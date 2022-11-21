@@ -7,6 +7,54 @@ import { checkImg } from "./modal.js";
 // Extract product list:Start
 let productList = gItem("productList") || defaultProducts;
 
+function createEditablePrice(item, index) {
+  let area = document.createElement("div");
+  area.className = item.className;
+  area.innerHTML =
+    `<textarea class="textarea price" rows="2" cols="1">` +
+    item.innerHTML.split("$")[0].trim() +
+    `</textarea>` +
+    `<span class="col l-12 invalid-input ">Please input product price</span>
+`;
+
+  item.replaceWith(area);
+}
+
+function createEditableImg(img, index) {
+  let area = document.createElement("label");
+  area.className = img.className;
+  area.id = "img-area";
+  area.innerHTML =
+    '<input type="file" name="productImg" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
+  area.htmlFor = "productImg";
+  img.replaceWith(area);
+  const preview = document.getElementById("img");
+  const input = document.getElementById("productImg");
+  preview.style.display = "block";
+
+  preview.src = productList[index].img;
+  sItem("imgconfig", preview.src);
+  area.addEventListener("change", () => {
+    change = true;
+    let path = input.value;
+    let temparr = path.split("\\");
+    let filename = temparr.slice(-1)[0];
+    if (checkImg(filename)) {
+      //Check for valid filetype
+
+      let src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
+      //
+      preview.src = src;
+      preview.style.display = "block";
+      preview.style.border = "1px solid #cc2424";
+      //
+      sItem("imgconfig", src);
+    } else {
+      alert("Only images are supported");
+      imgReset();
+    }
+  });
+}
 export function outputProd() {
   const productList =
     JSON.parse(localStorage.getItem(prodKey)) || defaultProducts;
@@ -110,6 +158,11 @@ export function outputProd() {
 
         fixSubmitButton.forEach((item) => {
           changedArea.forEach(function (itemCheck, index) {
+            itemCheck.onkeydown = function (e) {
+              if (e.key == "Enter") {
+                this.blur();
+              }
+            };
             itemCheck.onblur = function () {
               const itemValue = itemCheck.value.trim();
               if (itemValue == null || itemValue == "") {
@@ -119,7 +172,7 @@ export function outputProd() {
               }
             };
           });
-          item.onclick = () => {
+          item.onclick = function () {
             if (!check) {
               toggleButton(index);
             }
@@ -159,55 +212,6 @@ export function outputProd() {
   const editableName = createArr(document.querySelectorAll(".product.name"));
   const editableDesc = createArr(document.querySelectorAll(".desc"));
   const editablePrice = createArr(document.querySelectorAll(".price"));
-
-  function createEditablePrice(item, index) {
-    let area = document.createElement("div");
-    area.className = item.className;
-    area.innerHTML =
-      `<textarea class="textarea price" rows="2" cols="1">` +
-      item.innerHTML.split("$")[0].trim() +
-      `</textarea>` +
-      `<span class="col l-12 invalid-input ">Please input product price</span>
-  `;
-
-    item.replaceWith(area);
-  }
-
-  function createEditableImg(img, index) {
-    let area = document.createElement("label");
-    area.className = img.className;
-    area.id = "img-area";
-    area.innerHTML =
-      '<input type="file" name="productImg" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
-    area.htmlFor = "productImg";
-    img.replaceWith(area);
-    const preview = document.getElementById("img");
-
-    const input = document.getElementById("productImg");
-    preview.style.display = "block";
-
-    preview.src = productList[index].img;
-    sItem("imgconfig", preview.src);
-    area.addEventListener("change", () => {
-      change = true;
-      let path = input.value;
-      var temparr = path.split("\\");
-      var filename = temparr.slice(-1)[0];
-      if (checkImg(filename)) {
-        //Check for valid filetype
-
-        var src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
-
-        preview.src = src;
-        preview.style.display = "block";
-        preview.style.border = "1px solid #cc2424";
-
-        sItem("imgconfig", src);
-      } else {
-        alert("Vui lòng Chọn File là Hình Ảnh");
-      }
-    });
-  }
 
   // :End
 }
@@ -373,49 +377,6 @@ function searchProductList() {
     const editableName = createArr(document.querySelectorAll(".product.name"));
     const editableDesc = createArr(document.querySelectorAll(".desc"));
     const editablePrice = createArr(document.querySelectorAll(".price"));
-
-    function createEditablePrice(item) {
-      let area = document.createElement("textarea");
-      area.className = item.className + " textarea";
-      area.value = item.innerHTML.split("$")[0].trim();
-      item.replaceWith(area);
-    }
-
-    function createEditableImg(img, index) {
-      let area = document.createElement("label");
-      area.className = img.className;
-      area.id = "img-area";
-      area.innerHTML =
-        '<input type="file" name="productImg" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
-      area.htmlFor = "productImg";
-      img.replaceWith(area);
-      const preview = document.getElementById("img");
-      const input = document.getElementById("productImg");
-      preview.style.display = "block";
-
-      preview.src = productList[index].img;
-      sItem("imgconfig", preview.src);
-      area.addEventListener("change", () => {
-        change = true;
-        let path = input.value;
-        let temparr = path.split("\\");
-        let filename = temparr.slice(-1)[0];
-        if (checkImg(filename)) {
-          //Check for valid filetype
-
-          let src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
-          //
-          preview.src = src;
-          preview.style.display = "block";
-          preview.style.border = "1px solid #cc2424";
-          //
-          sItem("imgconfig", src);
-        } else {
-          alert("Only images are supported");
-          imgReset();
-        }
-      });
-    }
 
     // :End
   });
