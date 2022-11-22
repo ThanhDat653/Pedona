@@ -20,12 +20,13 @@ function createEditablePrice(item, index) {
   item.replaceWith(area);
 }
 
+let change = false;
 function createEditableImg(img, index) {
   let area = document.createElement("label");
   area.className = img.className;
   area.id = "img-area";
   area.innerHTML =
-    '<input type="file" name="productImg" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
+    '<input type="file" name="" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
   area.htmlFor = "productImg";
   img.replaceWith(area);
   const preview = document.getElementById("img");
@@ -33,7 +34,6 @@ function createEditableImg(img, index) {
   preview.style.display = "block";
 
   preview.src = productList[index].img;
-  sItem("imgconfig", preview.src);
   area.addEventListener("change", () => {
     change = true;
     let path = input.value;
@@ -47,7 +47,8 @@ function createEditableImg(img, index) {
       preview.src = src;
       preview.style.display = "block";
       preview.style.border = "1px solid #cc2424";
-      //
+      //\
+      console.log(src);
       sItem("imgconfig", src);
     } else {
       alert("Only images are supported");
@@ -188,8 +189,15 @@ export function outputProd() {
               productList[index].name = changedArea[1].value.trim();
               productList[index].price = changedArea[2].value.trim();
               productList[index].desc = changedArea[3].value.trim();
-              if (change) {
+              const img = document.getElementById("img");
+              console.log(
+                "🚀 ~ file: product.js ~ line 198 ~ fixSubmitButton.forEach ~ img.src",
+                img.src
+              );
+              console.log(gItem("imgconfig"));
+              if (img.src === gItem("imgconfig")) {
                 productList[index].img = gItem("imgconfig");
+                console.log(1);
               }
               localStorage.setItem(prodKey, JSON.stringify(productList));
               location.reload();
