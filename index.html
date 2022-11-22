@@ -71,10 +71,19 @@
                                 </div>
                             </li>
                             
-                            <li class="c-0 header--top-navbar__item">
+                            <li class="c-0 header--top-navbar__item" id="user_icon">
                                 <a href="#" class="li header--top-navbar__item-link">
                                     <i class="top-navbar__icon fa-regular fa-user"></i>
                                 </a>
+
+                                <!-- Tam: Begin -->
+                                <ul class="user_menu close">
+                                    <li class="user_menu_item user_menu_name">User's name</li>
+                                    <li class="user_menu_item user_role">Customer</li> 
+                                    <li class="user_menu_item logout--btn">LOG OUT</li>
+                                    
+                                </ul>
+                                <!-- Tam: End -->
                             </li>
 
                             <li class="m-0 c-0 header--top-navbar__item">
@@ -220,6 +229,7 @@
             
         </div>
 
+        <!-- Tam: Begin side menu Start-->
         <div class="header__side-menu-container">
             <div class="header__side-menu">
                 <div class="user">
@@ -235,17 +245,17 @@
     
     
                 </div>
-    
+                
                 <div class="side-menu__list-wrapper">
                     <ul class="side-menu__list">
-                        <li class="side-menu-item">
+                        <li class="side-menu-item mobile-login">
                             <i class="side-menu__icon fa-solid fa-user"></i>
-                            <a href="" class="side-menu-item--link">Tài Khoản Của Tôi</a>
+                            <a href="#" class="side-menu-item--link">Đăng Nhập</a>
                         </li>
     
                         <li class="side-menu-item">
                             <i class="side-menu__icon fa-solid fa-bag-shopping"></i>
-                            <a href="" class="side-menu-item--link">Đơn Mua</a>
+                            <a href="#" class="side-menu-item--link">Đơn Mua</a>
                         </li>
                     </ul>
     
@@ -301,25 +311,21 @@
                     </ul>
     
                     <ul class="side-menu__list">
-                        <li class="side-menu-item">
+                        <li class="side-menu-item mobile-logout">
                             <i class="side-menu__icon fa-solid fa-right-from-bracket"></i>
-                            <a href="" class="side-menu-item--link">Đăng Xuất</a>
+                            <a href="#" class="side-menu-item--link">Đăng Xuất</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+        <!-- Tam:  Begin side menu End -->
 
-        <div class="modal-sign">
-            <div class="modal-form">
-                <div class="close-modal">
-                    <button class="close-btn">
-                        <i class="close-modal--icon fa-solid fa-xmark"></i>
-                    </button>
-                </div>
+        <!-- Tam: Begin modal sign in, sign up -->
+        <div class="modal-sign close">
+            <div class="modal-form" id="modal-form">
                 
-
-                <div class="modal--sign-in-form">
+                <div class="modal--sign-in-form form-container" id="form_1">
                     <div class="sign-in-form--content">
                         <div class="sign-in-form--content__header">
                             <div class="content-heding">
@@ -328,15 +334,17 @@
                         </div>
     
                         <div class="sign-in-form--content__body">
-                            <form action="">
+                            <form action="" name="sign_in_form">
                                 <div class="form-item">
                                     <label for="username">Username</label>
                                     <input id="username" class="sign-in-input" type="text" value="" name="user-name" placeholder="Type your username">
+                                    <span class="form-message"></span>
                                 </div>
 
                                 <div class="form-item">
                                     <label for="password">Password</label>
-                                    <input id="pasword" class="sign-in-input" type="text" value="" name="password" placeholder="Type your password">
+                                    <input id="password" class="sign-in-input" type="text" value="" name="password" placeholder="Type your password">
+                                    <span class="form-message"></span>
                                     <a href="" class="forgot-password">
                                         <span>Forgot password ?</span>
                                     </a>
@@ -347,34 +355,75 @@
     
                         <div class="sign-in-form--content__footer">
                             <button class="sign-in--btn">Sign In</button>
-                            <div class="move-to-sign-up">
-                                <span>Not a member?</span>
-                                <a href="" class="sign-up__link">Sign up now</a>
-                            </div>
                         </div>
                     </div>
                 </div>
 
                 
-
-                <div class="modal--sign-up-form">
+ 
+                <div class="modal--sign-up-form form-container" id="form_2">
                     <div class="sign-up-form--content">
                         <div class="sign-up-form--content__header">
-    
+                            <div class="content-heding">
+                                <h2>Sign up</h2>
+                            </div>
                         </div>
     
                         <div class="sign-up-form--content__body">
-    
+                            <form action="" name="sign_up_form">
+                                <div class="form-item">
+                                    <label for="su_name">What's Your Name?</label>
+                                    <input id="su_name" class="sign-in-input" type="text" value="" name="su_name" placeholder="Type your real name">
+                                    <span class="form-message"></span>
+                                </div>
+
+                                <div class="form-item">
+                                    <label for="su_username">Sign Up Username</label>
+                                    <input id="su_username" class="sign-in-input" type="text" value="" name="su_user-name" placeholder="Type your username">
+                                    <span class="form-message"></span>
+                                </div>
+
+                                <div class="form-item">
+                                    <label for="su_password">Password</label>
+                                    <input id="su_password" class="sign-in-input" type="text" value="" name="su_password" placeholder="Type your password">
+                                    <span class="form-message"></span>
+                                </div>
+
+                                <div class="form-item">
+                                    <label for="re_su_password">Password</label>
+                                    <input id="re_su_password" class="sign-in-input" type="text" value="" name="re_su_password" placeholder="Type your password again">
+                                    <span class="form-message"></span>
+                                </div>
+                            </form>
                         </div>
     
                         <div class="sign-up-form--content__footer">
-    
+                            <button class="sign-in--btn" id="sign-up--btn">Sign Up</button>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- oveylayer-container -->
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-left">
+                            <h1>Welcome Back!</h1>
+                            <div class="overlay-test">My friend</div>
+                            <button class="ghost" id="signIn">Sign In</button>
+                        </div>
+                        <div class="overlay-panel overlay-right">
+                            <h1>Hello, Friend!</h1>
+                            <div class="overlay-test">Are you new?</div>
+                            <button class="ghost" id="signUp">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
-            
         </div>
+
+        <!-- Tam: End -->
 
         <div class="slider">
             <img src="./assets/image/slider_img1.jpg" alt="" class="slider-img">

@@ -404,6 +404,58 @@
     font-weight: 600;
 }
 
+.user_menu{
+    /* display: block; */
+    position: absolute;
+    margin-top: 10px;
+    right: 5%;
+    width: 150px;
+    height: auto;
+    background-color: #FFF;
+    z-index: 1000;
+    list-style: none;
+    border-radius: 10px;
+    box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    /* padding-inline-start: 10px;
+    padding-inline-end: 10px; */
+    text-align: center;
+    padding: 0;
+ }
+ 
+ .user_menu .user_menu_item:nth-child(1) {
+ border-top-right-radius:10px ;
+ border-top-left-radius: 10px;
+ }
+ 
+ .user_menu .user_menu_item:last-child {
+     border-bottom-right-radius:10px ;
+     border-bottom-left-radius: 10px;
+     }
+ 
+ .user_menu_item{
+     padding: 10px 0px;
+    font-size: 1.4rem;
+    border-bottom: 1px solid #CCC;
+ }
+ 
+ .user_menu_item.user_role:hover {
+     cursor: pointer;
+ }
+ 
+ .logout--btn {
+     color: #cc2424;
+     cursor: pointer;
+     background: linear-gradient(to left,   #fff 50%, #cc2424 50%) right;
+     background-size: 200% 100%;
+     transition: all .5s ease-out;
+ }
+ 
+ .logout--btn:hover {
+     color: #fff;
+     font-size: 2rem;
+     background-position: left;
+ }
+
 /* Header sticky */
 .header-sticky {
     position: fixed;
@@ -1227,8 +1279,14 @@
 
 /* ----- MODAL LOGIN FORM ----- */
 
+/* ----- MODAL LOGIN FORM ----- */
+
 .modal-sign {
-    display: none;
+    /* display: none; */
+    /* juvi */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: fixed;
     top: 0;
     right: 0;
@@ -1240,19 +1298,83 @@
 
 .modal-form {
     display: flex;
-    flex-direction: row;
-    position: absolute;
-    right: 27.5%;
-    top: 15%;
-    width: 50%;
-    height: 40%;
-    min-height: 500px;
+    flex-direction: column;
+    position: relative;
+    left: 20%;
+    top: 10%;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
     background-color: var(--white-color);
     opacity: 1;
     border-radius: 2px;
     overflow: hidden;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    animation: modalFaceIn ease 0.5s;
+    /* juvi */
 }
+
+.form-message {
+    text-align: left;
+    color: red;
+}
+
+.form-item.invalid .sign-in-input {
+    border-color: #f33a58;
+  }
+  
+  .form-item.invalid .form-message {
+    color: #f33a58;
+  }
+  
+
+
+
+/* juvi */
+
+.modal-form.right-panel-active .modal--sign-in-form {
+    transform: translateX(100%);
+}
+.modal-form.right-panel-active .modal--sign-up-form{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+@keyframes modalFaceIn{
+    from{
+      opacity: 0;
+      transform: translateY(-140px);
+    }
+    to{
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+@keyframes show {
+
+    0%,
+    49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+/* ---- */
 
 .close-modal {
     position: absolute;
@@ -1266,6 +1388,9 @@
     height: 30px;
     border: solid 1px #888;
     background-color: transparent;
+    text-align: center;
+    justify-content: center;
+    line-height: 30px;
 }
 
 .close-btn:hover {
@@ -1284,9 +1409,13 @@
 /* Sign in */
 
 .modal--sign-in-form {
+    background-color: #FFFFFF;
     width: 50%;
     height: 100%;
     background-color: var(--white-color);
+    /* juvi */
+    left: 0;
+    z-index: 2;
 }
 
 .sign-in-form--content {
@@ -1325,6 +1454,7 @@
 .form-item {
     position: relative;
     margin-bottom: 10px;
+    height: 60px;
 
 }
 
@@ -1388,32 +1518,146 @@
     color: var(--sub-text-color);
 }
 
-/* Sign up */
+/*   */
 
 .modal--sign-up-form {
+    background-color: #FFFFFF;
     width: 50%;
     height: 100%;
-    background: url(../image/login_banner.jpg) right bottom no-repeat;
+   /* juvi */
+   left: 0;
+   z-index: 1;
 }
 
 .sign-up-form--content {
-
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .sign-up-form--content__header {
-
+    width: 100%;
+    height: 40px;
 }
 
 .sign-up-form--content__body {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 35px 0;
+    width: 100%;
 }
 
 .sign-up-form--content__footer {
-
+    flex: 1;
+    position: relative; 
 }
 
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
 
+.modal-form.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
 
+.overlay {
+    /* background: #FF416C;
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+    background: linear-gradient(to right, #FF4B2B, #FF416C); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #FFFFFF;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+    background: url(../image/login_banner.jpg) right bottom no-repeat;
+    opacity: 0.9;
+}
+
+.modal-form.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+    transform: translateX(-20%);
+}
+
+.modal-form.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.modal-form.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}   
+
+button {
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+button.ghost {
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+.overlay-test{
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+}
 
 
 /* ----- BACK-TOP Btn */
