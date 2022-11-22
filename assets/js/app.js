@@ -1,7 +1,7 @@
 import {
     products as defaultProducts,
-    carts as defaultCarts,
     users as defaultUsers,
+	 orders as defaultOrders
 } from "./storage.js";
 
 function gItem(key) {
@@ -11,10 +11,6 @@ function gItem(key) {
 function sItem(key, value) {
     return localStorage.setItem(key, value);
 }
-
-// CARTS STORAGE
-const cartKey = "cartList";
-const cartList = JSON.parse(gItem(cartKey)) || defaultCarts;
 
 //  HEADER SCROLL
 
@@ -538,34 +534,35 @@ function setQuantityOfProduct() {
    plusBtn.forEach(function (item, index) {
       item.addEventListener("click", function () {
          quantityInput[index].value = plus(quantityInput[index].value);
-         console.log(quantityInput[index].value);
       });
    });
 }
 
-// CARTS STORAGE
+// ----- CARTS: start -----
 
-sItem(cartKey, JSON.stringify(cartList));
+// demo current user
+sItem(
+	"userCurrent",
+	JSON.stringify({ name: "Nguyen Thanh Dat", userID: "1" })
+);
 
 const userKey = "userList";
-const userList = JSON.parse(gItem(userKey)) || defaultCarts;
+const userList = JSON.parse(gItem(userKey)) || defaultUsers;
 sItem(userKey, JSON.stringify(userList));
 
-// find a cart of userCurrent from cartList by ID
-var temp= cartList.filter(function (item) {
-   return item.cartID == JSON.parse(gItem("userCurrent")).cartID;
+let userCurrent;
+userList.forEach(function (item) {
+   if(item.userID === JSON.parse(gItem("userCurrent")).userID)
+      userCurrent = item;
 });
 
-let cartOfUserCurrent = temp[0];
-renderCartlistOfUserCurrent();
+// find a cart of userCurrent from cartList by ID
+let cartOfUserCurrent = userCurrent.carts;
 
+renderCartlistOfUserCurrent();
 
 // add new product to productList of userCurrent
 function addToCart() {
-   sItem(
-      "userCurrent",
-      JSON.stringify({ name: "Nguyen Thanh Dat", cartID: "1" })
-   );
    let buyBtn = document.querySelectorAll(".buy-btn > button");
    let quantityInput = document.querySelectorAll(".input-qty");
 
@@ -573,84 +570,174 @@ function addToCart() {
       item.addEventListener("click", function() {
          var amount = parseInt(quantityInput[index].value);
          var temp = {
-               product: products[item.value],
-               amount: amount,
-               total: products[item.value].price * amount,
-               check: false
+				product: products[item.value],
+				amount: amount,
+				total: products[item.value].price * amount,
+				check: false
          }
          
-         var n = cartOfUserCurrent.productList.length;
-         cartOfUserCurrent.productList[n] = temp;
-         // console.clear();
+         var n = cartOfUserCurrent.length;
+         cartOfUserCurrent[n] = temp;
 
-         checkProductList(cartOfUserCurrent.productList)
-         updateProductListOfUserCurrent();
+         console.log(cartOfUserCurrent);
+
+         checkProductList(cartOfUserCurrent);
+         updateUserList();
          renderAmountOfCart();
          renderCartlistOfUserCurrent();
       })
    })
+
+}
+
+function updateUserList() {
+   userCurrent.carts = cartOfUserCurrent;
+
+   userList.forEach(function(user) {
+      if(user.userID === userCurrent.userID)
+         user = userCurrent;
+   })
+
+   sItem(userKey, JSON.stringify(userList));
 }
 
 // check product list have a same product 
 function checkProductList(productList) {
    productList.forEach(function(item, index) {
-         // let temp = item.product.id;
       for (let i = index + 1; i < productList.length; i++) {
          if (productList[i].product.id === item.product.id) {
-               item.amount += productList[i].amount;
-               item.total += productList[i].total;
+				item.amount += productList[i].amount;
+				item.total += productList[i].total;
 
-               productList[i] = productList[i + 1];
+				productList[i] = productList[i + 1];
 
-               if(i == productList.length - 1)
-               productList.pop();
+				if(i == productList.length - 1)
+					productList.pop();
          }
       }
    })
 }
 
-// update cartList to localStorage
-function updateProductListOfUserCurrent() {
-   cartList.forEach(function (item) {
-      if (item.cartID === cartOfUserCurrent.cartID)
-         item = cartOfUserCurrent;
-   });
-
-   sItem(cartKey, JSON.stringify(cartList));
-}
-
 //  render amount of products in cart
-
 function renderAmountOfCart() {
-   document.querySelector(".cart-quantity").innerText = cartOfUserCurrent.productList.length;
+   document.querySelector(".cart-quantity").innerText = cartOfUserCurrent.length;
 }
 
 function renderCartlistOfUserCurrent() {
    const headerCartListElement = document.querySelector(".cart-list-item");
    headerCartListElement.innerHTML = "";
-   console.log(headerCartListElement);
-   cartOfUserCurrent.productList.forEach(function(item) {
-      let temp = 
-      `<li class="cart-item" value="">
-         <div class="cart-item__img">
-            <img src="${item.product.img}" alt="">
-         </div>
-         
-         <div class="cart-item__info">
-            <div class="cart-item__heading">
-               <div class="cart-item__name">${item.product.name}</div>
-               <div class="cart-item__price-wrap">
-                     <div class="cart-item__price">$${item.product.price}</div>
-                     <div class="cart-item__quantity">x ${item.amount}</div>
-               </div>
-            </div>
-            <div class="cart-item__detail">
-               <span class="cart-item__type">Color: ${item.product.color}</span>
-               <button type="button" class="cart-item__remove-btn">Remove</button>
-            </div>
-         </div>
+	if(cartOfUserCurrent.length == 0) {
+		let temp = 
+      `<li class="cart-empty">
+			<i class="fa-regular fa-face-frown"></i>
+			<span>Your Cart Is Empty</span>
       </li>`
 
+		document.querySelector(".cart-purchase-btn").style.display = "none";
+
       headerCartListElement.insertAdjacentHTML("beforeend", temp);
-   })
+	}
+	else {
+		cartOfUserCurrent.forEach(function(item) {
+			let temp = 
+			`<li class="cart-item">
+				<div class="cart-item__img">
+					<img src="${item.product.img}" alt="">
+				</div>
+				
+				<div class="cart-item__info">
+					<div class="cart-item__heading">
+						<div class="cart-item__name">${item.product.name}</div>
+						<div class="cart-item__price-wrap">
+								<div class="cart-item__price">$${item.product.price}</div>
+								<div class="cart-item__quantity">x ${item.amount}</div>
+						</div>
+					</div>
+					<div class="cart-item__detail">
+						<span class="cart-item__type">Color: ${item.product.color}</span>
+						<button type="button" class="cart-item__remove-btn" value="${item.product.id}">Remove</button>
+					</div>
+				</div>
+			</li>`
+
+			headerCartListElement.insertAdjacentHTML("beforeend", temp);
+		})
+		document.querySelector(".cart-purchase-btn").style.display = "block";
+	}
+
+	removeProductInCart();
+   renderAmountOfCart();
 }
+
+// Remove product from cart list
+function deleteObjectInArrayList(arrayList, startIndex) {
+	for (var i = startIndex; i < arrayList.length; i++) {
+		arrayList[i] = arrayList[i + 1];
+		if (i == arrayList.length - 1)
+			arrayList.pop();
+	}
+}
+
+function removeProductInCart() {
+	const removeProductBtn = document.querySelectorAll(".cart-item__remove-btn");
+	removeProductBtn.forEach(function(button) {
+		button.addEventListener("click", function() {
+			cartOfUserCurrent.forEach(function(item, index) {
+				if (item.product.id === button.value)
+					deleteObjectInArrayList(cartOfUserCurrent, index);
+			})
+			
+			renderCartlistOfUserCurrent();
+         updateUserList();
+		})
+	})
+}
+
+// ----- CARTS STORAGE: end -----
+
+
+// ----- ORDERS: Start -----
+
+// create  the orders of user current
+const ordersKey = "ordersList";
+const ordersList = JSON.parse(gItem(ordersKey)) || defaultOrders;
+sItem(ordersKey, JSON.stringify(ordersList));
+
+// find an order of current user
+var ordersOfUserCurrent;
+userList.forEach(function (item) {
+   if(item.userID == JSON.parse(gItem("userCurrent")).userID)
+      ordersOfUserCurrent = item.orders;
+});
+
+const purchaseButton = document.querySelector(".cart-purchase-btn");
+
+purchaseButton.addEventListener("click", function() {
+   let today = new Date();
+   let date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+   let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+   let dateTime = date+' '+time;
+
+   let total = 0; 
+   cartOfUserCurrent.forEach((item) => {
+      total += item.total;
+   })
+
+   ordersList[ordersList.length] = {
+      name: userCurrent.name,
+      ordersID: userCurrent.userID,
+      productList: cartOfUserCurrent,
+      time: dateTime,
+      total: total
+   }
+
+   // update ordersList
+	sItem(ordersKey, JSON.stringify(ordersList));
+
+   // update cart of current user
+	cartOfUserCurrent = [];
+   updateUserList();
+	renderCartlistOfUserCurrent();
+})
+
+// ----- ORDERS: End -----
