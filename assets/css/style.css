@@ -263,6 +263,7 @@
 }
 
 .cart-item__remove-btn:hover {
+    cursor: pointer;
     opacity: 0.8;
 }
 
@@ -292,6 +293,16 @@
     cursor: pointer;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, 
                 rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.cart-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    font-size: 1.5rem;
+    color: var(--sub-text-color);
+    opacity: 0.7;
 }
 
 /* Cartlist end */
