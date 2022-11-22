@@ -123,13 +123,13 @@ const users = [
 // ---------- ORDERS LIST ----------
 
 const orders = [
-  {
-    name: "nguyen thanh dat", // carts[0].name = users[0].name;
-    orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
-    productList: [],
-    time: "",
-    total: 0,
-  },
+  // {
+  //   name: "nguyen thanh dat", // carts[0].name = users[0].name;
+  //   orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
+  //   productList: [],
+  //   time: "",
+  //   total: 0,
+  // },
 ];
 
 export { products, users, orders };
