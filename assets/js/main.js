@@ -1,36 +1,30 @@
 // import { outputCarts } from "./content/carts.js";
 import { outputProd } from "./product.js";
 import { outputUsers } from "./users.js";
-import {
-  sItem,
-  gItem,
-  products as defaultProducts,
-  users as defaultUsers,
-  carts as defaultCarts,
-} from "./storage.js";
+import { sItem, gItem } from "./storage.js";
 const userKey = "userList";
 const prodKey = "productList";
-const cartKey = "cartList";
-export { userKey, prodKey, cartKey };
+const orderKey = "orderList";
+export { userKey, prodKey, orderKey };
 
 const tableBodyProduct = document.getElementById("table__body--products");
 export { tableBodyProduct };
 const tableBodyUser = document.getElementById("table__body--users");
 export { tableBodyUser };
-const tableBodyCart = document.getElementById("table__body--carts");
-export { tableBodyCart };
+const tableBodyOrder = document.getElementById("table__body--orders");
+export { tableBodyOrder };
 
 outputProd();
 outputUsers();
-// outputCarts();
+// outputOrders();
 
 //        Sidebar Size Change :Start
 const productPage = document.getElementById("products-page");
 let pastProduct = productPage.offsetTop;
 const userPage = document.getElementById("users-page");
 let pastUser = userPage.offsetTop;
-const cartPage = document.getElementById("carts-page");
-let pastCart = cartPage.offsetTop;
+const orderPage = document.getElementById("orders-page");
+let pastOrder = orderPage.offsetTop;
 
 let toggleSideBarButton = document.getElementById("toggle-sidebar");
 let closeSideBarButton = document.getElementById("close-sidebar");
@@ -67,9 +61,6 @@ sideBar.addEventListener("mouseout", hoverOut);
 
 let list = document.querySelectorAll(".side-bar__item");
 
-function test() {
-  if (window.scrollY);
-}
 for (let i = 0; i < list.length; i++) {
   list[i].onclick = function () {
     let j = 0;
@@ -101,18 +92,19 @@ function textAreaStyle(item) {
     return "Please input user username";
   }
 }
-export function createEditable(item, col) {
+export function createEditable(item) {
   let area = document.createElement("div");
   area.className = item.className;
   area.innerHTML =
     `<textarea class="textarea 
-  " rows="4"> ` +
-    item.innerHTML +
+  " rows="4">` +
+    item.innerHTML.trim() +
     `</textarea>` +
     `<span class="col l-12 invalid-input ">` +
     textAreaStyle(item) +
     `</span>
   `;
+
   item.replaceWith(area);
 }
 
@@ -133,13 +125,13 @@ body.onscroll = function () {
       list[j++].classList.remove("side-bar__item--active");
     }
     list[1].classList.add("side-bar__item--active");
-  } else if (window.scrollY >= pastUser && window.scrollY <= pastCart) {
+  } else if (window.scrollY >= pastUser && window.scrollY <= pastOrder) {
     let j = 0;
     while (j < list.length) {
       list[j++].classList.remove("side-bar__item--active");
     }
     list[2].classList.add("side-bar__item--active");
-  } else if (window.scrollY >= pastCart) {
+  } else if (window.scrollY >= pastOrder) {
     let j = 0;
     while (j < list.length) {
       list[j++].classList.remove("side-bar__item--active");

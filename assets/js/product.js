@@ -2,10 +2,60 @@ import { tableBodyProduct } from "./main.js";
 import { products as defaultProducts } from "./storage.js";
 import { sItem, gItem } from "./storage.js";
 import { deleteObject, createEditable, createArr, prodKey } from "./main.js";
+import { checkImg } from "./modal.js";
 
 // Extract product list:Start
 let productList = gItem("productList") || defaultProducts;
 
+function createEditablePrice(item, index) {
+  let area = document.createElement("div");
+  area.className = item.className;
+  area.innerHTML =
+    `<textarea class="textarea price" rows="2" cols="1">` +
+    item.innerHTML.split("$")[0].trim() +
+    `</textarea>` +
+    `<span class="col l-12 invalid-input ">Please input product price</span>
+`;
+
+  item.replaceWith(area);
+}
+
+let change = false;
+function createEditableImg(img, index) {
+  let area = document.createElement("label");
+  area.className = img.className;
+  area.id = "img-area";
+  area.innerHTML =
+    '<input type="file" name="" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
+  area.htmlFor = "productImg";
+  img.replaceWith(area);
+  const preview = document.getElementById("img");
+  const input = document.getElementById("productImg");
+  preview.style.display = "block";
+
+  preview.src = productList[index].img;
+  area.addEventListener("change", () => {
+    change = true;
+    let path = input.value;
+    let temparr = path.split("\\");
+    let filename = temparr.slice(-1)[0];
+    if (checkImg(filename)) {
+      //Check for valid filetype
+
+      let src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
+      //
+      preview.src = src;
+      preview.style.display = "block";
+      preview.style.border = "1px solid #cc2424";
+      //\
+      console.log(src);
+      sItem("imgconfig", src);
+    } else {
+      alert("Only images are supported");
+      imgReset();
+    }
+  });
+}
 export function outputProd() {
   const productList =
     JSON.parse(localStorage.getItem(prodKey)) || defaultProducts;
@@ -76,7 +126,6 @@ export function outputProd() {
 
   fixButton.forEach((item, index) => {
     item.onclick = () => {
-      let valid = true;
       if (check) {
         alert("chỉ được sửa 1 đối tượng một lần ");
       } else {
@@ -99,21 +148,32 @@ export function outputProd() {
         const errorShow = createArr(
           document.querySelectorAll("textarea.textarea + span")
         );
+        function validCheck() {
+          for (let i = 0; i < errorShow.length; i++) {
+            if (errorShow[i].classList.contains("invalid")) {
+              return false;
+            }
+          }
+          return true;
+        }
 
         fixSubmitButton.forEach((item) => {
           changedArea.forEach(function (itemCheck, index) {
+            itemCheck.onkeydown = function (e) {
+              if (e.key == "Enter") {
+                this.blur();
+              }
+            };
             itemCheck.onblur = function () {
-              if (itemCheck.value == null || itemCheck.value == "") {
+              const itemValue = itemCheck.value.trim();
+              if (itemValue == null || itemValue == "") {
                 errorShow[index].classList.add("invalid");
-
-                valid = false;
               } else {
                 errorShow[index].classList.remove("invalid");
-                valid = true;
               }
             };
           });
-          item.onclick = () => {
+          item.onclick = function () {
             if (!check) {
               toggleButton(index);
             }
@@ -123,14 +183,21 @@ export function outputProd() {
                   parseInt(prodNumber[index].innerHTML) +
                   " in the Store ?"
               ) &&
-              valid
+              validCheck()
             ) {
-              productList[index].id = changedArea[0].value;
-              productList[index].name = changedArea[1].value;
-              productList[index].price = changedArea[2].value;
-              productList[index].desc = changedArea[3].value;
-              if (change) {
+              productList[index].id = changedArea[0].value.trim();
+              productList[index].name = changedArea[1].value.trim();
+              productList[index].price = changedArea[2].value.trim();
+              productList[index].desc = changedArea[3].value.trim();
+              const img = document.getElementById("img");
+              console.log(
+                "🚀 ~ file: product.js ~ line 198 ~ fixSubmitButton.forEach ~ img.src",
+                img.src
+              );
+              console.log(gItem("imgconfig"));
+              if (img.src === gItem("imgconfig")) {
                 productList[index].img = gItem("imgconfig");
+                console.log(1);
               }
               localStorage.setItem(prodKey, JSON.stringify(productList));
               location.reload();
@@ -153,55 +220,6 @@ export function outputProd() {
   const editableName = createArr(document.querySelectorAll(".product.name"));
   const editableDesc = createArr(document.querySelectorAll(".desc"));
   const editablePrice = createArr(document.querySelectorAll(".price"));
-
-  function createEditablePrice(item, index) {
-    let area = document.createElement("div");
-    area.className = item.className;
-    area.innerHTML =
-      `<textarea class="textarea" rows="2" col="1"> ` +
-      item.innerHTML.split("$")[0] +
-      `</textarea>` +
-      `<span class="col l-12 invalid-input ">Please input product price</span>
-  `;
-
-    item.replaceWith(area);
-  }
-
-  function createEditableImg(img, index) {
-    let area = document.createElement("label");
-    area.className = img.className;
-    area.id = "img-area";
-    area.innerHTML =
-      '<input type="file" name="productImg" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
-    area.htmlFor = "productImg";
-    img.replaceWith(area);
-    const preview = document.getElementById("img");
-
-    const input = document.getElementById("productImg");
-    preview.style.display = "block";
-
-    preview.src = productList[index].img;
-    sItem("imgconfig", preview.src);
-    area.addEventListener("change", () => {
-      change = true;
-      let path = input.value;
-      var temparr = path.split("\\");
-      var filename = temparr.slice(-1)[0];
-      if (checkImg(filename)) {
-        //Check for valid filetype
-
-        var src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
-
-        preview.src = src;
-        preview.style.display = "block";
-        preview.style.border = "1px solid #cc2424";
-
-        sItem("imgconfig", src);
-      } else {
-        alert("Vui lòng Chọn File là Hình Ảnh");
-      }
-    });
-  }
 
   // :End
 }
@@ -283,22 +301,15 @@ function searchProductList() {
 
     fixButton.forEach((item, index) => {
       item.onclick = () => {
-        let valid = true;
         if (check) {
           alert("Only change one item per time");
         } else {
           toggleButton(index);
           fixSubmitButton[index].style.animation = "button-full .25s linear";
-          createEditable(editableId[parseInt(prodNumber[index].innerHTML) - 1]);
-          createEditable(
-            editableName[parseInt(prodNumber[index].innerHTML) - 1]
-          );
-          createEditable(
-            editableDesc[parseInt(prodNumber[index].innerHTML) - 1]
-          );
-          createEditablePrice(
-            editablePrice[parseInt(prodNumber[index].innerHTML) - 1]
-          );
+          createEditable(editableId[index]);
+          createEditable(editableName[index]);
+          createEditable(editableDesc[index]);
+          createEditablePrice(editablePrice[index]);
           createEditableImg(
             editableImg[index],
             parseInt(prodNumber[index].innerHTML) - 1
@@ -310,17 +321,22 @@ function searchProductList() {
           const errorShow = createArr(
             document.querySelectorAll("textarea.textarea + span")
           );
-
+          function validCheck() {
+            for (let i = 0; i < errorShow.length; i++) {
+              if (errorShow[i].classList.contains("invalid")) {
+                return false;
+              }
+            }
+            return true;
+          }
           fixSubmitButton.forEach((item) => {
             changedArea.forEach(function (itemCheck, index) {
               itemCheck.onblur = function () {
-                if (itemCheck.value == null || itemCheck.value == "") {
+                const itemValue = itemCheck.value.trim();
+                if (itemValue == null || itemValue == "") {
                   errorShow[index].classList.add("invalid");
-
-                  valid = false;
                 } else {
                   errorShow[index].classList.remove("invalid");
-                  valid = true;
                 }
               };
             });
@@ -334,14 +350,19 @@ function searchProductList() {
                     parseInt(prodNumber[index].innerHTML) +
                     " in the Store ?"
                 ) &&
-                valid
+                validCheck()
               ) {
-                productList[index].id = changedArea[0].value;
-                productList[index].name = changedArea[1].value;
-                productList[index].price = changedArea[2].value;
-                productList[index].desc = changedArea[3].value;
+                productList[parseInt(prodNumber[index].innerHTML) - 1].id =
+                  changedArea[0].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].name =
+                  changedArea[1].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].price =
+                  changedArea[2].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
+                  changedArea[3].value.trim();
                 if (change) {
-                  productList[index].img = gItem("imgconfig");
+                  productList[parseInt(prodNumber[index].innerHTML) - 1].img =
+                    gItem("imgconfig");
                 }
                 localStorage.setItem(prodKey, JSON.stringify(productList));
                 location.reload();
@@ -364,49 +385,6 @@ function searchProductList() {
     const editableName = createArr(document.querySelectorAll(".product.name"));
     const editableDesc = createArr(document.querySelectorAll(".desc"));
     const editablePrice = createArr(document.querySelectorAll(".price"));
-
-    function createEditablePrice(item) {
-      let area = document.createElement("textarea");
-      area.className = item.className + " textarea";
-      area.value = item.innerHTML.split("$")[0];
-      item.replaceWith(area);
-    }
-
-    function createEditableImg(img, index) {
-      let area = document.createElement("label");
-      area.className = img.className;
-      area.id = "img-area";
-      area.innerHTML =
-        '<input type="file" name="productImg" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
-      area.htmlFor = "productImg";
-      img.replaceWith(area);
-      const preview = document.getElementById("img");
-      const input = document.getElementById("productImg");
-      preview.style.display = "block";
-
-      preview.src = productList[index].img;
-      sItem("imgconfig", preview.src);
-      area.addEventListener("change", () => {
-        change = true;
-        let path = input.value;
-        let temparr = path.split("\\");
-        let filename = temparr.slice(-1)[0];
-        if (checkImg(filename)) {
-          //Check for valid filetype
-
-          let src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
-          //
-          preview.src = src;
-          preview.style.display = "block";
-          preview.style.border = "1px solid #cc2424";
-          //
-          sItem("imgconfig", src);
-        } else {
-          alert("Only images are supported");
-          imgReset();
-        }
-      });
-    }
 
     // :End
   });

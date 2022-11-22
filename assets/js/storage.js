@@ -100,6 +100,7 @@ const users = [
     pass: "123",
     userID: "0",
     name: "nguyen van a",
+    carts: [],
   },
 
   {
@@ -107,6 +108,7 @@ const users = [
     pass: "123",
     userID: "1",
     name: "nguyen thanh dat",
+    carts: [],
   },
 
   {
@@ -114,29 +116,23 @@ const users = [
     pass: "123",
     userID: "2",
     name: "nguyen van a",
+    carts: [],
   },
 ];
 
-// ---------- CART LIST ----------
-const carts = [
+// ---------- ORDERS LIST ----------
+
+const orders = [
   {
     name: "nguyen thanh dat", // carts[0].name = users[0].name;
-    cartID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
-    productList: [
-      
-    ],
-  },
-
-  {
-    name: "nguyen van a", // carts[0].name = users[0].name;
-    cartID: "2", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
-    productList: [
-      
-    ],
+    orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
+    productList: [],
+    time: "",
+    total: 0,
   },
 ];
 
-export { products, carts, users };
+export { products, users, orders };
 
 export function gItem(key) {
   return JSON.parse(localStorage.getItem(key));
@@ -145,3 +141,7 @@ export function gItem(key) {
 export function sItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
+
+// trong orders sẽ chứa tất cả đơn hàng của shop
+// mỗi user sẽ có 1 danh sách đơn hàng
+// khi click chọn mua hàng, sẽ thêm đơn hàng đó vào cả user.orders và orders

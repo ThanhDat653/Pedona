@@ -69,7 +69,6 @@ export function outputUsers() {
     };
   });
   fixButtonUser.forEach((item, index) => {
-    let valid = true;
     item.onclick = () => {
       if (check) {
         alert("Only change one item per time");
@@ -88,16 +87,22 @@ export function outputUsers() {
         const errorShow = createArr(
           document.querySelectorAll("textarea.textarea + span")
         );
+        function validCheck() {
+          for (let i = 0; i < errorShow.length; i++) {
+            if (errorShow[i].classList.contains("invalid")) {
+              return false;
+            }
+          }
+          return true;
+        }
         fixSubmitButtonUser.forEach((item, index) => {
           changedArea.forEach(function (itemCheck, index) {
             itemCheck.onblur = function () {
-              if (itemCheck.value == null || itemCheck.value == "") {
+              const itemValue = itemCheck.value.trim();
+              if (itemValue == null || itemValue == "") {
                 errorShow[index].classList.add("invalid");
-
-                valid = false;
               } else {
                 errorShow[index].classList.remove("invalid");
-                valid = true;
               }
             };
           });
@@ -111,11 +116,11 @@ export function outputUsers() {
                   parseInt(userNumber[index].innerHTML) +
                   " in the Data ?"
               ) &&
-              valid
+              validCheck()
             ) {
-              userList[index].username = changedArea[0].value;
-              userList[index].pass = changedArea[1].value;
-              userList[index].name = changedArea[2].value;
+              userList[index].username = changedArea[0].value.trim();
+              userList[index].pass = changedArea[1].value.trim();
+              userList[index].name = changedArea[2].value.trim();
               localStorage.setItem("userList", JSON.stringify(userList));
               location.reload();
             } else {
@@ -170,6 +175,10 @@ function searchUserList() {
     const userNumber = createArr(document.querySelectorAll(".user.number"));
 
     const editableUserName = createArr(document.querySelectorAll(".username"));
+    console.log(
+      "🚀 ~ file: users.js ~ line 178 ~ userList.filter ~ editableUserName",
+      editableUserName
+    );
     const editablePassword = createArr(document.querySelectorAll(".password"));
     const editableName = createArr(document.querySelectorAll(".user.name"));
 
@@ -187,7 +196,6 @@ function searchUserList() {
       };
     });
     fixButtonUser.forEach((item, index) => {
-      let valid = true;
       item.onclick = () => {
         if (check) {
           alert("Only change one item per time");
@@ -195,30 +203,30 @@ function searchUserList() {
           toggleButton(index);
           fixSubmitButtonUser[index].style.animation =
             "button-full .25s linear";
-          createEditable(
-            editableUserName[parseInt(userNumber[index].innerHTML) - 1]
-          );
-          createEditable(
-            editableName[parseInt(userNumber[index].innerHTML) - 1]
-          );
-          createEditable(
-            editablePassword[parseInt(userNumber[index].innerHTML) - 1]
-          );
+          createEditable(editableUserName[index]);
+          createEditable(editableName[index]);
+          createEditable(editablePassword[index]);
           check = true;
           let changedArea = createArr(document.querySelectorAll(".textarea"));
           const errorShow = createArr(
             document.querySelectorAll("textarea.textarea + span")
           );
+          function validCheck() {
+            for (let i = 0; i < errorShow.length; i++) {
+              if (errorShow[i].classList.contains("invalid")) {
+                return false;
+              }
+            }
+            return true;
+          }
           fixSubmitButtonUser.forEach((item, index) => {
             changedArea.forEach(function (itemCheck, index) {
               itemCheck.onblur = function () {
-                if (itemCheck.value == null || itemCheck.value == "") {
+                const itemValue = itemCheck.value.trim();
+                if (itemValue == null || itemValue == "") {
                   errorShow[index].classList.add("invalid");
-
-                  valid = false;
                 } else {
                   errorShow[index].classList.remove("invalid");
-                  valid = true;
                 }
               };
             });
@@ -232,11 +240,14 @@ function searchUserList() {
                     parseInt(userNumber[index].innerHTML) +
                     " in the Data ?"
                 ) &&
-                valid
+                validCheck()
               ) {
-                userList[index].username = changedArea[0].value;
-                userList[index].pass = changedArea[1].value;
-                userList[index].name = changedArea[2].value;
+                userList[parseInt(userNumber[index].innerHTML) - 1].username =
+                  changedArea[0].value;
+                userList[parseInt(userNumber[index].innerHTML) - 1].pass =
+                  changedArea[1].value;
+                userList[parseInt(userNumber[index].innerHTML) - 1].name =
+                  changedArea[2].value;
                 localStorage.setItem("userList", JSON.stringify(userList));
                 location.reload();
               } else {

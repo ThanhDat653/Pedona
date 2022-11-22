@@ -521,7 +521,10 @@ a {
   border: none;
   text-align: center;
   background: transparent;
-
+  width: 200px;
+}
+.price.textarea {
+  width: auto;
 }
 
 .desc .textarea {
@@ -647,7 +650,7 @@ a {
   align-items: center;
 }
 
-.cart-detail__btn {
+.order-detail__btn {
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -710,6 +713,8 @@ a {
   margin: auto;
   height: auto;
   background-color: #fff;
+  height: 605px;
+  width: 1100px;
 }
 
 .modal__header {
