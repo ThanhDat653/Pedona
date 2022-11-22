@@ -1,7 +1,7 @@
-import { tableBodyCart as tableBodyCart } from "./main.js";
+import { tableBodyOrder } from "./main.js";
 
-import { cartKey, createArr } from "./main.js";
-import { gItem, sItem, carts as defaultCarts } from "./storage.js";
+import { createArr, orderKey } from "./main.js";
+import { gItem, sItem, orders as defaultOrders } from "./storage.js";
 
 function displayCheck(item) {
   if (item) {
@@ -10,15 +10,14 @@ function displayCheck(item) {
     return "Chưa xử lý";
   }
 }
-const cartList = gItem("cartList") || defaultCarts;
+const orderList = gItem("orderList") || defaultOrders;
 
 // =================================================================== render =================================================================//
+export function outputOrders() {
+  tableBodyOrder.innerHTML = "";
 
-export function outputCarts() {
-  tableBodyCart.innerHTML = "";
-
-  for (let i = 0; i < cartList.length; i++) {
-    tableBodyCart.innerHTML +=
+  for (let i = 0; i < orderList.length; i++) {
+    tableBodyOrder.innerHTML +=
       `<div class="row mb-32 table__row shadow-wrap js-mid no-gutters">
     <div class="col l-1">
       ` +
@@ -27,13 +26,13 @@ export function outputCarts() {
     </div>
     <div class="col l-9">
       <div class="row">User Name:  ` +
-      cartList[i].name +
+      orderList[i].name +
       `</div>
-      <div class="row mt-16">Cart ID:  ` +
-      cartList[i].cartID +
+      <div class="row mt-16">Order ID:  ` +
+      orderList[i].orderID +
       `</div>
     </div>
-    <div class="col l-1 cart-detail__btn">
+    <div class="col l-1 order-detail__btn">
       <button class="order-full btn"><i class="fa-solid fa-caret-left fa-xl"></i></button>
       ` + // <button class="order-full--close btn"><i class="fa-solid fa-caret-down"></i></button>`
       `</div>
@@ -42,7 +41,7 @@ export function outputCarts() {
     
   </div>`;
   }
-  const cartView = document.querySelectorAll(".details-view");
+  const orderView = document.querySelectorAll(".details-view");
   const viewButton = document.querySelectorAll(".order-full");
 
   viewButton.forEach((item, indexButton) => {
@@ -51,16 +50,16 @@ export function outputCarts() {
         let j = 0;
         while (j < viewButton.length) {
           viewButton[j].classList.remove("active");
-          cartView[j].innerHTML = "";
-          cartView[j].classList.remove("active");
-          cartView[j].style.height = 0 + "px";
+          orderView[j].innerHTML = "";
+          orderView[j].classList.remove("active");
+          orderView[j].style.height = 0 + "px";
           j++;
         }
         item.classList.add("active");
-        cartView[indexButton].classList.add("active");
-        cartView[indexButton].innerHTML = "";
-        cartList[indexButton].productList.forEach((item, indexList) => {
-          cartView[indexButton].innerHTML +=
+        orderView[indexButton].classList.add("active");
+        orderView[indexButton].innerHTML = "";
+        orderList[indexButton].productList.forEach((item, indexList) => {
+          orderView[indexButton].innerHTML +=
             `<div class="row order-view ">
             <div class=" col l-9 l-o-3 ">
                 <div class="row no-gutters js-mid order-view__header">
@@ -102,65 +101,70 @@ export function outputCarts() {
             </div>
           </div>`;
         });
-        cartView[indexButton].innerHTML += `<div class="row no-gutters js-mid">
-      <div class="col l-3">Thời Gian:  </div>
-      <div class="col l-3 l-o-6">Total:  </div>
+        orderView[indexButton].innerHTML +=
+          `<div class="row no-gutters js-mid">
+      <div class="col l-3">Thời Gian: ` +
+          orderList[indexButton].time +
+          `   </div>
+      <div class="col l-3 l-o-6">Total: ` +
+          orderList[indexButton].total +
+          `$</div>
       </div>`;
-        let h = cartView[indexButton].scrollHeight;
+        let h = orderView[indexButton].scrollHeight;
         let i = 0;
         while (i <= h) {
-          cartView[indexButton].style.height = i + "px";
+          orderView[indexButton].style.height = i + "px";
           i += 3;
         }
       } else {
-        cartView[indexButton].classList.remove("active");
-        cartView[indexButton].style.height = 0 + "px";
-        cartView[indexButton].innerHTML = "";
+        orderView[indexButton].classList.remove("active");
+        orderView[indexButton].style.height = 0 + "px";
+        orderView[indexButton].innerHTML = "";
         item.classList.toggle("active");
       }
       const checkView = createArr(document.querySelectorAll(".col.check"));
 
       checkView.forEach((itemCheck, indexCheck) => {
         itemCheck.onclick = () => {
-          if (cartList[indexButton].productList[indexCheck].check == true) {
+          if (orderList[indexButton].productList[indexCheck].check == true) {
             itemCheck.innerHTML = "Chưa xử lý";
             itemCheck.classList.remove("true");
             itemCheck.classList.add("false");
-            cartList[indexButton].productList[indexCheck].check = false;
-            sItem(cartKey, cartList);
+            orderList[indexButton].productList[indexCheck].check = false;
+            sItem(orderKey, orderList);
           } else {
             itemCheck.innerHTML = "Đã xử lý";
             itemCheck.classList.remove("false");
             itemCheck.classList.add("true");
-            cartList[indexButton].productList[indexCheck].check = true;
-            sItem(cartKey, cartList);
+            orderList[indexButton].productList[indexCheck].check = true;
+            sItem(orderKey, orderList);
           }
         };
       });
     };
   });
-  sItem(cartKey, cartList);
+  sItem(orderKey, orderList);
 }
-outputCarts();
-const searchInput = document.querySelector(".cart.search-input");
-function searchCartList() {
+outputOrders();
+const searchInput = document.querySelector(".order.search-input");
+function searchOrderList() {
   const searchValue = searchInput.value;
-  tableBodyCart.innerHTML = "";
-  cartList.filter((item, i) => {
-    if (item.name.includes(searchValue) || item.cartID.includes(searchValue)) {
-      tableBodyCart.innerHTML +=
+  tableBodyOrder.innerHTML = "";
+  orderList.filter((item, i) => {
+    if (item.name.includes(searchValue)) {
+      tableBodyOrder.innerHTML +=
         `<div class="row mt-32 mb-32 table__row shadow-wrap js-mid no-gutters">
-      <div class="col l-2 cart number">
+      <div class="col l-2 Order number">
       ` +
         (i + 1) +
         `
   </div>
   <div class="col l-8">
     <div class="row">Tên Khách Hàng:` +
-        cartList[i].name +
+        orderList[i].name +
         `</div>
       <div class="row mt-16">Mã Đơn Hàng:` +
-        cartList[i].cartID +
+        orderList[i].orderID +
         `</div>
   </div>
   <div class="col l-2">
@@ -171,27 +175,27 @@ function searchCartList() {
     <div class="content details-view no-gutters">
     
     </div>`;
-      const cartView = document.querySelectorAll(".details-view");
+      const orderView = document.querySelectorAll(".details-view");
       const viewButton = document.querySelectorAll(".order-full");
-      const cartNumber = document.querySelectorAll(".cart.number");
+      const OrderNumber = document.querySelectorAll(".Order.number");
       viewButton.forEach((item, indexButton) => {
         item.onclick = () => {
           if (!item.classList.contains("active")) {
             let j = 0;
             while (j < viewButton.length) {
               viewButton[j].classList.remove("active");
-              cartView[j].innerHTML = "";
-              cartView[j].classList.remove("active");
-              cartView[j].style.height = 0 + "px";
+              orderView[j].innerHTML = "";
+              orderView[j].classList.remove("active");
+              orderView[j].style.height = 0 + "px";
               j++;
             }
             item.classList.add("active");
-            cartView[indexButton].classList.add("active");
-            cartView[indexButton].innerHTML = "";
-            cartList[
-              parseInt(cartNumber[indexButton].innerHTML) - 1
+            orderView[indexButton].classList.add("active");
+            orderView[indexButton].innerHTML = "";
+            orderList[
+              parseInt(OrderNumber[indexButton].innerHTML) - 1
             ].productList.forEach((item, indexList) => {
-              cartView[indexButton].innerHTML +=
+              orderView[indexButton].innerHTML +=
                 `<div class="row mt-16 mr-16 no-gutters pt-16 order-view ">
             <div class=" col l-9 l-o-3">
             <div class="row no-gutters js-mid">
@@ -233,40 +237,42 @@ function searchCartList() {
           </div>
         </div>`;
             });
-            cartView[
+            orderView[
               indexButton
             ].innerHTML += `<div class="row no-gutters js-mid">
           <div class="col l-3">Thời Gian :</div>
     <div class="col l-3 l-o-6">Tổng Đơn Hàng</div>
     </div>`;
-            let h = cartView[indexButton].scrollHeight;
+            let h = orderView[indexButton].scrollHeight;
             let i = 0;
             while (i <= h) {
-              cartView[indexButton].style.height = i + "px";
+              orderView[indexButton].style.height = i + "px";
               i += 3;
             }
           } else {
-            cartView[indexButton].classList.remove("active");
-            cartView[indexButton].style.height = 0 + "px";
-            cartView[indexButton].innerHTML = "";
+            orderView[indexButton].classList.remove("active");
+            orderView[indexButton].style.height = 0 + "px";
+            orderView[indexButton].innerHTML = "";
             item.classList.toggle("active");
           }
           const checkView = createArr(document.querySelectorAll(".col.check"));
 
           checkView.forEach((itemCheck, indexCheck) => {
             itemCheck.onclick = () => {
-              if (cartList[indexButton].productList[indexCheck].check == true) {
+              if (
+                orderList[indexButton].productList[indexCheck].check == true
+              ) {
                 itemCheck.innerHTML = "Chưa xử lý";
                 itemCheck.classList.remove("true");
                 itemCheck.classList.add("false");
-                cartList[indexButton].productList[indexCheck].check = false;
-                sItem(cartKey, cartList);
+                orderList[indexButton].productList[indexCheck].check = false;
+                sItem(orderKey, orderList);
               } else {
                 itemCheck.innerHTML = "Đã xử lý";
                 itemCheck.classList.remove("false");
                 itemCheck.classList.add("true");
-                cartList[indexButton].productList[indexCheck].check = true;
-                sItem(cartKey, cartList);
+                orderList[indexButton].productList[indexCheck].check = true;
+                sItem(orderKey, orderList);
               }
             };
           });
@@ -275,7 +281,7 @@ function searchCartList() {
     }
   });
 }
-searchInput.addEventListener("keypress", searchCartList);
-searchInput.addEventListener("input", searchCartList);
-searchInput.addEventListener("paste", searchCartList);
-searchInput.addEventListener("change", searchCartList);
+searchInput.addEventListener("keypress", searchOrderList);
+searchInput.addEventListener("input", searchOrderList);
+searchInput.addEventListener("paste", searchOrderList);
+searchInput.addEventListener("change", searchOrderList);

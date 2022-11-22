@@ -1,15 +1,15 @@
 import {
-    products as defaultProducts,
-    users as defaultUsers,
-	 orders as defaultOrders
+  products as defaultProducts,
+  users as defaultUsers,
+  orders as defaultOrders,
 } from "./storage.js";
 
 function gItem(key) {
-    return localStorage.getItem(key);
+  return localStorage.getItem(key);
 }
 
 function sItem(key, value) {
-    return localStorage.setItem(key, value);
+  return localStorage.setItem(key, value);
 }
 
 //  HEADER SCROLL
@@ -18,14 +18,14 @@ const headerElement = document.querySelector(".header");
 const stickyHeaderElement = document.querySelector(".header-sticky");
 
 window.onscroll = function () {
-    if (
-        document.body.scrollTop > 150 ||
-        document.documentElement.scrollTop > 150
-    ) {
-        stickyHeaderElement.style.top = "0";
-    } else {
-        stickyHeaderElement.style.top = "-60px";
-    }
+  if (
+    document.body.scrollTop > 150 ||
+    document.documentElement.scrollTop > 150
+  ) {
+    stickyHeaderElement.style.top = "0";
+  } else {
+    stickyHeaderElement.style.top = "-60px";
+  }
 };
 
 // MOBILE SIDE MENU
@@ -35,27 +35,26 @@ const overlaySideMenu = document.querySelector(".header__side-menu-container");
 const sideMenu = document.querySelector(".header__side-menu");
 
 menuIcon.addEventListener("click", function () {
-    overlaySideMenu.classList.toggle("open");
-    sideMenu.classList.toggle("open");
-    sideMenu.classList.remove("hide");
+  overlaySideMenu.classList.toggle("open");
+  sideMenu.classList.toggle("open");
+  sideMenu.classList.remove("hide");
 });
 
 overlaySideMenu.addEventListener("click", function () {
-    sideMenu.classList.toggle("hide");
-    setTimeout(hideMenu, 450);
+  sideMenu.classList.toggle("hide");
+  setTimeout(hideMenu, 450);
 });
 
 sideMenu.addEventListener("click", function (event) {
-    event.stopPropagation();
+  event.stopPropagation();
 });
 
 function hideMenu() {
-    overlaySideMenu.classList.toggle("open");
-    sideMenu.classList.toggle("open");
+  overlaySideMenu.classList.toggle("open");
+  sideMenu.classList.toggle("open");
 }
 
 // CONTENT PRODUCT LIST
-
 
 // Render product view-mode grid
 const productGridList = document.querySelector(".list-product__grid");
@@ -429,11 +428,11 @@ const gridList = document.querySelector(".list-product__grid");
 const listList = document.querySelector(".list-product__list");
 
 function viewMode() {
-   gridList.classList.toggle("close-view-mode");
-   gridModeOption.classList.toggle("current-view");
+  gridList.classList.toggle("close-view-mode");
+  gridModeOption.classList.toggle("current-view");
 
-   listList.classList.toggle("close-view-mode");
-   listModeOption.classList.toggle("current-view");
+  listList.classList.toggle("close-view-mode");
+  listModeOption.classList.toggle("current-view");
 }
 
 gridModeOption.addEventListener("click", viewMode);
@@ -442,109 +441,112 @@ listModeOption.addEventListener("click", viewMode);
 // DESCRIPTION
 
 function description() {
-    let productElement = document.querySelectorAll(".product__link");
-    let descriptionLayer = document.querySelectorAll(".product__description-layer");
-    let productDescriptionElement = document.querySelectorAll(".product__description");
-    let closeDescriptionBtn = document.querySelectorAll(".product__description--close");
-    let buyBtn = document.querySelectorAll(".product__description .grid_buy-btn");
+  let productElement = document.querySelectorAll(".product__link");
+  let descriptionLayer = document.querySelectorAll(
+    ".product__description-layer"
+  );
+  let productDescriptionElement = document.querySelectorAll(
+    ".product__description"
+  );
+  let closeDescriptionBtn = document.querySelectorAll(
+    ".product__description--close"
+  );
+  let buyBtn = document.querySelectorAll(".product__description .grid_buy-btn");
 
-    productElement.forEach(function (item, index) {
-        item.addEventListener("click", function () {
-            descriptionLayer[index].classList.toggle("open-description--layer");
-        });
-        
-        closeDescriptionBtn[index].addEventListener("click", function () {
-            descriptionLayer[index].classList.remove("open-description--layer");
-        });
-        
-        descriptionLayer[index].addEventListener("click", function () {
-            item.classList.remove("open-description--layer");
-        });
-       
-        buyBtn[index].addEventListener("click", function () {
-            descriptionLayer[index].classList.remove("open-description--layer");
-        });
+  productElement.forEach(function (item, index) {
+    item.addEventListener("click", function () {
+      descriptionLayer[index].classList.toggle("open-description--layer");
     });
 
-    productDescriptionElement.forEach(function (item) {
-        item.addEventListener("click", function (event) {
-            event.stopPropagation();
-        });
+    closeDescriptionBtn[index].addEventListener("click", function () {
+      descriptionLayer[index].classList.remove("open-description--layer");
     });
+
+    descriptionLayer[index].addEventListener("click", function () {
+      item.classList.remove("open-description--layer");
+    });
+
+    buyBtn[index].addEventListener("click", function () {
+      descriptionLayer[index].classList.remove("open-description--layer");
+    });
+  });
+
+  productDescriptionElement.forEach(function (item) {
+    item.addEventListener("click", function (event) {
+      event.stopPropagation();
+    });
+  });
 }
 
 // Quantity input
 
 const pcQuantityInput = document.querySelectorAll(
-   ".product__description .input-qty"
+  ".product__description .input-qty"
 );
 
 pcQuantityInput.forEach(function (item) {
-   item.addEventListener("keypress", checkInput);
-   item.addEventListener("input", checkInput);
-   item.addEventListener("paste", checkInput);
-   item.addEventListener("change", checkInput);
+  item.addEventListener("keypress", checkInput);
+  item.addEventListener("input", checkInput);
+  item.addEventListener("paste", checkInput);
+  item.addEventListener("change", checkInput);
 });
 
 const mobileQuantityInput = document.querySelectorAll(
-   ".mobile-product__information .input-qty"
+  ".mobile-product__information .input-qty"
 );
 mobileQuantityInput.forEach(function (item) {
-   item.addEventListener("keypress", checkInput);
-   item.addEventListener("input", checkInput);
-   item.addEventListener("paste", checkInput);
-   item.addEventListener("change", checkInput);
+  item.addEventListener("keypress", checkInput);
+  item.addEventListener("input", checkInput);
+  item.addEventListener("paste", checkInput);
+  item.addEventListener("change", checkInput);
 });
 
 function checkInput() {
-   if (this.max)
-      this.value = Math.min(parseInt(this.max), parseInt(this.value) || 1);
+  if (this.max)
+    this.value = Math.min(parseInt(this.max), parseInt(this.value) || 1);
 }
 
 //  QUANTITY BUTTON
 
 function plus(value) {
-   var temp = Math.floor(value);
+  var temp = Math.floor(value);
 
-   if (temp < 10) {
-      return String(temp + 1);
-   } else return value;
+  if (temp < 10) {
+    return String(temp + 1);
+  } else return value;
 }
 
 function minus(value) {
-   var temp = Math.floor(value);
+  var temp = Math.floor(value);
 
-   if (temp > 1) {
-      return String(temp - 1);
-   } else return value;
+  if (temp > 1) {
+    return String(temp - 1);
+  } else return value;
 }
 
 function setQuantityOfProduct() {
-   const minusBtn = document.querySelectorAll(".minus");
-   const plusBtn = document.querySelectorAll(".plus");
-   const quantityInput = document.querySelectorAll(".input-qty");
+  const minusBtn = document.querySelectorAll(".minus");
+  const plusBtn = document.querySelectorAll(".plus");
+  const quantityInput = document.querySelectorAll(".input-qty");
 
-   minusBtn.forEach(function (item, index) {
-      item.addEventListener("click", function () {
-         quantityInput[index].value = minus(quantityInput[index].value);
-         console.log(quantityInput[index].value);
-      });
-   });
+  minusBtn.forEach(function (item, index) {
+    item.addEventListener("click", function () {
+      quantityInput[index].value = minus(quantityInput[index].value);
+      console.log(quantityInput[index].value);
+    });
+  });
 
-   plusBtn.forEach(function (item, index) {
-      item.addEventListener("click", function () {
-         quantityInput[index].value = plus(quantityInput[index].value);
-      });
-   });
+  plusBtn.forEach(function (item, index) {
+    item.addEventListener("click", function () {
+      quantityInput[index].value = plus(quantityInput[index].value);
+    });
+  });
 }
 
 // ----- CARTS: start -----
 
 // demo current user
-sItem(
-	"userCurrent",
-	JSON.stringify({ name: "Nguyen Thanh Dat", userID: "1" })
-);
+sItem("userCurrent", JSON.stringify({ name: "Nguyen Thanh Dat", userID: "1" }));
 
 const userKey = "userList";
 const userList = JSON.parse(gItem(userKey)) || defaultUsers;
@@ -552,8 +554,8 @@ sItem(userKey, JSON.stringify(userList));
 
 let userCurrent;
 userList.forEach(function (item) {
-   if(item.userID === JSON.parse(gItem("userCurrent")).userID)
-      userCurrent = item;
+  if (item.userID === JSON.parse(gItem("userCurrent")).userID)
+    userCurrent = item;
 });
 
 // find a cart of userCurrent from cartList by ID
@@ -563,84 +565,78 @@ renderCartlistOfUserCurrent();
 
 // add new product to productList of userCurrent
 function addToCart() {
-   let buyBtn = document.querySelectorAll(".buy-btn > button");
-   let quantityInput = document.querySelectorAll(".input-qty");
+  let buyBtn = document.querySelectorAll(".buy-btn > button");
+  let quantityInput = document.querySelectorAll(".input-qty");
 
-   buyBtn.forEach(function(item, index) {
-      item.addEventListener("click", function() {
-         var amount = parseInt(quantityInput[index].value);
-         var temp = {
-				product: products[item.value],
-				amount: amount,
-				total: products[item.value].price * amount,
-				check: false
-         }
-         
-         var n = cartOfUserCurrent.length;
-         cartOfUserCurrent[n] = temp;
+  buyBtn.forEach(function (item, index) {
+    item.addEventListener("click", function () {
+      var amount = parseInt(quantityInput[index].value);
+      var temp = {
+        product: products[item.value],
+        amount: amount,
+        total: products[item.value].price * amount,
+        check: false,
+      };
 
-         console.log(cartOfUserCurrent);
+      var n = cartOfUserCurrent.length;
+      cartOfUserCurrent[n] = temp;
 
-         checkProductList(cartOfUserCurrent);
-         updateUserList();
-         renderAmountOfCart();
-         renderCartlistOfUserCurrent();
-      })
-   })
+      console.log(cartOfUserCurrent);
 
+      checkProductList(cartOfUserCurrent);
+      updateUserList();
+      renderAmountOfCart();
+      renderCartlistOfUserCurrent();
+    });
+  });
 }
 
 function updateUserList() {
-   userCurrent.carts = cartOfUserCurrent;
+  userCurrent.carts = cartOfUserCurrent;
 
-   userList.forEach(function(user) {
-      if(user.userID === userCurrent.userID)
-         user = userCurrent;
-   })
+  userList.forEach(function (user) {
+    if (user.userID === userCurrent.userID) user = userCurrent;
+  });
 
-   sItem(userKey, JSON.stringify(userList));
+  sItem(userKey, JSON.stringify(userList));
 }
 
-// check product list have a same product 
+// check product list have a same product
 function checkProductList(productList) {
-   productList.forEach(function(item, index) {
-      for (let i = index + 1; i < productList.length; i++) {
-         if (productList[i].product.id === item.product.id) {
-				item.amount += productList[i].amount;
-				item.total += productList[i].total;
+  productList.forEach(function (item, index) {
+    for (let i = index + 1; i < productList.length; i++) {
+      if (productList[i].product.id === item.product.id) {
+        item.amount += productList[i].amount;
+        item.total += productList[i].total;
 
-				productList[i] = productList[i + 1];
+        productList[i] = productList[i + 1];
 
-				if(i == productList.length - 1)
-					productList.pop();
-         }
+        if (i == productList.length - 1) productList.pop();
       }
-   })
+    }
+  });
 }
 
 //  render amount of products in cart
 function renderAmountOfCart() {
-   document.querySelector(".cart-quantity").innerText = cartOfUserCurrent.length;
+  document.querySelector(".cart-quantity").innerText = cartOfUserCurrent.length;
 }
 
 function renderCartlistOfUserCurrent() {
-   const headerCartListElement = document.querySelector(".cart-list-item");
-   headerCartListElement.innerHTML = "";
-	if(cartOfUserCurrent.length == 0) {
-		let temp = 
-      `<li class="cart-empty">
+  const headerCartListElement = document.querySelector(".cart-list-item");
+  headerCartListElement.innerHTML = "";
+  if (cartOfUserCurrent.length == 0) {
+    let temp = `<li class="cart-empty">
 			<i class="fa-regular fa-face-frown"></i>
 			<span>Your Cart Is Empty</span>
-      </li>`
+      </li>`;
 
-		document.querySelector(".cart-purchase-btn").style.display = "none";
+    document.querySelector(".cart-purchase-btn").style.display = "none";
 
-      headerCartListElement.insertAdjacentHTML("beforeend", temp);
-	}
-	else {
-		cartOfUserCurrent.forEach(function(item) {
-			let temp = 
-			`<li class="cart-item">
+    headerCartListElement.insertAdjacentHTML("beforeend", temp);
+  } else {
+    cartOfUserCurrent.forEach(function (item) {
+      let temp = `<li class="cart-item">
 				<div class="cart-item__img">
 					<img src="${item.product.img}" alt="">
 				</div>
@@ -658,86 +654,86 @@ function renderCartlistOfUserCurrent() {
 						<button type="button" class="cart-item__remove-btn" value="${item.product.id}">Remove</button>
 					</div>
 				</div>
-			</li>`
+			</li>`;
 
-			headerCartListElement.insertAdjacentHTML("beforeend", temp);
-		})
-		document.querySelector(".cart-purchase-btn").style.display = "block";
-	}
+      headerCartListElement.insertAdjacentHTML("beforeend", temp);
+    });
+    document.querySelector(".cart-purchase-btn").style.display = "block";
+  }
 
-	removeProductInCart();
-   renderAmountOfCart();
+  removeProductInCart();
+  renderAmountOfCart();
 }
 
 // Remove product from cart list
 function deleteObjectInArrayList(arrayList, startIndex) {
-	for (var i = startIndex; i < arrayList.length; i++) {
-		arrayList[i] = arrayList[i + 1];
-		if (i == arrayList.length - 1)
-			arrayList.pop();
-	}
+  for (var i = startIndex; i < arrayList.length; i++) {
+    arrayList[i] = arrayList[i + 1];
+    if (i == arrayList.length - 1) arrayList.pop();
+  }
 }
 
 function removeProductInCart() {
-	const removeProductBtn = document.querySelectorAll(".cart-item__remove-btn");
-	removeProductBtn.forEach(function(button) {
-		button.addEventListener("click", function() {
-			cartOfUserCurrent.forEach(function(item, index) {
-				if (item.product.id === button.value)
-					deleteObjectInArrayList(cartOfUserCurrent, index);
-			})
-			
-			renderCartlistOfUserCurrent();
-         updateUserList();
-		})
-	})
+  const removeProductBtn = document.querySelectorAll(".cart-item__remove-btn");
+  removeProductBtn.forEach(function (button) {
+    button.addEventListener("click", function () {
+      cartOfUserCurrent.forEach(function (item, index) {
+        if (item.product.id === button.value)
+          deleteObjectInArrayList(cartOfUserCurrent, index);
+      });
+
+      renderCartlistOfUserCurrent();
+      updateUserList();
+    });
+  });
 }
 
 // ----- CARTS STORAGE: end -----
 
-
 // ----- ORDERS: Start -----
 
 // create  the orders of user current
-const ordersKey = "ordersList";
+const ordersKey = "orderList";
 const ordersList = JSON.parse(gItem(ordersKey)) || defaultOrders;
 sItem(ordersKey, JSON.stringify(ordersList));
 
 // find an order of current user
 var ordersOfUserCurrent;
 userList.forEach(function (item) {
-   if(item.userID == JSON.parse(gItem("userCurrent")).userID)
-      ordersOfUserCurrent = item.orders;
+  if (item.userID == JSON.parse(gItem("userCurrent")).userID)
+    ordersOfUserCurrent = item.orders;
 });
 
 const purchaseButton = document.querySelector(".cart-purchase-btn");
 
-purchaseButton.addEventListener("click", function() {
-   let today = new Date();
-   let date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
-   let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-   let dateTime = date+' '+time;
+purchaseButton.addEventListener("click", function () {
+  let today = new Date();
+  let date =
+    today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
+  let time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  let dateTime = date + " " + time;
 
-   let total = 0; 
-   cartOfUserCurrent.forEach((item) => {
-      total += item.total;
-   })
+  let total = 0;
+  cartOfUserCurrent.forEach((item) => {
+    total += item.total;
+  });
 
-   ordersList[ordersList.length] = {
-      name: userCurrent.name,
-      ordersID: userCurrent.userID,
-      productList: cartOfUserCurrent,
-      time: dateTime,
-      total: total
-   }
+  ordersList[ordersList.length] = {
+    name: userCurrent.name,
+    orderID: userCurrent.userID,
+    productList: cartOfUserCurrent,
+    time: dateTime,
+    total: total,
+  };
 
-   // update ordersList
-	sItem(ordersKey, JSON.stringify(ordersList));
+  // update ordersList
+  sItem(ordersKey, JSON.stringify(ordersList));
 
-   // update cart of current user
-	cartOfUserCurrent = [];
-   updateUserList();
-	renderCartlistOfUserCurrent();
-})
+  // update cart of current user
+  cartOfUserCurrent = [];
+  updateUserList();
+  renderCartlistOfUserCurrent();
+});
 
 // ----- ORDERS: End -----

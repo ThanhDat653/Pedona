@@ -100,9 +100,7 @@ const users = [
     pass: "123",
     userID: "0",
     name: "nguyen van a",
-    carts: [
-      
-    ]
+    carts: [],
   },
 
   {
@@ -110,9 +108,7 @@ const users = [
     pass: "123",
     userID: "1",
     name: "nguyen thanh dat",
-    carts: [
-      
-    ]
+    carts: [],
   },
 
   {
@@ -120,9 +116,7 @@ const users = [
     pass: "123",
     userID: "2",
     name: "nguyen van a",
-    carts: [
-      
-    ]
+    carts: [],
   },
 ];
 
@@ -131,17 +125,14 @@ const users = [
 const orders = [
   {
     name: "nguyen thanh dat", // carts[0].name = users[0].name;
-    ordersID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
-    productList: [
-      
-    ],
+    orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
+    productList: [],
     time: "",
-    total: 0
+    total: 0,
   },
-
 ];
 
-export { products, users, orders};
+export { products, users, orders };
 
 export function gItem(key) {
   return JSON.parse(localStorage.getItem(key));
