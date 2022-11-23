@@ -1,4 +1,13 @@
+import {
+    products as defaultProducts,
+    users as defaultUsers
+  } from "./storage.js";
 
+// const products = JSON.parse(gItem("productList")) || defaultProducts;
+  
+const userKey = "userList";
+const userList = JSON.parse(localStorage.getItem(userKey)) || defaultUsers;
+localStorage.setItem(userKey, JSON.stringify(userList));
 
 //--------------- open/close form-----------
 var formElemnt = document.querySelector('.modal-sign');
@@ -8,8 +17,8 @@ function openForm() {
 }
 
 function closeForm() {
-    formElemnt.classList.toggle('close');  
-    formElemnt.classList.remove('open'); 
+    formElemnt.classList.toggle('close'); 
+    // formElemnt.classList.remove('open');  
 }
 
 var loginButtons = document.querySelector('#loginBtn')
@@ -42,11 +51,10 @@ container.classList.remove('right-panel-active');
 
 let isLogin = false;
 
-if(!!localStorage.getItem("currentUser")){
-    // isLogin = true;
-    isLogin = !!localStorage.getItem("currentUser");
+if(!!localStorage.getItem("userCurrent")){
+    isLogin = !!localStorage.getItem("userCurrent");
 }else{
-    localStorage.setItem("currentUser",'');
+    localStorage.setItem("userCurrent",'');
 }
 
 
@@ -58,19 +66,22 @@ window.onload = function(){
 
 function Login(){ 
     var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var checkAccount = users.some(value => value.username === username && value.password === password)
-     //hàm some trả về true nếu tìm thấy
+    var pass = document.getElementById("password").value;
+    var checkAccount = userList.some(value => value.username === username && value.pass === pass)
+    console.log(checkAccount);
+    
+    //hàm some trả về true nếu tìm thấy
     // lưu lại account vào local storage
     if(checkAccount) {
-        let user = users.filter(value => value.username === username)[0]
-        let currentUser = {username: user.name, userID: user.userID}
-        localStorage.setItem('currentUser',JSON.stringify(currentUser));
+        let user = userList.filter(value => value.username === username)[0]
+        let userCurrent = {username: user.name, userID: user.userID}
+        localStorage.setItem("userCurrent",JSON.stringify(userCurrent));
         isLogin = true;
         checkLogin();
         location.reload();
-    }else{
-        alert("Wrong username or password!");
+    } 
+    else{
+        alert("Wrong username or pass!");
         container.classList.add('right-panel-active');
     }
 }
@@ -95,7 +106,7 @@ function checkLogin() {
 }
 
 function showUserInfo() {
-    let user = JSON.parse(localStorage.getItem('currentUser'));
+    let user = JSON.parse(localStorage.getItem('userCurrent'));
     if(user) {
         document.querySelector(".user_menu_name").innerText = user.username;
         document.querySelector(".user-name").innerText = user.username;
@@ -103,7 +114,7 @@ function showUserInfo() {
 }
 
 function isAdmin(){
-    let user = JSON.parse(localStorage.getItem('currentUser'));
+    let user = JSON.parse(localStorage.getItem('userCurrent'));
     if(user.userID === 0){
         document.querySelector(".user_role").innerText = 'Go Setting';
         document.querySelector(".user_role").style.color = 'red';
@@ -114,7 +125,7 @@ function isAdmin(){
 }
 
 function isUser(){
-    let user = JSON.parse(localStorage.getItem('currentUser'));
+    let user = JSON.parse(localStorage.getItem('userCurrent'));
     if(user.userID !== 0){
         document.querySelector(".user_role").innerText = 'Orders';
         document.querySelector(".user_role").style.color = 'red';
@@ -139,7 +150,7 @@ function confirmLogout(){
 function Logout(){
     isLogin = false;
     document.getElementById('loginBtn').style.display = 'block';
-    localStorage.setItem('currentUser','');
+    localStorage.setItem('userCurrent','');
     checkLogin(); 
     // location.reload(); //load lại trang
 }
@@ -252,37 +263,39 @@ Validator.isConfirmed = function(selector,getConfirmValue, message){
 // tao account------------------------------------
 
 // check xem có local User hay chưa? có thì chép lại vào user / ko thì tạo
-if(!!localStorage.getItem("localUsers")){
-    users = JSON.parse(localStorage.getItem("localUsers"));
+if(!!localStorage.getItem("userList")){
+    const userList = JSON.parse(localStorage.getItem(userKey)) || defaultUsers;
+    localStorage.setItem(userKey, JSON.stringify(userList));
+
 }else{
-    localStorage.setItem("localUsers",JSON.stringify(users));
+    localStorage.setItem("userList",JSON.stringify(userList));
 }
 
 var signUpbtn = document.getElementById('sign-up--btn');
 signUpbtn.addEventListener('click', getAccount);
 
 function getAccount(){
-    users = JSON.parse(localStorage.getItem('localUsers')); //tạo mảng user lấy data từ localStorage
+    userList = JSON.parse(localStorage.getItem('userList')); //tạo mảng user lấy data từ localStorage
     let  username = document.querySelector('#su_username').value; //xài var sẽ tạo thêm ra null -> xài let
     let  name = document.querySelector('#su_name').value;
-    let  password = document.querySelector('#su_password').value;
+    let  pass = document.querySelector('#su_pass').value;
 
-    if(users.some(value => value.username === username)){  //check có trùng tk ko
+    if(userList.some(value => value.username === username)){  //check có trùng tk ko
         alert("Username alert in use")
     }else{
-         if(username == '' || password == ''|| name == ''){
+         if(username == '' || pass == ''|| name == ''){
              alert('Vui lòng nhập đầy đủ thông tin')
     }
          else{
-             let  userNumber = users.length + 1;
+             let  userNumber = userList.length + 1;
              let  newAccount = {
                 username,
-                password,
+                pass,
                 userID: userNumber,
                 name,
         }
-             users.push(newAccount);  // gắn vào mảng
-             localStorage.setItem('localUsers',JSON.stringify(users)); // đẩy mảng lên localStorage
+             userList.push(newAccount);  // gắn vào mảng
+             localStorage.setItem('userList',JSON.stringify(userList)); // đẩy mảng lên localStorage
              alert('Tạo tài khoản thành công')
              container.classList.remove('right-panel-active'); // chuyển qua form đăng nhập
     }

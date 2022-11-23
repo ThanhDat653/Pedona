@@ -411,7 +411,8 @@ function clickOnPage2() {
 
   description();
   setQuantityOfProduct();
-  addToCart();
+  if(gItem(userCurrent) != "")
+    addToCart();
 }
 
 page1.addEventListener("click", clickOnPage1);
@@ -545,18 +546,22 @@ function setQuantityOfProduct() {
 
 // ----- CARTS: start -----
 
-// demo current user
-sItem("userCurrent", JSON.stringify({ name: "Nguyen Thanh Dat", userID: "1" }));
-
 const userKey = "userList";
 const userList = JSON.parse(gItem(userKey)) || defaultUsers;
 sItem(userKey, JSON.stringify(userList));
 
 let userCurrent;
-userList.forEach(function (item) {
-  if (item.userID === JSON.parse(gItem("userCurrent")).userID)
-    userCurrent = item;
-});
+
+if (gItem("userCurrent") != ""){
+  // userCurrent = JSON.parse(gItem("userCurrent"));
+  userList.forEach(function (item) {
+    if (item.userID === JSON.parse(gItem("userCurrent")).userID)
+      userCurrent = item;
+    });
+  }
+  
+console.log(userCurrent);
+
 
 // find a cart of userCurrent from cartList by ID
 let cartOfUserCurrent = userCurrent.carts;

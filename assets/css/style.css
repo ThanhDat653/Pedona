@@ -1406,6 +1406,10 @@
     color: #888;
 }
 
+.close {
+    display: none;
+}
+
 /* Sign in */
 
 .modal--sign-in-form {

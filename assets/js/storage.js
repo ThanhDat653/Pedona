@@ -105,7 +105,7 @@ const users = [
 
   {
     username: "thanhdat653",
-    pass: "123",
+    pass: "123456",
     userID: "1",
     name: "nguyen thanh dat",
     carts: [],
