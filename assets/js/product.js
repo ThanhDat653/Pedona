@@ -11,7 +11,7 @@ function createEditablePrice(item, index) {
   let area = document.createElement("div");
   area.className = item.className;
   area.innerHTML =
-    `<textarea class="textarea price" rows="2" cols="1">` +
+    `<textarea class="textarea price" rows="2" cols="2">` +
     item.innerHTML.split("$")[0].trim() +
     `</textarea>` +
     `<span class="col l-12 invalid-input ">Please input product price</span>

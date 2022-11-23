@@ -628,9 +628,22 @@ a {
   opacity: 1;
 }
 
+
+
 .check {
   color: #fff;
   height: 30px;
+}
+
+span.check {
+  display: none;
+}
+span.check.true {
+  line-height: 30px;
+  display: block;
+  background: #059862;
+  border-radius: 5px;
+  border:none;
 }
 
 .check.true {
