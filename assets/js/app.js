@@ -551,33 +551,8 @@ function setQuantityOfProduct() {
 
 // ----- CARTS: start -----
 
-// const userList = gItem(userKey) || defaultUsers;
-// sItem(userKey, JSON.stringify(userList));
-
-// create a default current user is null
-// let userCurrent = {
-//   username: "",
-//   pass: "",
-//   userID: "",
-//   name: "",
-//   carts: [],
-// };
-
 let cartOfUserCurrent = userCurrent.carts;
 
-// // if have a login account, set current user = login user
-// if(isLogin) {
-//   // find a cart of userCurrent from cartList by ID
-//   if (gItem("userCurrent") != ""){
-//     userList.forEach(function (item) {
-//     if (item.userID === gItem("userCurrent").userID)
-//       userCurrent = item;
-//     });
-//   }
-//   cartOfUserCurrent = userCurrent.carts;
-
-//   console.log(cartOfUserCurrent);
-// }
 
 // add new product to productList of userCurrent
 function addToCart() {
