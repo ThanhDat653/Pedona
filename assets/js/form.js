@@ -1,24 +1,26 @@
 import {
     products as defaultProducts,
-    users as defaultUsers
-  } from "./storage.js";
+    users as defaultUsers,
+    gItem,
+    sItem
+} from "./storage.js";
 
 // const products = JSON.parse(gItem("productList")) || defaultProducts;
   
 const userKey = "userList";
-const userList = JSON.parse(localStorage.getItem(userKey)) || defaultUsers;
-localStorage.setItem(userKey, JSON.stringify(userList));
+var userList = gItem(userKey) || defaultUsers;
+sItem(userKey, userList);
 
 //--------------- open/close form-----------
 var formElemnt = document.querySelector('.modal-sign');
 function openForm() {
-    formElemnt.classList.toggle('open'); 
     formElemnt.classList.remove('close'); 
 }
 
+export{openForm};
+
 function closeForm() {
     formElemnt.classList.toggle('close'); 
-    // formElemnt.classList.remove('open');  
 }
 
 var loginButtons = document.querySelector('#loginBtn')
@@ -49,45 +51,68 @@ container.classList.remove('right-panel-active');
 //Login----------------------------------------------------------
 //ckech xem có current user chưa
 
-let isLogin = false;
+let isLogin;
+let userCurrent;
 
-if(!!localStorage.getItem("userCurrent")){
-    isLogin = !!localStorage.getItem("userCurrent");
-}else{
-    localStorage.setItem("userCurrent",'');
-}
+
+// console.log(JSON.parse(localStorage.getItem("userCurrent")));
 
 
 // mỗi khi load lại trang sẽ check 
 window.onload = function(){
-    // showUserInfo();
     checkLogin();
+}
+
+
+userCurrent = {
+    username: "",
+    pass: "",
+    userID: "",
+    name: "",
+    carts: [],
+};
+localStorage.setItem("userCurrent", JSON.stringify(userCurrent));
+
+if(gItem("userCurrent").userID != "") {
+    isLogin = true;
+}
+else {
+    isLogin = false;
 }
 
 function Login(){ 
     var username = document.getElementById("username").value;
     var pass = document.getElementById("password").value;
     var checkAccount = userList.some(value => value.username === username && value.pass === pass)
-    console.log(checkAccount);
     
+    
+
     //hàm some trả về true nếu tìm thấy
     // lưu lại account vào local storage
     if(checkAccount) {
         let user = userList.filter(value => value.username === username)[0]
-        let userCurrent = {username: user.name, userID: user.userID}
-        localStorage.setItem("userCurrent",JSON.stringify(userCurrent));
+        let userCurrentInLcs = {username: user.name, userID: user.userID}
+        localStorage.setItem("userCurrent", JSON.stringify(userCurrentInLcs));
+        userList.forEach(function (item) {
+            if (item.userID === user.userID){
+              userCurrent = item;
+            }
+        });
         isLogin = true;
         checkLogin();
-        location.reload();
     } 
     else{
         alert("Wrong username or pass!");
         container.classList.add('right-panel-active');
     }
+    console.log(userCurrent);
+    return userCurrent; 
 }
 
 var signIn = document.querySelector('.sign-in--btn');
 signIn.addEventListener('click', Login);
+
+console.log(userCurrent);
 
 // nếu có current user thì sẽ trong trạng thái login
 function checkLogin() {
@@ -106,7 +131,7 @@ function checkLogin() {
 }
 
 function showUserInfo() {
-    let user = JSON.parse(localStorage.getItem('userCurrent'));
+    let user = gItem('userCurrent');
     if(user) {
         document.querySelector(".user_menu_name").innerText = user.username;
         document.querySelector(".user-name").innerText = user.username;
@@ -114,7 +139,7 @@ function showUserInfo() {
 }
 
 function isAdmin(){
-    let user = JSON.parse(localStorage.getItem('userCurrent'));
+    let user = gItem('userCurrent');
     if(user.userID === 0){
         document.querySelector(".user_role").innerText = 'Go Setting';
         document.querySelector(".user_role").style.color = 'red';
@@ -125,7 +150,7 @@ function isAdmin(){
 }
 
 function isUser(){
-    let user = JSON.parse(localStorage.getItem('userCurrent'));
+    let user = gItem('userCurrent');
     if(user.userID !== 0){
         document.querySelector(".user_role").innerText = 'Orders';
         document.querySelector(".user_role").style.color = 'red';
@@ -150,9 +175,9 @@ function confirmLogout(){
 function Logout(){
     isLogin = false;
     document.getElementById('loginBtn').style.display = 'block';
-    localStorage.setItem('userCurrent','');
+    localStorage.setItem('userCurrent', "[]");
     checkLogin(); 
-    // location.reload(); //load lại trang
+    location.reload(); //load lại trang
 }
 
 
@@ -263,19 +288,12 @@ Validator.isConfirmed = function(selector,getConfirmValue, message){
 // tao account------------------------------------
 
 // check xem có local User hay chưa? có thì chép lại vào user / ko thì tạo
-if(!!localStorage.getItem("userList")){
-    const userList = JSON.parse(localStorage.getItem(userKey)) || defaultUsers;
-    localStorage.setItem(userKey, JSON.stringify(userList));
-
-}else{
-    localStorage.setItem("userList",JSON.stringify(userList));
-}
 
 var signUpbtn = document.getElementById('sign-up--btn');
 signUpbtn.addEventListener('click', getAccount);
 
 function getAccount(){
-    userList = JSON.parse(localStorage.getItem('userList')); //tạo mảng user lấy data từ localStorage
+    userList = gItem('userList'); //tạo mảng user lấy data từ localStorage
     let  username = document.querySelector('#su_username').value; //xài var sẽ tạo thêm ra null -> xài let
     let  name = document.querySelector('#su_name').value;
     let  pass = document.querySelector('#su_pass').value;
@@ -339,6 +357,7 @@ mobileLogout.addEventListener('click', function(){
     hideMenu();
 });
 
+export{isLogin, userList, userCurrent, userKey};
 
 
 

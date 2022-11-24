@@ -2,15 +2,17 @@ import {
   products as defaultProducts,
   users as defaultUsers,
   orders as defaultOrders,
+  sItem,
+  gItem
 } from "./storage.js";
 
-function gItem(key) {
-  return localStorage.getItem(key);
-}
-
-function sItem(key, value) {
-  return localStorage.setItem(key, value);
-}
+import {
+  isLogin, 
+  openForm, 
+  userList, 
+  userCurrent, 
+  userKey
+} from "./form.js";
 
 //  HEADER SCROLL
 
@@ -58,7 +60,7 @@ function hideMenu() {
 
 // Render product view-mode grid
 const productGridList = document.querySelector(".list-product__grid");
-const products = JSON.parse(gItem("productList")) || defaultProducts;
+const products = gItem("productList") || defaultProducts;
 
 products.forEach(function (product, index) {
   if (index < 6) {
@@ -167,8 +169,6 @@ products.forEach(function (product, index) {
 });
 
 description();
-setQuantityOfProduct();
-addToCart();
 
 //  --- PAGINATION ---
 const prevBtn = document.querySelector(".pagination-prev");
@@ -291,8 +291,11 @@ function clickOnPage1() {
   });
 
   description();
-  setQuantityOfProduct();
-  addToCart();
+
+  if(isLogin) {
+    setQuantityOfProduct();
+    addToCart();
+  }
 }
 
 function clickOnPage2() {
@@ -410,9 +413,11 @@ function clickOnPage2() {
   });
 
   description();
-  setQuantityOfProduct();
-  if(gItem(userCurrent) != "")
+
+  if(isLogin) {
+    setQuantityOfProduct();
     addToCart();
+  }
 }
 
 page1.addEventListener("click", clickOnPage1);
@@ -546,27 +551,33 @@ function setQuantityOfProduct() {
 
 // ----- CARTS: start -----
 
-const userKey = "userList";
-const userList = JSON.parse(gItem(userKey)) || defaultUsers;
-sItem(userKey, JSON.stringify(userList));
+// const userList = gItem(userKey) || defaultUsers;
+// sItem(userKey, JSON.stringify(userList));
 
-let userCurrent;
+// create a default current user is null
+// let userCurrent = {
+//   username: "",
+//   pass: "",
+//   userID: "",
+//   name: "",
+//   carts: [],
+// };
 
-if (gItem("userCurrent") != ""){
-  // userCurrent = JSON.parse(gItem("userCurrent"));
-  userList.forEach(function (item) {
-    if (item.userID === JSON.parse(gItem("userCurrent")).userID)
-      userCurrent = item;
-    });
-  }
-  
-console.log(userCurrent);
-
-
-// find a cart of userCurrent from cartList by ID
 let cartOfUserCurrent = userCurrent.carts;
 
-renderCartlistOfUserCurrent();
+// // if have a login account, set current user = login user
+// if(isLogin) {
+//   // find a cart of userCurrent from cartList by ID
+//   if (gItem("userCurrent") != ""){
+//     userList.forEach(function (item) {
+//     if (item.userID === gItem("userCurrent").userID)
+//       userCurrent = item;
+//     });
+//   }
+//   cartOfUserCurrent = userCurrent.carts;
+
+//   console.log(cartOfUserCurrent);
+// }
 
 // add new product to productList of userCurrent
 function addToCart() {
@@ -575,27 +586,32 @@ function addToCart() {
 
   buyBtn.forEach(function (item, index) {
     item.addEventListener("click", function () {
-      var amount = parseInt(quantityInput[index].value);
-      var temp = {
-        product: products[item.value],
-        amount: amount,
-        total: products[item.value].price * amount,
-        check: false,
-      };
+      if(!isLogin) {
+        openForm();
+      }
+      else {
+        var amount = parseInt(quantityInput[index].value);
+        var temp = {
+          product: products[item.value],
+          amount: amount,
+          total: products[item.value].price * amount,
+          check: false,
+        };
 
-      var n = cartOfUserCurrent.length;
-      cartOfUserCurrent[n] = temp;
+        var n = cartOfUserCurrent.length;
+        cartOfUserCurrent[n] = temp;
 
-      console.log(cartOfUserCurrent);
+        console.log(cartOfUserCurrent);
 
-      checkProductList(cartOfUserCurrent);
-      updateUserList();
-      renderAmountOfCart();
-      renderCartlistOfUserCurrent();
+        checkProductList(cartOfUserCurrent);
+        updateUserList();
+        renderAmountOfCart();
+        renderCartlistOfUserCurrent();
+      }
     });
   });
 }
-
+  
 function updateUserList() {
   userCurrent.carts = cartOfUserCurrent;
 
@@ -603,7 +619,7 @@ function updateUserList() {
     if (user.userID === userCurrent.userID) user = userCurrent;
   });
 
-  sItem(userKey, JSON.stringify(userList));
+  sItem(userKey, userList);
 }
 
 // check product list have a same product
@@ -617,14 +633,19 @@ function checkProductList(productList) {
         productList[i] = productList[i + 1];
 
         if (i == productList.length - 1) productList.pop();
-      }
-    }
+      };
+    };
   });
 }
 
 //  render amount of products in cart
 function renderAmountOfCart() {
-  document.querySelector(".cart-quantity").innerText = cartOfUserCurrent.length;
+  let temp = 
+  `<span class="cart-number-badge">
+    <span class="cart-quantity">${cartOfUserCurrent.length}</span>
+  </span>
+  `
+  document.querySelector(".cart-list").insertAdjacentHTML("beforebegin", temp);
 }
 
 function renderCartlistOfUserCurrent() {
@@ -632,8 +653,8 @@ function renderCartlistOfUserCurrent() {
   headerCartListElement.innerHTML = "";
   if (cartOfUserCurrent.length == 0) {
     let temp = `<li class="cart-empty">
-			<i class="fa-regular fa-face-frown"></i>
-			<span>Your Cart Is Empty</span>
+      <i class="fa-regular fa-face-frown"></i>
+      <span>Your Cart Is Empty</span>
       </li>`;
 
     document.querySelector(".cart-purchase-btn").style.display = "none";
@@ -642,24 +663,24 @@ function renderCartlistOfUserCurrent() {
   } else {
     cartOfUserCurrent.forEach(function (item) {
       let temp = `<li class="cart-item">
-				<div class="cart-item__img">
-					<img src="${item.product.img}" alt="">
-				</div>
-				
-				<div class="cart-item__info">
-					<div class="cart-item__heading">
-						<div class="cart-item__name">${item.product.name}</div>
-						<div class="cart-item__price-wrap">
-								<div class="cart-item__price">$${item.product.price}</div>
-								<div class="cart-item__quantity">x ${item.amount}</div>
-						</div>
-					</div>
-					<div class="cart-item__detail">
-						<span class="cart-item__type">Color: ${item.product.color}</span>
-						<button type="button" class="cart-item__remove-btn" value="${item.product.id}">Remove</button>
-					</div>
-				</div>
-			</li>`;
+        <div class="cart-item__img">
+          <img src="${item.product.img}" alt="">
+        </div>
+        
+        <div class="cart-item__info">
+          <div class="cart-item__heading">
+            <div class="cart-item__name">${item.product.name}</div>
+            <div class="cart-item__price-wrap">
+                <div class="cart-item__price">$${item.product.price}</div>
+                <div class="cart-item__quantity">x ${item.amount}</div>
+            </div>
+          </div>
+          <div class="cart-item__detail">
+            <span class="cart-item__type">Color: ${item.product.color}</span>
+            <button type="button" class="cart-item__remove-btn" value="${item.product.id}">Remove</button>
+          </div>
+        </div>
+      </li>`;
 
       headerCartListElement.insertAdjacentHTML("beforeend", temp);
     });
@@ -699,13 +720,15 @@ function removeProductInCart() {
 
 // create  the orders of user current
 const ordersKey = "orderList";
-const ordersList = JSON.parse(gItem(ordersKey)) || defaultOrders;
-sItem(ordersKey, JSON.stringify(ordersList));
+const ordersList = gItem(ordersKey) || defaultOrders;
+sItem(ordersKey, ordersList);
 
 // find an order of current user
 var ordersOfUserCurrent;
+console.log(userCurrent);
+
 userList.forEach(function (item) {
-  if (item.userID == JSON.parse(gItem("userCurrent")).userID)
+  if (item.userID === gItem("userCurrent").userID)
     ordersOfUserCurrent = item.orders;
 });
 
@@ -729,16 +752,21 @@ purchaseButton.addEventListener("click", function () {
     orderID: userCurrent.userID,
     productList: cartOfUserCurrent,
     time: dateTime,
-    total: total,
+    total: total
   };
 
   // update ordersList
-  sItem(ordersKey, JSON.stringify(ordersList));
+  sItem(ordersKey,ordersList);
 
   // update cart of current user
   cartOfUserCurrent = [];
   updateUserList();
   renderCartlistOfUserCurrent();
 });
-
+  
 // ----- ORDERS: End -----
+  
+renderCartlistOfUserCurrent();
+setQuantityOfProduct();
+addToCart();
+

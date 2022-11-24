@@ -7,7 +7,6 @@ const products = [
     id: "jd3-black",
     color: "black",
     price: 200,
-    // img: "./assets/image/jordan_delta_3_black.png",
     img: "./assets/image/jordan_delta_3_black.png",
     desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
   },
@@ -97,7 +96,7 @@ const products = [
 const users = [
   {
     username: "admin",
-    pass: "123",
+    pass: "123456",
     userID: "0",
     name: "nguyen van a",
     carts: [],
@@ -113,7 +112,7 @@ const users = [
 
   {
     username: "nguyenvana123",
-    pass: "123",
+    pass: "123456",
     userID: "2",
     name: "nguyen van a",
     carts: [],
@@ -123,13 +122,13 @@ const users = [
 // ---------- ORDERS LIST ----------
 
 const orders = [
-  // {
-  //   name: "nguyen thanh dat", // carts[0].name = users[0].name;
-  //   orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
-  //   productList: [],
-  //   time: "",
-  //   total: 0,
-  // },
+  {
+    name: "nguyen thanh dat", // carts[0].name = users[0].name;
+    orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
+    productList: [],
+    time: "",
+    total: 0,
+  },
 ];
 
 export { products, users, orders };
