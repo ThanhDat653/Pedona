@@ -11,18 +11,23 @@ function displayCheck(item) {
   }
 }
 
-function fullCheck(item) {
+function fullCheck(item, index, button) {
   const check_True = createArr(document.querySelectorAll("button.check.true"));
-  console.log(
-    "🚀 ~ file: orders.js ~ line 16 ~ fullCheck ~ check_True",
-    check_True
-  );
-  const fullCheckDisplay = document.querySelector("span.check");
+  const fullCheckDisplay = createArr(document.querySelectorAll("span.check"));
   if (item.productList.length == check_True.length) {
-    fullCheckDisplay.classList.add("true");
+    orderList[index].fullyCheck = true;
+    fullCheckDisplay[index].classList.add("true");
+    fullCheckDisplay[index].classList.remove("false");
+    button.classList.add("true");
+    button.innerHTML = "✓";
   } else {
-    fullCheckDisplay.classList.remove("true");
+    fullCheckDisplay[index].classList.remove("true");
+    fullCheckDisplay[index].classList.add("false");
+    orderList[index].fullyCheck = false;
+    button.classList.remove("true");
+    button.innerHTML = `<i class="fa-solid fa-caret-left fa-xl"></i>`;
   }
+  sItem(orderKey, orderList);
 }
 
 function baseRenderOrder(i) {
@@ -41,11 +46,15 @@ function baseRenderOrder(i) {
     orderList[i].orderID +
     `</div>
     </div>
-	<div class="col l-1 ">
-    <span class="check"> Fully checked </span>
+	<div class="col l-2 ">
+    <span class="check ` +
+    (orderList[i].fullyCheck || false) +
+    `"> Fully-checked </span>
     </div>
     <div class="col l-1 order-detail__btn">
-      <button class="order-full btn"><i class="fa-solid fa-caret-left fa-xl"></i></button>
+      <button class="order-full ` +
+    orderList[i].fullyCheck +
+    ` btn"><i class="fa-solid fa-caret-left fa-xl"></i></button>
     </div>
     </div>
   <div class="details-view no-gutters">
@@ -59,6 +68,11 @@ function renderOrderDetails() {
   const viewButton = document.querySelectorAll(".order-full");
   const OrderNumber = document.querySelectorAll(".order.number");
   viewButton.forEach((item, indexButton) => {
+    if (item.classList.contains("true")) {
+      item.innerHTML = "✓";
+    } else {
+      item.innerHTML = `<i class="fa-solid fa-caret-left fa-xl"></i>`;
+    }
     item.onclick = () => {
       if (!item.classList.contains("active")) {
         let j = 0;
@@ -154,7 +168,7 @@ function renderOrderDetails() {
             orderList[indexButton].productList[indexCheck].check = true;
             sItem(orderKey, orderList);
           }
-          fullCheck(orderList[indexButton]);
+          fullCheck(orderList[indexButton], indexButton, item);
         };
       });
     };
