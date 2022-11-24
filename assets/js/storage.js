@@ -123,13 +123,161 @@ const users = [
 // ---------- ORDERS LIST ----------
 
 const orders = [
-  // {
-  //   name: "nguyen thanh dat", // carts[0].name = users[0].name;
-  //   orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
-  //   productList: [],
-  //   time: "",
-  //   total: 0,
-  // },
+  {
+    name: "nguyen thanh dat", // carts[0].name = users[0].name;
+    orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
+    productList: [
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+    ],
+    fullyCheck: false,
+    time: "",
+    total: 0,
+  },
+  {
+    name: "nguyen thanh dat", // carts[0].name = users[0].name;
+    orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
+    productList: [
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+    ],
+    fullyCheck: false,
+
+    time: "",
+    total: 0,
+  },
+  {
+    name: "nguyen thanh dat", // carts[0].name = users[0].name;
+    orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
+    productList: [
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+      {
+        product: {
+          color: "khaki",
+          desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
+          id: "jd3-khaki",
+          img: "./assets/image/jordan_delta_3_khaki.png",
+          name: "Jordan Delta 3 Mid",
+          price: 200,
+          type: "jd3",
+        },
+        check: false,
+        total: 200,
+        amount: 2,
+      },
+    ],
+    fullyCheck: false,
+
+    time: "",
+    total: 0,
+  },
 ];
 
 export { products, users, orders };
@@ -142,6 +290,6 @@ export function sItem(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-// trong orders sẽ chứa tất cả đơn hàng của shop
-// mỗi user sẽ có 1 danh sách đơn hàng
-// khi click chọn mua hàng, sẽ thêm đơn hàng đó vào cả user.orders và orders
+//? trong orders sẽ chứa tất cả đơn hàng của shop
+//? mỗi user sẽ có 1 danh sách đơn hàng
+//? khi click chọn mua hàng, sẽ thêm đơn hàng đó vào cả user.orders và orders
