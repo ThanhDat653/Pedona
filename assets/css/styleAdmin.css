@@ -114,6 +114,9 @@ a {
 .even-spc{
   justify-content: space-evenly;
 }
+.spc-ar {
+  justify-content: space-around;
+}
 
 .center-text {
 
