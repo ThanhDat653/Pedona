@@ -31,7 +31,7 @@ export function outputUsers() {
       '<div class="col l-2 m-2 c-12 user name" >' +
       userList[i].name +
       "</div>" +
-      '<div class="col l-2 m-2 c-12">' +
+      '<div class="col l-2 m-2 m-o-10 mt-8 c-12 bordered--tablet">' +
       '<button class=" user table__fix-btn"><i class="fa-solid fa-pencil"></i></button>' +
       '<button class=" user table__del-btn"><i class="fa-solid fa-trash-can"></i></button>' +
       '<button class=" user table__fix-submit close">Submit</button>' +

@@ -97,7 +97,7 @@ export function createEditable(item) {
   area.className = item.className;
   area.innerHTML =
     `<textarea class="textarea 
-  " rows="4">` +
+  ">` +
     item.innerHTML.trim() +
     `</textarea>` +
     `<span class="col l-12 invalid-input ">` +
@@ -139,3 +139,16 @@ body.onscroll = function () {
     list[3].classList.add("side-bar__item--active");
   }
 };
+
+const searchBar = document.querySelectorAll(".search-bar");
+const searchInput = createArr(document.querySelectorAll(".search-input"));
+for (let i = 0; i < searchInput.length; i++) {
+  searchInput[i].onfocus = function () {
+    console.log(1);
+    searchBar[i].style.borderColor = "#cc2424";
+  };
+  searchInput[i].onblur = function () {
+    // searchBar[i].style.border = "solid 3px var(--text-color)";
+    searchBar[i].style.border = "";
+  };
+}

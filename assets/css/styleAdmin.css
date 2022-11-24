@@ -75,6 +75,10 @@ a {
   margin-top: 4px!important;
 }
 
+.mt-8 {
+  margin-top:8px!important;
+}
+
 .mt-16{
   margin-top: 16px!important;
 }
@@ -333,21 +337,6 @@ a {
   background-color: transparent;
 }
 
-.select {
-  display: inline-block;
-  padding: 5px 6px;
-  border-radius: 5px;
-  border: 2px solid #000;
-}
-
-.select:focus, .search-input:focus {
-  border :2px solid #cc2424;
-}
-
-.show-select {
-
-}
-
 .search-input {
   flex: 1;
   border: none;
@@ -363,6 +352,7 @@ a {
   width: 50%;
   border: solid 3px var(--text-color);
   border-radius: .3rem;
+
 }
 
 .search-bar > i {
@@ -404,7 +394,7 @@ a {
   transition: all 0.75s ease-out;
 }
 
-.row.table__row .col {
+.table__row .col {
   margin: 8px 0;
 }
 
@@ -522,14 +512,17 @@ a {
   text-align: center;
   background: transparent;
   width: 200px;
+  max-height: 37px;
+  overflow: hidden;
+
 }
 .price.textarea {
   width: auto;
 }
 
-.desc .textarea {
-  width: 320px;
-  overflow: hidden;
+.desc>.textarea {
+  min-height: 160px;
+  min-width: 320px;
 
 }
 
