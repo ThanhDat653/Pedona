@@ -603,6 +603,9 @@ a {
   transform:rotate(0deg);
   transition: all 0.5s ease;
 }
+.order-full:hover {
+  cursor: pointer;
+}
 
 .order-full.active>i {
   transform: rotate(-90deg);
