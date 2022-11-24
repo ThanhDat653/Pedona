@@ -1,194 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./assets/css/styleAdmin.css" />
-    <link rel="stylesheet" href="./assets/css/responsiveAdmin.css" />
-    <link rel="stylesheet" href="./assets/css/grid.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script
-      src="https://kit.fontawesome.com/9ca965c469.js"
-      crossorigin="anonymous"
-    ></script>
 
-    <title>Admin</title>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="black-layout"></div>
-      <div class="side-bar side-bar--mobile" id="sidebar">
-        <div class="side-bar__header">
-          <div class="side-bar__menu-btn">
-            <button id="toggle-sidebar" class="">
-              <i class="fa-solid fa-bars fa-xl"></i>
-            </button>
-            <button id="close-sidebar" class="close">
-              <i class="fa-solid fa-xmark fa-xl"></i>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./assets/css/styleAdmin.css" />
+  <link rel="stylesheet" href="./assets/css/responsiveAdmin.css" />
+  <link rel="stylesheet" href="./assets/css/grid.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="./assets/fonts/fontawesome-free-6.1.2-web/css/all.min.css">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <title>Admin</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="black-layout"></div>
+    <div class="side-bar side-bar--mobile" id="sidebar">
+      <div class="side-bar__header">
+        <div class="side-bar__menu-btn">
+          <button id="toggle-sidebar">
+            <i class="fa-solid fa-bars fa-xl"></i>
+          </button>
+          <button id="close-sidebar" class="close">
+            <i class="fa-solid fa-xmark fa-xl"></i>
+          </button>
+        </div>
+      </div>
+      <ul id="list" class="side-bar__list">
+        <li class="side-bar__item">
+          <a href="./index.html">
+            <span class="item__icon">
+              <i class="fa-solid fa-house fa-lg"></i>
+            </span>
+            <span class="item__title"> Go back </span>
+          </a>
+        </li>
+        <li class="side-bar__item">
+          <a href="#products-page" id="product-page"><span class="item__icon"><i
+                class="fa-solid fa-tag fa-lg"></i></span>
+            <span class="item__title"> Products </span>
+          </a>
+        </li>
+        <li class="side-bar__item">
+          <a href="#users-page"><span class="item__icon">
+              <i class="fa-solid fa-user fa-lg"></i>
+
+            </span>
+            <span class="item__title"> Users </span>
+          </a>
+        </li>
+        <li class="side-bar__item">
+          <a href="#orders-page"><span class="item__icon">
+              <i class="fa-solid fa-dolly fa-lg"></i>
+            </span>
+            <span class="item__title"> Orders </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div id="content" class="content content--mobile">
+      <div id="products-page" class="container container--mobile shadow-wrap products-page">
+        <div class="content__header">
+          <h2 class="header__text">products</h2>
+        </div>
+
+        <div class="content__body">
+          <div class="body__util grid mb-16">
+            <div class="row no-gutters">
+
+              <div class="col search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input type="text" class="product search-input" placeholder="Search" />
+              </div>
+            </div>
+          </div>
+          <div id="content__table" class="content__table table--bordered grid">
+            <div class="row table__header js-mid no-gutters">
+              <div class="col l-1 m-1 c-2">no.</div>
+              <div class="col l-2 m-2 c-2">product id</div>
+              <div class="col l-2 m-3 c-2">name</div>
+              <div class="col l-1 m-3 c-2">image</div>
+              <div class="col l-1 m-1 c-2">price</div>
+              <div class="col l-3 m-0 c-2">description</div>
+              <div class="col l-2 m-1 c-2">edit</div>
+            </div>
+            <div id="table__body--products" class="table__body"></div>
+          </div>
+          <div class="row no-gutters">
+            <button class="toggle-modal table__add-btn">
+              new product
+              <i class="fa-solid fa-upload"></i>
             </button>
           </div>
         </div>
-        <ul id="list" class="side-bar__list">
-          <li class="side-bar__item">
-            <a href="./index.html">
-              <span class="item__icon">
-                <i class="fa-solid fa-house fa-lg"></i>
-              </span>
-              <span class="item__title"> Go back </span>
-            </a>
-          </li>
-          <li class="side-bar__item">
-            <a href="#products-page" id="product-page"
-              ><span class="item__icon"
-                ><i class="fa-solid fa-tag fa-lg"></i
-              ></span>
-              <span class="item__title"> Products </span>
-            </a>
-          </li>
-          <li class="side-bar__item">
-            <a href="#users-page"
-              ><span class="item__icon"
-                >
-                <i class="fa-solid fa-user fa-lg"></i>
-
-              </span>
-              <span class="item__title"> Users </span>
-            </a>
-          </li>
-          <li class="side-bar__item">
-            <a href="#orders-page"
-            ><span class="item__icon">
-                <i class="fa-solid fa-dolly fa-lg"></i>
-              </span>
-              <span class="item__title"> Orders </span>
-            </a>
-          </li>
-        </ul>
       </div>
 
-      <div id="content" class="content content--mobile">
-        <div
-          id="products-page"
-          class="container container--mobile shadow-wrap products-page"
-        >
-          <div class="content__header">
-            <h2 class="header__text">products</h2>
-          </div>
+      <div id="users-page" class="container container--mobile shadow-wrap users-page">
+        <div class="content__header">
+          <h2 class="header__text">users</h2>
+        </div>
 
-          <div class="content__body">
-            <div class="body__util grid mb-16">
-              <div class="row no-gutters">
-                
-                <div class="col search-bar">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-
-                  <input
-                    id="search-text"
-                    type="text"
-                    class="product search-input"
-                    placeholder="Search"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              id="content__table"
-              class="content__table table--bordered grid"
-            >
-              <div class="row table__header js-mid no-gutters">
-                <div class="col l-1 m-1 c-2">no.</div>
-                <div class="col l-2 m-2 c-2">product id</div>
-                <div class="col l-2 m-3 c-2">name</div>
-                <div class="col l-1 m-3 c-2">image</div>
-                <div class="col l-1 m-1 c-2">price</div>
-                <div class="col l-3 m-0 c-2">description</div>
-                <div class="col l-2 m-1 c-2">edit</div>
-              </div>
-              <div id="table__body--products" class="table__body"></div>
-            </div>
+        <div class="content__body">
+          <div class="body__util grid mb-16">
             <div class="row no-gutters">
-              <button class="toggle-modal table__add-btn">
-                new product 
-                <i class="fa-solid fa-upload"></i>
-              </button>
+              <div class="col search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input type="text" class="user search-input" placeholder="Search" />
+              </div>
             </div>
+          </div>
+          <div id="content__table" class="content__table table--bordered grid">
+            <div class="row table__header js-mid no-gutters">
+              <div class="col l-2 m-2 c-2">no.</div>
+              <div class="col l-2 m-2 c-2">user id</div>
+              <div class="col l-2 m-3 c-2">account</div>
+              <div class="col l-2 m-3 c-2">password</div>
+              <div class="col l-2 m-2 c-2">user name</div>
+              <div class="col l-2 m-2 c-2"></div>
+            </div>
+            <div id="table__body--users" class="table__body"></div>
           </div>
         </div>
-
-        <div
-          id="users-page"
-          class="container container--mobile shadow-wrap users-page"
-        >
-          <div class="content__header">
-            <h2 class="header__text">users</h2>
-          </div>
-
-          <div class="content__body">
-            <div class="body__util grid mb-16">
-              <div class="row no-gutters">
-                <div class="col search-bar">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-
-                  <input
-                    id="search-text"
-                    type="text"
-                    class="user search-input"
-                    placeholder="Search"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              id="content__table"
-              class="content__table table--bordered grid"
-            >
-              <div class="row table__header js-mid no-gutters">
-                <div class="col l-2 m-2 c-2">no.</div>
-                <div class="col l-2 m-2 c-2">user id</div>
-                <div class="col l-2 m-3 c-2">account</div>
-                <div class="col l-2 m-3 c-2">password</div>
-                <div class="col l-2 m-2 c-2">user name</div>
-                <div class="col l-2 m-2 c-2"></div>
-              </div>
-              <div id="table__body--users" class="table__body"></div>
-            </div>
-          </div>
+      </div>
+      <div id="orders-page" class="container container--mobile shadow-wrap carts-page">
+        <div class="content__header">
+          <h2 class="header__text">orders</h2>
         </div>
-        <div
-          id="orders-page"
-          class="container container--mobile shadow-wrap carts-page"
-        >
-          <div class="content__header">
-            <h2 class="header__text">orders</h2>
-          </div>
 
-          <div class="content__body">
-            <div class="body__util grid mb-16">
-              <div class="row no-gutters">
-                <div class="col search-bar">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-
-                  <input
-                    id="search-text"
-                    type="text"
-                    class="order search-input"
-                    placeholder="Search"
-                  />
-                </div>
+        <div class="content__body">
+          <div class="body__util grid mb-16">
+            <div class="row no-gutters">
+              <div class="col search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" class="order search-input" placeholder="Search" />
               </div>
             </div>
-            <div
-              id="content__table"
-              class="content__table table--bordered grid"
-            >
-              <div class="row table__header js-mid no-gutters">
-                <div class="col l-1 m-2 c-2">no.</div>
-                <div class="col l-11 m-2 c-2">orders information</div>
-              </div>
-              <div id="table__body--orders" class="table__body">
+          </div>
+          <div id="content__table" class="content__table table--bordered grid">
+            <div class="row table__header js-mid no-gutters">
+              <div class="col l-1 m-2 c-2">no.</div>
+              <div class="col l-11 m-2 c-2">orders information</div>
+            </div>
+            <div id="table__body--orders" class="table__body">
             </div>
           </div>
         </div>
@@ -196,14 +157,7 @@
     </div>
     <div class="footer"></div>
 
-    <form
-      name="form_add"
-      method="get"
-      action=""
-      id="modal-wrapper"
-      class="modal close"
-      onsubmit="return false"
-    >
+    <form name="form_add" method="get" action="" id="modal-wrapper" class="modal close" onsubmit="return false">
       <div id="modal" class="modal__container shadow-wrap">
         <div class="modal__header row grid">
           <span class="col l-12 header__text">new product</span>
@@ -216,71 +170,35 @@
             <div class="col l-6 modal__left">
               <label class="row no-gutters spc-btw mt-16" id="id__label" for="product__id">
                 <span class="col l-4 modal__text">Mã Sản Phẩm </span>
-                <input
-                  class="col l-4 input"
-                  type="text"
-                  name="name"
-                  id="product__id"
-                />
+                <input class="col l-4 input" type="text" name="name" id="product__id" />
                 <span class="col l-12 invalid-input id">Vui lòng nhập mã sản phẩm</span>
               </label>
               <label class="row no-gutters spc-btw mt-16" id="name__label" for="product__name">
                 <span class="modal__text">Tên Sản Phẩm </span>
-                <input
-                  class="input"
-                  type="text"
-                  name="name"
-                  id="product__name"
-                />
+                <input class="input" type="text" name="name" id="product__name" />
                 <span class="col l-12 invalid-input ">Vui lòng nhập tên sản phẩm</span>
 
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__color">
                 <span class="col l-2 modal__text">Màu</span>
                 <label for="product__color--black" class="col l-2 l-o-3">
-                  <input
-                    type="radio"
-                    name="color"
-                    id="product__color--black"
-                    value="1"
-                    checked
-                  />
+                  <input type="radio" name="color" id="product__color--black" value="1" checked />
                   <span class="modal__text">Black</span>
                 </label>
                 <label for="product__color--orthers" class="col l-3 spc-btw">
-                  <input
-                    type="radio"
-                    name="color"
-                    id="product__color--orthers"
-                    value="2"
-                  />
+                  <input type="radio" name="color" id="product__color--orthers" value="2" />
                   <span class="modal__text">Others</span>
                 </label>
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__price">
                 <span class="modal__text">Giá </span>
-                <input
-                  class="input"
-                  type="text"
-                  inputmode="numeric"
-                  name="price"
-                  value="200"
-                  max="1000"
-                  min="200"
-                  id="product__price"
-                />
+                <input class="input" type="text" inputmode="numeric" name="price" value="200" max="1000" min="200"
+                  id="product__price" />
               </label>
               <label class="row no-gutters spc-btw mt-16" id="desc__label" for="product__desc">
                 <span class="modal__text">Mô Tả</span>
-                <textarea
-                  form="modal-wrapper"
-                  class="input"
-                  name="desc"
-                  id="product__desc"
-                  cols="25"
-                  rows="9"
-                  placeholder="Mô Tả Sản Phẩm"
-                ></textarea>
+                <textarea form="modal-wrapper" class="input" name="desc" id="product__desc" cols="25" rows="9"
+                  placeholder="Mô Tả Sản Phẩm"></textarea>
                 <span class="col l-12 invalid-input ">Vui lòng nhập mô tả sản phẩm</span>
 
               </label>
@@ -290,26 +208,17 @@
                 <span class="col l-4 modal__text center-text">Hình Sản Phẩm</span>
                 <label for="img-input" id="img__label" class=" row fake-input mt-16">
                   <div id="img-show">
-                    <input
-                      type="file"
-                      name="img"
-                      id="img-input"
-                      accept="image/png, image/jpeg"
-                      visiblity="hidden"
-                      form="modal-wrapper"
-                    />
+                    <input type="file" name="img" id="img-input" accept="image/png, image/jpeg" visiblity="hidden"
+                      form="modal-wrapper" />
                     <img src="" alt="" id="img-preview" />
                     <div id="upload-icon" class="">
-                      <i
-                      id="icon"
-                      class="fa-solid fa-arrow-up-from-bracket fa-2xl"
-                      ></i>
+                      <i id="icon" class="fa-solid fa-arrow-up-from-bracket fa-2xl"></i>
                       <span class="icon__text">Chọn hình ảnh</span>
                     </div>
                   </div>
                   <span class="col l-8 l-o-2 invalid-input center-text ">Vui lòng không để trống hình sản phẩm</span>
                 </label>
-                  
+
               </div>
             </div>
           </div>
@@ -326,5 +235,6 @@
     <script type="module" src="./assets/js/orders.js"></script>
     <script type="module" src="./assets/js/modal.js"></script>
     <script type="module" src="./assets/js/main.js"></script>
-  </body>
+</body>
+
 </html>
