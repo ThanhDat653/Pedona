@@ -1,4 +1,5 @@
-import { gItem, products as defaultProducts, sItem } from "./storage.js";
+
+import { gItem, sItem } from "./storage.js";
 import { outputProd } from "./product.js";
 import { createArr, prodKey } from "./main.js";
 //*================================================================================================================//

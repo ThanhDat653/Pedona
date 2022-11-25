@@ -1,7 +1,7 @@
 import { tableBodyOrder } from "./main.js";
 
 import { createArr, orderKey } from "./main.js";
-import { gItem, sItem, orders as defaultOrders } from "./storage.js";
+import { gItem, sItem,} from "./storage.js";
 
 function displayCheck(item) {
   if (item) {

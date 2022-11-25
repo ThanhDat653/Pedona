@@ -1,12 +1,10 @@
 import {
-    products as defaultProducts,
-    users as defaultUsers,
     gItem,
     sItem
 } from "./storage.js";
 
 const userKey = "userList";
-var userList = gItem(userKey) || defaultUsers;
+var userList = gItem(userKey);
 sItem(userKey, userList);
 
 //--------------- open/close form-----------
@@ -64,6 +62,7 @@ function getUserCurrent() {
             pass: "",
             userID: "",
             name: "",
+            type: "",
             carts: [],
         }
     }
@@ -82,6 +81,7 @@ getUserCurrent();
 
 // mỗi khi load lại trang sẽ check 
 window.onload = function(){ 
+    checkLogin();
     getUserCurrent();
 }
 
@@ -291,7 +291,7 @@ function getAccount(){
     userList = gItem('userList'); //tạo mảng user lấy data từ localStorage
     let  username = document.querySelector('#su_username').value; //xài var sẽ tạo thêm ra null -> xài let
     let  name = document.querySelector('#su_name').value;
-    let  pass = document.querySelector('#su_pass').value;
+    let  pass = document.querySelector('#su_password').value;
 
   if (userList.some((value) => value.username === username)) {
     //check có trùng tk ko
@@ -306,6 +306,8 @@ function getAccount(){
         pass,
         userID: userNumber,
         name,
+        type: 1,
+        carts: []
       };
       userList.push(newAccount); // gắn vào mảng
       localStorage.setItem("userList", JSON.stringify(userList)); // đẩy mảng lên localStorage
@@ -352,15 +354,6 @@ mobileLogout.addEventListener("click", function () {
 });
 
 export{isLogin, userList, userCurrentInLocal, Login, userKey, getUserCurrent};
-
-
-
-
-
-
-    
-
-
 
 
 

@@ -1,4 +1,4 @@
-import { gItem, sItem, users as defaultUsers } from "./storage.js";
+import { gItem, sItem,} from "./storage.js";
 import { tableBodyUser as tableBodyUser } from "./main.js";
 import { deleteObject, createEditable, createArr } from "./main.js";
 

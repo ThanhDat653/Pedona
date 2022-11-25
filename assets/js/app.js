@@ -1,7 +1,7 @@
 import {
-  products as defaultProducts,
-  users as defaultUsers,
-  orders as defaultOrders,
+  // products as defaultProducts,
+  // users as defaultUsers,
+  // orders as defaultOrders,
   sItem,
   gItem
 } from "./storage.js";
@@ -61,7 +61,7 @@ function hideMenu() {
 
 // Render product view-mode grid
 const productGridList = document.querySelector(".list-product__grid");
-const products = gItem("productList") || defaultProducts;
+const products = gItem("productList");
 
 products.forEach(function (product, index) {
   if (index < 6) {
