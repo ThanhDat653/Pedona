@@ -1,11 +1,11 @@
 import { tableBodyProduct } from "./main.js";
-import { products as defaultProducts } from "./storage.js";
 import { sItem, gItem } from "./storage.js";
 import { deleteObject, createEditable, createArr, prodKey } from "./main.js";
 import { checkImg } from "./modal.js";
 
 // Extract product list:Start
-let productList = gItem("productList") || defaultProducts;
+let productList = gItem("productList");
+// let productList = gItem("productList") || defaultProducts;
 
 function createEditablePrice(item, index) {
   let area = document.createElement("div");
