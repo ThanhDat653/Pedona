@@ -10,8 +10,9 @@ import {
   isLogin, 
   openForm, 
   userList, 
-  userCurrent, 
-  userKey
+  userCurrentInLocal, 
+  userKey,
+  getUserCurrent
 } from "./form.js";
 
 //  HEADER SCROLL
@@ -550,8 +551,18 @@ function setQuantityOfProduct() {
 }
 
 // ----- CARTS: start -----
+var userCurrent = userCurrentInLocal;
 
+userList.forEach(function (item) {
+  if (item.userID === userCurrent.userID){
+    userCurrent = item;
+  }
+}); 
+
+console.log(userCurrentInLocal);
 let cartOfUserCurrent = userCurrent.carts;
+
+console.log(userCurrent);
 
 
 // add new product to productList of userCurrent
@@ -565,6 +576,7 @@ function addToCart() {
         openForm();
       }
       else {
+        
         var amount = parseInt(quantityInput[index].value);
         var temp = {
           product: products[item.value],
@@ -622,6 +634,8 @@ function renderAmountOfCart() {
   `
   document.querySelector(".cart-list").insertAdjacentHTML("beforebegin", temp);
 }
+
+console.log(cartOfUserCurrent);
 
 function renderCartlistOfUserCurrent() {
   const headerCartListElement = document.querySelector(".cart-list-item");
@@ -710,6 +724,7 @@ userList.forEach(function (item) {
 const purchaseButton = document.querySelector(".cart-purchase-btn");
 
 purchaseButton.addEventListener("click", function () {
+  
   let today = new Date();
   let date =
     today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();

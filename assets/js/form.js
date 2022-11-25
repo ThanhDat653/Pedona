@@ -5,8 +5,6 @@ import {
     sItem
 } from "./storage.js";
 
-// const products = JSON.parse(gItem("productList")) || defaultProducts;
-
 const userKey = "userList";
 var userList = gItem(userKey) || defaultUsers;
 sItem(userKey, userList);
@@ -53,32 +51,38 @@ signInButton.addEventListener("click", () => {
 //ckech xem có current user chưa
 
 let isLogin;
-let userCurrent;
+let userCurrentInLocal;
 
 
-// console.log(JSON.parse(localStorage.getItem("userCurrent")));
+function getUserCurrent() {
+    if(!!gItem("userCurrent")) {
+        userCurrentInLocal = gItem("userCurrent")
+    }
+    else {
+        userCurrentInLocal = {
+            username: "",
+            pass: "",
+            userID: "",
+            name: "",
+            carts: [],
+        }
+    }
+    localStorage.setItem("userCurrent", JSON.stringify(userCurrentInLocal));
+    
+    if(gItem("userCurrent").userID != "") {
+        isLogin = true;
+    }
+    
+    else {
+        isLogin = false;
+    }
+}
 
+getUserCurrent();
 
 // mỗi khi load lại trang sẽ check 
-window.onload = function(){
-    checkLogin();
-}
-
-
-userCurrent = {
-    username: "",
-    pass: "",
-    userID: "",
-    name: "",
-    carts: [],
-};
-localStorage.setItem("userCurrent", JSON.stringify(userCurrent));
-
-if(gItem("userCurrent").userID != "") {
-    isLogin = true;
-}
-else {
-    isLogin = false;
+window.onload = function(){ 
+    getUserCurrent();
 }
 
 function Login(){ 
@@ -86,9 +90,7 @@ function Login(){
     var pass = document.getElementById("password").value;
     var checkAccount = userList.some(value => value.username === username && value.pass === pass)
     
-    
-
-    //hàm some trả về true nếu tìm thấy
+    // hàm some trả về true nếu tìm thấy
     // lưu lại account vào local storage
     if(checkAccount) {
         let user = userList.filter(value => value.username === username)[0]
@@ -96,26 +98,22 @@ function Login(){
         localStorage.setItem("userCurrent", JSON.stringify(userCurrentInLcs));
         userList.forEach(function (item) {
             if (item.userID === user.userID){
-              userCurrent = item;
+              userCurrentInLocal = item;
             }
         });
         isLogin = true;
         checkLogin();
+        location.reload();
     } 
     else{
         alert("Wrong username or pass!");
         container.classList.add('right-panel-active');
     }
-    console.log(userCurrent);
-    return userCurrent; 
+    window.onload();
 }
 
 var signIn = document.querySelector(".sign-in--btn");
 signIn.addEventListener("click", Login);
-
-console.log(userCurrent);
-
-console.log(userCurrent);
 
 // nếu có current user thì sẽ trong trạng thái login
 function checkLogin() {
@@ -127,8 +125,9 @@ function checkLogin() {
     isAdmin();
     isUser();
     mobileLogin.classList.add("close");
-  } else {
-    openForm();
+  } 
+  else {
+    // openForm();
     mobileLogin.classList.remove("close");
   }
 }
@@ -177,9 +176,7 @@ function confirmLogout() {
 // gỡ bỏ current user 
 function Logout(){
     isLogin = false;
-    document.getElementById('loginBtn').style.display = 'block';
-    localStorage.setItem('userCurrent', "[]");
-    checkLogin(); 
+    localStorage.removeItem("userCurrent")
     location.reload(); //load lại trang
 }
 
@@ -195,13 +192,6 @@ userIcon.addEventListener("click", function () {
     container.classList.add("left-panel-active");
   }
 });
-
-// userMenu.onclick = function(event) {
-//     event.stopPropagation(); }
-
-// userIcon.addEventListener('focusout',function(){
-//     userMenu.classList.add('close');
-// })
 
 // form Validation-----------------------------------------------
 function Validator(options) {
@@ -361,7 +351,7 @@ mobileLogout.addEventListener("click", function () {
   hideMenu();
 });
 
-export{isLogin, userList, userCurrent, userKey};
+export{isLogin, userList, userCurrentInLocal, Login, userKey, getUserCurrent};
 
 
 
