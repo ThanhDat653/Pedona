@@ -110,6 +110,7 @@ function Login(){
         container.classList.add('right-panel-active');
     }
     window.onload();
+    console.log(userCurrentInLocal);
 }
 
 var signIn = document.querySelector(".sign-in--btn");
