@@ -20,7 +20,7 @@
                 <div class="row no-gutters header-container">
                     <div class="col l-3 m-0 c-0 header-item header--search">
                         <form action="" class="form-input">
-                            <input type="text" placeholder="Search products" class="header--search__input">
+                            <input type="text" placeholder="Search products" class="header--search__input" value="">
                             <button class="header--search__btn">
                                 <i class="search-icon fa-solid fa-magnifying-glass"></i>
                             </button>
@@ -35,7 +35,7 @@
 
                     <div class="col l-0 m-6 c-6 tablet-header--search">
                         <form action="" class="form-input">
-                            <input type="text" placeholder="Search products" class="c-10 header--search__input">
+                            <input type="text" placeholder="Search products" class="c-10 header--search__input" value="">
                             <div class="c-2 header--search__btn">
                                 <i class="search-icon fa-solid fa-magnifying-glass"></i>
                             </div>
@@ -435,6 +435,8 @@
             <h2 class="container-title">our products</h2>
             <div class="grid wide">
                 <div class="row l-0 m-0 mobile-filter-bar">
+
+                    
                     <div class="l-0 m-0 c-3 mobile-filter--btn">
                         <a href="" class="mobile-filter__link">
                             Color
@@ -468,7 +470,22 @@
                         <div class="filter-bar__container">
                             <h2 class="filter-bar__title">Categories</h2>
                             <ul class="product-category">
-                                <li class="category-item">
+                                <div id="product-category">
+                                    <div class="cap">Màu Sắc</div>
+                                    <div class="ct" > 
+                                        <label><input onchange="chon()" type="checkbox" class="mausac" value="white">White Hot Trend</label>
+                                        <label><input onchange="chon()" type="checkbox" class="mausac" value="black">Black Hot Trend</label>
+                                        <label><input onchange="chon()" type="checkbox" class="mausac" value="khac">Nổi Bật</label>
+                                    </div>
+                                    <div class="cap">Giá bán</div>
+                                    <div class="ct"> 
+                                        <label><input onchange="chon()" type="checkbox" class="giaban" value="1">Dưới $200</label>
+                                        <label><input onchange="chon()" type="checkbox" class="giaban" value="2">Từ $200 đến $500 triệu</label>
+                                        <label><input onchange="chon()" type="checkbox" class="giaban" value="3">Trên $500</label>
+                                    </div>
+                                </div>
+
+                                <!-- <li class="category-item">
                                     <a href="#" class="category-item__link">
                                         <span class="category-item__lable">White</span>
                                         <span class="item-amount">(2)</span>
@@ -492,7 +509,7 @@
                                 <li class="category-item filter-by-price">
                                     <span class="category-item__lable">Filter By Price</span>
                                     <input type="range" name="filter-price"  class="filter-price__input" id="" min="1" max="100">
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -639,8 +656,19 @@
         </div>
     </div>
 
+    <!--jQuery-->
+    <script src="./assets/js/Jquery/Jquery.min.js"></script>
+    <script src="./assets/js/owlcarousel/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="./assets/js/owlcarousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="./assets/js/owlcarousel/owl.theme.default.min.css">
+
+    <!--update Css-->
+    <link rel="stylesheet" href="./assets/css/updateStyle.css">
+    <link rel="stylesheet" href="./assets/css/updateResponsive.css">
+
     <script type="module" src="./assets/js/storage.js"></script>
     <script type="module" src="./assets/js/form.js"></script>
     <script type="module" src="./assets/js/app.js"></script>
+    <script type="module" src="./assets/js/public.js"></script>
 </body>
 </html>
