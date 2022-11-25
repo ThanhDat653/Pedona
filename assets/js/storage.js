@@ -65,7 +65,7 @@ const products = [
     name: "Nike Air Max 270",
     type: "AirMax",
     id: "AM270-white-black",
-    color: "white-back",
+    color: "white-black",
     price: 200,
     img: "./assets/image/nike_airmax_270_white_black.png",
     desc: "Nike's first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike's greatest innovation with its large window and fresh array of colours.",

@@ -181,13 +181,20 @@
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__color">
                 <span class="col l-2 modal__text">Màu</span>
-                <label for="product__color--black" class="col l-2 l-o-3">
-                  <input type="radio" name="color" id="product__color--black" value="1" checked />
-                  <span class="modal__text">Black</span>
-                </label>
-                <label for="product__color--orthers" class="col l-3 spc-btw">
-                  <input type="radio" name="color" id="product__color--orthers" value="2" />
-                  <span class="modal__text">Others</span>
+                <div class="color__render row no-gutters spc-btw">
+                </div>
+                <label for="product__color--orthers" class="col l-o-3 l-9 spc-btw">
+                  <div class="row no-gutters spc-btw">
+                    <div class="row no-gutters ">
+                      <input type="radio" name="color" id="product__color--orthers" value="0"
+                        class="col l-o-1 ml-32 " />
+                      <span class="modal__text mt-8 center-text
+                       col l-3">Others
+                      </span>
+                    </div>
+                    <input id="input_others" type="text" name="color" class="input col l-o-3 l-5"
+                      placeholder="Màu: red, black-red">
+                  </div>
                 </label>
               </label>
               <label class="row no-gutters spc-btw mt-16" for="product__price">
@@ -200,7 +207,6 @@
                 <textarea form="modal-wrapper" class="input" name="desc" id="product__desc" cols="25" rows="9"
                   placeholder="Mô Tả Sản Phẩm"></textarea>
                 <span class="col l-12 invalid-input ">Vui lòng nhập mô tả sản phẩm</span>
-
               </label>
             </div>
             <div class="col l-4 l-o-1 modal__right">
