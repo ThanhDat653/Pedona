@@ -174,7 +174,7 @@ function getColor(value) {
   if (value == 0) {
     return inputOthers.value;
   } else {
-    return colorList[value];
+    return colorList[value - 1];
   }
 }
 
@@ -188,22 +188,22 @@ function addObject() {
 
   // if (validInput) {
   // if (validName(name)) {
-  // const temp = {
-  //   name,
-  //   id,
-  //   color,
-  //   price,
-  //   desc,
-  //   img: gItem("imgsrc") || "null",
-  // };
-  // productList.push(temp);
+  let temp = {
+    name,
+    id,
+    color,
+    price,
+    desc,
+    img: gItem("imgsrc") || "null",
+  };
+  productList.push(temp);
 
-  // imgReset();
-  // form_add.reset();
-  // modal.classList.toggle("close");
+  imgReset();
+  form_add.reset();
+  modal.classList.toggle("close");
 
-  // localStorage.setItem(prodKey, JSON.stringify(productList));
-  // outputProd();
+  localStorage.setItem(prodKey, JSON.stringify(productList));
+  outputProd();
   // }
 }
 
@@ -211,21 +211,35 @@ const submitButton = document.getElementById("submit-prod");
 let id = document.getElementById("product__id");
 let name = document.getElementById("product__name");
 let desc = document.getElementById("product__desc");
+let otherValue = document.form_add.color.value;
 
 let modalInputs = [id, name, desc];
-
 function validModal() {
+  if (otherValue == 0) {
+    modalInputs.push(inputOthers);
+  }
+  console.log(modalInputs);
+  if (prodImg.files[0] == null) {
+    document
+      .querySelector("#img-show + span.invalid-input")
+      .classList.add("invalid");
+    return false;
+  }
   for (let i = 0; i < modalInputs.length; i++) {
     let errorShow = document
       .querySelector("#" + modalInputs[i].id + "+ span")
       .classList.contains("invalid");
+    console.log(errorShow);
     if (errorShow) {
       return false;
     }
   }
   return true;
 }
-validModal();
+
+if (otherValue == 0) {
+  modalInputs.push(inputOthers);
+}
 
 modalInputs.forEach((item) => {
   item.onblur = () => {
@@ -239,8 +253,12 @@ modalInputs.forEach((item) => {
   };
 });
 submitButton.onclick = function () {
+  // if (otherValue == 0) {
+  //   modalInputs.push(inputOthers);
+  // }
   modalInputs.forEach((item) => {
     let errorShow = document.querySelector("#" + item.id + " + span");
+
     if (item.value == "" || item.value == undefined) {
       errorShow.classList.add("invalid");
     }
