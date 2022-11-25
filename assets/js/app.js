@@ -10,8 +10,9 @@ import {
   isLogin, 
   openForm, 
   userList, 
-  userCurrent, 
-  userKey
+  userCurrentInLocal, 
+  userKey,
+  getUserCurrent
 } from "./form.js";
 
 //  HEADER SCROLL
@@ -550,34 +551,19 @@ function setQuantityOfProduct() {
 }
 
 // ----- CARTS: start -----
+var userCurrent = userCurrentInLocal;
 
-// const userList = gItem(userKey) || defaultUsers;
-// sItem(userKey, JSON.stringify(userList));
+userList.forEach(function (item) {
+  if (item.userID === userCurrent.userID){
+    userCurrent = item;
+  }
+}); 
 
-// create a default current user is null
-// let userCurrent = {
-//   username: "",
-//   pass: "",
-//   userID: "",
-//   name: "",
-//   carts: [],
-// };
-
+console.log(userCurrentInLocal);
 let cartOfUserCurrent = userCurrent.carts;
 
-// // if have a login account, set current user = login user
-// if(isLogin) {
-//   // find a cart of userCurrent from cartList by ID
-//   if (gItem("userCurrent") != ""){
-//     userList.forEach(function (item) {
-//     if (item.userID === gItem("userCurrent").userID)
-//       userCurrent = item;
-//     });
-//   }
-//   cartOfUserCurrent = userCurrent.carts;
+console.log(userCurrent);
 
-//   console.log(cartOfUserCurrent);
-// }
 
 // add new product to productList of userCurrent
 function addToCart() {
@@ -590,6 +576,7 @@ function addToCart() {
         openForm();
       }
       else {
+        
         var amount = parseInt(quantityInput[index].value);
         var temp = {
           product: products[item.value],
@@ -647,6 +634,8 @@ function renderAmountOfCart() {
   `
   document.querySelector(".cart-list").insertAdjacentHTML("beforebegin", temp);
 }
+
+console.log(cartOfUserCurrent);
 
 function renderCartlistOfUserCurrent() {
   const headerCartListElement = document.querySelector(".cart-list-item");
@@ -735,6 +724,7 @@ userList.forEach(function (item) {
 const purchaseButton = document.querySelector(".cart-purchase-btn");
 
 purchaseButton.addEventListener("click", function () {
+  
   let today = new Date();
   let date =
     today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
