@@ -1,4 +1,3 @@
-
 import { gItem, sItem } from "./storage.js";
 import { outputProd } from "./product.js";
 import { createArr, prodKey } from "./main.js";
@@ -123,7 +122,7 @@ colorList.forEach(function (item, index) {
     item +
     `" class=" mt-8 col l-3 l-o-1 spc-btw">
    <div class="row no-gutters ">
-  <input type="radio" name="color" id="product__color--` +
+  <input class="color" type="radio" name="color" id="product__color--` +
     item +
     `" value="` +
     (index + 1) +
@@ -142,16 +141,39 @@ colorList.forEach(function (item, index) {
 </label>`;
   console.log(colorConfig(item));
 });
-
+let colorArr = document.querySelectorAll("input.color");
+console.log("🚀 ~ file: modal.js ~ line 145 ~ colorArr", colorArr);
 const inputOthers = document.getElementById("input_others");
+let checkOther = document.getElementById("product__color--orthers");
 inputOthers.onclick = function () {
-  document.getElementById("product__color--orthers").checked = "true";
+  checkOther.checked = "true";
+  document.querySelector("#input_others + span").classList.remove("invalid");
 };
-if (!document.getElementById("product__color--orthers").checked) {
-  document
-    .querySelector("#" + inputOthers.id + " + span")
-    .classList.remove("invalid");
-}
+
+//
+//
+
+checkOther.onchange = function () {
+  if (checkOther.checked) {
+    document.querySelector("#input_others + span").classList.remove("invalid");
+    inputOthers.focus();
+  }
+};
+
+//
+//
+
+colorArr.forEach(function (color) {
+  color.onchange = function () {
+    inputOthers.value = "";
+    document.querySelector("#input_others + span").classList.remove("invalid");
+  };
+});
+
+//
+//
+
+function checkColorOther() {}
 //*==============================================================================================================================//
 //*====================================================Price input check :Start =================================================//
 //*==============================================================================================================================//
@@ -187,7 +209,7 @@ function addObject() {
   const id = document.getElementById("product__id").value;
   const name = document.getElementById("product__name").value;
   const color = getColor(document.form_add.color.value);
-
+  const type = document.getElementById("product__type").value;
   const price = document.getElementById("product__price").value;
   const desc = document.getElementById("product__desc").value;
 
@@ -199,6 +221,7 @@ function addObject() {
     color,
     price,
     desc,
+    type,
     img: gItem("imgsrc") || "null",
   };
   productList.push(temp);
@@ -216,8 +239,8 @@ const submitButton = document.getElementById("submit-prod");
 let id = document.getElementById("product__id");
 let name = document.getElementById("product__name");
 let desc = document.getElementById("product__desc");
-
-let modalInputs = [id, name, desc];
+let type = document.getElementById("product__type");
+let modalInputs = [id, name, desc, type];
 function validModal() {
   let otherValue = document.form_add.color.value;
   if (otherValue == 0) {
@@ -225,9 +248,13 @@ function validModal() {
       modalInputs.push(inputOthers);
     }
   } else {
-    modalInputs.splice(modalInputs.indexOf(inputOthers), 1);
+    if (modalInputs.indexOf(inputOthers) != -1) {
+      document
+        .querySelector("#" + inputOthers.id + " + span")
+        .classList.remove("invalid");
+      modalInputs.splice(modalInputs.indexOf(inputOthers), 1);
+    }
   }
-  console.log(modalInputs);
   if (prodImg.files[0] == null) {
     document
       .querySelector("#img-show + span.invalid-input")
@@ -246,7 +273,24 @@ function validModal() {
   return true;
 }
 
+if (modalInputs.indexOf(inputOthers) == -1) {
+  modalInputs.push(inputOthers);
+}
+
 modalInputs.forEach((item) => {
+  let otherValue = document.form_add.color.value;
+  if (otherValue == 0) {
+    if (modalInputs.indexOf(inputOthers) == -1) {
+      modalInputs.push(inputOthers);
+    }
+  } else {
+    if (modalInputs.indexOf(inputOthers) != -1) {
+      document
+        .querySelector("#" + inputOthers.id + " + span")
+        .classList.remove("invalid");
+      modalInputs.splice(modalInputs.indexOf(inputOthers), 1);
+    }
+  }
   item.onblur = () => {
     let errorShow = document.querySelector("#" + item.id + " + span");
     console.log(
@@ -269,10 +313,12 @@ submitButton.onclick = function () {
     }
   } else {
     if (modalInputs.indexOf(inputOthers) != -1) {
+      document
+        .querySelector("#" + inputOthers.id + " + span")
+        .classList.remove("invalid");
       modalInputs.splice(modalInputs.indexOf(inputOthers), 1);
     }
   }
-  console.log(modalInputs);
   modalInputs.forEach((item) => {
     let errorShow = document.querySelector("#" + item.id + " + span");
 

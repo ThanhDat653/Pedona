@@ -132,6 +132,10 @@ a {
   justify-content: flex-end;
 }
 
+.end-text {
+  text-align: end;
+}
+
 .close {
   display: none;
 }
@@ -758,9 +762,12 @@ button.order-full.true {
 
 .modal__container {
   border-radius: 5px;
-  position: relative;
+  position: absolute;
   margin: auto;
-  height: auto;
+  top:0;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
   background-color: #fff;
 
 }
@@ -808,11 +815,12 @@ button.order-full.true {
 
 }
 
-.col.invalid-input {
+.col.invalid-input,.row.invalid-input {
   display: none;
 }
 
 .row.invalid .invalid-input,.invalid.invalid-input {
+  
   display: block;
   color:#cc2424;
   font-size: 12px;
