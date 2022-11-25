@@ -146,7 +146,11 @@ const inputOthers = document.getElementById("input_others");
 inputOthers.onclick = function () {
   document.getElementById("product__color--orthers").checked = "true";
 };
-
+if (!document.getElementById("product__color--orthers").checked) {
+  document
+    .querySelector("#" + inputOthers.id + " + span")
+    .classList.remove("invalid");
+}
 //*==============================================================================================================================//
 //*====================================================Price input check :Start =================================================//
 //*==============================================================================================================================//
@@ -182,7 +186,7 @@ function addObject() {
   const id = document.getElementById("product__id").value;
   const name = document.getElementById("product__name").value;
   const color = getColor(document.form_add.color.value);
-  console.log("🚀 ~ file: modal.js ~ line 177 ~ addObject ~ color", color);
+
   const price = document.getElementById("product__price").value;
   const desc = document.getElementById("product__desc").value;
 
@@ -211,12 +215,16 @@ const submitButton = document.getElementById("submit-prod");
 let id = document.getElementById("product__id");
 let name = document.getElementById("product__name");
 let desc = document.getElementById("product__desc");
-let otherValue = document.form_add.color.value;
 
 let modalInputs = [id, name, desc];
 function validModal() {
+  let otherValue = document.form_add.color.value;
   if (otherValue == 0) {
-    modalInputs.push(inputOthers);
+    if (modalInputs.indexOf(inputOthers) == -1) {
+      modalInputs.push(inputOthers);
+    }
+  } else {
+    modalInputs.splice(modalInputs.indexOf(inputOthers), 1);
   }
   console.log(modalInputs);
   if (prodImg.files[0] == null) {
@@ -237,13 +245,13 @@ function validModal() {
   return true;
 }
 
-if (otherValue == 0) {
-  modalInputs.push(inputOthers);
-}
-
 modalInputs.forEach((item) => {
   item.onblur = () => {
     let errorShow = document.querySelector("#" + item.id + " + span");
+    console.log(
+      "🚀 ~ file: modal.js ~ line 249 ~ modalInputs.forEach ~ errorShow",
+      errorShow
+    );
     if (item.value.trim() == "" || item.value == undefined) {
       item.value = "";
       errorShow.classList.add("invalid");
@@ -253,9 +261,17 @@ modalInputs.forEach((item) => {
   };
 });
 submitButton.onclick = function () {
-  // if (otherValue == 0) {
-  //   modalInputs.push(inputOthers);
-  // }
+  let otherValue = document.form_add.color.value;
+  if (otherValue == 0) {
+    if (modalInputs.indexOf(inputOthers) == -1) {
+      modalInputs.push(inputOthers);
+    }
+  } else {
+    if (modalInputs.indexOf(inputOthers) != -1) {
+      modalInputs.splice(modalInputs.indexOf(inputOthers), 1);
+    }
+  }
+  console.log(modalInputs);
   modalInputs.forEach((item) => {
     let errorShow = document.querySelector("#" + item.id + " + span");
 
