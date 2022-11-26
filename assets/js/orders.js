@@ -100,7 +100,7 @@ function renderOrderDetails() {
                       </div>
               <div class="row table__row  no-gutters js-mid">
               <div class="col l-3 ">
-                <img class="product__img" src="` +
+                <img class="product__img" src="./assets/image/` +
             item.product.img +
             `" alt="">
               

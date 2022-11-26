@@ -98,11 +98,11 @@ productList.forEach(function (item) {
     colorList.push(item.color);
   }
 });
-console.log(colorList);
+// console.log(colorList);
 function colorConfig(item) {
   if (item.includes("-")) {
     const splited = item.split("-");
-    console.log(splited);
+    // console.log(splited);
     return (
       "linear-gradient(to right, " +
       splited[0] +
@@ -139,10 +139,10 @@ colorList.forEach(function (item, index) {
     </span></div>
     </div>
 </label>`;
-  console.log(colorConfig(item));
+  // console.log(colorConfig(item));
 });
 let colorArr = document.querySelectorAll("input.color");
-console.log("🚀 ~ file: modal.js ~ line 145 ~ colorArr", colorArr);
+// console.log("🚀 ~ file: modal.js ~ line 145 ~ colorArr", colorArr);
 const inputOthers = document.getElementById("input_others");
 let checkOther = document.getElementById("product__color--orthers");
 inputOthers.onclick = function () {
@@ -293,10 +293,10 @@ modalInputs.forEach((item) => {
   }
   item.onblur = () => {
     let errorShow = document.querySelector("#" + item.id + " + span");
-    console.log(
-      "🚀 ~ file: modal.js ~ line 249 ~ modalInputs.forEach ~ errorShow",
-      errorShow
-    );
+    // console.log(
+    //   "🚀 ~ file: modal.js ~ line 249 ~ modalInputs.forEach ~ errorShow",
+    //   errorShow
+    // );
     if (item.value.trim() == "" || item.value == undefined) {
       item.value = "";
       errorShow.classList.add("invalid");
