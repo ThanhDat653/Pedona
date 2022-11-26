@@ -146,7 +146,7 @@ function categoryRender() {
   category_Color.innerHTML += `<li class="category-item filter-by-price">
     <span class="category-item__lable">Filter By Price</span>
     <input type="range" name="filter-price" class="filter-price__input" id="" min="100"
-      value="200"  max="1000">
+      value="1000"  max="1000">
       <div class="bubble"> <div>
 </li>`;
   //
