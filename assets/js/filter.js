@@ -14,7 +14,7 @@ function basicItemRenderList(product, index) {
   <div class="product-item">
       <div class="product-item__img">
           <div class="product__img">
-              <img src="${product.img}" alt="">
+              <img src="./assets/image/${product.img}" alt="">
           </div>
       </div>
   </div>
@@ -42,7 +42,7 @@ function basicItemRenderGrid(product, index) {
   return `<div class="l-4 m-6 c-12 product">
   <div class="product__link">
       <div class="product-item product__img">
-          <img src="${product.img}"></img>
+          <img src="./assets/image/${product.img}"></img>
       </div>
 
       <div class="product__description-layer">
@@ -54,7 +54,7 @@ function basicItemRenderGrid(product, index) {
               <div class="product-item">
                   <div class="product-item__img">
                       <div class="dscr--product__img">
-                          <img src="${product.img}" alt="">
+                          <img src="./assets/image/${product.img}" alt="">
                       </div>
                   </div>
               </div>
