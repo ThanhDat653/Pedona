@@ -7,7 +7,30 @@ let colorList = [];
 const productList = gItem("productList");
 const productGridList = document.querySelector(".list-product__grid");
 const productListList = document.querySelector(".list-product__list");
+const searchButton = document.querySelector(".header--search__btn");
+const searchInput = document.querySelector(".header--search__input");
+function searchProduct() {
+  let searchValue = searchInput.value;
+  productGridList.innerHTML = "";
+  productListList.innerHTML = "";
+  productList.forEach(function (item, index) {
+    if (item.name.includes(searchValue)) {
+      productGridList.innerHTML += basicItemRenderGrid(item, index);
+      productListList.innerHTML += basicItemRenderList(item, index);
 
+      addToCart();
+      description();
+    }
+  });
+  searchInput.value = "";
+}
+searchButton.addEventListener("click", searchProduct);
+searchInput.addEventListener("keydown", function (event) {
+  if (event.key == "Enter") {
+    console.log(1);
+    searchProduct();
+  }
+});
 //
 function basicItemRenderList(product, index) {
   return `<div class="l-12 product">

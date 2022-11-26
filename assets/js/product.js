@@ -230,7 +230,7 @@ function searchProductList() {
   tableBodyProduct.innerHTML = "";
   productList = gItem(prodKey) || defaultProducts;
 
-  productList.filter((item, i) => {
+  productList.forEach((item, i) => {
     // if (item.name.includes(searchValue)) {
     if (
       item.name.includes(searchValue) ||
