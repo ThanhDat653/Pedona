@@ -32,12 +32,12 @@ for (let i = 0; i < exitModal.length; i++) {
 
 let prodImg = document.getElementById("img-input");
 let showImg = document.getElementById("img-show");
-var preview = document.getElementById("img-preview");
+let preview = document.getElementById("img-preview");
 let uploadIcon = document.getElementById("upload-icon");
 
 //*================================================ valid values for images ================================================//
 
-var valid = [".png", ".jpec", ".jpg"];
+let valid = [".png", ".jpec", ".jpg"];
 
 //*================================================ Image Reset :Start ================================================//
 
@@ -65,8 +65,9 @@ export function checkImg(filename) {
 
 prodImg.addEventListener("change", function showPre(event) {
   let path = prodImg.value;
-  var temparr = path.split("\\");
-  var filename = temparr.slice(-1)[0];
+  let temparr = path.split("\\");
+  let filename = temparr.slice(-1)[0];
+  console.log("🚀 ~ file: modal.js ~ line 70 ~ showPre ~ filename", filename);
   if (checkImg(filename)) {
     //*====================================== Create Blob object ================================//
     //
@@ -78,7 +79,7 @@ prodImg.addEventListener("change", function showPre(event) {
     preview.style.display = "block";
     uploadIcon.style.display = "none";
     showImg.style.border = "3px solid #242424";
-    sItem("imgsrc", src);
+    sItem("imgsrc", filename);
   } else {
     //
     alert("Vui lòng Chọn File là Hình Ảnh");
@@ -172,7 +173,6 @@ colorArr.forEach(function (color) {
 
 //
 //
-
 
 //*==============================================================================================================================//
 //*====================================================Price input check :Start =================================================//
