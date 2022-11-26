@@ -64,11 +64,12 @@ const productGridList = document.querySelector(".list-product__grid");
 const products = gItem("productList");
 
 products.forEach(function (product, index) {
+  console.log(product.img)
   if (index < 6) {
     var productElement = `<div class="l-4 m-6 c-12 product">
                 <div class="product__link">
                     <div class="product-item product__img">
-                        <img src="${product.img}"></img>
+                        <img src="./assets/image/${product.img}"></img>
                     </div>
     
                     <div class="product__description-layer">
@@ -80,7 +81,7 @@ products.forEach(function (product, index) {
                             <div class="product-item">
                                 <div class="product-item__img">
                                     <div class="dscr--product__img">
-                                        <img src="${product.img}" alt="">
+                                        <img src="./assets/image/${product.img}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +143,7 @@ products.forEach(function (product, index) {
             <div class="product-item">
                 <div class="product-item__img">
                     <div class="product__img">
-                        <img src="${product.img}" alt="">
+                        <img src="./assets/image/${product.img}" alt="">
                     </div>
                 </div>
             </div>
@@ -192,7 +193,7 @@ function clickOnPage1() {
       var productElement = `<div class="l-4 m-6 c-12 product">
                     <div class="product__link">
                         <div class="product-item product__img">
-                            <img src="${product.img}"></img>
+                            <img src="./assets/image/${product.img}"></img>
                         </div>
         
                         <div class="product__description-layer">
@@ -204,7 +205,7 @@ function clickOnPage1() {
                                 <div class="product-item">
                                     <div class="product-item__img">
                                         <div class="dscr--product__img">
-                                            <img src="${product.img}" alt="">
+                                            <img src="./assets/image/${product.img}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +265,7 @@ function clickOnPage1() {
                 <div class="product-item">
                     <div class="product-item__img">
                         <div class="product__img">
-                            <img src="${product.img}" alt="">
+                            <img src="./assets/image/${product.img}" alt="">
                         </div>
                     </div>
                 </div>
@@ -314,7 +315,7 @@ function clickOnPage2() {
       var productElement = `<div class="l-4 m-6 c-12 product">
                     <div class="product__link">
                         <div class="product-item product__img">
-                            <img src="${product.img}"></img>
+                            <img src="./assets/image/${product.img}"></img>
                         </div>
         
                         <div class="product__description-layer">
@@ -326,7 +327,7 @@ function clickOnPage2() {
                                 <div class="product-item">
                                     <div class="product-item__img">
                                         <div class="dscr--product__img">
-                                            <img src="${product.img}" alt="">
+                                            <img src="./assets/image/${product.img}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -386,7 +387,7 @@ function clickOnPage2() {
                 <div class="product-item">
                     <div class="product-item__img">
                         <div class="product__img">
-                            <img src="${product.img}" alt="">
+                            <img src="./assets/image/${product.img}" alt="">
                         </div>
                     </div>
                 </div>
@@ -649,7 +650,7 @@ function renderCartlistOfUserCurrent() {
     cartOfUserCurrent.forEach(function (item) {
       let temp = `<li class="cart-item">
         <div class="cart-item__img">
-          <img src="${item.product.img}" alt="">
+          <img src="./assets/image/${item.product.img}" alt="">
         </div>
         
         <div class="cart-item__info">

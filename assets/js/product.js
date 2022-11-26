@@ -76,7 +76,7 @@ export function outputProd() {
       productList[i].name +
       "</div>" +
       '<div class="col l-1 m-3 img">' +
-      '<img class="product__img" src="' +
+      '<img class="product__img" src="./assets/image/' +
       productList[i].img +
       '" alt="">' +
       "</div>" +
@@ -248,12 +248,12 @@ function searchProductList() {
         item.name +
         "</div>" +
         '<div class="col l-1 m-3 img">' +
-        '<img class="product__img" src="' +
+        '<img class="product__img" src="./assets/image/'+
         item.img +
         '" alt="">' +
         "</div>" +
         '<div class="col l-1 m-1 c-10 c-o-2 color--price price">' +
-        (item.price || 200) +
+        (item.price) +
         "$" +
         "</div>" +
         '<div class="col l-3 m-0 c-0 desc">' +
