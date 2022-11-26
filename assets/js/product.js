@@ -49,7 +49,7 @@ function createEditableImg(img, index) {
       preview.style.border = "1px solid #cc2424";
       //\
       console.log(src);
-      sItem("imgconfig", src);
+      sItem("imgconfig", filename);
     } else {
       alert("Only images are supported");
       imgReset();

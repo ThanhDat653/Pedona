@@ -3,16 +3,16 @@ import {
   // users as defaultUsers,
   // orders as defaultOrders,
   sItem,
-  gItem
+  gItem,
 } from "./storage.js";
 
 import {
-  isLogin, 
-  openForm, 
-  userList, 
-  userCurrentInLocal, 
+  isLogin,
+  openForm,
+  userList,
+  userCurrentInLocal,
   userKey,
-  getUserCurrent
+  getUserCurrent,
 } from "./form.js";
 
 //  HEADER SCROLL
@@ -294,7 +294,7 @@ function clickOnPage1() {
 
   description();
 
-  if(isLogin) {
+  if (isLogin) {
     setQuantityOfProduct();
     addToCart();
   }
@@ -416,7 +416,7 @@ function clickOnPage2() {
 
   description();
 
-  if(isLogin) {
+  if (isLogin) {
     setQuantityOfProduct();
     addToCart();
   }
@@ -448,7 +448,7 @@ listModeOption.addEventListener("click", viewMode);
 
 // DESCRIPTION
 
-function description() {
+export function description() {
   let productElement = document.querySelectorAll(".product__link");
   let descriptionLayer = document.querySelectorAll(
     ".product__description-layer"
@@ -555,29 +555,26 @@ function setQuantityOfProduct() {
 var userCurrent = userCurrentInLocal;
 
 userList.forEach(function (item) {
-  if (item.userID === userCurrent.userID){
+  if (item.userID === userCurrent.userID) {
     userCurrent = item;
   }
-}); 
+});
 
 console.log(userCurrentInLocal);
 let cartOfUserCurrent = userCurrent.carts;
 
 console.log(userCurrent);
 
-
 // add new product to productList of userCurrent
-function addToCart() {
+export function addToCart() {
   let buyBtn = document.querySelectorAll(".buy-btn > button");
   let quantityInput = document.querySelectorAll(".input-qty");
 
   buyBtn.forEach(function (item, index) {
     item.addEventListener("click", function () {
-      if(!isLogin) {
+      if (!isLogin) {
         openForm();
-      }
-      else {
-        
+      } else {
         var amount = parseInt(quantityInput[index].value);
         var temp = {
           product: products[item.value],
@@ -599,7 +596,7 @@ function addToCart() {
     });
   });
 }
-  
+
 function updateUserList() {
   userCurrent.carts = cartOfUserCurrent;
 
@@ -621,18 +618,17 @@ function checkProductList(productList) {
         productList[i] = productList[i + 1];
 
         if (i == productList.length - 1) productList.pop();
-      };
-    };
+      }
+    }
   });
 }
 
 //  render amount of products in cart
 function renderAmountOfCart() {
-  let temp = 
-  `<span class="cart-number-badge">
+  let temp = `<span class="cart-number-badge">
     <span class="cart-quantity">${cartOfUserCurrent.length}</span>
   </span>
-  `
+  `;
   document.querySelector(".cart-list").insertAdjacentHTML("beforebegin", temp);
 }
 
@@ -725,7 +721,6 @@ userList.forEach(function (item) {
 const purchaseButton = document.querySelector(".cart-purchase-btn");
 
 purchaseButton.addEventListener("click", function () {
-  
   let today = new Date();
   let date =
     today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
@@ -743,21 +738,20 @@ purchaseButton.addEventListener("click", function () {
     orderID: userCurrent.userID,
     productList: cartOfUserCurrent,
     time: dateTime,
-    total: total
+    total: total,
   };
 
   // update ordersList
-  sItem(ordersKey,ordersList);
+  sItem(ordersKey, ordersList);
 
   // update cart of current user
   cartOfUserCurrent = [];
   updateUserList();
   renderCartlistOfUserCurrent();
 });
-  
+
 // ----- ORDERS: End -----
-  
+
 renderCartlistOfUserCurrent();
 setQuantityOfProduct();
 addToCart();
-
