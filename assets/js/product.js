@@ -1,7 +1,7 @@
 import { tableBodyProduct } from "./main.js";
 import { sItem, gItem } from "./storage.js";
 import { deleteObject, createEditable, createArr, prodKey } from "./main.js";
-import { checkImg } from "./modal.js";
+import { checkImg, setColor } from "./modal.js";
 
 // Extract product list:Start
 let productList = gItem("productList");
@@ -52,7 +52,8 @@ function basicProductRender(item, i) {
     '<div class="col l-2 m-1 m-o-2 c-12">' +
     '<button class="product table__fix-btn"><i class="fa-solid fa-pencil"></i></button>' +
     '<button class="product table__del-btn"><i class="fa-solid fa-trash-can"></i></button>' +
-    '<button class="product table__fix-submit close">Submit</button>' +
+    '<button class="product table__fix-submit close">Submit  ✓</button>' +
+    '<button class="product table__fix-cancel close">X</button>' +
     "</div>" +
     "</div>"
   );
@@ -72,8 +73,16 @@ function createEditableImg(img, index) {
   const preview = document.getElementById("img");
   const input = document.getElementById("productImg");
   preview.style.display = "block";
+  //
+
+  //
 
   preview.src = "./assets/image/" + productList[index].img;
+  localStorage.setItem("imgconfig", JSON.stringify(productList[index].img));
+  //
+
+  //
+
   area.addEventListener("change", () => {
     let productList = gItem(prodKey);
     let path = input.value;
@@ -84,14 +93,22 @@ function createEditableImg(img, index) {
 
       let src = "./assets/image/" + filename; // URL object create upon Media-Src
       //
+
+      //
+
       preview.src = src;
       preview.style.display = "block";
       preview.style.border = "3px solid #cc2424";
-      //\
+      //
+
+      //
       productList[index].img = filename;
-      sItem("imgconfig", filename);
+      localStorage.setItem("imgconfig", JSON.stringify(filename));
       console.log(productList[index].img);
     } else {
+      //
+
+      //
       alert("Only images are supported");
       imgReset();
     }
@@ -114,10 +131,20 @@ export function outputProd() {
   let delButton = createArr(
     document.querySelectorAll(".product.table__del-btn")
   );
-  const fixSubmitButton = createArr(
+  let fixSubmitButton = createArr(
     document.querySelectorAll(".product.table__fix-submit")
   );
+  let fixCancelButton = createArr(
+    document.querySelectorAll(".product.table__fix-cancel")
+  );
+  fixCancelButton.forEach(function (item) {
+    item.onclick = function () {
+      if(confirm("Do you want to cancel?")){
 
+        location.reload();
+      }
+    };
+  });
   delButton.forEach((item, index) => {
     item.onclick = () => {
       if (
@@ -143,7 +170,6 @@ export function outputProd() {
         alert("chỉ được sửa 1 đối tượng một lần ");
       } else {
         toggleButton(index);
-        fixSubmitButton[index].style.animation = "button-full .25s linear";
         createEditable(editableId[parseInt(prodNumber[index].innerHTML) - 1]);
         createEditable(editableName[parseInt(prodNumber[index].innerHTML) - 1]);
         createEditable(editableDesc[parseInt(prodNumber[index].innerHTML) - 1]);
@@ -170,6 +196,7 @@ export function outputProd() {
           return true;
         }
 
+        editRow(index);
         fixSubmitButton.forEach((item) => {
           changedArea.forEach(function (itemCheck, index) {
             itemCheck.onkeydown = function (e) {
@@ -198,6 +225,7 @@ export function outputProd() {
               ) &&
               validCheck()
             ) {
+              
               productList[index].id = changedArea[0].value.trim();
               productList[index].name = changedArea[1].value.trim();
               productList[index].price = changedArea[2].value.trim();
@@ -219,6 +247,7 @@ export function outputProd() {
     fixButton[index].classList.toggle("close");
     delButton[index].classList.toggle("close");
     fixSubmitButton[index].classList.toggle("close");
+    fixCancelButton[index].classList.toggle("close");
   }
   const editableImg = createArr(document.querySelectorAll(".img"));
   const editableId = createArr(document.querySelectorAll(".id"));
@@ -236,8 +265,10 @@ const searchInput = document.querySelector(".product.search-input");
 //
 
 //
-function editRow() {
-  const rowList = querySelectorAll("#table__body--product .row");
+function editRow(index) {
+  const rowList = document.querySelectorAll("#table__body--products .row");
+  rowList[index].style.border = "3px solid #cc2424";
+  rowList[index].classList.add("shadow-wrap");
 }
 //
 
@@ -259,13 +290,25 @@ function searchProductList() {
     let prodNumber = createArr(document.querySelectorAll(".prod.number"));
 
     let check = false;
-    let change = false;
-    let delButton = createArr(
-      document.querySelectorAll(".product.table__del-btn")
-    );
+    ;
+    
     const fixSubmitButton = createArr(
       document.querySelectorAll(".product.table__fix-submit")
     );
+    let fixCancelButton = createArr(
+      document.querySelectorAll(".product.table__fix-cancel")
+    );
+    fixCancelButton.forEach(function (item) {
+      item.onclick = function () {
+        if(confirm("Do you want to cancel?")){
+  
+          location.reload();
+        }
+      };
+    });
+    let delButton = createArr(
+      document.querySelectorAll(".product.table__del-btn")
+    )
     delButton.forEach((item, index) => {
       item.onclick = () => {
         if (
@@ -295,7 +338,6 @@ function searchProductList() {
           alert("Only change one item per time");
         } else {
           toggleButton(index);
-          fixSubmitButton[index].style.animation = "button-full .25s linear";
           createEditable(editableId[index]);
           createEditable(editableName[index]);
           createEditable(editableDesc[index]);
@@ -319,6 +361,7 @@ function searchProductList() {
             }
             return true;
           }
+          editRow(index);
           fixSubmitButton.forEach((item) => {
             changedArea.forEach(function (itemCheck, index) {
               itemCheck.onblur = function () {
@@ -342,6 +385,7 @@ function searchProductList() {
                 ) &&
                 validCheck()
               ) {
+                setColor();
                 productList[parseInt(prodNumber[index].innerHTML) - 1].id =
                   changedArea[0].value.trim();
                 productList[parseInt(prodNumber[index].innerHTML) - 1].name =

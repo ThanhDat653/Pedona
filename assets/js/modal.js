@@ -13,7 +13,7 @@ let exitModal = document.querySelectorAll(".toggle-modal");
 
 for (let i = 0; i < exitModal.length; i++) {
   exitModal[i].onclick = () => {
-    const validModal = document.querySelectorAll(".modal__body label");
+    const validModal = document.querySelectorAll(".invalid-input");
     validModal.forEach(function (item) {
       item.classList.remove("invalid");
     });
@@ -92,12 +92,19 @@ prodImg.addEventListener("change", function showPre(event) {
 
 //
 //
-let colorList = [];
+export function setColor()
+{
+const productList = JSON.parse(localStorage.getItem("productList"));
+
+  let colorList = [];
 productList.forEach(function (item) {
   if (colorList.indexOf(item.color) == -1) {
     colorList.push(item.color);
   }
 });
+return colorList;
+}
+let colorList = setColor();
 // console.log(colorList);
 function colorConfig(item) {
   if (item.includes("-")) {
@@ -115,7 +122,8 @@ function colorConfig(item) {
   }
 }
 const renderColor = document.querySelector(".color__render");
-renderColor.innerHTML += "";
+export function renderAllProductColor(){
+  renderColor.innerHTML += "";
 colorList.forEach(function (item, index) {
   renderColor.innerHTML +=
     `<label for="product__color--` +
@@ -140,7 +148,9 @@ colorList.forEach(function (item, index) {
     </div>
 </label>`;
   // console.log(colorConfig(item));
-});
+});}
+
+renderAllProductColor();
 let colorArr = document.querySelectorAll("input.color");
 // console.log("🚀 ~ file: modal.js ~ line 145 ~ colorArr", colorArr);
 const inputOthers = document.getElementById("input_others");
@@ -228,6 +238,7 @@ function addObject() {
   imgReset();
   form_add.reset();
   modal.classList.toggle("close");
+  renderAllProductColor();
   sItem(prodKey, productList);
   outputProd();
   // }

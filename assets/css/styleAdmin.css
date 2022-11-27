@@ -415,7 +415,7 @@ a {
 
 .row.table__row {
   border-top: solid 2px #242424;
-  transition: all 0.75s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .row.table__row .col {
@@ -463,9 +463,9 @@ a {
 
 }
 
-.table__del-btn {
+.table__del-btn,.table__fix-cancel {
   color: #fff;
-  background:linear-gradient(to left,#242424 50%,#cc2424 50%)right;
+  background:linear-gradient(to left,#111111 50%,#cc2424 50%)right;
   background-size: 300% 100%;
   padding: 8px 16px;
   border: none;
@@ -479,11 +479,16 @@ a {
   background-position: left;
   cursor: pointer;
 }
+.table__fix-cancel:hover {
+
+  background-position: left;
+  cursor: pointer;
+}
 
 .table__fix-btn {
   color: #fff;
   padding: 8px 16px;
-  background:linear-gradient(to right, #242424 50%,#059862 50%)left;
+  background:linear-gradient(to right, #111111 50%,#059862 50%)left;
   background-size: 300% 100%;
   background-position: left;
   border: none;
@@ -512,9 +517,11 @@ a {
   padding: 8px 16px;
   background: linear-gradient( to left,#111111 50% ,#17d08c 50% )right;
   background-size: 200% 100%;
-  border-radius: 5px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   border:none;
-  transition:  all 1.2s ease;
+  transition: all .5s ease-in-out;
+
 }
 
 .table__fix-submit:hover {
