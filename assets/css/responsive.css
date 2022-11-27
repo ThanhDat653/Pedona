@@ -76,13 +76,12 @@
     }
 
     .side-menu__list-wrapper {
-        justify-content: space-around;
         margin: 0;
     }
 
     .side-menu__list {
         position: relative;
-        padding: 30px 0 30px 30px;
+        padding: 0 0 5px 30px;
         margin: 0;
     }
 
@@ -239,6 +238,10 @@
 
     /* Container */
 
+    #container {
+        margin-top: 133px;
+    }
+
     .container-title{
         display: none;
     }
@@ -249,6 +252,10 @@
 
     .mobile-filter-bar {
         display: flex;
+        position: fixed;
+        top: 91px;
+        background-color: var(--white-color);
+        z-index: 100;
     }
 
     .filter-bar {

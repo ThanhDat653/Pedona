@@ -40,68 +40,6 @@ document.querySelector(".back-to-top").addEventListener('click', () => {
   })
 })
 
-// MOBILE SIDE MENU
-
-const menuIcon = document.querySelector(".mobile-menu__icon");
-const overlaySideMenu = document.querySelector(".header__side-menu-container");
-const sideMenu = document.querySelector(".header__side-menu");
-
-menuIcon.addEventListener("click", function () {
-  overlaySideMenu.classList.toggle("open");
-  sideMenu.classList.toggle("open");
-  sideMenu.classList.remove("hide");
-});
-
-overlaySideMenu.addEventListener("click", function () {
-  sideMenu.classList.toggle("hide");
-  setTimeout(hideMenu, 450);
-});
-
-sideMenu.addEventListener("click", function (event) {
-  event.stopPropagation();
-});
-
-function hideMenu() {
-  overlaySideMenu.classList.toggle("open");
-  sideMenu.classList.toggle("open");
-}
-
-// SLIDER
-
-// let slideIndex = 0;
-// showSlides(slideIndex);
-// let slides = document.getElementsByClassName("mySlides");
-
-
-// // function nextSlides(n) {
-// //   showSlides(slideIndex += n);
-// // };
-
-// var nextBtnSlider = document.querySelector(".next");
-// console.log(nextBtnSlider);
-// nextBtnSlider.addEventListener("click", showSlides(1));
-
-// setInterval(function() {
-
-// }, 1000)
-
-// function showSlides(n) {
-//   let i;
-
-
-//   if (n > slides.length) {
-//     slideIndex = 0;
-//   }
-
-//   if (n < 0) {
-//     slideIndex = slides.length;
-//   }
-
-//   slides[slideIndex].style.display = "block";  
-//   console.log(1);
-// }
-
-
 // CONTENT PRODUCT LIST
 
 // Render product view-mode grid
@@ -845,7 +783,8 @@ function renderOderlistOfUserCurrent() {
             </div>
           </div>
       </li>`
-    orderListElement.insertAdjacentHTML('beforeend', temp);
+        
+        orderListElement.insertAdjacentHTML('beforeend', temp);
 
     // Render the produt list in each order
     let orderProductListElement = document.querySelectorAll(".orders-item_list");
@@ -892,6 +831,10 @@ function openOrderList(event) {
 }
 
 // ----- ORDERS: End -----
+
+document.querySelector(".orders").addEventListener('click', openOrderList())
+
+// location.reload(openOrderList())
 
 addToCart();
 renderCartlistOfUserCurrent();

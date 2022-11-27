@@ -123,8 +123,8 @@ function checkLogin() {
     formElemnt.classList.add("close");
     document.getElementById("loginBtn").classList.add("close");
     // showUserInfo();
-    isAdmin();
-    isUser();
+    // isAdmin();
+    // isUser();
     mobileLogin.classList.add("close");
   } 
   else {
@@ -141,27 +141,27 @@ function checkLogin() {
 //     }
 // }
 
-function isAdmin(){
-    let user = gItem('userCurrent');
-    if(user.userID === 0){
-        document.querySelector(".user_role").innerText = 'Go Setting';
-        document.querySelector(".user_role").style.color = 'red';
-        document.querySelector(".user_role").onclick = function(){
-            window.location.replace('./assets/js/test.html') //doi sang trang admin
-        }
-    }
-}
+// Tam 25/11/2022
+// function isAdmin(){
+//   let user = gItem('userCurrent');
+//   if(user.userType == 0){
+//       document.querySelector(".user_role").innerText = 'Orders';
+//       document.querySelector(".user_role").style.color = 'red';
+//       document.querySelector(".admin-btn").style.display = 'block';
+//       document.querySelector(".admin-btn").onclick = function() {
+//           window.location.replace("./admin.html");
+//       }
+//   }
+// }
 
-function isUser(){
-    let user = gItem('userCurrent');
-    if(user.userID !== 0){
-        // document.querySelector(".user_role").innerText = 'Orders';
-        // document.querySelector(".user_role").style.color = 'red';
-        // document.querySelector(".user_role").onclick = function(){
-        //     // window.location.replace('./assets/js/test.html') //doi sang trang admin
-        // }
-    }
-}
+// // Tam  25/11/2022
+// function isUser(){
+//   let user = gItem('userCurrent');
+//   if(user.userType !== 0){
+//       document.querySelector(".user_role").innerText = 'Orders';
+//       document.querySelector(".user_role").style.color = 'red';
+//   }
+// }
 
 // Log out -------------------------------
 var logOutBtn = document.querySelector(".logout--btn");
@@ -180,6 +180,20 @@ function Logout(){
     localStorage.removeItem("userCurrent")
     location.reload(); //load lại trang
 }
+
+//Tam 25/11/2022
+//---- ------------------------------User Menu
+// var userMenu = document.querySelector(".user_menu");
+var userIcon = document.querySelector("#user_icon");
+
+userIcon.addEventListener("click", function () {
+  if (!!isLogin) {
+    // userMenu.classList.toggle("close");
+  } else {
+    openForm();
+    container.classList.add("left-panel-active");
+  }
+});
 
 // form Validation-----------------------------------------------
 function Validator(options) {

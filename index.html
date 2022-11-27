@@ -118,7 +118,7 @@
                         </li>
 
                         <li class="header__navbar-item">
-                            <a href="#" class="header__navbar-item__link">
+                            <a href="#container" class="header__navbar-item__link">
                                 <span class="header__navbar-item__lable">shop</span>
                             </a>
                         </li>
@@ -130,8 +130,14 @@
                         </li>
 
                         <li class="header__navbar-item">
-                            <a href="./admin.html" class="header__navbar-item__link">
+                            <a href="#footer" class="header__navbar-item__link">
                                 <span class="header__navbar-item__lable">contact</span>
+                            </a>
+                        </li>
+
+                        <li class="header__navbar-item">
+                            <a href="./admin.html" class="header__navbar-item__link">
+                                <span class="header__navbar-item__lable">admin</span>
                             </a>
                         </li>
 
@@ -163,7 +169,7 @@
                         </li>
 
                         <li class="header__navbar-item header-sticky__navbar-item">
-                            <a href="#" class="header__navbar-item__link">
+                            <a href="#3" class="header__navbar-item__link">
                                 <span class="header__navbar-item__lable">shop</span>
                             </a>
                         </li>
@@ -180,7 +186,7 @@
                             </a>
                         </li>
 
-                        <li class="header__navbar-item header-sticky__navbar-item">
+                        <li class="header__navbar-item header-sticky__navbar-item" id="header-login">
                             <a href="#" class="header__navbar-item__link">
                                 <span class="header__navbar-item__lable">log in</span>
                             </a>
@@ -215,9 +221,12 @@
                             <a href="#" class="side-menu-item--link">Đăng Nhập</a>
                         </li>
 
-                        <li class="side-menu-item">
+                        <li class="side-menu-item orders">
                             <i class="side-menu__icon fa-solid fa-bag-shopping"></i>
                             <a href="#" class="side-menu-item--link">Đơn Mua</a>
+                            <ul class="orders-list">
+                                <!-- Render by Javascript -->
+                            </ul>
                         </li>
                     </ul>
 
@@ -513,7 +522,7 @@
             </div>
         </div>
 
-        <div class="footer">
+        <div class="footer" id="footer">
             <div class="distance"></div>
             <div class="grid footer-container">
                 <div class="row wide">
