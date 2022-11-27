@@ -1,14 +1,17 @@
 import { gItem } from "./storage.js";
 import { addToCart, description } from "./app.js";
 
-const category_Color = document.querySelector(".product-category");
-let colorList = [];
+const category = document.querySelector(".product-category");
 
 const productList = gItem("productList");
 const productGridList = document.querySelector(".list-product__grid");
 const productListList = document.querySelector(".list-product__list");
 const searchButton = document.querySelector(".header--search__btn");
 const searchInput = document.querySelector(".header--search__input");
+
+//
+
+//
 function searchProduct() {
   let searchValue = searchInput.value;
   productGridList.innerHTML = "";
@@ -27,7 +30,6 @@ function searchProduct() {
 searchButton.addEventListener("click", searchProduct);
 searchInput.addEventListener("keydown", function (event) {
   if (event.key == "Enter") {
-    console.log(1);
     searchProduct();
   }
 });
@@ -129,6 +131,7 @@ function basicItemRenderGrid(product, index) {
 }
 
 //
+let colorList = [];
 productList.forEach(function (item) {
   if (colorList.map((x) => x.color).indexOf(item.color) == -1) {
     var object = { color: item.color, amount: 1 };
@@ -139,6 +142,16 @@ productList.forEach(function (item) {
   }
 });
 //
+let typeList = [];
+productList.forEach(function (item) {
+  if (colorList.map((x) => x.color).indexOf(item.type) == -1) {
+    var object = { color: item.type, amount: 1 };
+
+    colorList.push(object);
+  } else {
+    colorList[colorList.map((x) => x.color).indexOf(item.type)].amount++;
+  }
+});
 
 //
 function upperCaseFirstLetter(item) {
@@ -150,9 +163,9 @@ function upperCaseFirstLetter(item) {
 //
 
 function categoryRender() {
-  category_Color.innerHTML += "";
+  category.innerHTML += "";
   colorList.forEach(function (item) {
-    category_Color.innerHTML += ` <li class="category-item color ${item.color}">
+    category.innerHTML += ` <li class="category-item color ${item.color}">
         <div class="category-item__link">
             <span class="category-item__lable"> ${upperCaseFirstLetter(
               item.color
@@ -163,10 +176,10 @@ function categoryRender() {
     </li>`;
   });
   //
-
+  function typeRender() {}
   //
 
-  category_Color.innerHTML += `<li class="category-item filter-by-price">
+  category.innerHTML += `<li class="category-item filter-by-price">
     <span class="category-item__lable">Filter By Price</span>
     <input type="range" name="filter-price" class="filter-price__input" id="" min="100"
       value="1000"  max="1000">
