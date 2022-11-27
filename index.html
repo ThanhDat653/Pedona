@@ -57,10 +57,7 @@
                                 <a href="#" class="li header--top-navbar__item-link">
                                     <i class="top-navbar__icon fa-solid fa-bag-shopping"></i>
                                 </a>
-                                <!-- <span class="cart-number-badge">
-                                    <span class="cart-quantity"></span>
-                                </span> -->
-
+                                
                                 <div class="cart-list">
                                     <div class="cart-list__heading">Recently Added Products</div>
 
@@ -80,11 +77,19 @@
                                 </a>
 
                                 <!-- Tam: Begin -->
-                                <ul class="user_menu close">
-                                    <li class="user_menu_item user_menu_name">User's name</li>
-                                    <li class="user_menu_item user_role">Customer</li>
-                                    <li class="user_menu_item logout--btn">LOG OUT</li>
+                                <ul class="user_menu">
+                                    <li class="user_menu_item user_menu_name">My Account</li>
+                                    <li class="user_menu_item user_orders">
+                                        Orders
+                                        <div class="orders-list-container">
+                                            <div class="orders-list__heading">Your Orders</div>
 
+                                            <ul class="orders-list">
+                                                <!-- Render by Javascript -->
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="user_menu_item logout--btn">Log Out</li>
                                 </ul>
                                 <!-- Tam: End -->
                             </li>
@@ -112,33 +117,10 @@
                             </a>
                         </li>
 
-                        <li class="header__navbar-item header--shop__category">
+                        <li class="header__navbar-item">
                             <a href="#" class="header__navbar-item__link">
                                 <span class="header__navbar-item__lable">shop</span>
-                                <i class="header__navbar-more-icon fa-solid fa-chevron-down"></i>
                             </a>
-
-                            <div class="header__sub-navbar">
-                                <ul class="header__sub-navbar-list">
-                                    <li class="header__sub-navbar-item">
-                                        <a href="" class="header__sub-navbar-item__link">
-                                            <span class="header__sub-navbar-item__lable">Shoes</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="header__sub-navbar-item">
-                                        <a href="" class="header__sub-navbar-item__link">
-                                            <span class="header__sub-navbar-item__lable">T-shirt</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="header__sub-navbar-item">
-                                        <a href="" class="header__sub-navbar-item__link">
-                                            <span class="header__sub-navbar-item__lable">Short</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
 
                         <li class="header__navbar-item">
@@ -180,33 +162,10 @@
                             </a>
                         </li>
 
-                        <li class="header__navbar-item header-sticky__navbar-item header--shop__category">
+                        <li class="header__navbar-item header-sticky__navbar-item">
                             <a href="#" class="header__navbar-item__link">
                                 <span class="header__navbar-item__lable">shop</span>
-                                <i class="header__navbar-more-icon fa-solid fa-chevron-down"></i>
                             </a>
-
-                            <div class="header__sub-navbar">
-                                <ul class="header__sub-navbar-list">
-                                    <li class="header__sub-navbar-item">
-                                        <a href="" class="header__sub-navbar-item__link">
-                                            <span class="header__sub-navbar-item__lable">Shoes</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="header__sub-navbar-item">
-                                        <a href="" class="header__sub-navbar-item__link">
-                                            <span class="header__sub-navbar-item__lable">T-shirt</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="header__sub-navbar-item">
-                                        <a href="" class="header__sub-navbar-item__link">
-                                            <span class="header__sub-navbar-item__lable">Short</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
 
                         <li class="header__navbar-item header-sticky__navbar-item">
@@ -413,7 +372,7 @@
                 </div>
 
 
-                <!-- oveylayer-container -->
+                <!-- overlayer-container -->
                 <div class="overlay-container">
                     <div class="overlay">
                         <div class="overlay-panel overlay-left">
@@ -435,7 +394,9 @@
         <!-- Tam: End -->
 
         <div class="slider">
-            <img src="./assets/image/slider_img1.jpg" alt="" class="slider-img">
+            <div class="slider-img">
+                <img src="./assets/image/slider_img1.jpg" style="width:100%">
+            </div>
         </div>
 
         <div class="distance"></div>
@@ -478,30 +439,21 @@
                     <div class="col l-2-4 m-2-4 filter-bar">
                         <div class="filter-bar__container">
                             <h2 class="filter-bar__title">Categories</h2>
-                            <ul class="product-category">
-                                <!-- <div id="product-category">
-                                    <div class="cap">Màu Sắc</div>
-                                    <div class="ct">
-                                        <label><input onchange="chon();" type="checkbox" class="mausac"
-                                                value="white">White Hot Trend</label>
-                                        <label><input onchange="chon();" type="checkbox" class="mausac"
-                                                value="black">Black Hot Trend</label>
-                                        <label><input onchange="chon();" type="checkbox" class="mausac" value="khac">Nổi
-                                            Bật</label>
-                                    </div>
-                                    <div class="cap">Giá bán</div>
-                                    <div class="ct">
-                                        <label><input onchange="chon();" type="checkbox" class="giaban" value="1">Dưới
-                                            $200</label>
-                                        <label><input onchange="chon();" type="checkbox" class="giaban" value="2">Từ
-                                            $200 đến $500 triệu</label>
-                                        <label><input onchange="chon();" type="checkbox" class="giaban" value="3">Trên
-                                            $500</label>
-                                    </div>
-                                </div> -->
+                            <div class="product-category">
+                                <ul class="product-category__group product-category__group-color">
+                                    <span>Color</span>
+                                    <!-- Render options by js -->
 
+                                </ul>
 
-                            </ul>
+                                <ul class="product-category__group product-category__group-type">
+                                    <span>Type</span>
+                                    <!-- Render options by js -->
+                                </ul>
+
+                                
+                                
+                            </div>
                         </div>
                     </div>
 
@@ -647,17 +599,7 @@
             <i class="back-to-top__icon fa-solid fa-caret-up"></i>
         </div>
     </div>
-
-    <!--jQuery-->
-    <script src="./assets/js/Jquery/Jquery.min.js"></script>
-    <script src="./assets/js/owlcarousel/owl.carousel.min.js"></script>
-    <link rel="stylesheet" href="./assets/js/owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="./assets/js/owlcarousel/owl.theme.default.min.css">
-
-    <!--update Css-->
-    <link rel="stylesheet" href="./assets/css/updateStyle.css">
-    <link rel="stylesheet" href="./assets/css/updateResponsive.css">
-
+    
     <script type="module" src="./assets/js/storage.js"></script>
     <script type="module" src="./assets/js/form.js"></script>
     <script type="module" src="./assets/js/app.js"></script>

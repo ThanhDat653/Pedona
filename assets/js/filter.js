@@ -1,7 +1,7 @@
 import { gItem } from "./storage.js";
 import { addToCart, description } from "./app.js";
 
-const category_Color = document.querySelector(".product-category");
+const category_Color = document.querySelector(".product-category__group-color");
 let colorList = [];
 
 const productList = gItem("productList");
@@ -143,19 +143,23 @@ function categoryRender() {
 
   //
 
-  category_Color.innerHTML += `<li class="category-item filter-by-price">
+  let productCartegoryElement = document.querySelector(".product-category");
+  let temp = `<div class="category-item filter-by-price">
     <span class="category-item__lable">Filter By Price</span>
     <input type="range" name="filter-price" class="filter-price__input" id="" min="100"
       value="1000"  max="1000">
-      <div class="bubble"> <div>
-</li>`;
+      <div class="bubble">  <div>
+  </div>`;
+
+  productCartegoryElement.insertAdjacentHTML("beforeend", temp);
+
   //
 
   //
 
   const filterPrice = document.querySelector(".filter-price__input");
   const view = document.querySelector(".bubble");
-  console.log("🚀 ~ file: filter.js ~ line 42 ~ categoryRender ~ view", view);
+  // console.log("🚀 ~ file: filter.js ~ line 42 ~ categoryRender ~ view", view);
   const maxPrice = filterPrice.max;
   const maxView = filterPrice.scrollWidth;
   const minPrice = filterPrice.min;

@@ -132,18 +132,6 @@ function creatUserList() {
 
 creatUserList();
 
-// function createAdmin() {
-//   const users =
-//     {
-//       username: "admin",
-//       pass: "123456",
-//       userID: "0",
-//       type: 0,
-//       name: "nguyen van a",
-//       carts: [],
-//     }
-// }
-
 // ---------- ORDERS LIST ----------
 
 function creatOrderList() {
@@ -153,8 +141,8 @@ function creatOrderList() {
     const orders = [
       {
         name: "nguyen thanh dat", // carts[0].name = users[0].name;
-        orderID: "1", // lấy ID của user và duyệt vào mảng carts để tìm và hiển thị giỏ hàng
-
+        userID: "1", 
+        orderID: "1", 
         productList: [
           {
             product: {
