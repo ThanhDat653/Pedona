@@ -890,11 +890,13 @@
 }
 
 .mobile-filter--btn {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     border-right: solid 1px var(--border-color);
+    cursor: pointer;
 }
 
 .mobile-filter--btn:hover {
@@ -914,6 +916,38 @@
 .mobile-filter__link > i {
     font-size: 0.9rem;
     margin-left: 2px;
+}
+
+.price-filter,
+.type-filter,
+.color-filter {
+    display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    background-color: var(--white-color);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+                rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    width: 100%;
+    margin: 0;
+    border-radius: 2px;
+}
+
+.price-filter {
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+.filter__option {
+    font-size: 1.3rem;
+    color: var(--sub-text-color);
+    opacity: 0.9;
+    padding: 10px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.filter__option:hover {
+    color: var(--primary-color);
 }
 
 

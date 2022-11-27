@@ -841,3 +841,30 @@ renderCartlistOfUserCurrent();
 setQuantityOfProduct();
 openOrderList();
 renderOderlistOfUserCurrent();
+
+// Click to open/close filter options in mobile
+
+document.querySelector(".mobile-filter--btn__color").addEventListener('click', function() {
+  document.querySelector(".color-filter").style.display = "block";
+  document.querySelector(".type-filter").style.display = "none";
+  document.querySelector(".price-filter").style.display = "none";
+})
+
+document.querySelector(".mobile-filter--btn__type").addEventListener('click', function() {
+  document.querySelector(".type-filter").style.display = "block";
+  document.querySelector(".color-filter").style.display = "none";
+  document.querySelector(".price-filter").style.display = "none";
+})
+
+document.querySelector(".mobile-filter--btn__price").addEventListener('click', function() {
+  document.querySelector(".price-filter").style.display = "block";
+  document.querySelector(".color-filter").style.display = "none";
+  document.querySelector(".type-filter").style.display = "none";
+})
+
+document.querySelector(".shop-content").addEventListener('click', function() {
+  document.querySelector(".color-filter").style.display = "none";
+  document.querySelector(".type-filter").style.display = "none";
+  document.querySelector(".price-filter").style.display = "none";
+
+})
