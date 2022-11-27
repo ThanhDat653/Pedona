@@ -5,9 +5,11 @@ import { checkImg } from "./modal.js";
 
 // Extract product list:Start
 let productList = gItem("productList");
-// let productList = gItem("productList") || defaultProducts;
+//
 
-function createEditablePrice(item, index) {
+//
+
+function createEditablePrice(item) {
   let area = document.createElement("div");
   area.className = item.className;
   area.innerHTML =
@@ -19,85 +21,96 @@ function createEditablePrice(item, index) {
 
   item.replaceWith(area);
 }
+//
 
-let change = false;
+//
+
+function basicProductRender(item, i) {
+  return (
+    ' <div class="row js-mid table__row no-gutters spc-even--mobile ">' +
+    '<div class="col l-1 m-1 c-12 prod number ">' +
+    (i + 1) +
+    "</div>" +
+    '<div class="col l-2 m-2 c-10 c-o-2  color--id id">' +
+    item.id +
+    "</div>" +
+    '<div class="col l-2 m-3 c-12 product name ">' +
+    item.name +
+    "</div>" +
+    '<div class="col l-1 m-3 img">' +
+    '<img class="product__img" src="./assets/image/' +
+    item.img +
+    '" alt="">' +
+    "</div>" +
+    '<div class="col l-1 m-1 c-10 c-o-2 color--price price">' +
+    item.price +
+    "$" +
+    "</div>" +
+    '<div class="col l-3 m-0 c-0 desc">' +
+    item.desc +
+    "</div>" +
+    '<div class="col l-2 m-1 m-o-2 c-12">' +
+    '<button class="product table__fix-btn"><i class="fa-solid fa-pencil"></i></button>' +
+    '<button class="product table__del-btn"><i class="fa-solid fa-trash-can"></i></button>' +
+    '<button class="product table__fix-submit close">Submit</button>' +
+    "</div>" +
+    "</div>"
+  );
+}
+//
+
+//
+
 function createEditableImg(img, index) {
   let area = document.createElement("label");
   area.className = img.className;
   area.id = "img-area";
   area.innerHTML =
-    '<input type="file" name="" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="" alt="" id="img" class="product__img">';
+    '<input type="file" name="" id="productImg" accept="image/png, image/jpeg" visiblity="hidden"> <img src="./assets/image/" alt="" id="img" class="product__img">';
   area.htmlFor = "productImg";
   img.replaceWith(area);
   const preview = document.getElementById("img");
   const input = document.getElementById("productImg");
   preview.style.display = "block";
 
-  preview.src = productList[index].img;
+  preview.src = "./assets/image/" + productList[index].img;
   area.addEventListener("change", () => {
-    change = true;
+    let productList = gItem(prodKey);
     let path = input.value;
     let temparr = path.split("\\");
     let filename = temparr.slice(-1)[0];
     if (checkImg(filename)) {
       //Check for valid filetype
 
-      let src = URL.createObjectURL(input.files[0]); // URL object create upon Media-Src
+      let src = "./assets/image/" + filename; // URL object create upon Media-Src
       //
       preview.src = src;
       preview.style.display = "block";
-      preview.style.border = "1px solid #cc2424";
+      preview.style.border = "3px solid #cc2424";
       //\
-      console.log(src);
+      productList[index].img = filename;
       sItem("imgconfig", filename);
+      console.log(productList[index].img);
     } else {
       alert("Only images are supported");
       imgReset();
     }
   });
 }
+//
+
+//
+
 export function outputProd() {
-  const productList =
-    JSON.parse(localStorage.getItem(prodKey)) || defaultProducts;
-
+  let productList = gItem(prodKey);
   tableBodyProduct.innerHTML = "";
-  // for (let i = 0; i < productList.length; i++) {
+  productList.forEach(function (product, i) {
+    tableBodyProduct.innerHTML += basicProductRender(product, i);
+  });
 
-  for (let i = 0; i < productList.length; i++) {
-    tableBodyProduct.innerHTML +=
-      ' <div class="row js-mid table__row no-gutters spc-even--mobile ">' +
-      '<div class="col l-1 m-1 c-12 prod number ">' +
-      (i + 1) +
-      "</div>" +
-      '<div class="col l-2 m-2 c-10 c-o-2  id">' +
-      productList[i].id +
-      "</div>" +
-      '<div class="col l-2 m-3 c-12 product name ">' +
-      productList[i].name +
-      "</div>" +
-      '<div class="col l-1 m-3 img">' +
-      '<img class="product__img" src="./assets/image/' +
-      productList[i].img +
-      '" alt="">' +
-      "</div>" +
-      '<div class="col l-1 m-1 c-10 c-o-2 price">' +
-      (productList[i].price || 200) +
-      "$" +
-      "</div>" +
-      '<div class="col l-3 m-0 c-0 desc">' +
-      productList[i].desc +
-      "</div>" +
-      '<div class="col l-2 m-1 m-o-2 c-12">' +
-      '<button class="product table__fix-btn"><i class="fa-solid fa-pencil"></i></button>' +
-      '<button class="product table__del-btn"><i class="fa-solid fa-trash-can"></i></button>' +
-      '<button class="product table__fix-submit close">Submit</button>' +
-      "</div>" +
-      "</div>";
-  }
   const prodNumber = createArr(document.querySelectorAll(".prod.number"));
 
   let check = false;
-  let change = false;
   let delButton = createArr(
     document.querySelectorAll(".product.table__del-btn")
   );
@@ -189,16 +202,8 @@ export function outputProd() {
               productList[index].name = changedArea[1].value.trim();
               productList[index].price = changedArea[2].value.trim();
               productList[index].desc = changedArea[3].value.trim();
-              const img = document.getElementById("img");
-              console.log(
-                "🚀 ~ file: product.js ~ line 198 ~ fixSubmitButton.forEach ~ img.src",
-                img.src
-              );
-              console.log(gItem("imgconfig"));
-              if (img.src === gItem("imgconfig")) {
-                productList[index].img = gItem("imgconfig");
-                console.log(1);
-              }
+              productList[index].img = gItem("imgconfig");
+
               localStorage.setItem(prodKey, JSON.stringify(productList));
               location.reload();
             } else {
@@ -223,7 +228,20 @@ export function outputProd() {
 
   // :End
 }
+//
+
+//
+
 const searchInput = document.querySelector(".product.search-input");
+//
+
+//
+function editRow() {
+  const rowList = querySelectorAll("#table__body--product .row");
+}
+//
+
+//
 function searchProductList() {
   // this.onkeydown = () => {
   const searchValue = searchInput.value;
@@ -236,35 +254,7 @@ function searchProductList() {
       item.name.includes(searchValue) ||
       item.id.toString().includes(searchValue)
     ) {
-      tableBodyProduct.innerHTML +=
-        ' <div class="row js-mid table__row no-gutters spc-even--mobile ">' +
-        '<div class="col l-1 m-1 c-12 prod number ">' +
-        (i + 1) +
-        "</div>" +
-        '<div class="col l-2 m-2 c-10 c-o-2  color--id id">' +
-        item.id +
-        "</div>" +
-        '<div class="col l-2 m-3 c-12 product name ">' +
-        item.name +
-        "</div>" +
-        '<div class="col l-1 m-3 img">' +
-        '<img class="product__img" src="./assets/image/'+
-        item.img +
-        '" alt="">' +
-        "</div>" +
-        '<div class="col l-1 m-1 c-10 c-o-2 color--price price">' +
-        (item.price) +
-        "$" +
-        "</div>" +
-        '<div class="col l-3 m-0 c-0 desc">' +
-        item.desc +
-        "</div>" +
-        '<div class="col l-2 m-1 m-o-2 c-12">' +
-        '<button class="product table__fix-btn"><i class="fa-solid fa-pencil"></i></button>' +
-        '<button class="product table__del-btn"><i class="fa-solid fa-trash-can"></i></button>' +
-        '<button class="product table__fix-submit close">Submit</button>' +
-        "</div>" +
-        "</div>";
+      tableBodyProduct.innerHTML += basicProductRender(item, i);
     }
     let prodNumber = createArr(document.querySelectorAll(".prod.number"));
 
@@ -360,10 +350,8 @@ function searchProductList() {
                   changedArea[2].value.trim();
                 productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
                   changedArea[3].value.trim();
-                if (change) {
-                  productList[parseInt(prodNumber[index].innerHTML) - 1].img =
-                    gItem("imgconfig");
-                }
+                productList[parseInt(prodNumber[index].innerHTML) - 1].img =
+                  gItem("imgconfig");
                 localStorage.setItem(prodKey, JSON.stringify(productList));
                 location.reload();
               } else {
@@ -389,6 +377,10 @@ function searchProductList() {
     // :End
   });
 }
+//
+
+//
+
 searchInput.addEventListener("keypress", searchProductList);
 searchInput.addEventListener("input", searchProductList);
 searchInput.addEventListener("paste", searchProductList);

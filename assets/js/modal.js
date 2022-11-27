@@ -4,8 +4,7 @@ import { createArr, prodKey } from "./main.js";
 //*================================================================================================================//
 //*==================================================Modal=========================================================//
 //*================================================================================================================//
-const productList =
-  JSON.parse(localStorage.getItem("productList")) || defaultProducts;
+const productList = JSON.parse(localStorage.getItem("productList"));
 let modal = document.getElementById("modal-wrapper");
 
 // Turn on off Modal :Start
@@ -71,7 +70,7 @@ prodImg.addEventListener("change", function showPre(event) {
   if (checkImg(filename)) {
     //*====================================== Create Blob object ================================//
     //
-    let src = URL.createObjectURL(prodImg.files[0]); //* URL object create upon Media-Src
+    let src = "./assets/image/" + filename; //* URL object create upon Media-Src
 
     console.log(src);
     //
@@ -222,15 +221,14 @@ function addObject() {
     price,
     desc,
     type,
-    img: gItem("imgsrc") || "null",
+    img: gItem("imgsrc"),
   };
   productList.push(temp);
 
   imgReset();
   form_add.reset();
   modal.classList.toggle("close");
-
-  localStorage.setItem(prodKey, JSON.stringify(productList));
+  sItem(prodKey, productList);
   outputProd();
   // }
 }
