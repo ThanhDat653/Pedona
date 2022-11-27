@@ -7,7 +7,33 @@ let colorList = [];
 const productList = gItem("productList");
 const productGridList = document.querySelector(".list-product__grid");
 const productListList = document.querySelector(".list-product__list");
+const searchButton = document.querySelector(".header--search__btn");
+const searchInput = document.querySelector(".header--search__input");
 
+//
+
+//
+function searchProduct() {
+  let searchValue = searchInput.value;
+  productGridList.innerHTML = "";
+  productListList.innerHTML = "";
+  productList.forEach(function (item, index) {
+    if (item.name.includes(searchValue)) {
+      productGridList.innerHTML += basicItemRenderGrid(item, index);
+      productListList.innerHTML += basicItemRenderList(item, index);
+
+      addToCart();
+      description();
+    }
+  });
+  searchInput.value = "";
+}
+searchButton.addEventListener("click", searchProduct);
+searchInput.addEventListener("keydown", function (event) {
+  if (event.key == "Enter") {
+    searchProduct();
+  }
+});
 //
 function basicItemRenderList(product, index) {
   return `<div class="l-12 product">
@@ -106,6 +132,7 @@ function basicItemRenderGrid(product, index) {
 }
 
 //
+// let colorList = [];
 productList.forEach(function (item) {
   if (colorList.map((x) => x.color).indexOf(item.color) == -1) {
     var object = { color: item.color, amount: 1 };
@@ -116,6 +143,27 @@ productList.forEach(function (item) {
   }
 });
 //
+let typeList = [];
+function getType(item) {
+  if (item == "jd3") {
+    return "Jordan 3";
+  }
+  if (item == "jd1") {
+    return "Jordan 1";
+  }
+  if (item == "AirMax") {
+    return "Air Max";
+  }
+}
+productList.forEach(function (item) {
+  if (typeList.map((x) => x.type).indexOf(getType(item.type)) == -1) {
+    var object = { type: getType(item.type), amount: 1 };
+
+    typeList.push(object);
+  } else {
+    typeList[typeList.map((x) => x.type).indexOf(getType(item.type))].amount++;
+  }
+});
 
 //
 function upperCaseFirstLetter(item) {
@@ -125,11 +173,11 @@ function upperCaseFirstLetter(item) {
 //
 
 //
-
+let categoryColor = document.querySelector(".product-category__group-color")
 function categoryRender() {
-  category_Color.innerHTML += "";
+  categoryColor.innerHTML += "";
   colorList.forEach(function (item) {
-    category_Color.innerHTML += ` <li class="category-item color ${item.color}">
+    categoryColor.innerHTML += ` <li class="category-item color ${item.color}">
         <div class="category-item__link">
             <span class="category-item__lable"> ${upperCaseFirstLetter(
               item.color
@@ -139,8 +187,18 @@ function categoryRender() {
         </div>
     </li>`;
   });
+  typeList.forEach(function(item) {
+    categoryColor.innerHTML += ` <li class="category-item type ${item.color}">
+        <div class="category-item__link">
+            <span class="category-item__lable"> ${upperCaseFirstLetter(
+              item.type
+            )} 
+            </span>
+            <span class="item-amount">(${item.amount})</span>
+        </div>
+    </li>`;
+  })
   //
-
   //
 
   let productCartegoryElement = document.querySelector(".product-category");
@@ -159,7 +217,6 @@ function categoryRender() {
 
   const filterPrice = document.querySelector(".filter-price__input");
   const view = document.querySelector(".bubble");
-  // console.log("🚀 ~ file: filter.js ~ line 42 ~ categoryRender ~ view", view);
   const maxPrice = filterPrice.max;
   const maxView = filterPrice.scrollWidth;
   const minPrice = filterPrice.min;

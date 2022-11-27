@@ -189,7 +189,7 @@ const searchInput = document.querySelector(".order.search-input");
 function searchOrderList() {
   const searchValue = searchInput.value;
   tableBodyOrder.innerHTML = "";
-  orderList.filter((item, i) => {
+  orderList.forEach((item, i) => {
     if (item.name.includes(searchValue)) {
       tableBodyOrder.innerHTML += baseRenderOrder(i);
     }

@@ -137,7 +137,7 @@ const searchInput = document.querySelector(".user.search-input");
 function searchUserList() {
   const searchValue = searchInput.value;
   tableBodyUser.innerHTML = "";
-  userList.filter((item, i) => {
+  userList.forEach((item, i) => {
     if (item.userID.includes(searchValue)) {
       tableBodyUser.innerHTML +=
         '<div class="row table__row js-mid no-gutters spc-even--mobile"><div class="col l-2 m-2 c-2 user number">' +

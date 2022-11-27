@@ -266,6 +266,7 @@
     background-color: var(--primary-color);
     height: 18px;
     font-size: 1.2rem;
+    line-height: .3rem;
     border: none;
     border-radius: 2px;
     color: var(--white-color);
@@ -289,6 +290,7 @@
     width: 180px;
     margin-bottom: 10px;
     font-size: 1.3rem;
+    line-height: .3rem;
     text-transform: uppercase;
     color: var(--white-color);
     background-color: var(--primary-color);
