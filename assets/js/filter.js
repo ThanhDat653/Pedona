@@ -143,13 +143,24 @@ productList.forEach(function (item) {
 });
 //
 let typeList = [];
+function getType(item) {
+  if (item == "jd3") {
+    return "Jordan 3";
+  }
+  if (item == "jd1") {
+    return "Jordan 1";
+  }
+  if (item == "AirMax") {
+    return "Air Max";
+  }
+}
 productList.forEach(function (item) {
-  if (colorList.map((x) => x.color).indexOf(item.type) == -1) {
-    var object = { color: item.type, amount: 1 };
+  if (typeList.map((x) => x.type).indexOf(getType(item.type)) == -1) {
+    var object = { type: getType(item.type), amount: 1 };
 
-    colorList.push(object);
+    typeList.push(object);
   } else {
-    colorList[colorList.map((x) => x.color).indexOf(item.type)].amount++;
+    typeList[typeList.map((x) => x.type).indexOf(getType(item.type))].amount++;
   }
 });
 
@@ -175,8 +186,18 @@ function categoryRender() {
         </div>
     </li>`;
   });
+  typeList.forEach(function(item) {
+    category.innerHTML += ` <li class="category-item type ${item.color}">
+        <div class="category-item__link">
+            <span class="category-item__lable"> ${upperCaseFirstLetter(
+              item.type
+            )} 
+            </span>
+            <span class="item-amount">(${item.amount})</span>
+        </div>
+    </li>`;
+  })
   //
-  function typeRender() {}
   //
 
   category.innerHTML += `<li class="category-item filter-by-price">
@@ -191,7 +212,6 @@ function categoryRender() {
 
   const filterPrice = document.querySelector(".filter-price__input");
   const view = document.querySelector(".bubble");
-  console.log("🚀 ~ file: filter.js ~ line 42 ~ categoryRender ~ view", view);
   const maxPrice = filterPrice.max;
   const maxView = filterPrice.scrollWidth;
   const minPrice = filterPrice.min;
