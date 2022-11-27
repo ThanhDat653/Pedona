@@ -1946,3 +1946,31 @@ button.ghost {
     font-size: 2rem;
     color: #fff;
 }
+
+
+
+/* Khánh Hoàng*/
+.filter-by-price {
+    position: relative;
+}
+.bubble {
+
+    background-color: #059602;
+    position: absolute;
+    top:55px;
+    bottom: -15px;
+    line-height: 26px;
+    color: #fff;
+    /* left: 0;
+    right: 0; */
+    text-align: center;
+    transform: translateX(-50px);
+}
+.bubble::after {
+    content:"$"
+}
+/* .filter-by-price:hover > .bubble{display: block;} */
+.category-item.checked {
+    background-color: #059602;
+}
+/* Khánh Hoàng */

@@ -1,7 +1,8 @@
 import { gItem } from "./storage.js";
 import { addToCart, description } from "./app.js";
 
-const category_Color = document.querySelector(".product-category__group-color");
+const categoryColor = document.querySelector(".product-category__group-color");
+const categoryType = document.querySelector(".product-category__group-type");
 let colorList = [];
 
 const productList = gItem("productList");
@@ -154,14 +155,15 @@ function getType(item) {
   if (item == "AirMax") {
     return "Air Max";
   }
+  return item;
 }
 productList.forEach(function (item) {
-  if (typeList.map((x) => x.type).indexOf(getType(item.type)) == -1) {
-    var object = { type: getType(item.type), amount: 1 };
+  if (typeList.map((x) => x.type).indexOf(item.type) == -1) {
+    var object = { type: item.type, amount: 1 };
 
     typeList.push(object);
   } else {
-    typeList[typeList.map((x) => x.type).indexOf(getType(item.type))].amount++;
+    typeList[typeList.map((x) => x.type).indexOf(item.type)].amount++;
   }
 });
 
@@ -173,7 +175,6 @@ function upperCaseFirstLetter(item) {
 //
 
 //
-let categoryColor = document.querySelector(".product-category__group-color")
 function categoryRender() {
   categoryColor.innerHTML += "";
   colorList.forEach(function (item) {
@@ -187,17 +188,19 @@ function categoryRender() {
         </div>
     </li>`;
   });
-  typeList.forEach(function(item) {
-    categoryColor.innerHTML += ` <li class="category-item type ${item.color}">
+  categoryType.innerHTML += "";
+
+  typeList.forEach(function (item) {
+    categoryType.innerHTML += ` <li class="category-item type ${item.type}">
         <div class="category-item__link">
             <span class="category-item__lable"> ${upperCaseFirstLetter(
-              item.type
+              getType(item.type)
             )} 
             </span>
             <span class="item-amount">(${item.amount})</span>
         </div>
     </li>`;
-  })
+  });
   //
   //
 
@@ -223,15 +226,31 @@ function categoryRender() {
   //
   const colorButton = document.querySelectorAll(".color");
   colorButton.forEach(function (colorFil) {
-    colorFil.classList.remove("checked");
     colorFil.onclick = function () {
+      const typeCheck = document.querySelector(".type.checked");
+
       if (!colorFil.classList.contains("checked")) {
         let j = 0;
         while (j < colorButton.length) {
           colorButton[j].classList.remove("checked");
           j++;
-          productGridList.innerHTML = "";
-          productListList.innerHTML = "";
+        }
+        productGridList.innerHTML = "";
+        productListList.innerHTML = "";
+        if (typeCheck != null) {
+          productList.forEach(function (item, index) {
+            if (
+              colorFil.className.split(" ")[2] == item.color &&
+              item.price <= filterPrice.value &&
+              typeCheck.className.split(" ")[2] == item.type
+            ) {
+              productGridList.innerHTML += basicItemRenderGrid(item, index);
+              productListList.innerHTML += basicItemRenderList(item, index);
+              addToCart();
+              description();
+            }
+          });
+        } else {
           productList.forEach(function (item, index) {
             if (
               colorFil.className.split(" ")[2] == item.color &&
@@ -239,20 +258,22 @@ function categoryRender() {
             ) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
-
               addToCart();
               description();
             }
           });
         }
+
         colorFil.classList.add("checked");
       } else {
         colorFil.classList.remove("checked");
         productGridList.innerHTML = "";
         productListList.innerHTML = "";
         productList.forEach(function (item, index) {
-          productGridList.innerHTML += basicItemRenderGrid(item, index);
-          productListList.innerHTML += basicItemRenderList(item, index);
+          if (item.price <= filterPrice.value) {
+            productGridList.innerHTML += basicItemRenderGrid(item, index);
+            productListList.innerHTML += basicItemRenderList(item, index);
+          }
 
           addToCart();
           description();
@@ -260,7 +281,59 @@ function categoryRender() {
       }
     };
   });
+  const typeButton = document.querySelectorAll(".type");
+  typeButton.forEach(function (typeBtn) {
+    typeBtn.onclick = function () {
+      const colorFil = document.querySelector(".color.checked");
 
+      if (!typeBtn.classList.contains("checked")) {
+        let j = 0;
+        while (j < typeButton.length) {
+          typeButton[j].classList.remove("checked");
+          j++;
+        }
+        productGridList.innerHTML = "";
+        productListList.innerHTML = "";
+        if (colorFil != null) {
+          productList.forEach(function (item, index) {
+            if (
+              item.type == typeBtn.className.split(" ")[2] &&
+              item.price <= filterPrice.value &&
+              colorFil.className.split(" ")[2] == item.color
+            ) {
+              console.log(item);
+              productGridList.innerHTML += basicItemRenderGrid(item, index);
+              productListList.innerHTML += basicItemRenderList(item, index);
+            }
+          });
+        } else {
+          productList.forEach(function (item, index) {
+            if (
+              item.type == typeBtn.className.split(" ")[2] &&
+              item.price <= filterPrice.value
+            ) {
+              productGridList.innerHTML += basicItemRenderGrid(item, index);
+              productListList.innerHTML += basicItemRenderList(item, index);
+            }
+          });
+        }
+        typeBtn.classList.add("checked");
+      } else {
+        typeBtn.classList.remove("checked");
+        productGridList.innerHTML = "";
+        productListList.innerHTML = "";
+        productList.forEach(function (item, index) {
+          if (item.price <= filterPrice.value) {
+            productGridList.innerHTML += basicItemRenderGrid(item, index);
+            productListList.innerHTML += basicItemRenderList(item, index);
+          }
+
+          addToCart();
+          description();
+        });
+      }
+    };
+  });
   //
 
   function callBubble() {
@@ -282,15 +355,20 @@ function categoryRender() {
 
   function filterInRangePrice() {
     const colorFil = document.querySelector(".color.checked ");
+    const typeCheck = document.querySelector(".type.checked");
+    console.log(
+      "🚀 ~ file: filter.js ~ line 327 ~ filterInRangePrice ~ typeCheck",
+      typeCheck
+    );
     productGridList.innerHTML = "";
     productListList.innerHTML = "";
-    if (colorFil != null) {
+    if (colorFil != null && typeCheck != null) {
       productList.forEach(function (item, index) {
         if (
           item.price <= filterPrice.value &&
-          item.color == colorFil.className.split(" ")[2]
+          item.color == colorFil.className.split(" ")[2] &&
+          item.type == typeCheck.className.split(" ")[2]
         ) {
-          console.log(colorFil.innerHTML);
           productGridList.innerHTML += basicItemRenderGrid(item, index);
           productListList.innerHTML += basicItemRenderList(item, index);
         }
@@ -298,16 +376,44 @@ function categoryRender() {
         description();
       });
     } else {
-      productList.forEach(function (item, index) {
-        if (item.price <= filterPrice.value) {
-          productGridList.innerHTML += basicItemRenderGrid(item, index);
-          productListList.innerHTML += basicItemRenderList(item, index);
+      if (colorFil != null) {
+        productList.forEach(function (item, index) {
+          if (
+            colorFil.className.split(" ")[2] == item.color &&
+            item.price <= filterPrice.value
+          ) {
+            productGridList.innerHTML += basicItemRenderGrid(item, index);
+            productListList.innerHTML += basicItemRenderList(item, index);
+            addToCart();
+            description();
+          }
+        });
+      } else {
+        if (typeCheck != null) {
+          productList.forEach(function (item, index) {
+            if (
+              item.type == typeCheck.className.split(" ")[2] &&
+              item.price <= filterPrice.value
+            ) {
+              productGridList.innerHTML += basicItemRenderGrid(item, index);
+              productListList.innerHTML += basicItemRenderList(item, index);
+            }
+          });
+        } else {
+          productList.forEach(function (item, index) {
+            if (item.price <= filterPrice.value) {
+              productGridList.innerHTML += basicItemRenderGrid(item, index);
+              productListList.innerHTML += basicItemRenderList(item, index);
+            }
+            addToCart();
+            description();
+          });
         }
-        addToCart();
-        description();
-      });
+      }
     }
   }
+  //
+
   //
 
   filterPrice.oninput = function () {
