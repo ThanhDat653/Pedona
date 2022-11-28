@@ -1,7 +1,8 @@
 import { tableBodyOrder } from "./main.js";
 
 import { createArr, orderKey } from "./main.js";
-import { gItem, sItem } from "./storage.js";
+import { orderItemCheck} from "./app.js";
+import { gItem, sItem,} from "./storage.js";
 
 function displayCheck(item) {
   if (item) {
@@ -100,6 +101,7 @@ function fullCheck(item, index, button) {
     button.innerHTML = `<i class="fa-solid fa-caret-left fa-xl"></i>`;
   }
   sItem(orderKey, orderList);
+  orderItemCheck();
 }
 
 function baseRenderOrder(i) {

@@ -454,6 +454,8 @@ function categoryRender() {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
             }
+            addToCart();
+            description();
           });
         } else {
           productList.forEach(function (item, index) {

@@ -19,6 +19,7 @@
         background-color: #d7d7d7;
         border-radius: 2px;
     }
+
 }
 
 @media (max-width: 1113px) {
@@ -227,6 +228,11 @@
         display: none;
     }
 
+    
+    .modal-form {
+        left: 0;
+    }
+
     /* Slider */
     .distance {
         display: none;
@@ -366,6 +372,10 @@
 
     .overlay-container{
         display:  none;
+    }
+
+    .mobile-sign{
+        display: block;
     }
         
 }

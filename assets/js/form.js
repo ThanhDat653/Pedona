@@ -20,6 +20,7 @@ function closeForm() {
 }
 
 var loginButtons = document.querySelector("#loginBtn");
+
 loginButtons.addEventListener("click", openForm);
 
 formElemnt.addEventListener("click", closeForm);
@@ -122,9 +123,9 @@ function checkLogin() {
     formElemnt.classList.remove("open");
     formElemnt.classList.add("close");
     document.getElementById("loginBtn").classList.add("close");
-    // showUserInfo();
-    // isAdmin();
-    // isUser();
+    showUserInfo();
+    isAdmin();
+    isUser();
     mobileLogin.classList.add("close");
   } 
   else {
@@ -133,35 +134,35 @@ function checkLogin() {
   }
 }
 
-// function showUserInfo() {
-//     let user = gItem('userCurrent');
-//     if(user) {
-//         document.querySelector(".user_menu_name").innerText = user.username;
-//         document.querySelector(".user-name").innerText = user.username;
-//     }
-// }
+function showUserInfo() {
+    let user = gItem('userCurrent');
+    if(user) {
+        document.querySelector(".user_menu_name").innerText = user.username;
+        document.querySelector(".user-name").innerText = user.username;
+    }
+}
 
 // Tam 25/11/2022
-// function isAdmin(){
-//   let user = gItem('userCurrent');
-//   if(user.userType == 0){
-//       document.querySelector(".user_role").innerText = 'Orders';
-//       document.querySelector(".user_role").style.color = 'red';
-//       document.querySelector(".admin-btn").style.display = 'block';
-//       document.querySelector(".admin-btn").onclick = function() {
-//           window.location.replace("./admin.html");
-//       }
-//   }
-// }
+function isAdmin(){
+  let user = gItem('userCurrent');
+  if(user.userType == 0){
+      document.querySelector(".user_role").innerText = 'Orders';
+      document.querySelector(".user_role").style.color = 'red';
+      document.querySelector(".admin-btn").style.display = 'block';
+      document.querySelector(".admin-btn").onclick = function() {
+          window.location.replace("./admin.html");
+      }
+  }
+}
 
-// // Tam  25/11/2022
-// function isUser(){
-//   let user = gItem('userCurrent');
-//   if(user.userType !== 0){
-//       document.querySelector(".user_role").innerText = 'Orders';
-//       document.querySelector(".user_role").style.color = 'red';
-//   }
-// }
+// Tam  25/11/2022
+function isUser(){
+  let user = gItem('userCurrent');
+  if(user.userType !== 0){
+      document.querySelector(".user_role").innerText = 'Orders';
+      document.querySelector(".user_role").style.color = 'red';
+  }
+}
 
 // Log out -------------------------------
 var logOutBtn = document.querySelector(".logout--btn");
@@ -353,6 +354,21 @@ var mobileLogout = document.querySelector(".mobile-logout");
 mobileLogout.addEventListener("click", function () {
   confirmLogout();
   hideMenu();
+});
+
+// Mobile menu
+
+const mobileSI = document.getElementById("mobile-SI");
+const mobileSU = document.getElementById("mobile-SU");
+
+mobileSI.addEventListener("click", () => {
+  document.forms.sign_up_form.reset();
+  container.classList.remove("right-panel-active")
+});
+
+mobileSU.addEventListener("click", () => {
+  document.forms.sign_in_form.reset();
+  container.classList.add("right-panel-active");
 });
 
 export{isLogin, userList, userCurrentInLocal, Login, userKey, getUserCurrent};
