@@ -2008,7 +2008,7 @@ button.ghost {
     content:"$0 - $"
 }
 /* .filter-by-price:hover > .bubble{display: block;} */
-.category-item.checked {
+.category-item.checked,.filter__option.checked {
     background-color: #059602;
     border-radius: 5px;
     
