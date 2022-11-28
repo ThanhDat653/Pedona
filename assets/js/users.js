@@ -98,8 +98,7 @@ export function outputUsers() {
   });
   fixCancelButtonUser.forEach(function (item) {
     item.onclick = function () {
-      if(confirm("Do you want to cancel?")){
-
+      if (confirm("Do you want to cancel?")) {
         location.reload();
       }
     };
@@ -109,7 +108,8 @@ export function outputUsers() {
       if (check) {
         alert("Only change one item per time");
       } else {
-        toggleButton(index);        createEditable(
+        toggleButton(index);
+        createEditable(
           editableUserName[parseInt(userNumber[index].innerHTML) - 1]
         );
         createEditable(editableName[parseInt(userNumber[index].innerHTML) - 1]);
@@ -161,10 +161,13 @@ export function outputUsers() {
 const searchInput = document.querySelector(".user.search-input");
 
 function searchUserList() {
-  const searchValue = searchInput.value;
+  const searchValue = searchInput.value.toLowerCase().trim();
   tableBodyUser.innerHTML = "";
   userList.forEach((item, i) => {
-    if (item.userID.includes(searchValue)) {
+    if (
+      item.userID.toLowerCase().includes(searchValue) ||
+      item.name.toLowerCase().includes(searchValue)
+    ) {
       tableBodyUser.innerHTML += basicUserRender(item, i);
     }
     let check = false;
@@ -199,8 +202,7 @@ function searchUserList() {
     }
     fixCancelButtonUser.forEach(function (item) {
       item.onclick = function () {
-        if(confirm("Do you want to cancel?")){
-  
+        if (confirm("Do you want to cancel?")) {
           location.reload();
         }
       };

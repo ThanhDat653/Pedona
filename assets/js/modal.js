@@ -302,10 +302,6 @@ modalInputs.forEach((item) => {
   }
   item.onblur = () => {
     let errorShow = document.querySelector("#" + item.id + " + span");
-    // console.log(
-    //   "🚀 ~ file: modal.js ~ line 249 ~ modalInputs.forEach ~ errorShow",
-    //   errorShow
-    // );
     if (item.value.trim() == "" || item.value == undefined) {
       item.value = "";
       errorShow.classList.add("invalid");

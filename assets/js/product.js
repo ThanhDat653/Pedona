@@ -13,7 +13,7 @@ function createEditablePrice(item) {
   let area = document.createElement("div");
   area.className = item.className;
   area.innerHTML =
-    `<textarea class="textarea price" rows="2" cols="2">` +
+    `<textarea class="textarea price" inputmode="numeric" rows="2" cols="2">` +
     item.innerHTML.split("$")[0].trim() +
     `</textarea>` +
     `<span class="col l-12 invalid-input ">Please input product price</span>
@@ -139,8 +139,7 @@ export function outputProd() {
   );
   fixCancelButton.forEach(function (item) {
     item.onclick = function () {
-      if(confirm("Do you want to cancel?")){
-
+      if (confirm("Do you want to cancel?")) {
         location.reload();
       }
     };
@@ -222,20 +221,20 @@ export function outputProd() {
                 "Do you want to change product No." +
                   parseInt(prodNumber[index].innerHTML) +
                   " in the Store ?"
-              ) &&
-              validCheck()
+              )
             ) {
-              
-              productList[index].id = changedArea[0].value.trim();
-              productList[index].name = changedArea[1].value.trim();
-              productList[index].price = changedArea[2].value.trim();
-              productList[index].desc = changedArea[3].value.trim();
-              productList[index].img = gItem("imgconfig");
+              if (validCheck()) {
+                productList[index].id = changedArea[0].value.trim();
+                productList[index].name = changedArea[1].value.trim();
+                productList[index].price = changedArea[2].value.trim();
+                productList[index].desc = changedArea[3].value.trim();
+                productList[index].img = gItem("imgconfig");
 
-              localStorage.setItem(prodKey, JSON.stringify(productList));
-              location.reload();
-            } else {
-              alert("Please input all product values");
+                localStorage.setItem(prodKey, JSON.stringify(productList));
+                location.reload();
+              } else {
+                alert("Please input all product values");
+              }
             }
           };
         });
@@ -275,23 +274,21 @@ function editRow(index) {
 //
 function searchProductList() {
   // this.onkeydown = () => {
-  const searchValue = searchInput.value;
+  const searchValue = searchInput.value.toLowerCase().trim();
   tableBodyProduct.innerHTML = "";
   productList = gItem(prodKey) || defaultProducts;
 
   productList.forEach((item, i) => {
     // if (item.name.includes(searchValue)) {
     if (
-      item.name.includes(searchValue) ||
-      item.id.toString().includes(searchValue)
+      item.name.toLowerCase().includes(searchValue) ||
+      item.id.toString().toLowerCase().includes(searchValue)
     ) {
       tableBodyProduct.innerHTML += basicProductRender(item, i);
     }
     let prodNumber = createArr(document.querySelectorAll(".prod.number"));
 
     let check = false;
-    ;
-    
     const fixSubmitButton = createArr(
       document.querySelectorAll(".product.table__fix-submit")
     );
@@ -300,15 +297,14 @@ function searchProductList() {
     );
     fixCancelButton.forEach(function (item) {
       item.onclick = function () {
-        if(confirm("Do you want to cancel?")){
-  
+        if (confirm("Do you want to cancel?")) {
           location.reload();
         }
       };
     });
     let delButton = createArr(
       document.querySelectorAll(".product.table__del-btn")
-    )
+    );
     delButton.forEach((item, index) => {
       item.onclick = () => {
         if (
@@ -382,24 +378,25 @@ function searchProductList() {
                   "Do you want to change product No." +
                     parseInt(prodNumber[index].innerHTML) +
                     " in the Store ?"
-                ) &&
-                validCheck()
+                )
               ) {
-                setColor();
-                productList[parseInt(prodNumber[index].innerHTML) - 1].id =
-                  changedArea[0].value.trim();
-                productList[parseInt(prodNumber[index].innerHTML) - 1].name =
-                  changedArea[1].value.trim();
-                productList[parseInt(prodNumber[index].innerHTML) - 1].price =
-                  changedArea[2].value.trim();
-                productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
-                  changedArea[3].value.trim();
-                productList[parseInt(prodNumber[index].innerHTML) - 1].img =
-                  gItem("imgconfig");
-                localStorage.setItem(prodKey, JSON.stringify(productList));
-                location.reload();
-              } else {
-                alert("Please input all product values");
+                if (validCheck()) {
+                  setColor();
+                  productList[parseInt(prodNumber[index].innerHTML) - 1].id =
+                    changedArea[0].value.trim();
+                  productList[parseInt(prodNumber[index].innerHTML) - 1].name =
+                    changedArea[1].value.trim();
+                  productList[parseInt(prodNumber[index].innerHTML) - 1].price =
+                    changedArea[2].value.trim();
+                  productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
+                    changedArea[3].value.trim();
+                  productList[parseInt(prodNumber[index].innerHTML) - 1].img =
+                    gItem("imgconfig");
+                  localStorage.setItem(prodKey, JSON.stringify(productList));
+                  location.reload();
+                } else {
+                  alert("Please input all product values");
+                }
               }
             };
           });
@@ -411,6 +408,7 @@ function searchProductList() {
       fixButton[index].classList.toggle("close");
       delButton[index].classList.toggle("close");
       fixSubmitButton[index].classList.toggle("close");
+      fixCancelButton[index].classList.toggle("close");
     }
     const editableImg = createArr(document.querySelectorAll(".img"));
     const editableId = createArr(document.querySelectorAll(".id"));

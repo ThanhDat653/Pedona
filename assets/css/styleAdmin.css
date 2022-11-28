@@ -353,14 +353,11 @@ a {
   border-radius: 5px;
   border: 2px solid #000;
 }
-
-.select:focus, .search-input:focus {
+ .search-input:focus {
   border :2px solid #cc2424;
 }
 
-.show-select {
 
-}
 
 .search-input {
   flex: 1;
@@ -672,28 +669,45 @@ a {
 
 
 
+.checker::before {
+  content: "";
+  display: block;
+  background-color: #111111;
+  height: 16px;
+  width: 16px;
+}
+.checked.checker::before {
+  content: "✓";
+  color: #fff;
+  display: block;
+  background-color: #111111;
+  height: 16px;
+  width: 16px;
+}
+
 .check {
   color: #fff;
   height: 30px;
 }
 
 span.check.false {
-  display: none;
-  opacity: 0;
-  transition: all 1s ease-out;
+
+  line-height: 30px;  
+  display: block;
+  background: #cc2424;
+  border-radius: 5px;
+  border:none;
+  transition:  all .3s ease-out;
 
 }
+
 span.check.true {
-  opacity: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   line-height: 30px;  
   display: block;
   background: #059862;
   border-radius: 5px;
   border:none;
-  transition:  all 1s ease-out;
+  transition:  all .3s ease-out;
 }
 
 .check.true {
