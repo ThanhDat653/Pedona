@@ -542,6 +542,8 @@ userList.forEach(function (item) {
   }
 });
 
+document.querySelector(".user-name").innerText = userCurrent.name;
+
 let cartOfUserCurrent = userCurrent.carts;
 
 
@@ -823,27 +825,25 @@ function renderOrderListOfUserCurrent() {
       mobileOrderProductListElement[index].insertAdjacentHTML('beforeend', temp);
     })
   })
-  // orderItemCheck();
+
+  orderItemCheck();
 }
 
-// function orderItemCheck() {
-//   let ordersListOfUserCurrent = ordersList.filter(function(order) {
-//     return order.userID === userCurrent.userID;
-//   })
-//   let orderItemBody = document.querySelectorAll(".orders-item__body > .orders-item__heading");
-//   let mobileOrderItemBody = document.querySelectorAll("mobile__orders-list .orders-item__body > .orders-item__heading");
+export function orderItemCheck() {
+  let ordersListOfUserCurrent = ordersList.filter(function(order) {
+    return order.userID === userCurrent.userID;
+  })
+  let orderItemBody = document.querySelectorAll(".orders-item__body > .orders-item__heading");
+  let mobileOrderItemBody = document.querySelectorAll("mobile__orders-list .orders-item__body > .orders-item__heading");
   
-//   ordersListOfUserCurrent.forEach(function(order, index) {
-//       if(order.fullyCheck == true) {
-//         orderItemBody[index].classList.add("background-color__checked");
-//         mobileOrderItemBody[index].classList.add("background-color__checked");
-//       }
-//       else{
-//         orderItemBody[index].classList.add("background-color__unchecked");
-//         mobileOrderItemBody[index].classList.add("background-color__unchecked");
-//       }  
-//   })
-// }
+  ordersListOfUserCurrent.forEach(function(order, index) {
+      if(order.fullyCheck == true) {
+        orderItemBody[index].classList.add("background-color__checked");
+        // mobileOrderItemBody[index].classList.add("background-color__checked");
+      }
+  })
+}
+
 
 function orderList() {
   let orderModalLayers = document.querySelectorAll(".orders-item__layer");

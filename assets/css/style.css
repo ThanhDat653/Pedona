@@ -614,15 +614,13 @@
     margin-bottom: 2px;
     padding: 20px;
     color: var(--white-color);
+    background-color: var(--primary-color);
 }
 
 .background-color__checked {
     background-color: #059862;
 }
 
-.background-color__unchecked {
-    background-color: var(--primary-color);
-}
 
 .orders-product {
     display: flex;
@@ -1586,7 +1584,7 @@
 /* ----- MODAL LOGIN FORM ----- */
 
 .modal-sign {
-    /* display: none; */
+    display: flex;
     /* juvi */
     justify-content: center;
     align-items: center;
@@ -1603,9 +1601,8 @@
 .modal-form {
     display: flex;
     flex-direction: column;
-    position: relative;
-    left: 20%;
-    top: 10%;
+    position: absolute;
+    top: 15%;
     width: 768px;
     max-width: 100%;
     min-height: 480px;
@@ -1855,7 +1852,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 35px 0;
+    margin: 10px 0;
     width: 100%;
 }
 
@@ -1994,6 +1991,17 @@ button.ghost {
 .back-to-top__icon {
     font-size: 2rem;
     color: #fff;
+}
+
+
+.mobile-sign{
+    display: none;
+    font-size: 16px;
+}
+
+.mobile-sign:hover{
+    cursor: pointer;
+    color: #FFF;
 }
 
 
