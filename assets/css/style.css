@@ -936,13 +936,20 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
                 rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     width: 100%;
+    min-width: 200px;
     margin: 0;
     border-radius: 2px;
+    padding-left: 30px;
+}
+
+.color-filter {
+    letter-spacing: 0.5px;
+    text-align: left;
+    left: 0;
 }
 
 .price-filter {
-    letter-spacing: 0.5px;
-    text-align: left;
+    right: 0;
 }
 
 .filter__option {
@@ -1996,24 +2003,19 @@ button.ghost {
     position: relative;
 }
 .bubble {
-    background-color: #059602;
+    background-color: var(--primary-color);
     color: #fff;
     border-radius: 5px;
-    box-sizing: content-box;
-    padding:  12px 8px;
+    margin-top: 7px;
+    padding: 3px 8px;
     text-align: center;
 }
 
 .bubble::before {
     content:"$0 - $"
 }
-/* .filter-by-price:hover > .bubble{display: block;} */
-.category-item.checked,.filter__option.checked {
-    background-color: #059602;
-    border-radius: 5px;
-    
-}
+
 .category-item.checked .category-item__link span {
-    color: #fff;
+    color: var(--primary-color);
 }
 /* Khánh Hoàng */
