@@ -40,7 +40,7 @@ searchInput.addEventListener("keydown", function (event) {
 
 //
 
-function basicItemRenderList(product, index) {
+export function basicItemRenderList(product, index) {
   return `<div class="l-12 product">
   <div class="product-item">
       <div class="product-item__img">
@@ -73,7 +73,7 @@ function basicItemRenderList(product, index) {
 
 //
 
-function basicItemRenderGrid(product, index) {
+export function basicItemRenderGrid(product, index) {
   return `<div class="l-4 m-6 c-12 product">
   <div class="product__link">
       <div class="product-item product__img">
@@ -226,7 +226,7 @@ function categoryRender() {
   let temp = `<div class="category-item filter-by-price">
     <span class="category-item__lable">Filter By Price</span>
     <input type="range" name="filter-price" class="filter-price__input" id="" min="100"
-      value="1000"  max="1000">
+      value="1001"  max="1001">
       <div class="bubble">  <div>
   </div>`;
 
@@ -403,7 +403,7 @@ function categoryRender() {
       (filterPrice.value * maxView) / (maxPrice - minPrice) -
       (minPrice / 10 + 32) +
       "px";
-    view.innerHTML = filterPrice.value;
+    view.innerHTML = Math.max(filterPrice.value - 1, minPrice);
   }
   //
 
@@ -421,7 +421,7 @@ function categoryRender() {
     if (colorFil != null && typeCheck != null) {
       productList.forEach(function (item, index) {
         if (
-          item.price <= filterPrice.value &&
+          item.price <= filterPrice.value - 1 &&
           item.color == colorFil.className.split(" ")[2] &&
           item.type == typeCheck.className.split(" ")[2]
         ) {
@@ -436,7 +436,7 @@ function categoryRender() {
         productList.forEach(function (item, index) {
           if (
             colorFil.className.split(" ")[2] == item.color &&
-            item.price <= filterPrice.value
+            item.price <= filterPrice.value - 1
           ) {
             productGridList.innerHTML += basicItemRenderGrid(item, index);
             productListList.innerHTML += basicItemRenderList(item, index);
@@ -449,7 +449,7 @@ function categoryRender() {
           productList.forEach(function (item, index) {
             if (
               item.type == typeCheck.className.split(" ")[2] &&
-              item.price <= filterPrice.value
+              item.price <= filterPrice.value - 1
             ) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
@@ -459,7 +459,7 @@ function categoryRender() {
           });
         } else {
           productList.forEach(function (item, index) {
-            if (item.price <= filterPrice.value) {
+            if (item.price <= filterPrice.value - 1) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
             }
@@ -478,6 +478,7 @@ function categoryRender() {
     callBubble();
     filterInRangePrice();
   };
+  filterPrice.addEventListener("change", filterInRangePrice);
 }
 //
 
@@ -526,6 +527,7 @@ mobileFilterColor.forEach(function (color) {
 const mobileFilterType = document.querySelectorAll(".filter__option.type");
 mobileFilterType.forEach(function (type) {
   type.onclick = function () {
+    
     if (type.classList.contains("checked")) {
       type.classList.remove("checked");
     } else {
@@ -574,7 +576,7 @@ mobileFilterPrice.forEach(function (price) {
             product.price >= parseInt(priceValue[1]) &&
             product.price <= parseInt(priceValue[2])
           ) {
-            console.log(product.price);
+
             productGridList.innerHTML += basicItemRenderGrid(product, i);
           }
         } else {

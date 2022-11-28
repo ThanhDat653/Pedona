@@ -76,12 +76,18 @@
 
               <div class="col search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
-
                 <input type="text" class="product search-input" placeholder="Search" />
+              </div>
+              <div class="col l-5 ml-32 pagination__holder">
+                <div class="row no-gutters js-mid pagination">
+                  <div class="center-text col l-o-4 js-mid l-4 currPage"></div>
+                  <button class="product__btn prevPage fade">❮</button>
+                  <button class="product__btn nextPage">❯</button>
+                </div>
               </div>
             </div>
           </div>
-          <div id="content__table" class="content__table table--bordered grid">
+          <div id=" content__table" class="content__table table--bordered grid">
             <div class="row table__header js-mid no-gutters">
               <div class="col l-1 m-1 c-2">no.</div>
               <div class="col l-2 m-2 c-2">product id</div>
@@ -137,119 +143,135 @@
 
         <div class="content__body">
           <div class="body__util grid mb-16">
-            <div class="row no-gutters">
+            <div class="row no-gutters ">
               <div class="col search-bar">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" class="order search-input" placeholder="Search" />
-              </div>
-            </div>
-          </div>
-          <div id="content__table" class="content__table table--bordered grid">
-            <div class="row table__header js-mid no-gutters">
-              <div class="col l-1 m-2 c-2">no.</div>
-              <div class="col l-11 m-2 c-2">orders information</div>
-            </div>
-            <div id="table__body--orders" class="table__body">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer"></div>
 
-    <form name="form_add" method="get" action="" id="modal-wrapper" class="modal close" onsubmit="return false">
-      <div id="modal" class="modal__container shadow-wrap">
-        <div class="modal__header row grid">
-          <span class="col l-12 header__text">new product</span>
-          <button id="exit-add" class="toggle-modal">
-            <i class="fa-solid fa-xmark fa-2xl"></i>
-          </button>
-        </div>
-        <div class="modal__body">
-          <div class="row no-gutters grid">
-            <div class="col l-5 l-o-1 modal__left">
-              <div class="row no-gutters js-mid">
-                <span class="col l-4 modal__text center-text">Hình Sản Phẩm</span>
-                <label for="img-input" id="img__label" class=" row fake-input mt-16">
-                  <div id="img-show">
-                    <input type="file" name="img" id="img-input" accept="image/png, image/jpeg" visiblity="hidden"
-                      form="modal-wrapper" />
-                    <img src="" alt="" id="img-preview" />
-                    <div id="upload-icon" class="">
-                      <i id="icon" class="fa-solid fa-arrow-up-from-bracket fa-2xl"></i>
-                      <span class="icon__text">Chọn hình ảnh</span>
-                    </div>
-                  </div>
-                  <span class="col l-8 l-o-2 invalid-input center-text ">Vui lòng không để trống hình sản phẩm</span>
-                </label>
-                <label class="row spc-btw  mt-16" id="id__label" for="product__id">
-                  <span class="col l-4 modal__text">Mã Sản Phẩm </span>
-                  <div class="col l-7 ">
-                    <input class=" col l-12 input" type="text" name="name" id="product__id" />
-                    <span class="col l-12 invalid-input id">Vui lòng nhập mã sản phẩm</span>
-                  </div>
-                </label>
-                <label class="row spc-btw mt-16" id="name__label" for="product__name">
-                  <span class="col l-4 modal__text">Tên Sản Phẩm </span>
-                  <div class="col l-7">
-                    <input class="input col l-12" type="text" name="name" id="product__name" />
-                    <span class=" col l-12 invalid-input ">Vui lòng nhập tên sản phẩm</span>
-                  </div>
-
-                </label>
               </div>
-            </div>
-            <div class="col l-5  modal__right">
-              <label class="row no-gutters spc-btw mt-16" for="product__color">
-                <span class="col l-2 modal__text">Màu</span>
-                <div class="color__render row no-gutters spc-btw">
+              <div class="col ml-32">
+                <div class="row spc-btw">
+                  <label class="checkerListener" for="checked">
+                    <input class="checker true" type="checkbox" name="showCheck" id="checked">
+                    <span ">Checked Orders</span>
+                  </label>
+                  <label class=" checkerListener ml-16" for="unchecked">
+                      <input class="checker false" type="checkbox" name="showCheck" id="unchecked">
+                      <span ">Unchecked Orders</span>
+                  </label>
                 </div>
-                <label for="product__color--orthers" class="col l-o-1 l-11 spc-btw">
-                  <div class="row no-gutters spc-btw others-color">
-                    <div class="row no-gutters ">
-                      <input type="radio" name="color" id="product__color--orthers" value="0" class="col " checked />
-                      <span class="modal__text mt-8 center-text
-                       col l-3">Others
-                      </span>
-                    </div>
-                    <input id="input_others" type="text" name="color" class="input col l-o-3 l-5"
-                      placeholder="Màu: red, black-red">
-                    <span class="col l-8 l-o-4 invalid-input center-text ">Vui lòng nhập màu sản phẩm</span>
-                  </div>
+              </div>
 
-                </label>
-              </label>
-              <label class="row no-gutters spc-btw mt-16" for="product__type">
-                <span class="modal__text">Kiểu giày </span>
-                <input class="input" type="text" name="type" id="product__type" />
-                <span class="col l-12 invalid-input ">Vui lòng nhập kiều giày</span>
-              </label>
-              <label class="row no-gutters spc-btw mt-16" for="product__price">
-                <span class="modal__text">Giá </span>
-                <input class="input" type="text" inputmode="numeric" name="price" value="200" max="1000" min="200"
-                  id="product__price" />
-              </label>
-              <label class="row no-gutters spc-btw mt-16" id="desc__label" for="product__desc">
-                <span class="modal__text">Mô Tả</span>
-                <textarea form="modal-wrapper" class="input" name="desc" id="product__desc" cols="25" rows="9"
-                  placeholder="Mô Tả Sản Phẩm"></textarea>
-                <span class="col l-12 invalid-input ">Vui lòng nhập mô tả sản phẩm</span>
-              </label>
             </div>
           </div>
-        </div>
-        <div class="modal__footer mt-16 grid">
-          <div class="row no-gutters submit-btn js-mid">
-            <button type="submit" id="submit-prod" class="col">xác nhận</button>
+          <div id=" content__table" class="content__table table--bordered grid">
+                        <div class="row table__header js-mid no-gutters">
+                          <div class="col l-1 m-2 c-2">no.</div>
+                          <div class="col l-11 m-2 c-2">orders information</div>
+                        </div>
+                        <div id="table__body--orders" class="table__body">
+                        </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </form>
-    <!-- <script type="module" src="./assets/scripts/content/users.js"></script> -->
-    <!-- <script type="module" src="./assets/scripts/content/product.js"></script> -->
-    <script type="module" src="./assets/js/orders.js"></script>
-    <script type="module" src="./assets/js/modal.js"></script>
-    <script type="module" src="./assets/js/main.js"></script>
+          <div class="footer"></div>
+
+          <form name="form_add" method="get" action="" id="modal-wrapper" class="modal close" onsubmit="return false">
+            <div id="modal" class="modal__container shadow-wrap">
+              <div class="modal__header row grid">
+                <span class="col l-12 header__text">new product</span>
+                <button id="exit-add" class="toggle-modal">
+                  <i class="fa-solid fa-xmark fa-2xl"></i>
+                </button>
+              </div>
+              <div class="modal__body">
+                <div class="row no-gutters grid">
+                  <div class="col l-5 l-o-1 modal__left">
+                    <div class="row no-gutters js-mid">
+                      <label for="img-input" id="img__label" class=" row fake-input mt-16">
+                        <div id="img-show">
+                          <input type="file" name="img" id="img-input" accept="image/png, image/jpeg" visiblity="hidden"
+                            form="modal-wrapper" />
+                          <img src="" alt="" id="img-preview" />
+                          <div id="upload-icon" class="">
+                            <i id="icon" class="fa-solid fa-arrow-up-from-bracket fa-2xl"></i>
+                            <span class="icon__text">Chọn hình ảnh</span>
+                          </div>
+                        </div>
+                        <span class="col l-8 l-o-2 invalid-input center-text ">Vui lòng không để trống hình sản
+                          phẩm</span>
+                      </label>
+                      <label class="row spc-btw  mt-16" id="id__label" for="product__id">
+                        <span class="col l-4 modal__text">Mã Sản Phẩm </span>
+                        <div class="col l-7 ">
+                          <input class=" col l-12 input" type="text" name="name" id="product__id" />
+                          <span class="col l-12 invalid-input id">Vui lòng nhập mã sản phẩm</span>
+                        </div>
+                      </label>
+                      <label class="row spc-btw mt-16" id="name__label" for="product__name">
+                        <span class="col l-4 modal__text">Tên Sản Phẩm </span>
+                        <div class="col l-7">
+                          <input class="input col l-12" type="text" name="name" id="product__name" />
+                          <span class=" col l-12 invalid-input ">Vui lòng nhập tên sản phẩm</span>
+                        </div>
+
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col l-5  modal__right">
+                    <label class="row no-gutters spc-btw mt-16" for="product__color">
+                      <span class="col l-2 modal__text">Màu</span>
+                      <div class="color__render row no-gutters spc-btw">
+                      </div>
+                      <label for="product__color--orthers" class="col l-o-1 l-11 spc-btw">
+                        <div class="row no-gutters spc-btw others-color">
+                          <div class="row no-gutters ">
+                            <input type="radio" name="color" id="product__color--orthers" value="0" class="col "
+                              checked />
+                            <span class="modal__text mt-8 center-text
+                       col l-3">Others
+                            </span>
+                          </div>
+                          <input id="input_others" type="text" name="color" class="input col l-o-3 l-5"
+                            placeholder="Màu: red, black-red">
+                          <span class="col l-8 l-o-4 invalid-input center-text ">Vui lòng nhập màu sản phẩm</span>
+                        </div>
+
+                      </label>
+                    </label>
+                    <label class="row no-gutters spc-btw mt-16" for="product__type">
+                      <span class="modal__text">Kiểu giày </span>
+                      <input class="input" type="text" name="type" id="product__type" />
+                      <span class="col l-12 invalid-input ">Vui lòng nhập kiều giày</span>
+                    </label>
+                    <label class="row no-gutters spc-btw mt-16" for="product__price">
+                      <span class="modal__text">Giá </span>
+                      <input class="input" type="text" inputmode="numeric" name="price" value="200" max="1000" min="200"
+                        id="product__price" />
+                    </label>
+                    <label class="row no-gutters spc-btw mt-16" id="desc__label" for="product__desc">
+                      <span class="modal__text">Mô Tả</span>
+                      <textarea form="modal-wrapper" class="input" name="desc" id="product__desc" cols="25" rows="9"
+                        placeholder="Mô Tả Sản Phẩm"></textarea>
+                      <span class="col l-12 invalid-input ">Vui lòng nhập mô tả sản phẩm</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="modal__footer mt-16 grid">
+                <div class="row no-gutters submit-btn js-mid">
+                  <button type="submit" id="submit-prod" class="col">xác nhận</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- <script type="module" src="./assets/scripts/content/users.js"></script> -->
+          <!-- <script type="module" src="./assets/scripts/content/product.js"></script> -->
+          <!-- <script type="module" src="./assets/js/form.js"></script> -->
+          <script type="module" src="./assets/js/orders.js"></script>
+          <script type="module" src="./assets/js/modal.js"></script>
+          <script type="module" src="./assets/js/main.js"></script>
 </body>
 
 </html>

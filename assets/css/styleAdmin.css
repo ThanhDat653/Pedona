@@ -347,21 +347,6 @@ a {
   background-color: transparent;
 }
 
-.select {
-  display: inline-block;
-  padding: 5px 6px;
-  border-radius: 5px;
-  border: 2px solid #000;
-}
-
-.select:focus, .search-input:focus {
-  border :2px solid #cc2424;
-}
-
-.show-select {
-
-}
-
 .search-input {
   flex: 1;
   border: none;
@@ -387,6 +372,30 @@ a {
   border-radius: 1px;
 }
 
+.pagination__holder {
+  position: relative;
+}
+.pagination {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.pagination .product__btn:nth-child(2) {
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.pagination .product__btn:last-child {
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.product__btn {
+  padding: 8px 24px;
+}
+
 .content__table {
   background-color: #f5f5f5;
   overflow: hidden;
@@ -403,10 +412,22 @@ a {
   align-self: center;
   text-align: center;
 }
-
+.row div.col.l-o-6 {
+  margin-left:50%
+}
+.row div.col.l-o-5 {
+  margin-left: 41.66667%;
+}
+.row div.col.l-o-1{
+  margin-left: 8.33333%
+}
 .table__header {
   text-transform: uppercase;
   height: 32px;
+}
+
+.fade {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .row.table__header .col {
@@ -415,7 +436,7 @@ a {
 
 .row.table__row {
   border-top: solid 2px #242424;
-  transition: all 0.75s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .row.table__row .col {
@@ -463,9 +484,9 @@ a {
 
 }
 
-.table__del-btn {
+.table__del-btn,.table__fix-cancel {
   color: #fff;
-  background:linear-gradient(to left,#242424 50%,#cc2424 50%)right;
+  background:linear-gradient(to left,#111111 50%,#cc2424 50%)right;
   background-size: 300% 100%;
   padding: 8px 16px;
   border: none;
@@ -479,11 +500,16 @@ a {
   background-position: left;
   cursor: pointer;
 }
+.table__fix-cancel:hover {
+
+  background-position: left;
+  cursor: pointer;
+}
 
 .table__fix-btn {
   color: #fff;
   padding: 8px 16px;
-  background:linear-gradient(to right, #242424 50%,#059862 50%)left;
+  background:linear-gradient(to right, #111111 50%,#059862 50%)left;
   background-size: 300% 100%;
   background-position: left;
   border: none;
@@ -512,9 +538,11 @@ a {
   padding: 8px 16px;
   background: linear-gradient( to left,#111111 50% ,#17d08c 50% )right;
   background-size: 200% 100%;
-  border-radius: 5px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   border:none;
-  transition:  all 1.2s ease;
+  transition: all .5s ease-in-out;
+
 }
 
 .table__fix-submit:hover {
@@ -657,28 +685,45 @@ a {
 
 
 
+.checker::before {
+  content: "";
+  display: block;
+  background-color: #111111;
+  height: 16px;
+  width: 16px;
+}
+.checked.checker::before {
+  content: "✓";
+  color: #fff;
+  display: block;
+  background-color: #111111;
+  height: 16px;
+  width: 16px;
+}
+
 .check {
   color: #fff;
   height: 30px;
 }
 
 span.check.false {
-  display: none;
-  opacity: 0;
-  transition: all 1s ease-out;
+
+  line-height: 30px;  
+  display: block;
+  background: #cc2424;
+  border-radius: 5px;
+  border:none;
+  transition:  all .3s ease-out;
 
 }
+
 span.check.true {
-  opacity: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   line-height: 30px;  
   display: block;
   background: #059862;
   border-radius: 5px;
   border:none;
-  transition:  all 1s ease-out;
+  transition:  all .3s ease-out;
 }
 
 .check.true {

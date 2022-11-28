@@ -76,6 +76,7 @@
                                     <i class="top-navbar__icon fa-regular fa-user"></i>
                                 </a>
 
+                                <!-- Tam fix -->
                                 <!-- Tam: Begin -->
                                 <ul class="user_menu">
                                     <li class="user_menu_item user_menu_name">My Account</li>
@@ -89,9 +90,11 @@
                                             </ul>
                                         </div>
                                     </li>
+                                    <li class="user_menu_item admin-btn">Manage</li>
                                     <li class="user_menu_item logout--btn">Log Out</li>
                                 </ul>
                                 <!-- Tam: End -->
+                                <!-- Tam fix -->
                             </li>
 
                             <li class="m-0 c-0 header--top-navbar__item">
@@ -332,7 +335,7 @@
 
                         <div class="sign-in-form--content__footer">
                             <button class="sign-in--btn">Sign In</button>
-                            <div class="mobile-sign form-message" id="mobile-SU">Don't have an account?</div> 
+                            <div class="mobile-sign form-message" id="mobile-SU">Don't have an account?</div>
                         </div>
                     </div>
                 </div>
@@ -381,7 +384,7 @@
 
                         <div class="sign-up-form--content__footer">
                             <button class="sign-in--btn" id="sign-up--btn">Sign Up</button>
-                            <div class="mobile-sign form-message" id="mobile-SI">Already have account?</div> 
+                            <div class="mobile-sign form-message" id="mobile-SI">Already have account?</div>
                         </div>
                     </div>
                 </div>
@@ -518,19 +521,20 @@
                         <div class="row list-product__list close-view-mode">
                         </div>
 
-                        <ul class="pagination">
+                        <!-- <ul class="pagination">
                             <li class="pagination-item pagination-prev close-view-mode">
                                 <div class="pagination__link">
                                     <i class="fa-solid fa-angle-left"></i>
                                 </div>
                             </li>
 
-                            <li class="pagination-item pagination-1 pagination-item__active">
-                                <div class="pagination__link">1</div>
-                            </li>
-
-                            <li class="pagination-item pagination-2">
-                                <div class="pagination__link">2</div>
+                            <li class="pagination__menu">
+                                <li class="pagination-item pagination-1 pagination-item__active">
+                                    <div class="pagination__link">1</div>
+                                </li>
+                                <li class="pagination-item pagination-2">
+                                    <div class="pagination__link">2</div>
+                                </li>
                             </li>
 
                             <li class="pagination-item pagination-next">
@@ -538,7 +542,7 @@
                                     <i class="fa-solid fa-angle-right"></i>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
 
                         <ul class="pagination">
                             <li class="pagination-item pagination-prev close-view-mode">
@@ -547,13 +551,14 @@
                                 </div>
                             </li>
 
-                            <!-- <li class="pagination-item pagination-1 pagination-item__active">
-                                <div class="pagination__link">1</div>
+                            <li class="pagination__menu">
+                                <!-- <li class="pagination-item pagination-1 pagination-item__active">
+                                    <div class="pagination__link">1</div>
+                                </li>
+                                <li class="pagination-item pagination-2">
+                                    <div class="pagination__link">2</div>
+                                </li> -->
                             </li>
-
-                            <li class="pagination-item pagination-2">
-                                <div class="pagination__link">2</div>
-                            </li> -->
 
                             <li class="pagination-item pagination-next">
                                 <div class="pagination__link">
@@ -651,6 +656,7 @@
         <div class="back-to-top" onclick="">
             <i class="back-to-top__icon fa-solid fa-caret-up"></i>
         </div>
+        <div class="" id="loginBtn"></div>
     </div>
 
     <script type="module" src="./assets/js/storage.js"></script>
