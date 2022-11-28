@@ -31,31 +31,14 @@ window.onscroll = function () {
   }
 };
 
-// MOBILE SIDE MENU
+// BACK-TO-TOP BUTTON 
 
-const menuIcon = document.querySelector(".mobile-menu__icon");
-const overlaySideMenu = document.querySelector(".header__side-menu-container");
-const sideMenu = document.querySelector(".header__side-menu");
-
-menuIcon.addEventListener("click", function () {
-  overlaySideMenu.classList.toggle("open");
-  sideMenu.classList.toggle("open");
-  sideMenu.classList.remove("hide");
-});
-
-overlaySideMenu.addEventListener("click", function () {
-  sideMenu.classList.toggle("hide");
-  setTimeout(hideMenu, 450);
-});
-
-sideMenu.addEventListener("click", function (event) {
-  event.stopPropagation();
-});
-
-function hideMenu() {
-  overlaySideMenu.classList.toggle("open");
-  sideMenu.classList.toggle("open");
-}
+document.querySelector(".back-to-top").addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: `smooth`
+  })
+})
 
 // CONTENT PRODUCT LIST
 
@@ -64,7 +47,6 @@ const productGridList = document.querySelector(".list-product__grid");
 const products = gItem("productList");
 
 products.forEach(function (product, index) {
-  console.log(product.img)
   if (index < 6) {
     var productElement = `<div class="l-4 m-6 c-12 product">
                 <div class="product__link">
@@ -560,10 +542,8 @@ userList.forEach(function (item) {
   }
 });
 
-console.log(userCurrentInLocal);
 let cartOfUserCurrent = userCurrent.carts;
 
-console.log(userCurrent);
 
 // add new product to productList of userCurrent
 export function addToCart() {
@@ -585,8 +565,6 @@ export function addToCart() {
 
         var n = cartOfUserCurrent.length;
         cartOfUserCurrent[n] = temp;
-
-        console.log(cartOfUserCurrent);
 
         checkProductList(cartOfUserCurrent);
         updateUserList();
@@ -632,15 +610,13 @@ function renderAmountOfCart() {
   document.querySelector(".cart-list").insertAdjacentHTML("beforebegin", temp);
 }
 
-console.log(cartOfUserCurrent);
-
 function renderCartlistOfUserCurrent() {
   const headerCartListElement = document.querySelector(".cart-list-item");
   headerCartListElement.innerHTML = "";
   if (cartOfUserCurrent.length == 0) {
     let temp = `<li class="cart-empty">
       <i class="fa-regular fa-face-frown"></i>
-      <span>Your Cart Is Empty</span>
+      <span>&nbspYour Cart Is Empty</span>
       </li>`;
 
     document.querySelector(".cart-purchase-btn").style.display = "none";
@@ -648,7 +624,8 @@ function renderCartlistOfUserCurrent() {
     headerCartListElement.insertAdjacentHTML("beforeend", temp);
   } else {
     cartOfUserCurrent.forEach(function (item) {
-      let temp = `<li class="cart-item">
+      let temp = 
+      `<li class="cart-item">
         <div class="cart-item__img">
           <img src="./assets/image/${item.product.img}" alt="">
         </div>
@@ -711,7 +688,6 @@ sItem(ordersKey, ordersList);
 
 // find an order of current user
 var ordersOfUserCurrent;
-console.log(userCurrent);
 
 userList.forEach(function (item) {
   if (item.userID === gItem("userCurrent").userID)
@@ -724,9 +700,7 @@ purchaseButton.addEventListener("click", function () {
   let today = new Date();
   let date =
     today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
-  let time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  let dateTime = date + " " + time;
+  
 
   let total = 0;
   cartOfUserCurrent.forEach((item) => {
@@ -735,9 +709,10 @@ purchaseButton.addEventListener("click", function () {
 
   ordersList[ordersList.length] = {
     name: userCurrent.name,
-    orderID: userCurrent.userID,
+    userID: userCurrent.userID,
+    orderID: JSON.stringify(JSON.parse(ordersList[ordersList.length - 1].orderID) + 1),
     productList: cartOfUserCurrent,
-    time: dateTime,
+    time: date,
     total: total,
   };
 
@@ -748,10 +723,148 @@ purchaseButton.addEventListener("click", function () {
   cartOfUserCurrent = [];
   updateUserList();
   renderCartlistOfUserCurrent();
+  renderOderlistOfUserCurrent();
+  openOrderList();
 });
+
+function renderOderlistOfUserCurrent() {
+  let userID = userCurrent.userID;
+  let orderListElement = document.querySelector(".orders-list");
+  let ordersListOfUserCurrent = ordersList.filter(function(order) {
+    return order.userID === userID;
+  })
+
+  orderListElement.innerHTML = ""
+  
+  // Render the order list
+  ordersListOfUserCurrent.forEach(function(order, index) {
+    let temp = 
+    `<li class="orders-item">
+        <div class="orders-item__heading">
+            <div class="orders-item__info">
+                <div class="header-info">
+                    <span class="orders-item__user-name">${order.name}</span>
+                    <span class="orders-item__order-name">Order ID: ${order.orderID}</span>
+                </div>
+
+                <div class="detail-info">
+                    <span class="orders-item__time">Date: ${order.time}</span>
+                    <span class="orders-item__total">Total:$ ${order.total}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="orders-item__layer">
+          <div class="orders-item__body">
+              <div class="orders-item__heading">
+
+                  <div class="orders-close__btn">
+                      <i class="fa-solid fa-xmark"></i>
+                  </div>
+                  
+                  <div class="orders-item__info">
+                      <div class="header-info">
+                          <span class="orders-item__user-name">${order.name}</span>
+                          <span class="orders-item__order-name">Order ID: ${order.orderID}</span>
+                      </div>
+
+                      <div class="detail-info">
+                          <span class="orders-item__time">Date: ${order.time}</span>
+                          <span class="orders-item__total"><mark>Total: $ ${order.total}</mark></span>
+                      </div>
+                  </div>
+
+              </div>
+
+              <ul class="orders-item_list">
+              
+              </ul>
+            </div>
+          </div>
+      </li>`
+        
+        orderListElement.insertAdjacentHTML('beforeend', temp);
+
+    // Render the produt list in each order
+    let orderProductListElement = document.querySelectorAll(".orders-item_list");
+    order.productList.forEach(function (item) { 
+      temp = 
+      `<li class="orders-product">
+        <div class="orders-product__img">
+          <img src="./assets/image/${item.product.img}" alt="">
+        </div>
+        
+        <div class="orders-product__info">
+          <div class="orders-product__heading">
+            <div class="orders-product__name">${item.product.name}</div>
+          </div>
+          <div class="orders-product__detail">
+            <span class="orders-product__type">Color: ${item.product.color}</span>
+            <div class="orders-product__price-wrap">
+              <div class="orders-product__price">$${item.product.price}</div>
+              <div class="orders-product__quantity"> x ${item.amount}</div>
+            </div>
+          </div>
+        </div>
+      </li>`
+      orderProductListElement[index].insertAdjacentHTML('beforeend', temp)
+    })
+  })
+
+}
+
+function openOrderList(event) {
+  let orderItems = document.querySelectorAll(".orders-item > .orders-item__heading");
+  let orderModals = document.querySelectorAll(".orders-item__layer");
+  let orderCloseBtn = document.querySelectorAll(".orders-close__btn");
+
+  orderItems.forEach(function(orderItem, index) { 
+    orderItem.addEventListener('click', function() {
+      orderModals[index].classList.toggle('orders-item__layer--display__flex');
+    })
+
+    orderCloseBtn[index].addEventListener("click", function() {
+      orderModals[index].classList.toggle('orders-item__layer--display__flex');
+    })
+  })
+}
 
 // ----- ORDERS: End -----
 
+document.querySelector(".orders").addEventListener('click', openOrderList())
+
+// location.reload(openOrderList())
+
+addToCart();
 renderCartlistOfUserCurrent();
 setQuantityOfProduct();
-addToCart();
+openOrderList();
+renderOderlistOfUserCurrent();
+
+// Click to open/close filter options in mobile
+
+document.querySelector(".mobile-filter--btn__color").addEventListener('click', function() {
+  document.querySelector(".color-filter").style.display = "block";
+  document.querySelector(".type-filter").style.display = "none";
+  document.querySelector(".price-filter").style.display = "none";
+})
+
+document.querySelector(".mobile-filter--btn__type").addEventListener('click', function() {
+  document.querySelector(".type-filter").style.display = "block";
+  document.querySelector(".color-filter").style.display = "none";
+  document.querySelector(".price-filter").style.display = "none";
+})
+
+document.querySelector(".mobile-filter--btn__price").addEventListener('click', function() {
+  document.querySelector(".price-filter").style.display = "block";
+  document.querySelector(".color-filter").style.display = "none";
+  document.querySelector(".type-filter").style.display = "none";
+})
+
+document.querySelector(".shop-content").addEventListener('click', function() {
+  document.querySelector(".color-filter").style.display = "none";
+  document.querySelector(".type-filter").style.display = "none";
+  document.querySelector(".price-filter").style.display = "none";
+
+})
