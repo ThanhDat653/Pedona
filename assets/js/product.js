@@ -278,6 +278,7 @@ function searchProductList() {
         tableBodyProduct.innerHTML += basicProductRender(item, i);
       }
     });
+    productFeatures();
   } else {
     newOutPut(productList);
   }
