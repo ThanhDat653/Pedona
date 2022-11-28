@@ -73,7 +73,7 @@ function basicItemRenderList(product, index) {
 
 //
 
-function basicItemRenderGrid(product, index) {
+export function basicItemRenderGrid(product, index) {
   return `<div class="l-4 m-6 c-12 product">
   <div class="product__link">
       <div class="product-item product__img">
@@ -485,7 +485,7 @@ function categoryRender() {
 
 categoryRender();
 const mobileFilterColor = document.querySelectorAll(".filter__option.color");
-console.log(mobileFilterColor);
+// console.log(mobileFilterColor);
 mobileFilterColor.forEach(function (color) {
   color.onclick = function () {
     if (color.classList.contains("checked")) {

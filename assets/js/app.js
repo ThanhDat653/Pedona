@@ -14,6 +14,7 @@ import {
   userKey,
   getUserCurrent,
 } from "./form.js";
+import { basicItemRenderGrid } from "./filter.js";
 
 //  HEADER SCROLL
 
@@ -931,3 +932,42 @@ document.querySelector(".shop-content").addEventListener('click', function() {
   document.querySelector(".price-filter").style.display = "none";
 
 })
+
+
+
+
+
+
+
+
+
+function paginationProduct() {
+  let nextPaginationBtn = document.querySelector(".pagination-prev__test")
+  let pageAmount = 0;
+  let maxProductAmount = products.length / 6;
+
+  if(products.length % 6 != 0) {
+    pageAmount = Math.floor((products.length / 6) + 1);
+  }
+  else  {
+    pageAmount = Math.floor((products.length / 6));
+  }
+
+  for(let i = 0; i < pageAmount; i++) {
+    let start = i*6;
+    let end = (i + 1)*6;
+
+    products.forEach(function(product, index) {
+      if(index >= start && index < end) {
+        basicItemRenderGrid(product, index)
+
+      }
+    })
+  }
+}
+
+function nextPage() {
+  
+}
+
+paginationProduct()
