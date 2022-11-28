@@ -1,7 +1,4 @@
-import {
-    gItem,
-    sItem
-} from "./storage.js";
+import { gItem, sItem } from "./storage.js";
 
 const userKey = "userList";
 var userList = gItem(userKey);
@@ -10,16 +7,17 @@ sItem(userKey, userList);
 //--------------- open/close form-----------
 var formElemnt = document.querySelector(".modal-sign");
 function openForm() {
-    formElemnt.classList.remove('close'); 
+  formElemnt.classList.remove("close");
 }
 
-export{openForm};
+export { openForm };
 
 function closeForm() {
-    formElemnt.classList.toggle('close'); 
+  formElemnt.classList.toggle("close");
 }
 
-var loginButtons = document.querySelector("#loginBtn");
+let loginButtons = document.querySelector("#loginBtn");
+console.log("🚀 ~ file: form.js ~ line 20 ~ loginButtons", loginButtons);
 
 loginButtons.addEventListener("click", openForm);
 
@@ -52,66 +50,63 @@ signInButton.addEventListener("click", () => {
 let isLogin;
 let userCurrentInLocal;
 
-
 function getUserCurrent() {
-    if(!!gItem("userCurrent")) {
-        userCurrentInLocal = gItem("userCurrent")
-    }
-    else {
-        userCurrentInLocal = {
-            username: "",
-            pass: "",
-            userID: "",
-            name: "",
-            type: "",
-            carts: [],
-        }
-    }
-    localStorage.setItem("userCurrent", JSON.stringify(userCurrentInLocal));
-    
-    if(gItem("userCurrent").userID != "") {
-        isLogin = true;
-    }
-    
-    else {
-        isLogin = false;
-    }
+  if (!!gItem("userCurrent")) {
+    userCurrentInLocal = gItem("userCurrent");
+  } else {
+    userCurrentInLocal = {
+      username: "",
+      pass: "",
+      userID: "",
+      name: "",
+      type: "",
+      carts: [],
+    };
+  }
+  localStorage.setItem("userCurrent", JSON.stringify(userCurrentInLocal));
+
+  if (gItem("userCurrent").userID != "") {
+    isLogin = true;
+  } else {
+    isLogin = false;
+  }
 }
 
 getUserCurrent();
 
-// mỗi khi load lại trang sẽ check 
-window.onload = function(){ 
-    checkLogin();
-    getUserCurrent();
-}
+// mỗi khi load lại trang sẽ check
+window.onload = function () {
+  checkLogin();
+  getUserCurrent();
+};
 
-function Login(){ 
-    var username = document.getElementById("username").value;
-    var pass = document.getElementById("password").value;
-    var checkAccount = userList.some(value => value.username === username && value.pass === pass)
-    
-    // hàm some trả về true nếu tìm thấy
-    // lưu lại account vào local storage
-    if(checkAccount) {
-        let user = userList.filter(value => value.username === username)[0]
-        let userCurrentInLcs = {username: user.name, userID: user.userID}
-        localStorage.setItem("userCurrent", JSON.stringify(userCurrentInLcs));
-        userList.forEach(function (item) {
-            if (item.userID === user.userID){
-              userCurrentInLocal = item;
-            }
-        });
-        isLogin = true;
-        checkLogin();
-        location.reload();
-    } 
-    else{
-        alert("Wrong username or pass!");
-        container.classList.add('right-panel-active');
-    }
-    window.onload();
-    console.log(userCurrentInLocal);
+function Login() {
+  var username = document.getElementById("username").value;
+  var pass = document.getElementById("password").value;
+  var checkAccount = userList.some(
+    (value) => value.username === username && value.pass === pass
+  );
+
+  // hàm some trả về true nếu tìm thấy
+  // lưu lại account vào local storage
+  if (checkAccount) {
+    let user = userList.filter((value) => value.username === username)[0];
+    let userCurrentInLcs = { username: user.name, userID: user.userID };
+    localStorage.setItem("userCurrent", JSON.stringify(userCurrentInLcs));
+    userList.forEach(function (item) {
+      if (item.userID === user.userID) {
+        userCurrentInLocal = item;
+      }
+    });
+    isLogin = true;
+    checkLogin();
+    location.reload();
+  } else {
+    alert("Wrong username or pass!");
+    container.classList.add("right-panel-active");
+  }
+  window.onload();
+  console.log(userCurrentInLocal);
 }
 
 var signIn = document.querySelector(".sign-in--btn");
@@ -127,43 +122,41 @@ function checkLogin() {
     isAdmin();
     isUser();
     mobileLogin.classList.add("close");
-  } 
-  else {
+  } else {
     // openForm();
     mobileLogin.classList.remove("close");
   }
 }
 
 function showUserInfo() {
-    let user = gItem('userCurrent');
-    if(user) {
-        document.querySelector(".user_menu_name").innerText = user.username;
-        document.querySelector(".user-name").innerText = user.username;
-    }
+  let user = gItem("userCurrent");
+  if (user) {
+    document.querySelector(".user_menu_name").innerText = user.username;
+    document.querySelector(".user-name").innerText = user.username;
+  }
 }
-
-// Tam 25/11/2022
-function isAdmin(){
-  let user = gItem('userCurrent');
-  if(user.userType == 0){
-      document.querySelector(".user_role").innerText = 'Orders';
-      document.querySelector(".user_role").style.color = 'red';
-      document.querySelector(".admin-btn").style.display = 'block';
-      document.querySelector(".admin-btn").onclick = function() {
-          window.location.replace("./admin.html");
-      }
+// Tam fix
+function isAdmin() {
+  let user = gItem("userCurrent");
+  if (user.userType == 0) {
+    // document.querySelector(".user_orders").innerText = 'Orders';
+    // document.querySelector(".user_orders").style.color = 'red';
+    document.querySelector(".admin-btn").style.display = "block";
+    document.querySelector(".admin-btn").onclick = function () {
+      window.location.replace("./admin.html");
+    };
   }
 }
 
 // Tam  25/11/2022
-function isUser(){
-  let user = gItem('userCurrent');
-  if(user.userType !== 0){
-      document.querySelector(".user_role").innerText = 'Orders';
-      document.querySelector(".user_role").style.color = 'red';
+function isUser() {
+  let user = gItem("userCurrent");
+  if (user.userType !== 0) {
+    // document.querySelector(".user_orders").innerText = 'Orders';
+    // document.querySelector(".user_orders").style.color = 'red';
   }
 }
-
+// Tam fix
 // Log out -------------------------------
 var logOutBtn = document.querySelector(".logout--btn");
 logOutBtn.addEventListener("click", confirmLogout);
@@ -175,11 +168,11 @@ function confirmLogout() {
   }
 }
 
-// gỡ bỏ current user 
-function Logout(){
-    isLogin = false;
-    localStorage.removeItem("userCurrent")
-    location.reload(); //load lại trang
+// gỡ bỏ current user
+function Logout() {
+  isLogin = false;
+  localStorage.removeItem("userCurrent");
+  location.reload(); //load lại trang
 }
 
 //Tam 25/11/2022
@@ -290,11 +283,11 @@ Validator.isConfirmed = function (selector, getConfirmValue, message) {
 var signUpbtn = document.getElementById("sign-up--btn");
 signUpbtn.addEventListener("click", getAccount);
 
-function getAccount(){
-    userList = gItem('userList'); //tạo mảng user lấy data từ localStorage
-    let  username = document.querySelector('#su_username').value; //xài var sẽ tạo thêm ra null -> xài let
-    let  name = document.querySelector('#su_name').value;
-    let  pass = document.querySelector('#su_password').value;
+function getAccount() {
+  userList = gItem("userList"); //tạo mảng user lấy data từ localStorage
+  let username = document.querySelector("#su_username").value; //xài var sẽ tạo thêm ra null -> xài let
+  let name = document.querySelector("#su_name").value;
+  let pass = document.querySelector("#su_password").value;
 
   if (userList.some((value) => value.username === username)) {
     //check có trùng tk ko
@@ -310,7 +303,7 @@ function getAccount(){
         userID: userNumber,
         name,
         type: 1,
-        carts: []
+        carts: [],
       };
       userList.push(newAccount); // gắn vào mảng
       localStorage.setItem("userList", JSON.stringify(userList)); // đẩy mảng lên localStorage
@@ -363,7 +356,7 @@ const mobileSU = document.getElementById("mobile-SU");
 
 mobileSI.addEventListener("click", () => {
   document.forms.sign_up_form.reset();
-  container.classList.remove("right-panel-active")
+  container.classList.remove("right-panel-active");
 });
 
 mobileSU.addEventListener("click", () => {
@@ -371,8 +364,11 @@ mobileSU.addEventListener("click", () => {
   container.classList.add("right-panel-active");
 });
 
-export{isLogin, userList, userCurrentInLocal, Login, userKey, getUserCurrent};
-
-
-
-
+export {
+  isLogin,
+  userList,
+  userCurrentInLocal,
+  Login,
+  userKey,
+  getUserCurrent,
+};

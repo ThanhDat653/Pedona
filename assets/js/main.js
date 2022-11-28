@@ -13,7 +13,7 @@ const tableBodyUser = document.getElementById("table__body--users");
 export { tableBodyUser };
 const tableBodyOrder = document.getElementById("table__body--orders");
 export { tableBodyOrder };
-newOutPut(gItem(prodKey));
+newOutPut(gItem(prodKey),true);
 outputUsers();
 
 //        Sidebar Size Change :Start

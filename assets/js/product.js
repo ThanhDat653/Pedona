@@ -263,17 +263,24 @@ function productFeatures() {
 function searchProductList() {
   const searchValue = searchInput.value.toLowerCase().trim();
   tableBodyProduct.innerHTML = "";
-  productList = gItem(prodKey);
-
-  let filteredArr = productList.filter((item, i) => {
-    if (
-      item.name.toLowerCase().includes(searchValue) ||
-      item.id.toString().toLowerCase().includes(searchValue)
-    ) {
-      return item;
-    }
-  });
-  newOutPut(filteredArr);
+  if (searchValue != "") {
+    const nextPage = document.querySelector(".nextPage");
+    const prevPage = document.querySelector(".prevPage");
+    const onPage = document.querySelector(".currPage");
+    onPage.innerHTML = "0/0";
+    prevPage.classList.add("fade");
+    nextPage.classList.add("fade");
+    productList.forEach((item, i) => {
+      if (
+        item.name.toLowerCase().includes(searchValue) ||
+        item.id.toString().toLowerCase().includes(searchValue)
+      ) {
+        tableBodyProduct.innerHTML += basicProductRender(item, i);
+      }
+    });
+  } else {
+    newOutPut(productList);
+  }
 }
 //
 
@@ -290,7 +297,7 @@ export function newOutPut(productList) {
   const productPerPage = 5;
   const numberOfProducts = productList.length;
   let curPage = 1;
-  changePage(1);
+  changePage(1, productList, true);
   const onPage = document.querySelector(".currPage");
   let numberOfPages = Math.ceil(numberOfProducts / productPerPage);
   if (numberOfPages == 0) {
@@ -308,7 +315,7 @@ export function newOutPut(productList) {
       curPage++;
       prevPage.classList.remove("fade");
 
-      changePage(curPage);
+      changePage(curPage, productList);
 
       showPage();
       if (curPage == numberOfPages) {
@@ -321,7 +328,7 @@ export function newOutPut(productList) {
     if (1 < curPage) {
       curPage--;
       nextPage.classList.remove("fade");
-      changePage(curPage);
+      changePage(curPage, productList);
       showPage();
       if (curPage == 1) {
         this.classList.add("fade");
@@ -333,7 +340,7 @@ export function newOutPut(productList) {
   }
   onPage.innerHTML = curPage + "/" + numberOfPages;
 
-  function changePage(curPage) {
+  function changePage(curPage, productList) {
     tableBodyProduct.innerHTML = "";
     productList.forEach(function (product, i) {
       if ((curPage - 1) * productPerPage <= i && i < curPage * productPerPage) {

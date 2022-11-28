@@ -40,7 +40,7 @@ searchInput.addEventListener("keydown", function (event) {
 
 //
 
-function basicItemRenderList(product, index) {
+export function basicItemRenderList(product, index) {
   return `<div class="l-12 product">
   <div class="product-item">
       <div class="product-item__img">
@@ -73,7 +73,7 @@ function basicItemRenderList(product, index) {
 
 //
 
-function basicItemRenderGrid(product, index) {
+export function basicItemRenderGrid(product, index) {
   return `<div class="l-4 m-6 c-12 product">
   <div class="product__link">
       <div class="product-item product__img">
@@ -527,6 +527,7 @@ mobileFilterColor.forEach(function (color) {
 const mobileFilterType = document.querySelectorAll(".filter__option.type");
 mobileFilterType.forEach(function (type) {
   type.onclick = function () {
+    
     if (type.classList.contains("checked")) {
       type.classList.remove("checked");
     } else {
@@ -575,7 +576,7 @@ mobileFilterPrice.forEach(function (price) {
             product.price >= parseInt(priceValue[1]) &&
             product.price <= parseInt(priceValue[2])
           ) {
-            console.log(product.price);
+
             productGridList.innerHTML += basicItemRenderGrid(product, i);
           }
         } else {
