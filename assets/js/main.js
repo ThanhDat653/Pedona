@@ -1,5 +1,5 @@
 // import { outputCarts } from "./content/carts.js";
-import { outputProd } from "./product.js";
+import { newOutPut } from "./product.js";
 import { outputUsers } from "./users.js";
 import { sItem, gItem } from "./storage.js";
 const userKey = "userList";
@@ -7,16 +7,14 @@ const prodKey = "productList";
 const orderKey = "orderList";
 export { userKey, prodKey, orderKey };
 
-const tableBodyProduct = document.getElementById("table__body--products");
+let tableBodyProduct = document.getElementById("table__body--products");
 export { tableBodyProduct };
 const tableBodyUser = document.getElementById("table__body--users");
 export { tableBodyUser };
 const tableBodyOrder = document.getElementById("table__body--orders");
 export { tableBodyOrder };
-
-outputProd();
+newOutPut(gItem(prodKey));
 outputUsers();
-// outputOrders();
 
 //        Sidebar Size Change :Start
 const productPage = document.getElementById("products-page");
@@ -139,3 +137,16 @@ body.onscroll = function () {
     list[3].classList.add("side-bar__item--active");
   }
 };
+
+const searchBar = document.querySelectorAll(".search-bar");
+const searchInput = createArr(document.querySelectorAll(".search-input"));
+for (let i = 0; i < searchInput.length; i++) {
+  searchInput[i].onfocus = function () {
+    console.log(1);
+    searchBar[i].style.borderColor = "#cc2424";
+  };
+  searchInput[i].onblur = function () {
+    // searchBar[i].style.border = "solid 3px var(--text-color)";
+    searchBar[i].style.border = "";
+  };
+}

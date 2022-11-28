@@ -118,20 +118,21 @@ function createEditableImg(img, index) {
 
 //
 
-export function outputProd() {
-  let productList = gItem(prodKey);
-  tableBodyProduct.innerHTML = "";
-  productList.forEach(function (product, i) {
-    tableBodyProduct.innerHTML += basicProductRender(product, i);
-  });
+const searchInput = document.querySelector(".product.search-input");
+//
 
-  const prodNumber = createArr(document.querySelectorAll(".prod.number"));
+//
+function editRow(index) {
+  const rowList = document.querySelectorAll("#table__body--products .row");
+  rowList[index].style.border = "3px solid #cc2424";
+  rowList[index].classList.add("shadow-wrap");
+}
+//
+function productFeatures() {
+  let prodNumber = createArr(document.querySelectorAll(".prod.number"));
 
   let check = false;
-  let delButton = createArr(
-    document.querySelectorAll(".product.table__del-btn")
-  );
-  let fixSubmitButton = createArr(
+  const fixSubmitButton = createArr(
     document.querySelectorAll(".product.table__fix-submit")
   );
   let fixCancelButton = createArr(
@@ -144,6 +145,9 @@ export function outputProd() {
       }
     };
   });
+  let delButton = createArr(
+    document.querySelectorAll(".product.table__del-btn")
+  );
   delButton.forEach((item, index) => {
     item.onclick = () => {
       if (
@@ -153,7 +157,11 @@ export function outputProd() {
             " in the Store?"
         )
       ) {
-        deleteObject(index, productList, prodKey);
+        deleteObject(
+          parseInt(prodNumber[index].innerHTML) - 1,
+          productList,
+          prodKey
+        );
         location.reload();
       }
     };
@@ -166,15 +174,13 @@ export function outputProd() {
   fixButton.forEach((item, index) => {
     item.onclick = () => {
       if (check) {
-        alert("chỉ được sửa 1 đối tượng một lần ");
+        alert("Only change one item per time");
       } else {
         toggleButton(index);
-        createEditable(editableId[parseInt(prodNumber[index].innerHTML) - 1]);
-        createEditable(editableName[parseInt(prodNumber[index].innerHTML) - 1]);
-        createEditable(editableDesc[parseInt(prodNumber[index].innerHTML) - 1]);
-        createEditablePrice(
-          editablePrice[parseInt(prodNumber[index].innerHTML) - 1]
-        );
+        createEditable(editableId[index]);
+        createEditable(editableName[index]);
+        createEditable(editableDesc[index]);
+        createEditablePrice(editablePrice[index]);
         createEditableImg(
           editableImg[index],
           parseInt(prodNumber[index].innerHTML) - 1
@@ -194,15 +200,9 @@ export function outputProd() {
           }
           return true;
         }
-
         editRow(index);
         fixSubmitButton.forEach((item) => {
           changedArea.forEach(function (itemCheck, index) {
-            itemCheck.onkeydown = function (e) {
-              if (e.key == "Enter") {
-                this.blur();
-              }
-            };
             itemCheck.onblur = function () {
               const itemValue = itemCheck.value.trim();
               if (itemValue == null || itemValue == "") {
@@ -212,7 +212,7 @@ export function outputProd() {
               }
             };
           });
-          item.onclick = function () {
+          item.onclick = () => {
             if (!check) {
               toggleButton(index);
             }
@@ -224,12 +224,17 @@ export function outputProd() {
               )
             ) {
               if (validCheck()) {
-                productList[index].id = changedArea[0].value.trim();
-                productList[index].name = changedArea[1].value.trim();
-                productList[index].price = changedArea[2].value.trim();
-                productList[index].desc = changedArea[3].value.trim();
-                productList[index].img = gItem("imgconfig");
-
+                setColor();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].id =
+                  changedArea[0].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].name =
+                  changedArea[1].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].price =
+                  changedArea[2].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
+                  changedArea[3].value.trim();
+                productList[parseInt(prodNumber[index].innerHTML) - 1].img =
+                  gItem("imgconfig");
                 localStorage.setItem(prodKey, JSON.stringify(productList));
                 location.reload();
               } else {
@@ -253,171 +258,22 @@ export function outputProd() {
   const editableName = createArr(document.querySelectorAll(".product.name"));
   const editableDesc = createArr(document.querySelectorAll(".desc"));
   const editablePrice = createArr(document.querySelectorAll(".price"));
-
-  // :End
 }
-//
-
-//
-
-const searchInput = document.querySelector(".product.search-input");
-//
-
-//
-function editRow(index) {
-  const rowList = document.querySelectorAll("#table__body--products .row");
-  rowList[index].style.border = "3px solid #cc2424";
-  rowList[index].classList.add("shadow-wrap");
-}
-//
-
 //
 function searchProductList() {
-  // this.onkeydown = () => {
   const searchValue = searchInput.value.toLowerCase().trim();
   tableBodyProduct.innerHTML = "";
-  productList = gItem(prodKey) || defaultProducts;
+  productList = gItem(prodKey);
 
-  productList.forEach((item, i) => {
-    // if (item.name.includes(searchValue)) {
+  let filteredArr = productList.filter((item, i) => {
     if (
       item.name.toLowerCase().includes(searchValue) ||
       item.id.toString().toLowerCase().includes(searchValue)
     ) {
-      tableBodyProduct.innerHTML += basicProductRender(item, i);
+      return item;
     }
-    let prodNumber = createArr(document.querySelectorAll(".prod.number"));
-
-    let check = false;
-    const fixSubmitButton = createArr(
-      document.querySelectorAll(".product.table__fix-submit")
-    );
-    let fixCancelButton = createArr(
-      document.querySelectorAll(".product.table__fix-cancel")
-    );
-    fixCancelButton.forEach(function (item) {
-      item.onclick = function () {
-        if (confirm("Do you want to cancel?")) {
-          location.reload();
-        }
-      };
-    });
-    let delButton = createArr(
-      document.querySelectorAll(".product.table__del-btn")
-    );
-    delButton.forEach((item, index) => {
-      item.onclick = () => {
-        if (
-          confirm(
-            "Do you want to delete product No." +
-              parseInt(prodNumber[index].innerHTML) +
-              " in the Store?"
-          )
-        ) {
-          deleteObject(
-            parseInt(prodNumber[index].innerHTML) - 1,
-            productList,
-            prodKey
-          );
-          location.reload();
-        }
-      };
-    });
-
-    let fixButton = createArr(
-      document.querySelectorAll(".product.table__fix-btn")
-    );
-
-    fixButton.forEach((item, index) => {
-      item.onclick = () => {
-        if (check) {
-          alert("Only change one item per time");
-        } else {
-          toggleButton(index);
-          createEditable(editableId[index]);
-          createEditable(editableName[index]);
-          createEditable(editableDesc[index]);
-          createEditablePrice(editablePrice[index]);
-          createEditableImg(
-            editableImg[index],
-            parseInt(prodNumber[index].innerHTML) - 1
-          );
-
-          check = true;
-          let changedArea = createArr(document.querySelectorAll(".textarea"));
-
-          const errorShow = createArr(
-            document.querySelectorAll("textarea.textarea + span")
-          );
-          function validCheck() {
-            for (let i = 0; i < errorShow.length; i++) {
-              if (errorShow[i].classList.contains("invalid")) {
-                return false;
-              }
-            }
-            return true;
-          }
-          editRow(index);
-          fixSubmitButton.forEach((item) => {
-            changedArea.forEach(function (itemCheck, index) {
-              itemCheck.onblur = function () {
-                const itemValue = itemCheck.value.trim();
-                if (itemValue == null || itemValue == "") {
-                  errorShow[index].classList.add("invalid");
-                } else {
-                  errorShow[index].classList.remove("invalid");
-                }
-              };
-            });
-            item.onclick = () => {
-              if (!check) {
-                toggleButton(index);
-              }
-              if (
-                confirm(
-                  "Do you want to change product No." +
-                    parseInt(prodNumber[index].innerHTML) +
-                    " in the Store ?"
-                )
-              ) {
-                if (validCheck()) {
-                  setColor();
-                  productList[parseInt(prodNumber[index].innerHTML) - 1].id =
-                    changedArea[0].value.trim();
-                  productList[parseInt(prodNumber[index].innerHTML) - 1].name =
-                    changedArea[1].value.trim();
-                  productList[parseInt(prodNumber[index].innerHTML) - 1].price =
-                    changedArea[2].value.trim();
-                  productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
-                    changedArea[3].value.trim();
-                  productList[parseInt(prodNumber[index].innerHTML) - 1].img =
-                    gItem("imgconfig");
-                  localStorage.setItem(prodKey, JSON.stringify(productList));
-                  location.reload();
-                } else {
-                  alert("Please input all product values");
-                }
-              }
-            };
-          });
-        }
-      };
-    });
-
-    function toggleButton(index) {
-      fixButton[index].classList.toggle("close");
-      delButton[index].classList.toggle("close");
-      fixSubmitButton[index].classList.toggle("close");
-      fixCancelButton[index].classList.toggle("close");
-    }
-    const editableImg = createArr(document.querySelectorAll(".img"));
-    const editableId = createArr(document.querySelectorAll(".id"));
-    const editableName = createArr(document.querySelectorAll(".product.name"));
-    const editableDesc = createArr(document.querySelectorAll(".desc"));
-    const editablePrice = createArr(document.querySelectorAll(".price"));
-
-    // :End
   });
+  newOutPut(filteredArr);
 }
 //
 
@@ -427,3 +283,63 @@ searchInput.addEventListener("keypress", searchProductList);
 searchInput.addEventListener("input", searchProductList);
 searchInput.addEventListener("paste", searchProductList);
 searchInput.addEventListener("change", searchProductList);
+
+export function newOutPut(productList) {
+  const nextPage = document.querySelector(".nextPage");
+  const prevPage = document.querySelector(".prevPage");
+  const productPerPage = 5;
+  const numberOfProducts = productList.length;
+  let curPage = 1;
+  changePage(1);
+  const onPage = document.querySelector(".currPage");
+  let numberOfPages = Math.ceil(numberOfProducts / productPerPage);
+  if (numberOfPages == 0) {
+    curPage = 0;
+  }
+  if (curPage == numberOfPages) {
+    prevPage.classList.add("fade");
+    nextPage.classList.add("fade");
+  } else {
+    prevPage.classList.add("fade");
+    nextPage.classList.remove("fade");
+  }
+  nextPage.onclick = function () {
+    if (curPage < numberOfPages) {
+      curPage++;
+      prevPage.classList.remove("fade");
+
+      changePage(curPage);
+
+      showPage();
+      if (curPage == numberOfPages) {
+        this.classList.add("fade");
+      }
+    }
+  };
+
+  prevPage.onclick = function () {
+    if (1 < curPage) {
+      curPage--;
+      nextPage.classList.remove("fade");
+      changePage(curPage);
+      showPage();
+      if (curPage == 1) {
+        this.classList.add("fade");
+      }
+    }
+  };
+  function showPage() {
+    onPage.innerHTML = curPage + "/" + numberOfPages;
+  }
+  onPage.innerHTML = curPage + "/" + numberOfPages;
+
+  function changePage(curPage) {
+    tableBodyProduct.innerHTML = "";
+    productList.forEach(function (product, i) {
+      if ((curPage - 1) * productPerPage <= i && i < curPage * productPerPage) {
+        tableBodyProduct.innerHTML += basicProductRender(product, i);
+      }
+    });
+    productFeatures();
+  }
+}

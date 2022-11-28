@@ -112,14 +112,6 @@ function baseRenderOrder(i) {
     </div>
     <div class="col l-6 l-o-1 information">
       <div class="row   spc-btw">` +
-    //   <span>
-    //   User Name:  ` +
-    // orderList[i].name +
-    // `</span>
-    // <span>
-    // Order ID:  ` +
-    // orderList[i].orderID +
-    // `</span>
     `<div class="col ">User Name:  ` +
     orderList[i].name +
     `</div>
@@ -281,7 +273,9 @@ function searchOrderList() {
         item.name.includes(searchValue) ||
         item.userID.includes(searchValue) ||
         item.orderID.includes(searchValue)
-      ) {
+
+
+        ) {
         if (item.fullyCheck.toString() == checkerValue) {
           tableBodyOrder.innerHTML += baseRenderOrder(i);
         }
