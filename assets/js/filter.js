@@ -416,10 +416,6 @@ function categoryRender() {
   function filterInRangePrice() {
     const colorFil = document.querySelector(".color.checked ");
     const typeCheck = document.querySelector(".type.checked");
-    console.log(
-      "🚀 ~ file: filter.js ~ line 327 ~ filterInRangePrice ~ typeCheck",
-      typeCheck
-    );
     productGridList.innerHTML = "";
     productListList.innerHTML = "";
     if (colorFil != null && typeCheck != null) {
@@ -490,23 +486,99 @@ const mobileFilterColor = document.querySelectorAll(".filter__option.color");
 console.log(mobileFilterColor);
 mobileFilterColor.forEach(function (color) {
   color.onclick = function () {
-    productGridList.innerHTML = "";
-    productListList.innerHTML = "";
     if (color.classList.contains("checked")) {
       color.classList.remove("checked");
     } else {
-      let colorValue = color.className.split(" ")[1];
-      console.log(colorValue);
       let j = 0;
+      for (let i = 0; i < mobileFilter.length; i++) {
+        mobileFilter[i].classList.remove("checked");
+      }
       while (j < mobileFilterColor.length) {
         mobileFilterColor[j].classList.remove("checked");
         j++;
       }
       color.classList.add("checked");
+      productGridList.innerHTML = "";
       productList.forEach(function (product, i) {
+        let colorValue = color.className.split(" ")[1];
         if (product.color.includes(colorValue)) {
           productGridList.innerHTML += basicItemRenderGrid(product, i);
-          productListList.innerHTML += basicItemRenderList(product, i);
+        } else {
+          if (colorValue == "others") {
+            if (
+              product.color.includes("white") == false &&
+              product.color.includes("black") == false
+            ) {
+              productGridList.innerHTML += basicItemRenderGrid(product, i);
+            }
+          }
+        }
+      });
+    }
+  };
+});
+//
+
+//
+
+const mobileFilterType = document.querySelectorAll(".filter__option.type");
+mobileFilterType.forEach(function (type) {
+  type.onclick = function () {
+    if (type.classList.contains("checked")) {
+      type.classList.remove("checked");
+    } else {
+      let j = 0;
+      for (let i = 0; i < mobileFilter.length; i++) {
+        mobileFilter[i].classList.remove("checked");
+      }
+      while (j < mobileFilterType.length) {
+        mobileFilterType[j].classList.remove("checked");
+        j++;
+      }
+      type.classList.add("checked");
+      productGridList.innerHTML = "";
+      productList.forEach(function (product, i) {
+        let typeValue = type.className.split(" ")[1];
+        if (product.type.includes(typeValue)) {
+          productGridList.innerHTML += basicItemRenderGrid(product, i);
+        }
+      });
+    }
+  };
+});
+
+const mobileFilterPrice = document.querySelectorAll(".filter__option.price");
+const mobileFilter = document.querySelectorAll(".filter__option");
+mobileFilterPrice.forEach(function (price) {
+  price.onclick = function () {
+    if (price.classList.contains("checked")) {
+      price.classList.remove("checked");
+    } else {
+      for (let i = 0; i < mobileFilter.length; i++) {
+        mobileFilter[i].classList.remove("checked");
+      }
+      let j = 0;
+      while (j < mobileFilterPrice.length) {
+        mobileFilterPrice[j].classList.remove("checked");
+        j++;
+      }
+      price.classList.add("checked");
+      let priceValue = price.innerHTML.split(/[- $ &gt;]+/);
+      console.log(priceValue);
+      productGridList.innerHTML = "";
+      productList.forEach(function (product, i) {
+        if (priceValue[2] != null) {
+          if (
+            product.price >= parseInt(priceValue[1]) &&
+            product.price <= parseInt(priceValue[2])
+          ) {
+            console.log(product.price);
+            productGridList.innerHTML += basicItemRenderGrid(product, i);
+          }
+        } else {
+          if (product.price >= parseInt(priceValue[1])) {
+            productGridList.innerHTML += basicItemRenderGrid(product, i);
+          }
         }
       });
     }
