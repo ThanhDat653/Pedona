@@ -1,7 +1,7 @@
 import { tableBodyOrder } from "./main.js";
 
 import { createArr, orderKey } from "./main.js";
-import { gItem, sItem,} from "./storage.js";
+import { gItem, sItem } from "./storage.js";
 
 function displayCheck(item) {
   if (item) {
@@ -38,15 +38,33 @@ function baseRenderOrder(i) {
     (i + 1) +
     `
     </div>
-    <div class="col l-8 information">
-      <div class="row">User Name:  ` +
+    <div class="col l-6 l-o-1 information">
+      <div class="row   spc-btw">` +
+    //   <span>
+    //   User Name:  ` +
+    // orderList[i].name +
+    // `</span>
+    // <span>
+    // Order ID:  ` +
+    // orderList[i].orderID +
+    // `</span>
+    `<div class="col ">User Name:  ` +
     orderList[i].name +
     `</div>
-      <div class="row mt-16">Order ID:  ` +
+<div class="col ">Order ID:  ` +
     orderList[i].orderID +
     `</div>
     </div>
-	<div class="col l-2 ">
+      <div class="row   mt-16 spc-btw">
+      <div class="col ">Time : ` +
+    (orderList[i].time || Date.now()) +
+    `</div>
+<div class="col ">Total: ` +
+    orderList[i].total +
+    `$</div>
+    </div>
+    </div>
+	<div class="col l-2 l-o-1 ">
     <span class="check ` +
     (orderList[i].fullyCheck || false) +
     `"> Fully-checked </span>
@@ -130,15 +148,6 @@ function renderOrderDetails() {
           </div>
         </div>`;
         });
-        orderView[indexButton].innerHTML +=
-          `<div class="row no-gutters js-mid">
-          <div class="col l-3">Time : ` +
-          (orderList[indexButton].time || Date.now()) +
-          `</div>
-    <div class="col l-3 l-o-6">Total: ` +
-          orderList[indexButton].total +
-          `$</div>
-    </div>`;
         let h = orderView[indexButton].scrollHeight;
         let i = 0;
         while (i <= h) {

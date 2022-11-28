@@ -403,7 +403,15 @@ a {
   align-self: center;
   text-align: center;
 }
-
+.row div.col.l-o-6 {
+  margin-left:50%
+}
+.row div.col.l-o-5 {
+  margin-left: 41.66667%;
+}
+.row div.col.l-o-1{
+  margin-left: 8.33333%
+}
 .table__header {
   text-transform: uppercase;
   height: 32px;
