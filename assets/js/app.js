@@ -714,6 +714,7 @@ purchaseButton.addEventListener("click", function () {
     productList: cartOfUserCurrent,
     time: date,
     total: total,
+    fullyCheck: false
   };
 
   // update ordersList
@@ -723,18 +724,22 @@ purchaseButton.addEventListener("click", function () {
   cartOfUserCurrent = [];
   updateUserList();
   renderCartlistOfUserCurrent();
-  renderOderlistOfUserCurrent();
-  openOrderList();
+  renderOrderListOfUserCurrent(); 
+  orderList();
 });
 
-function renderOderlistOfUserCurrent() {
-  let userID = userCurrent.userID;
+
+
+function renderOrderListOfUserCurrent() {
+  // let userID = userCurrent.userID;
   let orderListElement = document.querySelector(".orders-list");
+  let mobileOrderListElement = document.querySelector(".mobile__orders-list");
   let ordersListOfUserCurrent = ordersList.filter(function(order) {
-    return order.userID === userID;
+    return order.userID === userCurrent.userID;
   })
 
-  orderListElement.innerHTML = ""
+  orderListElement.innerHTML = "";
+  mobileOrderListElement.innerHTML = "";
   
   // Render the order list
   ordersListOfUserCurrent.forEach(function(order, index) {
@@ -755,39 +760,45 @@ function renderOderlistOfUserCurrent() {
 
         </div>
 
-        <div class="orders-item__layer">
-          <div class="orders-item__body">
-              <div class="orders-item__heading">
+        
+      </li>
+      
+      <div class="orders-item__layer">
+        <div class="orders-item__body">
+          <div class="orders-item__heading">
 
-                  <div class="orders-close__btn">
-                      <i class="fa-solid fa-xmark"></i>
-                  </div>
-                  
-                  <div class="orders-item__info">
-                      <div class="header-info">
-                          <span class="orders-item__user-name">${order.name}</span>
-                          <span class="orders-item__order-name">Order ID: ${order.orderID}</span>
-                      </div>
-
-                      <div class="detail-info">
-                          <span class="orders-item__time">Date: ${order.time}</span>
-                          <span class="orders-item__total"><mark>Total: $ ${order.total}</mark></span>
-                      </div>
-                  </div>
-
+            <div class="orders-close__btn">
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            
+            <div class="orders-item__info">
+              <div class="header-info">
+                  <span class="orders-item__user-name">${order.name}</span>
+                  <span class="orders-item__order-name">Order ID: ${order.orderID}</span>
               </div>
 
-              <ul class="orders-item_list">
-              
-              </ul>
+              <div class="detail-info">
+                  <span class="orders-item__time">Date: ${order.time}</span>
+                  <span class="orders-item__total"><mark>Total: $ ${order.total}</mark></span>
+              </div>
             </div>
-          </div>
-      </li>`
-        
-        orderListElement.insertAdjacentHTML('beforeend', temp);
 
+            </div>
+
+            <ul class="orders-item_list">
+            
+            </ul>
+        </div>
+      </div>`
+        
+      orderListElement.insertAdjacentHTML('beforeend', temp);
+      mobileOrderListElement.insertAdjacentHTML('beforeend', temp);
+
+
+      
     // Render the produt list in each order
     let orderProductListElement = document.querySelectorAll(".orders-item_list");
+    let mobileOrderProductListElement = document.querySelectorAll(".orders .orders-item_list");
     order.productList.forEach(function (item) { 
       temp = 
       `<li class="orders-product">
@@ -808,39 +819,91 @@ function renderOderlistOfUserCurrent() {
           </div>
         </div>
       </li>`
-      orderProductListElement[index].insertAdjacentHTML('beforeend', temp)
+      orderProductListElement[index].insertAdjacentHTML('beforeend', temp);
+      mobileOrderProductListElement[index].insertAdjacentHTML('beforeend', temp);
     })
   })
-
+  // orderItemCheck();
 }
 
-function openOrderList(event) {
-  let orderItems = document.querySelectorAll(".orders-item > .orders-item__heading");
-  let orderModals = document.querySelectorAll(".orders-item__layer");
+// function orderItemCheck() {
+//   let ordersListOfUserCurrent = ordersList.filter(function(order) {
+//     return order.userID === userCurrent.userID;
+//   })
+//   let orderItemBody = document.querySelectorAll(".orders-item__body > .orders-item__heading");
+//   let mobileOrderItemBody = document.querySelectorAll("mobile__orders-list .orders-item__body > .orders-item__heading");
+  
+//   ordersListOfUserCurrent.forEach(function(order, index) {
+//       if(order.fullyCheck == true) {
+//         orderItemBody[index].classList.add("background-color__checked");
+//         mobileOrderItemBody[index].classList.add("background-color__checked");
+//       }
+//       else{
+//         orderItemBody[index].classList.add("background-color__unchecked");
+//         mobileOrderItemBody[index].classList.add("background-color__unchecked");
+//       }  
+//   })
+// }
+
+function orderList() {
+  let orderModalLayers = document.querySelectorAll(".orders-item__layer");
+  let orderItems = document.querySelectorAll(".orders-item");
   let orderCloseBtn = document.querySelectorAll(".orders-close__btn");
+  let orderModals = document.querySelectorAll(".orders-item__body");
 
   orderItems.forEach(function(orderItem, index) { 
     orderItem.addEventListener('click', function() {
-      orderModals[index].classList.toggle('orders-item__layer--display__flex');
+      orderModalLayers[index].classList.add('orders-item__layer--display__flex');
     })
 
-    orderCloseBtn[index].addEventListener("click", function() {
-      orderModals[index].classList.toggle('orders-item__layer--display__flex');
+    orderCloseBtn[index].addEventListener('click', function(event) {
+      orderModalLayers[index].classList.remove('orders-item__layer--display__flex');
+    })
+
+    orderModalLayers[index].addEventListener('click', function() {
+      orderModalLayers[index].classList.remove('orders-item__layer--display__flex');
+    })
+
+    orderModals[index].addEventListener('click', function(e) { 
+      e.stopPropagation();
     })
   })
 }
 
 // ----- ORDERS: End -----
 
-document.querySelector(".orders").addEventListener('click', openOrderList())
+let ordersListContainerElement = document.querySelector(".orders > .orders-list-container")
+let iconOrderList = document.querySelector(".orders");
+let sideMenuLayer = document.querySelector(".header__side-menu-container");
+let sideMenu = document.querySelector(".header__side-menu");
 
-// location.reload(openOrderList())
+
+
+iconOrderList.addEventListener('click', function(event) {
+  orderList();
+  ordersListContainerElement.classList.add("open")
+  event.stopPropagation();
+})
+
+ordersListContainerElement.addEventListener('click', function(e) {
+  e.stopPropagation();
+})
+
+sideMenuLayer.addEventListener('click', function() {
+  ordersListContainerElement.classList.remove("open")
+})
+
+sideMenu.addEventListener('click', function() {
+  ordersListContainerElement.classList.remove("open")
+})
 
 addToCart();
 renderCartlistOfUserCurrent();
 setQuantityOfProduct();
-openOrderList();
-renderOderlistOfUserCurrent();
+renderOrderListOfUserCurrent();
+orderList();
+
+
 
 // Click to open/close filter options in mobile
 
