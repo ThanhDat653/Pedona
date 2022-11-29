@@ -11,6 +11,74 @@ function displayCheck(item) {
     return "Chưa xử lý";
   }
 }
+function bigCheck(item) {
+  if (item) {
+    return "Fully Checked";
+  } else {
+    return "Haven't Checked";
+  }
+}
+
+const checkerListener = document.querySelectorAll(".checker");
+
+checkerListener.forEach(function (item) {
+  item.onclick = function () {
+    let orderList = gItem(orderKey );
+    const checkValue = item.className.split(" ")[1];
+    if (item.classList.contains("checked")) {
+      item.classList.remove("checked");
+      item.checked = false;
+      let searchValue = searchInput.value;
+      tableBodyOrder.innerHTML = "";
+      if (searchValue != "") {
+        orderList.forEach(function (order, i) {
+          if (
+            order.name.includes(searchValue) ||
+            order.orderID.includes(searchValue) ||
+            order.userID.includes(searchValue)
+          ) {
+            tableBodyOrder.innerHTML += baseRenderOrder(i);
+          }
+          renderOrderDetails();
+        });
+      } else {
+        outputOrders();
+      }
+    } else {
+      let j = 0;
+      while (j < checkerListener.length) {
+        checkerListener[j].classList.remove("checked");
+        checkerListener[j].checked = false;
+        j++;
+      }
+      item.classList.add("checked");
+      let searchValue = searchInput.value.trim();
+      tableBodyOrder.innerHTML = "";
+      if (searchValue != "") {
+        orderList.forEach(function (order, i) {
+          if (
+            order.name.includes(searchValue) ||
+            order.orderID.includes(searchValue) ||
+            order.userID.includes(searchValue)
+          ) {
+            if (checkValue == order.fullyCheck.toString()) {
+              tableBodyOrder.innerHTML += baseRenderOrder(i);
+            }
+            renderOrderDetails();
+          }
+        });
+      } else {
+        tableBodyOrder.innerHTML = "";
+        orderList.forEach(function (order, i) {
+          if (checkValue == order.fullyCheck.toString()) {
+            tableBodyOrder.innerHTML += baseRenderOrder(i);
+          }
+          renderOrderDetails();
+        });
+      }
+    }
+  };
+});
 
 function fullCheck(item, index, button) {
   const check_True = createArr(document.querySelectorAll("button.check.true"));
@@ -19,11 +87,15 @@ function fullCheck(item, index, button) {
     orderList[index].fullyCheck = true;
     fullCheckDisplay[index].classList.add("true");
     fullCheckDisplay[index].classList.remove("false");
+    fullCheckDisplay[index].innerHTML = "Fully Checked";
+
     button.classList.add("true");
     button.innerHTML = "✓";
   } else {
     fullCheckDisplay[index].classList.remove("true");
     fullCheckDisplay[index].classList.add("false");
+    fullCheckDisplay[index].innerHTML = "Haven't Checked";
+
     orderList[index].fullyCheck = false;
     button.classList.remove("true");
     button.innerHTML = `<i class="fa-solid fa-caret-left fa-xl"></i>`;
@@ -40,18 +112,30 @@ function baseRenderOrder(i) {
     (i + 1) +
     `
     </div>
-    <div class="col l-8 information">
-      <div class="row">User Name:  ` +
+    <div class="col l-6 l-o-1 information">
+      <div class="row   spc-btw">` +
+    `<div class="col ">User Name:  ` +
     orderList[i].name +
     `</div>
-      <div class="row mt-16">Order ID:  ` +
+<div class="col ">Order ID:  ` +
     orderList[i].orderID +
     `</div>
     </div>
-	<div class="col l-2 ">
+      <div class="row   mt-16 spc-btw">
+      <div class="col ">Time : ` +
+    (orderList[i].time || Date.now()) +
+    `</div>
+<div class="col ">Total: ` +
+    orderList[i].total +
+    `$</div>
+    </div>
+    </div>
+	<div class="col l-2 l-o-1 ">
     <span class="check ` +
     (orderList[i].fullyCheck || false) +
-    `"> Fully-checked </span>
+    `"> ` +
+    bigCheck(orderList[i].fullyCheck || false) +
+    ` </span>
     </div>
     <div class="col l-1 order-detail__btn">
       <button class="order-full ` +
@@ -64,7 +148,7 @@ function baseRenderOrder(i) {
   </div>`
   );
 }
-const orderList = gItem("orderList") || defaultOrders;
+const orderList = gItem("orderList");
 function renderOrderDetails() {
   const orderView = document.querySelectorAll(".details-view");
   const viewButton = document.querySelectorAll(".order-full");
@@ -132,15 +216,6 @@ function renderOrderDetails() {
           </div>
         </div>`;
         });
-        orderView[indexButton].innerHTML +=
-          `<div class="row no-gutters js-mid">
-          <div class="col l-3">Time : ` +
-          (orderList[indexButton].time || Date.now()) +
-          `</div>
-    <div class="col l-3 l-o-6">Total: ` +
-          orderList[indexButton].total +
-          `$</div>
-    </div>`;
         let h = orderView[indexButton].scrollHeight;
         let i = 0;
         while (i <= h) {
@@ -189,15 +264,38 @@ export function outputOrders() {
 outputOrders();
 const searchInput = document.querySelector(".order.search-input");
 function searchOrderList() {
-  const searchValue = searchInput.value;
+  const searchValue = searchInput.value.toLowerCase().trim();
   tableBodyOrder.innerHTML = "";
+  let checker = document.querySelector(".checker.checked");
+
   orderList.forEach((item, i) => {
-    if (item.name.includes(searchValue)) {
-      tableBodyOrder.innerHTML += baseRenderOrder(i);
+    if (checker != null) {
+      let checkerValue = checker.className.split(" ")[1];
+      if (
+        item.name.includes(searchValue) ||
+        item.userID.includes(searchValue) ||
+        item.orderID.includes(searchValue)
+
+
+        ) {
+        if (item.fullyCheck.toString() == checkerValue) {
+          tableBodyOrder.innerHTML += baseRenderOrder(i);
+        }
+        renderOrderDetails();
+      }
+    } else {
+      if (
+        item.name.includes(searchValue) ||
+        item.userID.includes(searchValue) ||
+        item.orderID.includes(searchValue)
+      ) {
+        tableBodyOrder.innerHTML += baseRenderOrder(i);
+      }
+      renderOrderDetails();
     }
-    renderOrderDetails();
   });
 }
+
 searchInput.addEventListener("keypress", searchOrderList);
 searchInput.addEventListener("input", searchOrderList);
 searchInput.addEventListener("paste", searchOrderList);

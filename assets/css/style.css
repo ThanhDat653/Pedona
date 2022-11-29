@@ -422,7 +422,17 @@
     color: var(--primary-color);
     transition: all .4s ease;
  }
-
+ /* Tam fix */
+  /* Tam 25/11/2022 */
+  .user_menu_item.admin-btn{
+    display: none;
+    color: red;
+ }
+ /* Tam 25/11/2022 */
+ .user_menu_item.admin-btn:hover {
+    cursor: pointer;
+}
+/* Tam fix  */
  .user_orders {
     position: relative;
  }
@@ -2025,5 +2035,9 @@ button.ghost {
 
 .category-item.checked .category-item__link span {
     color: var(--primary-color);
+}
+
+.pagination__menu {
+    display: flex;
 }
 /* Khánh Hoàng */
