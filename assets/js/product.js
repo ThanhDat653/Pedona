@@ -8,18 +8,28 @@ let productList = gItem("productList");
 //
 
 //
-
+function checkInput() {
+  console.log(this.value);
+  if (this.max)
+    this.value = Math.min(parseInt(this.max), parseInt(this.value)) || "";
+  // if max value is less than input value means that value is out of range
+}
 function createEditablePrice(item) {
-  let area = document.createElement("div");
+  let area = document.createElement("label");
   area.className = item.className;
   area.innerHTML =
-    `<textarea class="textarea price" inputmode="numeric" rows="2" cols="2">` +
-    item.innerHTML.split("$")[0].trim() +
-    `</textarea>` +
-    `<span class="col l-12 invalid-input ">Please input product price</span>
-`;
+    `<input id="configPrice" class="input textarea" type="number" inputmode="numeric" name="price" value="` +
+    parseInt(item.innerHTML) +
+    `" max="1000" min="200" />`;
+  area.htmlFor = "configPrice";
 
   item.replaceWith(area);
+  document
+    .querySelector("#configPrice")
+    .addEventListener("keypress", checkInput);
+  document.querySelector("#configPrice").addEventListener("input", checkInput);
+  document.querySelector("#configPrice").addEventListener("paste", checkInput);
+  document.querySelector("#configPrice").addEventListener("change", checkInput);
 }
 //
 
@@ -188,6 +198,7 @@ function productFeatures() {
 
         check = true;
         let changedArea = createArr(document.querySelectorAll(".textarea"));
+        console.log(changedArea);
 
         const errorShow = createArr(
           document.querySelectorAll("textarea.textarea + span")
@@ -230,7 +241,7 @@ function productFeatures() {
                 productList[parseInt(prodNumber[index].innerHTML) - 1].name =
                   changedArea[1].value.trim();
                 productList[parseInt(prodNumber[index].innerHTML) - 1].price =
-                  changedArea[2].value.trim();
+                  parseInt(changedArea[2].value.trim());
                 productList[parseInt(prodNumber[index].innerHTML) - 1].desc =
                   changedArea[3].value.trim();
                 productList[parseInt(prodNumber[index].innerHTML) - 1].img =

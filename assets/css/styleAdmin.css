@@ -919,13 +919,6 @@ button.order-full.true {
   transform:translate(-50%,-50%);
 }
 
-#icon {
-
-}
-
-.icon__text {
- 
-}
 
 #product__desc {
   resize: none;
@@ -934,6 +927,11 @@ button.order-full.true {
 
 .modal__footer {
   height: 50px;
+}
+
+#configPrice {
+  box-shadow:initial;
+  width: 100%;
 }
 
 #submit-prod {

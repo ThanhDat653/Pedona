@@ -195,7 +195,8 @@ inputPrice.addEventListener("input", checkInput);
 inputPrice.addEventListener("paste", checkInput);
 inputPrice.addEventListener("change", checkInput);
 
-function checkInput() {
+export function checkInput() {
+  console.log(this.value);
   if (this.max)
     this.value = Math.min(parseInt(this.max), parseInt(this.value)) || "";
   // if max value is less than input value means that value is out of range
