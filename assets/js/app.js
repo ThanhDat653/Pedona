@@ -409,22 +409,22 @@ description();
 
 // DISPLAY VIEW MODE
 
-// const gridModeOption = document.querySelector(".view-mode__grid");
-// const listModeOption = document.querySelector(".view-mode__list");
+const gridModeOption = document.querySelector(".view-mode__grid");
+const listModeOption = document.querySelector(".view-mode__list");
 
-// const gridList = document.querySelector(".list-product__grid");
-// const listList = document.querySelector(".list-product__list");
+const gridList = document.querySelector(".list-product__grid");
+const listList = document.querySelector(".list-product__list");
 
-// function viewMode() {
-//   gridList.classList.toggle("close-view-mode");
-//   gridModeOption.classList.toggle("current-view");
+function viewMode() {
+  gridList.classList.toggle("close-view-mode");
+  gridModeOption.classList.toggle("current-view");
 
-//   listList.classList.toggle("close-view-mode");
-//   listModeOption.classList.toggle("current-view");
-// }
+  listList.classList.toggle("close-view-mode");
+  listModeOption.classList.toggle("current-view");
+}
 
-// gridModeOption.addEventListener("click", viewMode);
-// listModeOption.addEventListener("click", viewMode);
+gridModeOption.addEventListener("click", viewMode);
+listModeOption.addEventListener("click", viewMode);
 
 function renderPageNumber(i) {
   return ` <li class="pagination-item pages page${i}">
@@ -437,7 +437,7 @@ export function paginationRender(products) {
   const nextPage = document.querySelector(".pagination-next ");
   let curPage = 1;
   const productPerPage = 6;
-  const numberOfProducts = products.length ||0;
+  const numberOfProducts = products.length || 0;
   const pageList = document.querySelector(".pagination__menu");
   const numberOfPages = Math.ceil(numberOfProducts / productPerPage);
   pageList.innerHTML = "";
@@ -506,9 +506,18 @@ export function paginationRender(products) {
           productGridList.innerHTML += basicItemRenderGrid(product, i);
         }
       });
+      productListList.innerHTML = "";
+      products.forEach(function (product, i) {
+        if (
+          (curPage - 1) * productPerPage <= i &&
+          i < curPage * productPerPage
+        ) {
+          productListList.innerHTML += basicItemRenderList(product, i);
+        }
+      });
+      description();
+      addToCart();
     }
-    description();
-    addToCart();
     function toggleButton(item) {
       let j = 0;
       while (j < onPage.length) {
@@ -919,9 +928,8 @@ function renderOrderListOfUserCurrent() {
         temp
       );
     });
+    orderItemCheck();
   });
-
-  orderItemCheck();
 }
 
 export function orderItemCheck() {
