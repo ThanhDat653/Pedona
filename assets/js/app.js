@@ -154,7 +154,6 @@ products.forEach(function (product, index) {
 
 description();
 
-
 // DISPLAY VIEW MODE
 
 const gridModeOption = document.querySelector(".view-mode__grid");
@@ -181,6 +180,7 @@ function renderPageNumber(i) {
 }
 
 export function paginationRender(products) {
+  const productList = gItem("productList");
   const prevPage = document.querySelector(".pagination-prev ");
   const nextPage = document.querySelector(".pagination-next ");
   let curPage = 1;
@@ -193,6 +193,13 @@ export function paginationRender(products) {
     changePage(1, products);
     for (let i = 1; i <= numberOfPages; i++) {
       pageList.innerHTML += renderPageNumber(i);
+    }
+    if (numberOfPages == 1) {
+      nextPage.classList.add("close-view-mode");
+      prevPage.classList.add("close-view-mode");
+    } else {
+      prevPage.classList.add("close-view-mode");
+      nextPage.classList.remove("close-view-mode");
     }
     const onPage = document.querySelectorAll(".pagination-item.pages");
     onPage[0].classList.add("pagination-item__active");
@@ -215,6 +222,7 @@ export function paginationRender(products) {
             nextPage.classList.remove("close-view-mode");
           }
         }
+
         changePage(curPage, products);
         description();
         // addToCart();
@@ -222,9 +230,9 @@ export function paginationRender(products) {
       };
     });
     // description();
-        // addToCart();
+    // addToCart();
     //     removeProductInCart();
-      
+
     prevPage.onclick = function () {
       if (1 < curPage) {
         curPage--;
@@ -258,7 +266,10 @@ export function paginationRender(products) {
           (curPage - 1) * productPerPage <= i &&
           i < curPage * productPerPage
         ) {
-          productGridList.innerHTML += basicItemRenderGrid(product, i);
+          productGridList.innerHTML += basicItemRenderGrid(
+            product,
+            productList.map((x) => x.id).indexOf(product.id)
+          );
         }
       });
       description();
@@ -270,7 +281,10 @@ export function paginationRender(products) {
           (curPage - 1) * productPerPage <= i &&
           i < curPage * productPerPage
         ) {
-          productListList.innerHTML += basicItemRenderList(product, i);
+          productListList.innerHTML += basicItemRenderList(
+            product,
+            productList.map((x) => x.id).indexOf(product.id)
+          );
         }
       });
       addToCart();
@@ -287,8 +301,7 @@ export function paginationRender(products) {
     nextPage.classList.add("close-view-mode");
     prevPage.classList.add("close-view-mode");
   }
-        // addToCart();
-
+  // addToCart();
 }
 
 paginationRender(products);
