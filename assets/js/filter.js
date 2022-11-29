@@ -1,5 +1,5 @@
 import { gItem } from "./storage.js";
-import { addToCart, description } from "./app.js";
+import { addToCart, description, paginationRender } from "./app.js";
 
 const categoryColor = document.querySelector(".product-category__group-color");
 const categoryType = document.querySelector(".product-category__group-type");
@@ -245,7 +245,7 @@ function categoryRender() {
 
   //
 
-  const colorButton = document.querySelectorAll(".color");
+  let colorButton = document.querySelectorAll(".color");
   colorButton.forEach(function (colorFil) {
     colorFil.onclick = function () {
       const typeCheck = document.querySelector(".type.checked");
@@ -261,28 +261,28 @@ function categoryRender() {
         if (typeCheck != null) {
           const typeValue = typeCheck.className.split(" ")[2];
           const colorValue = colorFil.className.split(" ")[2];
-          productList.forEach(function (item, index) {
-            if (
-              item.type == typeValue &&
-              item.price <= filterPrice.value &&
-              item.color == colorValue
-            ) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-              addToCart();
-              description();
-            }
-          });
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (
+                item.type == typeValue &&
+                item.price <= filterPrice.value &&
+                item.color == colorValue
+              ) {
+                return item;
+              }
+            })
+          );
+          addToCart();
+          description();
         } else {
           const colorValue = colorFil.className.split(" ")[2];
-          productList.forEach(function (item, index) {
-            if (item.color == colorValue && item.price <= filterPrice.value) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-              addToCart();
-              description();
-            }
-          });
+          paginationRender(
+            productList.filter(function (item) {
+              if (item.color == colorValue && item.price <= filterPrice.value) {
+                return item;
+              }
+            })
+          );
         }
 
         colorFil.classList.add("checked");
@@ -292,23 +292,21 @@ function categoryRender() {
         if (typeCheck != null) {
           const typeValue = typeCheck.className.split(" ")[2];
           const colorValue = colorFil.className.split(" ")[2];
-          productList.forEach(function (item, index) {
-            if (item.type == typeValue && item.price <= filterPrice.value) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-              addToCart();
-              description();
-            }
-          });
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (item.type == typeValue && item.price <= filterPrice.value) {
+                return item;
+              }
+            })
+          );
         } else {
-          productList.forEach(function (item, index) {
-            if (item.price <= filterPrice.value) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-              addToCart();
-              description();
-            }
-          });
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (item.price <= filterPrice.value) {
+                return item;
+              }
+            })
+          );
         }
         colorFil.classList.remove("checked");
       }
@@ -318,7 +316,7 @@ function categoryRender() {
 
   //
 
-  const typeButton = document.querySelectorAll(".type");
+  let typeButton = document.querySelectorAll(".type");
   typeButton.forEach(function (typeBtn) {
     typeBtn.onclick = function () {
       const colorFil = document.querySelector(".color.checked");
@@ -334,24 +332,26 @@ function categoryRender() {
         if (colorFil != null) {
           const typeValue = typeBtn.className.split(" ")[2];
           const colorValue = colorFil.className.split(" ")[2];
-          productList.forEach(function (item, index) {
-            if (
-              item.type == typeValue &&
-              item.price <= filterPrice.value &&
-              item.color == colorValue
-            ) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-            }
-          });
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (
+                item.type == typeValue &&
+                item.price <= filterPrice.value &&
+                item.color == colorValue
+              ) {
+                return item;
+              }
+            })
+          );
         } else {
           const typeValue = typeBtn.className.split(" ")[2];
-          productList.forEach(function (item, index) {
-            if (item.type == typeValue && item.price <= filterPrice.value) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-            }
-          });
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (item.type == typeValue && item.price <= filterPrice.value) {
+                return item;
+              }
+            })
+          );
         }
         typeBtn.classList.add("checked");
       } else {
@@ -360,19 +360,21 @@ function categoryRender() {
         productListList.innerHTML = "";
         if (colorFil != null) {
           const colorValue = colorFil.className.split(" ")[2];
-          productList.forEach(function (item, index) {
-            if (item.price <= filterPrice.value && item.color == colorValue) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-            }
-          });
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (item.price <= filterPrice.value && item.color == colorValue) {
+                return item;
+              }
+            })
+          );
         } else {
-          productList.forEach(function (item, index) {
-            if (item.price <= filterPrice.value) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-            }
-          });
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (item.price <= filterPrice.value) {
+                return item;
+              }
+            })
+          );
         }
       }
     };
@@ -407,53 +409,49 @@ function categoryRender() {
     productGridList.innerHTML = "";
     productListList.innerHTML = "";
     if (colorFil != null && typeCheck != null) {
-      productList.forEach(function (item, index) {
-        if (
-          item.price <= filterPrice.value - 1 &&
-          item.color == colorFil.className.split(" ")[2] &&
-          item.type == typeCheck.className.split(" ")[2]
-        ) {
-          productGridList.innerHTML += basicItemRenderGrid(item, index);
-          productListList.innerHTML += basicItemRenderList(item, index);
-        }
-        addToCart();
-        description();
-      });
+      paginationRender(
+        productList.filter(function (item, index) {
+          if (
+            item.price <= filterPrice.value - 1 &&
+            item.color == colorFil.className.split(" ")[2] &&
+            item.type == typeCheck.className.split(" ")[2]
+          ) {
+            return item;
+          }
+        })
+      );
     } else {
       if (colorFil != null) {
-        productList.forEach(function (item, index) {
-          if (
-            colorFil.className.split(" ")[2] == item.color &&
-            item.price <= filterPrice.value - 1
-          ) {
-            productGridList.innerHTML += basicItemRenderGrid(item, index);
-            productListList.innerHTML += basicItemRenderList(item, index);
-            addToCart();
-            description();
-          }
-        });
-      } else {
-        if (typeCheck != null) {
-          productList.forEach(function (item, index) {
+        paginationRender(
+          productList.filter(function (item, index) {
             if (
-              item.type == typeCheck.className.split(" ")[2] &&
+              colorFil.className.split(" ")[2] == item.color &&
               item.price <= filterPrice.value - 1
             ) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
+              return item;
             }
-            addToCart();
-            description();
-          });
+          })
+        );
+      } else {
+        if (typeCheck != null) {
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (
+                item.type == typeCheck.className.split(" ")[2] &&
+                item.price <= filterPrice.value - 1
+              ) {
+                return item;
+              }
+            })
+          );
         } else {
-          productList.forEach(function (item, index) {
-            if (item.price <= filterPrice.value - 1) {
-              productGridList.innerHTML += basicItemRenderGrid(item, index);
-              productListList.innerHTML += basicItemRenderList(item, index);
-            }
-            addToCart();
-            description();
-          });
+          paginationRender(
+            productList.filter(function (item, index) {
+              if (item.price <= filterPrice.value - 1) {
+                return item;
+              }
+            })
+          );
         }
       }
     }

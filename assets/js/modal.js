@@ -197,7 +197,7 @@ inputPrice.addEventListener("change", checkInput);
 
 function checkInput() {
   if (this.max)
-    this.value = Math.min(parseInt(this.max), parseInt(this.value) || 200);
+    this.value = Math.min(parseInt(this.max), parseInt(this.value)) || "";
   // if max value is less than input value means that value is out of range
 }
 
@@ -218,7 +218,7 @@ function addObject() {
   const name = document.getElementById("product__name").value;
   const color = getColor(document.form_add.color.value);
   const type = document.getElementById("product__type").value;
-  const price = document.getElementById("product__price").value;
+  const price = parseInt(document.getElementById("product__price").value);
   const desc = document.getElementById("product__desc").value;
 
   // if (validInput) {
