@@ -263,9 +263,9 @@ function categoryRender() {
           const colorValue = colorFil.className.split(" ")[2];
           productList.forEach(function (item, index) {
             if (
-              item.type.includes(typeValue) &&
+              item.type == typeValue &&
               item.price <= filterPrice.value &&
-              item.color.includes(colorValue)
+              item.color == colorValue
             ) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
@@ -276,10 +276,7 @@ function categoryRender() {
         } else {
           const colorValue = colorFil.className.split(" ")[2];
           productList.forEach(function (item, index) {
-            if (
-              item.color.includes(colorValue) &&
-              item.price <= filterPrice.value
-            ) {
+            if (item.color == colorValue && item.price <= filterPrice.value) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
               addToCart();
@@ -296,10 +293,7 @@ function categoryRender() {
           const typeValue = typeCheck.className.split(" ")[2];
           const colorValue = colorFil.className.split(" ")[2];
           productList.forEach(function (item, index) {
-            if (
-              item.type.includes(typeValue) &&
-              item.price <= filterPrice.value
-            ) {
+            if (item.type == typeValue && item.price <= filterPrice.value) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
               addToCart();
@@ -342,9 +336,9 @@ function categoryRender() {
           const colorValue = colorFil.className.split(" ")[2];
           productList.forEach(function (item, index) {
             if (
-              item.type.includes(typeValue) &&
+              item.type == typeValue &&
               item.price <= filterPrice.value &&
-              item.color.includes(colorValue)
+              item.color == colorValue
             ) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
@@ -353,10 +347,7 @@ function categoryRender() {
         } else {
           const typeValue = typeBtn.className.split(" ")[2];
           productList.forEach(function (item, index) {
-            if (
-              item.type.includes(typeValue) &&
-              item.price <= filterPrice.value
-            ) {
+            if (item.type == typeValue && item.price <= filterPrice.value) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
             }
@@ -370,10 +361,7 @@ function categoryRender() {
         if (colorFil != null) {
           const colorValue = colorFil.className.split(" ")[2];
           productList.forEach(function (item, index) {
-            if (
-              item.price <= filterPrice.value &&
-              item.color.includes(colorValue)
-            ) {
+            if (item.price <= filterPrice.value && item.color == colorValue) {
               productGridList.innerHTML += basicItemRenderGrid(item, index);
               productListList.innerHTML += basicItemRenderList(item, index);
             }
@@ -527,7 +515,6 @@ mobileFilterColor.forEach(function (color) {
 const mobileFilterType = document.querySelectorAll(".filter__option.type");
 mobileFilterType.forEach(function (type) {
   type.onclick = function () {
-    
     if (type.classList.contains("checked")) {
       type.classList.remove("checked");
     } else {
@@ -576,7 +563,6 @@ mobileFilterPrice.forEach(function (price) {
             product.price >= parseInt(priceValue[1]) &&
             product.price <= parseInt(priceValue[2])
           ) {
-
             productGridList.innerHTML += basicItemRenderGrid(product, i);
           }
         } else {

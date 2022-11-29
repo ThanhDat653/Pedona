@@ -154,258 +154,6 @@ products.forEach(function (product, index) {
 
 description();
 
-//  --- PAGINATION ---
-// const prevBtn = document.querySelector(".pagination-prev");
-// const page1 = document.querySelector(".pagination-1");
-// const page2 = document.querySelector(".pagination-2");
-// const nextBtn = document.querySelector(".pagination-next");
-
-// function clickOnPage1() {
-//   page1.classList.add("pagination-item__active");
-//   page2.classList.remove("pagination-item__active");
-//   prevBtn.classList.add("close-view-mode");
-//   nextBtn.classList.remove("close-view-mode");
-//   productGridList.innerHTML = "";
-//   productListList.innerHTML = "";
-
-//   //  Render 0 - 5
-//   //Grid
-//   products.forEach(function (product, index) {
-//     if (index < 6) {
-//       var productElement = `<div class="l-4 m-6 c-12 product">
-//                     <div class="product__link">
-//                         <div class="product-item product__img">
-//                             <img src="./assets/image/${product.img}"></img>
-//                         </div>
-
-//                         <div class="product__description-layer">
-//                             <div class="product__description">
-//                                 <div class="product__description--close">
-//                                     <i class="fa-solid fa-xmark"></i>
-//                                 </div>
-
-//                                 <div class="product-item">
-//                                     <div class="product-item__img">
-//                                         <div class="dscr--product__img">
-//                                             <img src="./assets/image/${product.img}" alt="">
-//                                         </div>
-//                                     </div>
-//                                 </div>
-
-//                                 <div class="product__information">
-//                                     <div class="product-item dscr--product__name">${product.name}</div>
-//                                     <p class="dscr--product__detail">${product.desc}.</p>
-
-//                                     <div class="wrap-price">
-//                                         <div class="product-item product__price">$${product.price}</div>
-//                                         <div class="buttons__added">
-//                                             <input class="minus quantity-btn" type="button" value="-">
-//                                             <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-//                                             <input class="plus quantity-btn" type="button" value="+">
-//                                         </div>
-//                                     </div>
-
-//                                     <div class="buy-btn grid_buy-btn">
-//                                         <button type="submit" value=${index}>Add to Cart</button>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-
-//                         <div class="product-item product__name">${product.name}</div>
-//                         <p class="product__detail">${product.desc}.</p>
-//                         <div class="product-item product__price">$${product.price}</div>
-
-//                         <div class="mobile-product__information">
-//                             <div class="product-item dscr--product__name">${product.name}</div>
-//                             <p class="dscr--product__detail">${product.desc}.</p>
-
-//                             <div class="wrap-price">
-//                                 <div class="product-item product__price">$${product.price}</div>
-//                                 <div class="buttons__added">
-//                                     <input class="minus quantity-btn" type="button" value="-">
-//                                     <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-//                                     <input class="plus quantity-btn" type="button" value="+">
-//                                 </div>
-//                             </div>
-
-//                             <div class="buy-btn">
-//                                 <button type="submit" value=${index}>Add to Cart</button>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>`;
-//       productGridList.insertAdjacentHTML("beforeend", productElement);
-//     }
-//   });
-
-//   // List
-//   products.forEach(function (product, index) {
-//     if (index < 6) {
-//       var productElement = `<div class="l-12 product">
-//                 <div class="product-item">
-//                     <div class="product-item__img">
-//                         <div class="product__img">
-//                             <img src="./assets/image/${product.img}" alt="">
-//                         </div>
-//                     </div>
-//                 </div>
-
-//                 <div class="product__information">
-//                     <div class="product-item product__name">${product.name}</div>
-//                     <p class="product__detail">${product.desc}</p>
-
-//                     <div class="wrap-price">
-//                         <div class="product-item product__price">$${product.price}</div>
-//                         <div class="buttons__added">
-//                             <input class="minus quantity-btn" type="button" value="-">
-//                             <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-//                             <input class="plus quantity-btn" type="button" value="+">
-//                         </div>
-//                     </div>
-
-//                     <div class="buy-btn">
-//                         <button type="submit" value=${index}>Add to Cart</button>
-//                     </div>
-//                 </div>
-//                 </div>`;
-//       productListList.insertAdjacentHTML("beforeend", productElement);
-//     }
-//   });
-
-//   description();
-
-//   if (isLogin) {
-//     setQuantityOfProduct();
-//     addToCart();
-//   }
-// }
-
-// function clickOnPage2() {
-//   page2.classList.add("pagination-item__active");
-//   page1.classList.remove("pagination-item__active");
-//   prevBtn.classList.remove("close-view-mode");
-//   nextBtn.classList.add("close-view-mode");
-//   productGridList.innerHTML = "";
-//   productListList.innerHTML = "";
-
-//   //  Render 6 - end
-//   // Grid
-//   products.forEach(function (product, index) {
-//     if (index >= 6) {
-//       var productElement = `<div class="l-4 m-6 c-12 product">
-//                     <div class="product__link">
-//                         <div class="product-item product__img">
-//                             <img src="./assets/image/${product.img}"></img>
-//                         </div>
-
-//                         <div class="product__description-layer">
-//                             <div class="product__description">
-//                                 <div class="product__description--close">
-//                                     <i class="fa-solid fa-xmark"></i>
-//                                 </div>
-
-//                                 <div class="product-item">
-//                                     <div class="product-item__img">
-//                                         <div class="dscr--product__img">
-//                                             <img src="./assets/image/${product.img}" alt="">
-//                                         </div>
-//                                     </div>
-//                                 </div>
-
-//                                 <div class="product__information">
-//                                     <div class="product-item dscr--product__name">${product.name}</div>
-//                                     <p class="dscr--product__detail">${product.desc}.</p>
-
-//                                     <div class="wrap-price">
-//                                         <div class="product-item product__price">$${product.price}</div>
-//                                         <div class="buttons__added">
-//                                             <input class="minus quantity-btn" type="button" value="-">
-//                                             <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-//                                             <input class="plus quantity-btn" type="button" value="+">
-//                                         </div>
-//                                     </div>
-
-//                                     <div class="buy-btn grid_buy-btn">
-//                                         <button type="submit" value=${index}>Add to Cart</button>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                         </div>
-
-//                         <div class="product-item product__name">${product.name}</div>
-//                         <p class="product__detail">${product.desc}.</p>
-//                         <div class="product-item product__price">$${product.price}</div>
-
-//                         <div class="mobile-product__information">
-//                             <div class="product-item dscr--product__name">${product.name}</div>
-//                             <p class="dscr--product__detail">${product.desc}.</p>
-
-//                             <div class="wrap-price">
-//                                 <div class="product-item product__price">$${product.price}</div>
-//                                 <div class="buttons__added">
-//                                     <input class="minus quantity-btn" type="button" value="-">
-//                                     <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-//                                     <input class="plus quantity-btn" type="button" value="+">
-//                                 </div>
-//                             </div>
-
-//                             <div class="buy-btn">
-//                                 <button type="submit" value=${index}>Add to Cart</button>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>`;
-//       productGridList.insertAdjacentHTML("beforeend", productElement);
-//     }
-//   });
-
-//   // List
-//   products.forEach(function (product, index) {
-//     if (index >= 6) {
-//       var productElement = `<div class="l-12 product">
-//                 <div class="product-item">
-//                     <div class="product-item__img">
-//                         <div class="product__img">
-//                             <img src="./assets/image/${product.img}" alt="">
-//                         </div>
-//                     </div>
-//                 </div>
-
-//                 <div class="product__information">
-//                     <div class="product-item product__name">${product.name}</div>
-//                     <p class="product__detail">${product.desc}</p>
-
-//                     <div class="wrap-price">
-//                         <div class="product-item product__price">$${product.price}</div>
-//                         <div class="buttons__added">
-//                             <input class="minus quantity-btn" type="button" value="-">
-//                             <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-//                             <input class="plus quantity-btn" type="button" value="+">
-//                         </div>
-//                     </div>
-
-//                     <div class="buy-btn">
-//                         <button type="submit" value=${index}>Add to Cart</button>
-//                     </div>
-//                 </div>
-//                 </div>`;
-//       productListList.insertAdjacentHTML("beforeend", productElement);
-//     }
-//   });
-
-//   description();
-
-//   if (isLogin) {
-//     setQuantityOfProduct();
-//     addToCart();
-//   }
-// }
-
-// page1.addEventListener("click", clickOnPage1);
-// page2.addEventListener("click", clickOnPage2);
-// nextBtn.addEventListener("click", clickOnPage2);
-// prevBtn.addEventListener("click", clickOnPage1);
 
 // DISPLAY VIEW MODE
 
@@ -936,17 +684,17 @@ export function orderItemCheck() {
   let ordersListOfUserCurrent = ordersList.filter(function (order) {
     return order.userID === userCurrent.userID;
   });
-  let orderItemBody = document.querySelectorAll(
+  let orderItemHeading = document.querySelectorAll(
     ".orders-item__body > .orders-item__heading"
   );
-  let mobileOrderItemBody = document.querySelectorAll(
+  let mobileOrderItemHeading = document.querySelectorAll(
     "mobile__orders-list .orders-item__body > .orders-item__heading"
   );
 
   ordersListOfUserCurrent.forEach(function (order, index) {
     if (order.fullyCheck == true) {
-      orderItemBody[index].classList.add("background-color__checked");
-      // mobileOrderItemBody[index].classList.add("background-color__checked");
+      orderItemHeading[index].classList.add("background-color__checked");
+      mobileOrderItemHeading[index].classList.add("background-color__checked");
     }
   });
 }
@@ -1009,7 +757,7 @@ sideMenu.addEventListener("click", function () {
   ordersListContainerElement.classList.remove("open");
 });
 
-addToCart();
+// addToCart();
 renderCartlistOfUserCurrent();
 setQuantityOfProduct();
 renderOrderListOfUserCurrent();
