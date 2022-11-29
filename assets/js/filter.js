@@ -505,9 +505,9 @@ mobileFilterColor.forEach(function (color) {
           }
         }
       });
+      addToCart();
     }
   };
-  addToCart();
 });
 //
 
@@ -535,9 +535,9 @@ mobileFilterType.forEach(function (type) {
           productGridList.innerHTML += basicItemRenderGrid(product, i);
         }
       });
+      addToCart();
     }
   };
-  addToCart();
 });
 
 const mobileFilterPrice = document.querySelectorAll(".filter__option.price");
@@ -573,7 +573,7 @@ mobileFilterPrice.forEach(function (price) {
           }
         }
       });
+      addToCart();
     }
   };
-  addToCart();
 });

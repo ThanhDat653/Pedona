@@ -571,12 +571,18 @@ purchaseButton.addEventListener("click", function () {
     total += item.total;
   });
 
+  let ID = 0;
+  if(ordersList.length != 0)
+    ID = (
+      JSON.parse(ordersList[ordersList.length - 1].orderID) + 1
+    )
+  else
+    ID = 0;
+
   ordersList[ordersList.length] = {
     name: userCurrent.name,
     userID: userCurrent.userID,
-    orderID: JSON.stringify(
-      JSON.parse(ordersList[ordersList.length - 1].orderID) + 1
-    ),
+    orderID: ID,
     productList: cartOfUserCurrent,
     time: date,
     total: total,
