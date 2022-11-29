@@ -357,6 +357,10 @@
     font-size: 1.3rem;
 }
 
+.header__navbar-item__admin {
+    display: none;
+}
+
 .tablet-header--search {
     display: none;
 }
@@ -464,7 +468,7 @@
     background-color: var(--white-color);
     right: 100%;
     max-height: 300px;
-    top: 0;
+    top: -25px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
                 rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, 
                 rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -620,7 +624,12 @@
     font-size: 2.2rem;
 }
 
-.orders-item__body > .orders-item__heading {
+.orders-item__header {
+    margin-bottom: 2px;
+    padding: 20px;  
+}
+
+.orders-item__heading {
     margin-bottom: 2px;
     padding: 20px;
     color: var(--white-color);
@@ -630,7 +639,6 @@
 .background-color__checked {
     background-color: #059862;
 }
-
 
 .orders-product {
     display: flex;

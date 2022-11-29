@@ -139,58 +139,7 @@ function creatOrderList() {
     return 0;
   } else {
     const orders = [
-      {
-        name: "nguyen thanh dat", // carts[0].name = users[0].name;
-        userID: "1", 
-        orderID: "1", 
-        productList: [
-          {
-            product: {
-              color: "khaki",
-              desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
-              id: "jd3-khaki",
-              img: "jordan_delta_3_khaki.png",
-              name: "Jordan Delta 3 Mid",
-              price: 200,
-              type: "jd3",
-            },
-            check: false,
-            total: 200,
-            amount: 2,
-          },
-          {
-            product: {
-              color: "khaki",
-              desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
-              id: "jd3-khaki",
-              img: "jordan_delta_3_khaki.png",
-              name: "Jordan Delta 3 Mid",
-              price: 200,
-              type: "jd3",
-            },
-            check: false,
-            total: 200,
-            amount: 2,
-          },
-          {
-            product: {
-              color: "khaki",
-              desc: "Inspired by '90s on-court gear and the Space-Age aesthetic, the Delta 3 is ready to launch. With super-lightweight technical materials, they have a retro-futuristic look and feel. This is the next-gen footwear that's gonna take you into tomorrow",
-              id: "jd3-khaki",
-              img: "jordan_delta_3_khaki.png",
-              name: "Jordan Delta 3 Mid",
-              price: 200,
-              type: "jd3",
-            },
-            check: false,
-            total: 200,
-            amount: 2,
-          },
-        ],
-        fullyCheck: false,
-        time: "",
-        total: 0,
-      },
+      
     ];
     localStorage.setItem("orderList", JSON.stringify(orders));
   }

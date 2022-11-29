@@ -120,7 +120,6 @@ function checkLogin() {
     document.getElementById("loginBtn").classList.add("close");
     showUserInfo();
     isAdmin();
-    isUser();
     mobileLogin.classList.add("close");
   } else {
     // openForm();
@@ -137,11 +136,12 @@ function showUserInfo() {
 }
 // Tam fix
 function isAdmin() {
-  let user = gItem("userCurrent");
-  if (user.userType == 0) {
-    // document.querySelector(".user_orders").innerText = 'Orders';
-    // document.querySelector(".user_orders").style.color = 'red';
-    document.querySelector(".admin-btn").style.display = "block";
+  let user = userList.filter(function(user) {
+    return user.userID == gItem("userCurrent").userID
+  }) 
+
+  if (user[0].type == 0) {
+    document.querySelector(".header__navbar-item.header__navbar-item__admin").style.display = "block";
     document.querySelector(".admin-btn").onclick = function () {
       window.location.replace("./admin.html");
     };
@@ -149,13 +149,6 @@ function isAdmin() {
 }
 
 // Tam  25/11/2022
-function isUser() {
-  let user = gItem("userCurrent");
-  if (user.userType !== 0) {
-    // document.querySelector(".user_orders").innerText = 'Orders';
-    // document.querySelector(".user_orders").style.color = 'red';
-  }
-}
 // Tam fix
 // Log out -------------------------------
 var logOutBtn = document.querySelector(".logout--btn");
@@ -163,6 +156,7 @@ logOutBtn.addEventListener("click", confirmLogout);
 
 function confirmLogout() {
   if (confirm("Xác nhận đăng xuất?") == true) {
+    document.querySelector(".header__navbar-item__admin").style.display = "none"
     Logout();
     userMenu.classList.add("close");
   }
@@ -173,6 +167,7 @@ function Logout() {
   isLogin = false;
   localStorage.removeItem("userCurrent");
   location.reload(); //load lại trang
+
 }
 
 //Tam 25/11/2022
