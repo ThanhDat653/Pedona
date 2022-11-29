@@ -374,7 +374,10 @@ a {
 
 .pagination__holder {
   position: relative;
+  width: 100px;
+  height: 20px;
 }
+
 .pagination {
   position: absolute;
   top: 0;
@@ -394,6 +397,11 @@ a {
 
 .product__btn {
   padding: 8px 24px;
+}
+
+.product__btn:hover {
+  color: var(--primary-color);
+  transition: all .3s ease-in-out;
 }
 
 .content__table {
@@ -949,4 +957,31 @@ button.order-full.true {
 #submit-prod:hover {
   background-position: left;
   padding: 6px 22px;
+}
+
+
+.back-to-user__btn {
+  position: fixed;
+  left: 25px;
+  top: 50px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+  border: solid 3px var(--white-color);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, 
+  rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.back-to-user__btn:hover {
+  background-color: var(--primary-color);
+  transition: all .3s;
+}
+
+.back-to-user__icon {
+  font-size: 2rem;
+  color: #fff; 
 }

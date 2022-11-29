@@ -28,6 +28,19 @@
         display: block;
     }
 
+    .back-to-user__btn {
+        display: flex;
+    }
+
+    .body__util {
+        position: relative;
+    }
+
+    .pagination__holder {
+        position: absolute;
+        right: 20px;
+        width: auto;
+    }
 
 }
 

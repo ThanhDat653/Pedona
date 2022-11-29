@@ -148,8 +148,7 @@ function isAdmin() {
   }
 }
 
-// Tam  25/11/2022
-// Tam fix
+
 // Log out -------------------------------
 var logOutBtn = document.querySelector(".logout--btn");
 logOutBtn.addEventListener("click", confirmLogout);
@@ -170,7 +169,7 @@ function Logout() {
 
 }
 
-//Tam 25/11/2022
+
 //---- ------------------------------User Menu
 // var userMenu = document.querySelector(".user_menu");
 var userIcon = document.querySelector("#user_icon");
@@ -184,7 +183,7 @@ userIcon.addEventListener("click", function () {
   }
 });
 
-// form Validation-----------------------------------------------
+// // form Validation-----------------------------------------------
 function Validator(options) {
   var selectorRules = {};
 
@@ -271,6 +270,31 @@ Validator.isConfirmed = function (selector, getConfirmValue, message) {
   };
 };
 
+
+Validator({
+  form: '#form_2',
+  errorSelector: '.form-message',
+  rules: [
+     Validator.isRequired('#su_name','Vui lòng nhập tên đầy đủ của bạn'),
+     Validator.isRequired('#su_username','Vui lòng nhập tên tài khoản của bạn'),
+     Validator.minLength('#su_password',6),
+     Validator.isConfirmed('#re_su_password',function(){
+       return document.querySelector('#form_2 #su_password').value;
+     }, 'Mật khẩu nhập lại không chính xác')
+    ]
+    });   
+
+  Validator({
+  form: '#form_1',
+  errorSelector: '.form-message',
+  rules: [
+     Validator.isRequired('#username','Vui lòng nhập tên khoản của bạn'),
+     Validator.minLength('#password',6),
+    ]
+});
+
+
+
 // tao account------------------------------------
 
 // check xem có local User hay chưa? có thì chép lại vào user / ko thì tạo
@@ -283,14 +307,19 @@ function getAccount() {
   let username = document.querySelector("#su_username").value; //xài var sẽ tạo thêm ra null -> xài let
   let name = document.querySelector("#su_name").value;
   let pass = document.querySelector("#su_password").value;
-
+  let re_pass = document.querySelector("#re_su_password").value;
+  
   if (userList.some((value) => value.username === username)) {
     //check có trùng tk ko
     alert("Username alert in use");
   } else {
     if (username == "" || pass == "" || name == "") {
       alert("Vui lòng nhập đầy đủ thông tin");
-    } else {
+    } 
+    else if((re_pass != pass)){
+      alert("Check your password!!");
+      }
+    else {
       let userNumber = userList.length + 1;
       let newAccount = {
         username,

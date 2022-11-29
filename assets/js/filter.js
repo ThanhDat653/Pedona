@@ -472,7 +472,7 @@ function categoryRender() {
 
 categoryRender();
 const mobileFilterColor = document.querySelectorAll(".filter__option.color");
-// console.log(mobileFilterColor);
+
 mobileFilterColor.forEach(function (color) {
   color.onclick = function () {
     if (color.classList.contains("checked")) {
@@ -555,7 +555,6 @@ mobileFilterPrice.forEach(function (price) {
       }
       price.classList.add("checked");
       let priceValue = price.innerHTML.split(/[- $ &gt;]+/);
-      console.log(priceValue);
       productGridList.innerHTML = "";
       productList.forEach(function (product, i) {
         if (priceValue[2] != null) {
