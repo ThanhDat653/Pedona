@@ -1,8 +1,8 @@
 import { tableBodyOrder } from "./main.js";
 
 import { createArr, orderKey } from "./main.js";
-import { orderItemCheck} from "./app.js";
-import { gItem, sItem,} from "./storage.js";
+// import { orderItemCheck} from "./app.js";
+import { gItem, sItem } from "./storage.js";
 
 function displayCheck(item) {
   if (item) {
@@ -23,7 +23,7 @@ const checkerListener = document.querySelectorAll(".checker");
 
 checkerListener.forEach(function (item) {
   item.onclick = function () {
-    let orderList = gItem(orderKey );
+    let orderList = gItem(orderKey);
     const checkValue = item.className.split(" ")[1];
     if (item.classList.contains("checked")) {
       item.classList.remove("checked");
@@ -101,7 +101,7 @@ function fullCheck(item, index, button) {
     button.innerHTML = `<i class="fa-solid fa-caret-left fa-xl"></i>`;
   }
   sItem(orderKey, orderList);
-  orderItemCheck();
+  // orderItemCheck();
 }
 
 function baseRenderOrder(i) {
@@ -275,9 +275,7 @@ function searchOrderList() {
         item.name.includes(searchValue) ||
         item.userID.includes(searchValue) ||
         item.orderID.includes(searchValue)
-
-
-        ) {
+      ) {
         if (item.fullyCheck.toString() == checkerValue) {
           tableBodyOrder.innerHTML += baseRenderOrder(i);
         }
