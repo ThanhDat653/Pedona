@@ -474,7 +474,7 @@ function categoryRender() {
 
 categoryRender();
 const mobileFilterColor = document.querySelectorAll(".filter__option.color");
-console.log(mobileFilterColor);
+// console.log(mobileFilterColor);
 mobileFilterColor.forEach(function (color) {
   color.onclick = function () {
     if (color.classList.contains("checked")) {

@@ -216,8 +216,15 @@ export function paginationRender(products) {
           }
         }
         changePage(curPage, products);
+        description();
+        // addToCart();
+        removeProductInCart();
       };
     });
+    // description();
+        // addToCart();
+    //     removeProductInCart();
+      
     prevPage.onclick = function () {
       if (1 < curPage) {
         curPage--;
@@ -254,6 +261,9 @@ export function paginationRender(products) {
           productGridList.innerHTML += basicItemRenderGrid(product, i);
         }
       });
+      description();
+      // addToCart();
+      removeProductInCart();
       productListList.innerHTML = "";
       products.forEach(function (product, i) {
         if (
@@ -263,9 +273,9 @@ export function paginationRender(products) {
           productListList.innerHTML += basicItemRenderList(product, i);
         }
       });
-      description();
       addToCart();
     }
+
     function toggleButton(item) {
       let j = 0;
       while (j < onPage.length) {
@@ -277,6 +287,8 @@ export function paginationRender(products) {
     nextPage.classList.add("close-view-mode");
     prevPage.classList.add("close-view-mode");
   }
+        // addToCart();
+
 }
 
 paginationRender(products);
@@ -596,7 +608,7 @@ function renderOrderListOfUserCurrent() {
   // Render the order list
   ordersListOfUserCurrent.forEach(function (order, index) {
     let temp = `<li class="orders-item">
-        <div class="orders-item__heading">
+        <div class="orders-item__header">
             <div class="orders-item__info">
                 <div class="header-info">
                     <span class="orders-item__user-name">${order.name}</span>
@@ -694,7 +706,7 @@ export function orderItemCheck() {
   ordersListOfUserCurrent.forEach(function (order, index) {
     if (order.fullyCheck == true) {
       orderItemHeading[index].classList.add("background-color__checked");
-      mobileOrderItemHeading[index].classList.add("background-color__checked");
+      // mobileOrderItemHeading[index].classList.add("background-color__checked");
     }
   });
 }
