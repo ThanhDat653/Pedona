@@ -53,7 +53,6 @@ export function basicItemRenderList(product, index) {
 //
 
 export function basicItemRenderGrid(product, index) {
-  console.log(index);
   return `<div class="l-4 m-6 c-12 product">
   <div class="product__link">
       <div class="product-item product__img">
@@ -251,7 +250,6 @@ function categoryRender() {
       );
     } else {
       if (colorFil != null) {
-        console.log(1);
         paginationRender(
           productList.filter(function (item) {
             if (
@@ -476,13 +474,10 @@ mobileFilterPrice.forEach(function (price) {
 export function sortByPrice(arr) {
   const sortBy = document.querySelector(".sort-box__option").value;
   if (sortBy == "1") {
-    console.log("Thap -> Lon");
     return arr.sort(function (a, b) {
       return a.price - b.price;
     });
   } else {
-    console.log("Lon->Thap");
-
     return arr.sort(function (a, b) {
       return b.price - a.price;
     });
@@ -496,11 +491,10 @@ sortBox.onchange = function () {
 
 function filterColorTypePrice(colorFil, typeCheck, filterPrice) {
   const productList = gItem("productList");
-  console.log(productList);
+
   productGridList.innerHTML = "";
   productListList.innerHTML = "";
   if (colorFil != null && typeCheck != null) {
-    console.log(1);
     return sortByPrice(
       productList.filter(function (item) {
         if (
@@ -514,7 +508,6 @@ function filterColorTypePrice(colorFil, typeCheck, filterPrice) {
     );
   } else {
     if (colorFil != null) {
-      console.log(2);
       return sortByPrice(
         productList.filter(function (item) {
           if (
@@ -527,7 +520,6 @@ function filterColorTypePrice(colorFil, typeCheck, filterPrice) {
       );
     } else {
       if (typeCheck != null) {
-        console.log(3);
         return sortByPrice(
           productList.filter(function (item) {
             if (
@@ -539,7 +531,6 @@ function filterColorTypePrice(colorFil, typeCheck, filterPrice) {
           })
         );
       } else {
-        console.log(4);
         return sortByPrice(
           productList.filter(function (item) {
             if (item.price <= filterPrice.value - 1) {
@@ -556,5 +547,4 @@ export function filterHandler() {
   const filterPrice = document.querySelector(".filter-price__input");
   const typeCheck = document.querySelector(".type.checked");
   paginationRender(filterColorTypePrice(colorFil, typeCheck, filterPrice));
-  // console.log(filterColorTypePrice(colorFil, typeCheck, filterPrice));
 }

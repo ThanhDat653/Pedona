@@ -157,7 +157,6 @@ export function paginationRender(products) {
     };
     function changePage(curPage, products) {
       const productList = gItem("productList");
-      console.log(productList);
       productGridList.innerHTML = "";
       products.forEach(function (product, i) {
         if (
@@ -302,7 +301,6 @@ function setQuantityOfProduct() {
   minusBtn.forEach(function (item, index) {
     item.addEventListener("click", function () {
       quantityInput[index].value = minus(quantityInput[index].value);
-      console.log(quantityInput[index].value);
     });
   });
 
