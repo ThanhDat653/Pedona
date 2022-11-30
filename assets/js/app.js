@@ -120,9 +120,6 @@ export function paginationRender(products) {
         }
 
         changePage(curPage, products);
-        description();
-        // addToCart();
-        removeProductInCart();
       };
     });
     // description();
