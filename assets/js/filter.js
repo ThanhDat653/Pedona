@@ -1,4 +1,4 @@
-import { gItem } from "./storage.js";
+import { gItem, sItem } from "./storage.js";
 import { addToCart, description, paginationRender } from "./app.js";
 
 const categoryColor = document.querySelector(".product-category__group-color");
@@ -53,6 +53,7 @@ export function basicItemRenderList(product, index) {
 //
 
 export function basicItemRenderGrid(product, index) {
+  console.log(index);
   return `<div class="l-4 m-6 c-12 product">
   <div class="product__link">
       <div class="product-item product__img">
@@ -174,7 +175,9 @@ function upperCaseFirstLetter(item) {
 function categoryRender() {
   categoryColor.innerHTML += "";
   colorList.forEach(function (item) {
-    categoryColor.innerHTML += ` <li class="category-item color ${item.color}">
+    categoryColor.innerHTML += ` <li class="category-item color ${
+      item.color
+    } filter">
         <div class="category-item__link">
             <span class="category-item__lable"> ${upperCaseFirstLetter(
               item.color
@@ -187,7 +190,9 @@ function categoryRender() {
   categoryType.innerHTML += "";
 
   typeList.forEach(function (item) {
-    categoryType.innerHTML += ` <li class="category-item type ${item.type}">
+    categoryType.innerHTML += ` <li class="category-item type ${
+      item.type
+    } filter">
         <div class="category-item__link">
             <span class="category-item__lable"> ${upperCaseFirstLetter(
               getType(item.type)
@@ -214,6 +219,7 @@ function categoryRender() {
   //
 
   //
+  const categoryList = document.querySelectorAll(".category-item.filter");
 
   const filterPrice = document.querySelector(".filter-price__input");
   const view = document.querySelector(".bubble");
@@ -294,141 +300,31 @@ function categoryRender() {
 
   //
 
-  let colorButton = document.querySelectorAll(".color");
-  colorButton.forEach(function (colorFil) {
-    colorFil.onclick = function () {
-      const typeCheck = document.querySelector(".type.checked");
-
-      if (!colorFil.classList.contains("checked")) {
-        let j = 0;
-        while (j < colorButton.length) {
-          colorButton[j].classList.remove("checked");
-          j++;
-        }
-        productGridList.innerHTML = "";
-        productListList.innerHTML = "";
-        if (typeCheck != null) {
-          const typeValue = typeCheck.className.split(" ")[2];
-          const colorValue = colorFil.className.split(" ")[2];
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (
-                item.type == typeValue &&
-                item.price <= filterPrice.value &&
-                item.color == colorValue
-              ) {
-                return item;
-              }
-            })
-          );
+  categoryList.forEach(function (item) {
+    item.onclick = function () {
+      if (!item.classList.contains("checked")) {
+        if (item.classList.contains("color")) {
+          let j = 0;
+          while (j < colorList.length) {
+            categoryList[j].classList.remove("checked");
+            j++;
+          }
         } else {
-          const colorValue = colorFil.className.split(" ")[2];
-          paginationRender(
-            productList.filter(function (item) {
-              if (item.color == colorValue && item.price <= filterPrice.value) {
-                return item;
-              }
-            })
-          );
+          let j = colorList.length - 1;
+          while (j < typeList.length + colorList.length) {
+            categoryList[j].classList.remove("checked");
+            j++;
+          }
         }
+        item.classList.add("checked");
 
-        colorFil.classList.add("checked");
+        filterHandler();
       } else {
-        productGridList.innerHTML = "";
-        productListList.innerHTML = "";
-        if (typeCheck != null) {
-          const typeValue = typeCheck.className.split(" ")[2];
-          const colorValue = colorFil.className.split(" ")[2];
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (item.type == typeValue && item.price <= filterPrice.value) {
-                return item;
-              }
-            })
-          );
-        } else {
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (item.price <= filterPrice.value) {
-                return item;
-              }
-            })
-          );
-        }
-        colorFil.classList.remove("checked");
+        item.classList.remove("checked");
+        filterHandler();
       }
     };
   });
-  //
-
-  //
-
-  let typeButton = document.querySelectorAll(".type");
-  typeButton.forEach(function (typeBtn) {
-    typeBtn.onclick = function () {
-      const colorFil = document.querySelector(".color.checked");
-
-      if (!typeBtn.classList.contains("checked")) {
-        let j = 0;
-        while (j < typeButton.length) {
-          typeButton[j].classList.remove("checked");
-          j++;
-        }
-        productGridList.innerHTML = "";
-        productListList.innerHTML = "";
-        if (colorFil != null) {
-          const typeValue = typeBtn.className.split(" ")[2];
-          const colorValue = colorFil.className.split(" ")[2];
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (
-                item.type == typeValue &&
-                item.price <= filterPrice.value &&
-                item.color == colorValue
-              ) {
-                return item;
-              }
-            })
-          );
-        } else {
-          const typeValue = typeBtn.className.split(" ")[2];
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (item.type == typeValue && item.price <= filterPrice.value) {
-                return item;
-              }
-            })
-          );
-        }
-        typeBtn.classList.add("checked");
-      } else {
-        typeBtn.classList.remove("checked");
-        productGridList.innerHTML = "";
-        productListList.innerHTML = "";
-        if (colorFil != null) {
-          const colorValue = colorFil.className.split(" ")[2];
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (item.price <= filterPrice.value && item.color == colorValue) {
-                return item;
-              }
-            })
-          );
-        } else {
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (item.price <= filterPrice.value) {
-                return item;
-              }
-            })
-          );
-        }
-      }
-    };
-  });
-  //
-
-  //
 
   function callBubble() {
     view.style.left =
@@ -450,68 +346,14 @@ function categoryRender() {
 
   //
 
-  function filterInRangePrice() {
-    const colorFil = document.querySelector(".color.checked ");
-    const typeCheck = document.querySelector(".type.checked");
-    productGridList.innerHTML = "";
-    productListList.innerHTML = "";
-    if (colorFil != null && typeCheck != null) {
-      paginationRender(
-        productList.filter(function (item, index) {
-          if (
-            item.price <= filterPrice.value - 1 &&
-            item.color == colorFil.className.split(" ")[2] &&
-            item.type == typeCheck.className.split(" ")[2]
-          ) {
-            return item;
-          }
-        })
-      );
-    } else {
-      if (colorFil != null) {
-        paginationRender(
-          productList.filter(function (item, index) {
-            if (
-              colorFil.className.split(" ")[2] == item.color &&
-              item.price <= filterPrice.value - 1
-            ) {
-              return item;
-            }
-          })
-        );
-      } else {
-        if (typeCheck != null) {
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (
-                item.type == typeCheck.className.split(" ")[2] &&
-                item.price <= filterPrice.value - 1
-              ) {
-                return item;
-              }
-            })
-          );
-        } else {
-          paginationRender(
-            productList.filter(function (item, index) {
-              if (item.price <= filterPrice.value - 1) {
-                return item;
-              }
-            })
-          );
-        }
-      }
-    }
-  }
   //
 
   //
 
   filterPrice.oninput = function () {
     callBubble();
-    filterInRangePrice();
+    filterHandler();
   };
-  filterPrice.addEventListener("change", filterInRangePrice);
   searchButton.addEventListener("click", searchProduct);
   searchInput.addEventListener("keydown", function (event) {
     if (event.key == "Enter") {
@@ -525,6 +367,8 @@ function categoryRender() {
 //
 
 categoryRender();
+
+/// Mobile
 const mobileFilterColor = document.querySelectorAll(".filter__option.color");
 mobileFilterColor.forEach(function (color) {
   color.onclick = function () {
@@ -540,21 +384,6 @@ mobileFilterColor.forEach(function (color) {
         j++;
       }
       color.classList.add("checked");
-      // productList.forEach(function (product, i) {
-      //   let colorValue = color.className.split(" ")[1];
-      //   if (product.color.includes(colorValue)) {
-      //     productGridList.innerHTML += basicItemRenderGrid(product, i);
-      //   } else {
-      //     if (colorValue == "others") {
-      //       if (
-      //         product.color.includes("white") == false &&
-      //         product.color.includes("black") == false
-      //       ) {
-      //         productGridList.innerHTML += basicItemRenderGrid(product, i);
-      //       }
-      //     }
-      //   }
-      // });
       paginationRender(
         productList.filter(function (product, i) {
           let colorValue = color.className.split(" ")[1];
@@ -623,7 +452,6 @@ mobileFilterPrice.forEach(function (price) {
       }
       price.classList.add("checked");
       let priceValue = price.innerHTML.split(/[- $ &gt;]+/);
-      console.log(priceValue);
       productGridList.innerHTML = "";
       productList.forEach(function (product, i) {
         if (priceValue[2] != null) {
@@ -639,8 +467,94 @@ mobileFilterPrice.forEach(function (price) {
           }
         }
       });
-      addToCart()
-      description()
+      addToCart();
+      description();
     }
   };
 });
+
+export function sortByPrice(arr) {
+  const sortBy = document.querySelector(".sort-box__option").value;
+  if (sortBy == "1") {
+    console.log("Thap -> Lon");
+    return arr.sort(function (a, b) {
+      return a.price - b.price;
+    });
+  } else {
+    console.log("Lon->Thap");
+
+    return arr.sort(function (a, b) {
+      return b.price - a.price;
+    });
+  }
+}
+
+const sortBox = document.querySelector(".sort-box__option");
+sortBox.onchange = function () {
+  filterHandler();
+};
+
+function filterColorTypePrice(colorFil, typeCheck, filterPrice) {
+  const productList = gItem("productList");
+  console.log(productList);
+  productGridList.innerHTML = "";
+  productListList.innerHTML = "";
+  if (colorFil != null && typeCheck != null) {
+    console.log(1);
+    return sortByPrice(
+      productList.filter(function (item) {
+        if (
+          item.price <= filterPrice.value - 1 &&
+          item.color == colorFil.className.split(" ")[2] &&
+          item.type == typeCheck.className.split(" ")[2]
+        ) {
+          return item;
+        }
+      })
+    );
+  } else {
+    if (colorFil != null) {
+      console.log(2);
+      return sortByPrice(
+        productList.filter(function (item) {
+          if (
+            colorFil.className.split(" ")[2] == item.color &&
+            item.price <= filterPrice.value - 1
+          ) {
+            return item;
+          }
+        })
+      );
+    } else {
+      if (typeCheck != null) {
+        console.log(3);
+        return sortByPrice(
+          productList.filter(function (item) {
+            if (
+              item.type == typeCheck.className.split(" ")[2] &&
+              item.price <= filterPrice.value - 1
+            ) {
+              return item;
+            }
+          })
+        );
+      } else {
+        console.log(4);
+        return sortByPrice(
+          productList.filter(function (item) {
+            if (item.price <= filterPrice.value - 1) {
+              return item;
+            }
+          })
+        );
+      }
+    }
+  }
+}
+export function filterHandler() {
+  const colorFil = document.querySelector(".color.checked ");
+  const filterPrice = document.querySelector(".filter-price__input");
+  const typeCheck = document.querySelector(".type.checked");
+  paginationRender(filterColorTypePrice(colorFil, typeCheck, filterPrice));
+  // console.log(filterColorTypePrice(colorFil, typeCheck, filterPrice));
+}
