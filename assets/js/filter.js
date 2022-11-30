@@ -321,8 +321,6 @@ function categoryRender() {
               }
             })
           );
-          addToCart();
-          description();
         } else {
           const colorValue = colorFil.className.split(" ")[2];
           paginationRender(
