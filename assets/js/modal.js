@@ -263,6 +263,14 @@ function validModal() {
       modalInputs.splice(modalInputs.indexOf(inputOthers), 1);
     }
   }
+  for (let i = 0; i < productList.length; i++) {
+    if (
+      productList[i].id.toLowerCase().includes(id.value.toLowerCase().trim())
+    ) {
+      alert("This ID product is already in the Data");
+      return false;
+    }
+  }
   if (prodImg.files[0] == null) {
     document
       .querySelector("#img-show + span.invalid-input")
@@ -323,6 +331,7 @@ submitButton.onclick = function () {
       modalInputs.splice(modalInputs.indexOf(inputOthers), 1);
     }
   }
+
   modalInputs.forEach((item) => {
     let errorShow = document.querySelector("#" + item.id + " + span");
 

@@ -20,7 +20,9 @@ function createEditablePrice(item) {
   area.innerHTML =
     `<input id="configPrice" class="input textarea" type="number" inputmode="numeric" name="price" value="` +
     parseInt(item.innerHTML) +
-    `" max="1000" min="200" />`;
+    `" max="1000" min="1" />
+    <span class=" col l-12 invalid-input">Please input a price</span>`;
+
   area.htmlFor = "configPrice";
 
   item.replaceWith(area);
@@ -201,8 +203,9 @@ function productFeatures() {
         console.log(changedArea);
 
         const errorShow = createArr(
-          document.querySelectorAll("textarea.textarea + span")
+          document.querySelectorAll(".textarea + span")
         );
+        console.log(errorShow);
         function validCheck() {
           for (let i = 0; i < errorShow.length; i++) {
             if (errorShow[i].classList.contains("invalid")) {
@@ -275,21 +278,16 @@ function searchProductList() {
   const searchValue = searchInput.value.toLowerCase().trim();
   tableBodyProduct.innerHTML = "";
   if (searchValue != "") {
-    const nextPage = document.querySelector(".nextPage");
-    const prevPage = document.querySelector(".prevPage");
-    const onPage = document.querySelector(".currPage");
-    onPage.innerHTML = "0/0";
-    prevPage.classList.add("fade");
-    nextPage.classList.add("fade");
-    productList.forEach((item, i) => {
-      if (
-        item.name.toLowerCase().includes(searchValue) ||
-        item.id.toString().toLowerCase().includes(searchValue)
-      ) {
-        tableBodyProduct.innerHTML += basicProductRender(item, i);
-      }
-    });
-    productFeatures();
+    newOutPut(
+      productList.filter((item) => {
+        if (
+          item.name.toLowerCase().includes(searchValue) ||
+          item.id.toString().toLowerCase().includes(searchValue)
+        ) {
+          return item;
+        }
+      })
+    );
   } else {
     newOutPut(productList);
   }
@@ -303,13 +301,14 @@ searchInput.addEventListener("input", searchProductList);
 searchInput.addEventListener("paste", searchProductList);
 searchInput.addEventListener("change", searchProductList);
 
-export function newOutPut(productList) {
+export function newOutPut(arr) {
+  const productList = gItem(prodKey);
   const nextPage = document.querySelector(".nextPage");
   const prevPage = document.querySelector(".prevPage");
   const productPerPage = 5;
-  const numberOfProducts = productList.length;
+  const numberOfProducts = arr.length;
   let curPage = 1;
-  changePage(1, productList, true);
+  changePage(1, arr);
   const onPage = document.querySelector(".currPage");
   let numberOfPages = Math.ceil(numberOfProducts / productPerPage);
   if (numberOfPages == 0) {
@@ -327,7 +326,7 @@ export function newOutPut(productList) {
       curPage++;
       prevPage.classList.remove("fade");
 
-      changePage(curPage, productList);
+      changePage(curPage, arr);
 
       showPage();
       if (curPage == numberOfPages) {
@@ -340,7 +339,7 @@ export function newOutPut(productList) {
     if (1 < curPage) {
       curPage--;
       nextPage.classList.remove("fade");
-      changePage(curPage, productList);
+      changePage(curPage, arr);
       showPage();
       if (curPage == 1) {
         this.classList.add("fade");
@@ -352,11 +351,14 @@ export function newOutPut(productList) {
   }
   onPage.innerHTML = curPage + "/" + numberOfPages;
 
-  function changePage(curPage, productList) {
+  function changePage(curPage, arr) {
     tableBodyProduct.innerHTML = "";
-    productList.forEach(function (product, i) {
+    arr.forEach(function (product, i) {
       if ((curPage - 1) * productPerPage <= i && i < curPage * productPerPage) {
-        tableBodyProduct.innerHTML += basicProductRender(product, i);
+        tableBodyProduct.innerHTML += basicProductRender(
+          product,
+          productList.map((x) => x.id).indexOf(product.id)
+        );
       }
     });
     productFeatures();

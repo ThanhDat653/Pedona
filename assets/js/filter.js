@@ -225,7 +225,7 @@ function categoryRender() {
   //
   function searchProduct() {
     const productList = gItem("productList");
-    let searchValue = searchInput.value;
+    let searchValue = searchInput.value.toLowerCase().trim();
     const colorFil = document.querySelector(".color.checked ");
     const typeCheck = document.querySelector(".type.checked");
     productGridList.innerHTML = "";
@@ -249,7 +249,7 @@ function categoryRender() {
         paginationRender(
           productList.filter(function (item) {
             if (
-              item.name.includes(searchValue) &&
+              item.name.toLowerCase().includes(searchValue) &&
               colorFil.className.split(" ")[2] == item.color &&
               item.price <= filterPrice.value - 1
             ) {
@@ -262,7 +262,7 @@ function categoryRender() {
           paginationRender(
             productList.filter(function (item) {
               if (
-                item.name.includes(searchValue) &&
+                item.name.toLowerCase().includes(searchValue) &&
                 item.type == typeCheck.className.split(" ")[2] &&
                 item.price <= filterPrice.value - 1
               ) {
@@ -274,7 +274,7 @@ function categoryRender() {
           paginationRender(
             productList.filter(function (item, index) {
               if (
-                item.name.includes(searchValue) &&
+                item.name.toLowerCase().includes(searchValue) &&
                 item.price <= filterPrice.value - 1
               ) {
                 return item;
@@ -285,6 +285,10 @@ function categoryRender() {
       }
     }
     searchInput.value = "";
+    window.scrollTo({
+      top: 750,
+      behavior: `smooth`,
+    });
   }
   //
 

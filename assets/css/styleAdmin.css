@@ -790,8 +790,6 @@ button.order-full.true {
   border-radius: 5px;
   border:3px solid #e7e7e7;
   transition: border 0.3 ease;
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, 
-              rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
 .input:focus {
@@ -931,7 +929,7 @@ button.order-full.true {
 
 #configPrice {
   box-shadow:initial;
-  width: 100%;
+  width: 70%;
 }
 
 #submit-prod {
