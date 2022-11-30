@@ -540,23 +540,38 @@ mobileFilterColor.forEach(function (color) {
         j++;
       }
       color.classList.add("checked");
-      productGridList.innerHTML = "";
-      productList.forEach(function (product, i) {
-        let colorValue = color.className.split(" ")[1];
-        if (product.color.includes(colorValue)) {
-          productGridList.innerHTML += basicItemRenderGrid(product, i);
-        } else {
-          if (colorValue == "others") {
-            if (
-              product.color.includes("white") == false &&
-              product.color.includes("black") == false
-            ) {
-              productGridList.innerHTML += basicItemRenderGrid(product, i);
+      // productList.forEach(function (product, i) {
+      //   let colorValue = color.className.split(" ")[1];
+      //   if (product.color.includes(colorValue)) {
+      //     productGridList.innerHTML += basicItemRenderGrid(product, i);
+      //   } else {
+      //     if (colorValue == "others") {
+      //       if (
+      //         product.color.includes("white") == false &&
+      //         product.color.includes("black") == false
+      //       ) {
+      //         productGridList.innerHTML += basicItemRenderGrid(product, i);
+      //       }
+      //     }
+      //   }
+      // });
+      paginationRender(
+        productList.filter(function (product, i) {
+          let colorValue = color.className.split(" ")[1];
+          if (product.color == colorValue) {
+            return product;
+          } else {
+            if (colorValue == "others") {
+              if (
+                (product.color == "white") == false &&
+                (product.color == "black") == false
+              ) {
+                return product;
+              }
             }
           }
-        }
-      });
-      addToCart();
+        })
+      );
     }
   };
 });
@@ -579,14 +594,14 @@ mobileFilterType.forEach(function (type) {
         j++;
       }
       type.classList.add("checked");
-      productGridList.innerHTML = "";
-      productList.forEach(function (product, i) {
-        let typeValue = type.className.split(" ")[1];
-        if (product.type.includes(typeValue)) {
-          productGridList.innerHTML += basicItemRenderGrid(product, i);
-        }
-      });
-      addToCart();
+      paginationRender(
+        productList.filter(function (product, i) {
+          let typeValue = type.className.split(" ")[1];
+          if (product.type == typeValue) {
+            return product;
+          }
+        })
+      );
     }
   };
 });
@@ -624,7 +639,8 @@ mobileFilterPrice.forEach(function (price) {
           }
         }
       });
-      addToCart();
+      addToCart()
+      description()
     }
   };
 });
