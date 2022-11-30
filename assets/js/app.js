@@ -42,115 +42,115 @@ document.querySelector(".back-to-top").addEventListener("click", () => {
 
 // CONTENT PRODUCT LIST
 
-// Render product view-mode grid
-const productGridList = document.querySelector(".list-product__grid");
-const products = gItem("productList");
+// // Render product view-mode grid
+// const productGridList = document.querySelector(".list-product__grid");
+// const products = gItem("productList");
 
-products.forEach(function (product, index) {
-  if (index < 6) {
-    var productElement = `<div class="l-4 m-6 c-12 product">
-                <div class="product__link">
-                    <div class="product-item product__img">
-                        <img src="./assets/image/${product.img}"></img>
-                    </div>
+// products.forEach(function (product, index) {
+//   if (index < 6) {
+//     var productElement = `<div class="l-4 m-6 c-12 product">
+//                 <div class="product__link">
+//                     <div class="product-item product__img">
+//                         <img src="./assets/image/${product.img}"></img>
+//                     </div>
     
-                    <div class="product__description-layer">
-                        <div class="product__description">
-                            <div class="product__description--close">
-                                <i class="fa-solid fa-xmark"></i>
-                            </div>
+//                     <div class="product__description-layer">
+//                         <div class="product__description">
+//                             <div class="product__description--close">
+//                                 <i class="fa-solid fa-xmark"></i>
+//                             </div>
     
-                            <div class="product-item">
-                                <div class="product-item__img">
-                                    <div class="dscr--product__img">
-                                        <img src="./assets/image/${product.img}" alt="">
-                                    </div>
-                                </div>
-                            </div>
+//                             <div class="product-item">
+//                                 <div class="product-item__img">
+//                                     <div class="dscr--product__img">
+//                                         <img src="./assets/image/${product.img}" alt="">
+//                                     </div>
+//                                 </div>
+//                             </div>
     
-                            <div class="product__information">
-                                <div class="product-item dscr--product__name">${product.name}</div>
-                                <p class="dscr--product__detail">${product.desc}.</p>
+//                             <div class="product__information">
+//                                 <div class="product-item dscr--product__name">${product.name}</div>
+//                                 <p class="dscr--product__detail">${product.desc}.</p>
                                 
-                                <div class="wrap-price">
-                                    <div class="product-item product__price">$${product.price}</div>
-                                    <div class="buttons__added">
-                                        <input class="minus quantity-btn" type="button" value="-">
-                                        <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-                                        <input class="plus quantity-btn" type="button" value="+">
-                                    </div>
-                                </div>
+//                                 <div class="wrap-price">
+//                                     <div class="product-item product__price">$${product.price}</div>
+//                                     <div class="buttons__added">
+//                                         <input class="minus quantity-btn" type="button" value="-">
+//                                         <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
+//                                         <input class="plus quantity-btn" type="button" value="+">
+//                                     </div>
+//                                 </div>
     
-                                <div class="buy-btn grid_buy-btn">
-                                    <button type="submit" value=${index}>Add to Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+//                                 <div class="buy-btn grid_buy-btn">
+//                                     <button type="submit" value=${index}>Add to Cart</button>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
                     
     
-                    <div class="product-item product__name">${product.name}</div>
-                    <p class="product__detail">${product.desc}.</p>
-                    <div class="product-item product__price">$${product.price}</div>
+//                     <div class="product-item product__name">${product.name}</div>
+//                     <p class="product__detail">${product.desc}.</p>
+//                     <div class="product-item product__price">$${product.price}</div>
     
-                    <div class="mobile-product__information">
-                        <div class="product-item dscr--product__name">${product.name}</div>
-                        <p class="dscr--product__detail">${product.desc}.</p>
+//                     <div class="mobile-product__information">
+//                         <div class="product-item dscr--product__name">${product.name}</div>
+//                         <p class="dscr--product__detail">${product.desc}.</p>
                         
-                        <div class="wrap-price">
-                            <div class="product-item product__price">$${product.price}</div>
-                            <div class="buttons__added">
-                                <input class="minus quantity-btn" type="button" value="-">
-                                <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-                                <input class="plus quantity-btn" type="button" value="+">
-                            </div>
-                        </div>
+//                         <div class="wrap-price">
+//                             <div class="product-item product__price">$${product.price}</div>
+//                             <div class="buttons__added">
+//                                 <input class="minus quantity-btn" type="button" value="-">
+//                                 <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
+//                                 <input class="plus quantity-btn" type="button" value="+">
+//                             </div>
+//                         </div>
     
-                        <div class="buy-btn grid_buy-btn">
-                            <button type="submit" value=${index}>Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
-    productGridList.insertAdjacentHTML("beforeend", productElement);
-  }
-});
+//                         <div class="buy-btn grid_buy-btn">
+//                             <button type="submit" value=${index}>Add to Cart</button>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>`;
+//     productGridList.insertAdjacentHTML("beforeend", productElement);
+//   }
+// });
 
-// Render product view-mode list
-const productListList = document.querySelector(".list-product__list");
+// // Render product view-mode list
+// const productListList = document.querySelector(".list-product__list");
 
-products.forEach(function (product, index) {
-  if (index < 6) {
-    var productElement = `<div class="l-12 product">
-            <div class="product-item">
-                <div class="product-item__img">
-                    <div class="product__img">
-                        <img src="./assets/image/${product.img}" alt="">
-                    </div>
-                </div>
-            </div>
+// products.forEach(function (product, index) {
+//   if (index < 6) {
+//     var productElement = `<div class="l-12 product">
+//             <div class="product-item">
+//                 <div class="product-item__img">
+//                     <div class="product__img">
+//                         <img src="./assets/image/${product.img}" alt="">
+//                     </div>
+//                 </div>
+//             </div>
         
-            <div class="product__information">
-                <div class="product-item product__name">${product.name}</div>
-                <p class="product__detail">${product.desc}</p>
+//             <div class="product__information">
+//                 <div class="product-item product__name">${product.name}</div>
+//                 <p class="product__detail">${product.desc}</p>
                 
-                <div class="wrap-price">
-                    <div class="product-item product__price">$${product.price}</div>
-                    <div class="buttons__added">
-                        <input class="minus quantity-btn" type="button" value="-">
-                        <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
-                        <input class="plus quantity-btn" type="button" value="+">
-                    </div>
-                </div>
+//                 <div class="wrap-price">
+//                     <div class="product-item product__price">$${product.price}</div>
+//                     <div class="buttons__added">
+//                         <input class="minus quantity-btn" type="button" value="-">
+//                         <input class="input-qty" name="" type="text" inputmode="numeric" value="1" min="1" max="10">
+//                         <input class="plus quantity-btn" type="button" value="+">
+//                     </div>
+//                 </div>
         
-                <div class="buy-btn">
-                    <button type="submit" value=${index}>Add to Cart</button>
-                </div>
-            </div>
-            </div>`;
-    productListList.insertAdjacentHTML("beforeend", productElement);
-  }
-});
+//                 <div class="buy-btn">
+//                     <button type="submit" value=${index}>Add to Cart</button>
+//                 </div>
+//             </div>
+//             </div>`;
+//     productListList.insertAdjacentHTML("beforeend", productElement);
+//   }
+// });
 
 description();
 
