@@ -394,12 +394,12 @@ a {
 }
 
 .percent-amount.up {
-  font-size: 8.5em;
+  font-size: 6em;
   color: #17d08c;
 }
 
 .percent-amount.down {
-  font-size: 8rem;
+  font-size: 6rem;
   color:#cc2424
 }
 

@@ -124,12 +124,14 @@ export function getPreviousPrice() {
   let presentPrice = 0;
   topProduct.forEach(function (item) {
     if (item.time != date) {
-      previousPrice += item.product.price;
+      previousPrice += item.product.price * item.amount;
     } else {
-      presentPrice += item.product.price;
+      presentPrice += item.product.price * item.amount;
     }
   });
-  let percent = Math.ceil((presentPrice - previousPrice) / previousPrice / 100);
+  let percent = Math.ceil(
+    ((presentPrice - previousPrice) / previousPrice) * 100
+  );
   if (percent > 0) {
     percentShow.classList.add("up");
     percentShow.classList.remove("down");
