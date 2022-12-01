@@ -2,31 +2,25 @@
 /* PC  */
 @media (min-width:1024px) {
 
-    .side-bar {
-
-   
-
-    }
+    
 
 }
 
 /* Tablet & Mobile  */
 
 @media (max-width:1023px) {
-    .black-layout {
+    /* SIDEBAR  */
+    .side-bar {
+        display: none;
 
-        /* display: block; */
     }
-    .container{
-        width: 100%;
-    }
-    .btn {
-        padding: 10px 15px;
+    
+    /* BODY  */
+    #content,.container {
+        width: 100%;   
+        margin-left: initial; 
     }
 
-    .config__button, .delete__button {
-        display: block;
-    }
 
     .back-to-user__btn {
         display: flex;
@@ -48,14 +42,7 @@
 /* Tablet */
 @media (min-width:740px) and (max-width : 1023px){
    
-    .side-bar {
-        display: none;
-
-    }
-    #content,.container {
-        width: 100%;   
-        margin-left: initial; 
-    }
+    
 
     .side-bar__logo {
 
@@ -106,10 +93,7 @@
         
     }
 
-    .content--mobile,.container--mobile {
-        margin-left: 0;
-    }
-
+    
     .body__util.row {
         flex-direction: column;
     }
