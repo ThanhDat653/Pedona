@@ -9,7 +9,6 @@ let productList = gItem("productList");
 
 //
 function checkInput() {
-  console.log(this.value);
   if (this.max)
     this.value = Math.min(parseInt(this.max), parseInt(this.value)) || "";
   // if max value is less than input value means that value is out of range
@@ -116,7 +115,6 @@ function createEditableImg(img, index) {
       //
       productList[index].img = filename;
       localStorage.setItem("imgconfig", JSON.stringify(filename));
-      console.log(productList[index].img);
     } else {
       //
 
@@ -200,12 +198,10 @@ function productFeatures() {
 
         check = true;
         let changedArea = createArr(document.querySelectorAll(".textarea"));
-        console.log(changedArea);
 
         const errorShow = createArr(
           document.querySelectorAll(".textarea + span")
         );
-        console.log(errorShow);
         function validCheck() {
           for (let i = 0; i < errorShow.length; i++) {
             if (errorShow[i].classList.contains("invalid")) {

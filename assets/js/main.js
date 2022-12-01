@@ -142,7 +142,6 @@ const searchBar = document.querySelectorAll(".search-bar");
 const searchInput = createArr(document.querySelectorAll(".search-input"));
 for (let i = 0; i < searchInput.length; i++) {
   searchInput[i].onfocus = function () {
-    console.log(1);
     searchBar[i].style.borderColor = "#cc2424";
   };
   searchInput[i].onblur = function () {

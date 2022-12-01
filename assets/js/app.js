@@ -14,7 +14,12 @@ import {
   userKey,
   getUserCurrent,
 } from "./form.js";
-import { basicItemRenderGrid, basicItemRenderList } from "./filter.js";
+import {
+  basicItemRenderGrid,
+  basicItemRenderList,
+  filterHandler,
+  sortByPrice,
+} from "./filter.js";
 //  HEADER SCROLL
 
 const headerElement = document.querySelector(".header");
@@ -109,7 +114,6 @@ function renderPageNumber(i) {
 }
 
 export function paginationRender(products) {
-  const productList = gItem("productList");
   const prevPage = document.querySelector(".pagination-prev ");
   const nextPage = document.querySelector(".pagination-next ");
   let curPage = 1;
@@ -185,6 +189,7 @@ export function paginationRender(products) {
       }
     };
     function changePage(curPage, products) {
+      const productList = gItem("productList");
       productGridList.innerHTML = "";
       products.forEach(function (product, i) {
         if (
@@ -231,7 +236,7 @@ export function paginationRender(products) {
   // addToCart();
 }
 
-paginationRender(products);
+filterHandler();
 
 // DESCRIPTION
 
@@ -354,6 +359,7 @@ let cartOfUserCurrent = userCurrent.carts;
 
 // add new product to productList of userCurrent
 export function addToCart() {
+  // const
   let buyBtn = document.querySelectorAll(".buy-btn > button");
   let quantityInput = document.querySelectorAll(".input-qty");
 
@@ -715,7 +721,7 @@ sideMenu.addEventListener("click", function () {
 
 // addToCart();
 renderCartlistOfUserCurrent();
-setQuantityOfProduct();
+// setQuantityOfProduct();
 renderOrderListOfUserCurrent();
 orderList();
 

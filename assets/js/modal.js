@@ -73,7 +73,6 @@ prodImg.addEventListener("change", function showPre(event) {
       .classList.remove("invalid");
     let src = "./assets/image/" + filename;
 
-    console.log(src);
     //
     preview.src = src;
     preview.style.display = "block";
@@ -104,11 +103,10 @@ export function setColor() {
   return colorList;
 }
 let colorList = setColor();
-// console.log(colorList);
 function colorConfig(item) {
   if (item.includes("-")) {
     const splited = item.split("-");
-    // console.log(splited);
+
     return (
       "linear-gradient(to right, " +
       splited[0] +
@@ -146,12 +144,10 @@ function renderAllProductColor() {
     </span></div>
     </div>
 </label>`;
-    // console.log(colorConfig(item));
   });
 }
 
 let colorArr = document.querySelectorAll("input.color");
-// console.log("🚀 ~ file: modal.js ~ line 145 ~ colorArr", colorArr);
 const inputOthers = document.getElementById("input_others");
 let checkOther = document.getElementById("product__color--orthers");
 inputOthers.onclick = function () {
@@ -196,7 +192,6 @@ inputPrice.addEventListener("paste", checkInput);
 inputPrice.addEventListener("change", checkInput);
 
 export function checkInput() {
-  console.log(this.value);
   if (this.max)
     this.value = Math.min(parseInt(this.max), parseInt(this.value)) || "";
   // if max value is less than input value means that value is out of range
@@ -281,7 +276,6 @@ function validModal() {
     let errorShow = document
       .querySelector("#" + modalInputs[i].id + "+ span")
       .classList.contains("invalid");
-    console.log(errorShow);
     if (errorShow) {
       return false;
     }
