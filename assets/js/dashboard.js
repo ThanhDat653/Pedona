@@ -48,7 +48,8 @@ function basicPercentageProduct(product, item) {
     <div class="percentage ${item.amount}"></div>
   </div>
 
-     <div class="product-amount">${item.amount} was bought</div>
+     <div class="product-amount">${item.amount}</div>
+     <span> was bought</span>
 
 </div>`;
 }

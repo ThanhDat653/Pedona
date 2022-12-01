@@ -381,7 +381,23 @@ a {
   height: 400px;
   background: #fff;
   border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.dashboard-item__body.dashboard-item__body--productList {
+  display: block;
+}
+
+.dashboard-item__header {
+  text-transform: uppercase;
+}
+
+.percent-amount {
+  font-size: 8.5em;
+  color: #17d08c;
 }
 
 #best-seller {
@@ -393,8 +409,58 @@ a {
   position: relative;
   background-color: #f5f5f5;
   border-radius: 8px;
-  
-  
+}
+
+.chart-wrapper {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-item {
+  height: 20px;
+  width: 200px;
+  margin-bottom: 30px;
+  border-radius: 2px;
+  position: relative;
+}
+
+.chart-item__new {
+  background-color: rgb(49, 98, 190);
+  opacity: 0.8;
+
+}
+
+.chart-item__new::after {
+  content: "present";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 1.3rem;
+  color: rgb(49, 98, 190);
+}
+
+.chart-item__old::after {
+  content: "previous";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 1.3rem;
+  color: var(--primary-color);
+}
+
+.chart-item__old {
+  background-color: var(--primary-color);
+  opacity: 0.8;
+}
+
+.render-box__dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
 }
 
 .product-container {
@@ -402,7 +468,12 @@ a {
   align-items: center;
 justify-content:space-around;
 border-radius: 8px;
+font-weight: 100;
 
+}
+
+.product-name {
+  font-weight: 600;
 }
 
 .product-information {
@@ -419,9 +490,9 @@ border-radius: 8px;
   position: relative;
   width: 40%;
   height: 10px;
-  border: #111111 solid 2px;
+  border: #059862 solid 2px;
 
-  background-color: #cccccc;
+  background-color: #fff;
   border-radius: 20px;
   top:0;
   left:0;
@@ -437,6 +508,10 @@ border-radius: 8px;
   left:0;
   bottom: 0;
   right: 0;
+}
+
+.product-amount {
+  color: var(--primary-color);
 }
 
 .information-money {
