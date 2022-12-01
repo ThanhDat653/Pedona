@@ -1,4 +1,9 @@
-import { getTopProduct, renderTopProduct, showMoney } from "./dashboard.js";
+import {
+  getPreviousPrice,
+  getTopProduct,
+  renderTopProduct,
+  showMoney,
+} from "./dashboard.js";
 import { tableBodyOrder } from "./main.js";
 
 import { createArr, orderKey } from "./main.js";
@@ -105,6 +110,7 @@ function fullCheck(item, index, button) {
   sItem(orderKey, orderList);
   renderTopProduct();
   showMoney();
+  getPreviousPrice();
 }
 
 function baseRenderOrder(i) {
@@ -221,10 +227,6 @@ function renderOrderDetails() {
         </div>`;
         });
         let i = 0;
-        console.log(
-          orderList[parseInt(OrderNumber[indexButton].innerHTML) - 1]
-            .productList.length
-        );
         while (
           i <=
           orderList[parseInt(OrderNumber[indexButton].innerHTML) - 1]

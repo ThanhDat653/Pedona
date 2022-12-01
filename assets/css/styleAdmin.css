@@ -158,7 +158,6 @@ a {
   top: 20px;
   bottom: 20px;
   left: 20px;
-  box-sizing: initial;
   border-radius: 10px;
   transition:  width 0.5s ease-in-out;
 }
@@ -172,8 +171,8 @@ a {
 }
 
 .side-bar__header {
-  width: 100%;
-  text-align: center;
+  /* width: 100%; */
+  /* text-align: center; */
 }
 
 #toggle-sidebar,#close-sidebar {
@@ -215,7 +214,6 @@ a {
   overflow: hidden;
   position: absolute;
   top:0px;
-  left: 0px;
   padding: 0;
   margin-top: 76px;
   list-style: none;
@@ -395,9 +393,24 @@ a {
   text-transform: uppercase;
 }
 
-.percent-amount {
+.percent-amount.up {
   font-size: 8.5em;
   color: #17d08c;
+}
+
+.percent-amount.down {
+  font-size: 8rem;
+  color:#cc2424
+}
+
+.percent-amount.up::after {
+  content: "⬆";
+  color: #17d08c;
+}
+
+.percent-amount.down::after {
+  content: "⬇";
+  color: #cc2424;
 }
 
 #best-seller {

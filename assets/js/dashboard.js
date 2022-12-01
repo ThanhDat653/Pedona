@@ -9,6 +9,7 @@ let topProduct = [];
 if (orderList.length != 0) {
   renderTopProduct();
   showMoney();
+  getPreviousPrice();
 }
 export function getTopProduct() {
   const orderList = gItem("orderList");
@@ -27,6 +28,7 @@ export function getTopProduct() {
             var obj = {
               product: product,
               amount: Math.max(1, list.amount),
+              time: order.time,
             };
             topProduct.push(obj);
           } else {
@@ -82,8 +84,8 @@ function getTotalAmount() {
 }
 function setPercentage() {
   let max = getTotalAmount();
-  let test = document.querySelectorAll(".percentage");
-  test.forEach(function (item) {
+  let productPercent = document.querySelectorAll(".percentage");
+  productPercent.forEach(function (item) {
     let amount = item.className.split(" ")[1];
     let percent = (amount * 100) / max;
     item.style.width = percent + "%";
@@ -109,4 +111,33 @@ export function showMoney() {
 
   totalShowMoney.innerHTML = getTotalPrice() + "$";
   totalShowAmount.innerHTML = getTotalAmount() + " Products were sold";
+}
+
+export function getPreviousPrice() {
+  const oldPrice = document.querySelector(".chart-item__old");
+  const newPrice = document.querySelector(".chart-item__new");
+  const percentShow = document.querySelector(".percent-amount");
+  let today = new Date();
+  let date =
+    today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
+  let previousPrice = 0;
+  let presentPrice = 0;
+  topProduct.forEach(function (item) {
+    if (item.time != date) {
+      previousPrice += item.product.price;
+    } else {
+      presentPrice += item.product.price;
+    }
+  });
+  let percent = Math.ceil((presentPrice - previousPrice) / previousPrice / 100);
+  if (percent > 0) {
+    percentShow.classList.add("up");
+    percentShow.classList.remove("down");
+  } else {
+    percentShow.classList.add("down");
+    percentShow.classList.remove("up");
+  }
+  percentShow.innerHTML = percent + " %";
+  oldPrice.innerHTML = "$ " + previousPrice;
+  newPrice.innerHTML = "$ " + presentPrice;
 }
