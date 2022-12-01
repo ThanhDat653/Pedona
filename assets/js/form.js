@@ -116,6 +116,8 @@ function checkLogin() {
     formElemnt.classList.remove("open");
     formElemnt.classList.add("close");
     document.getElementById("loginBtn").classList.add("close");
+    document.getElementById("header-login").classList.add("close");
+    document.getElementById("admin-web").style.display = "block";
     showUserInfo();
     isAdmin();
     mobileLogin.classList.add("close");

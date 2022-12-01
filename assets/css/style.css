@@ -757,6 +757,10 @@
     margin-right: 0;
 }
 
+#admin-web {
+    display: none;
+}
+
 /* Mobile Menu */
 .header__side-menu-container {
     display: none;

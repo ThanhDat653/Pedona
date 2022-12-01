@@ -139,7 +139,30 @@ function creatOrderList() {
     return 0;
   } else {
     const orders = [
-      
+      {
+        fullyCheck: true,
+        name: "Nguyen Thanh Dat",
+        orderID: 0,
+        productList: [
+          {
+            amount: 1,
+            check: true,
+            total: 399,
+            product: {
+              name: "Nike Air Max 270",
+              type: "AirMax",
+              id: "AM270-white",
+              color: "white",
+              price: 399,
+              img: "nike_airmax_270_white.png",
+              desc: "Nike's first lifestyle Air Max brings you style, comfort and big attitude in the Nike Air Max 270. The design draws inspiration from Air Max icons, showcasing Nike's greatest innovation with its large window and fresh array of colours.",
+            },
+          }
+        ],
+        time: "30-11-2022",
+        total: 399,
+        userID: 1
+      }
     ];
     localStorage.setItem("orderList", JSON.stringify(orders));
   }

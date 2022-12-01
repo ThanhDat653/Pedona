@@ -9,7 +9,7 @@ const productList = gItem("productList");
 const productGridList = document.querySelector(".list-product__grid");
 const productListList = document.querySelector(".list-product__list");
 const searchButton = document.querySelector(".header--search__btn");
-const searchInput = document.querySelector(".header--search__input");
+const searchInput = document.querySelectorAll(".header--search__input");
 
 //
 
@@ -228,7 +228,7 @@ function categoryRender() {
   //
 
   //
-  function searchProduct() {
+  function searchProduct(searchInput) {
     const productList = gItem("productList");
     let searchValue = searchInput.value.toLowerCase().trim();
     const colorFil = document.querySelector(".color.checked ");
@@ -353,12 +353,15 @@ function categoryRender() {
     filterHandler();
   };
   searchButton.addEventListener("click", searchProduct);
-  searchInput.addEventListener("keydown", function (event) {
-    if (event.key == "Enter") {
-      event.preventDefault();
-      searchProduct();
-    }
-  });
+  searchInput.forEach(function(item) {
+    item.addEventListener("keydown", function (event) {
+      if (event.key == "Enter") {
+        event.preventDefault();
+        searchProduct(item);
+      }
+    });
+
+  })
 }
 //
 

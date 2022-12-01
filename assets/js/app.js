@@ -719,6 +719,7 @@ sideMenu.addEventListener("click", function () {
   ordersListContainerElement.classList.remove("open");
 });
 
+
 // addToCart();
 renderCartlistOfUserCurrent();
 // setQuantityOfProduct();
