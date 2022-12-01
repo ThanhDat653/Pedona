@@ -690,7 +690,7 @@ sideMenu.addEventListener("click", function () {
 
 // addToCart();
 renderCartlistOfUserCurrent();
-setQuantityOfProduct();
+// setQuantityOfProduct();
 renderOrderListOfUserCurrent();
 orderList();
 

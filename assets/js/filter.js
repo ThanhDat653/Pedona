@@ -238,54 +238,61 @@ function categoryRender() {
     productListList.innerHTML = "";
     if (colorFil != null && typeCheck != null) {
       paginationRender(
-        productList.filter(function (item, index) {
-          if (
-            item.name.includes(searchValue) &&
-            item.price <= filterPrice.value - 1 &&
-            item.color == colorFil.className.split(" ")[2] &&
-            item.type == typeCheck.className.split(" ")[2]
-          ) {
-            return item;
-          }
-        })
-      );
-    } else {
-      if (colorFil != null) {
-        console.log(1);
-        paginationRender(
-          productList.filter(function (item) {
+        sortByPrice(
+          productList.filter(function (item, index) {
             if (
-              item.name.toLowerCase().includes(searchValue) &&
-              colorFil.className.split(" ")[2] == item.color &&
-              item.price <= filterPrice.value - 1
+              item.name.includes(searchValue) &&
+              item.price <= filterPrice.value - 1 &&
+              item.color == colorFil.className.split(" ")[2] &&
+              item.type == typeCheck.className.split(" ")[2]
             ) {
               return item;
             }
           })
-        );
-      } else {
-        if (typeCheck != null) {
-          paginationRender(
+        )
+      );
+    } else {
+      if (colorFil != null) {
+        paginationRender(
+          sortByPrice(
             productList.filter(function (item) {
               if (
                 item.name.toLowerCase().includes(searchValue) &&
-                item.type == typeCheck.className.split(" ")[2] &&
+                colorFil.className.split(" ")[2] == item.color &&
                 item.price <= filterPrice.value - 1
               ) {
                 return item;
               }
             })
+          )
+        );
+      } else {
+        if (typeCheck != null) {
+          sortByPrice(
+            paginationRender(
+              productList.filter(function (item) {
+                if (
+                  item.name.toLowerCase().includes(searchValue) &&
+                  item.type == typeCheck.className.split(" ")[2] &&
+                  item.price <= filterPrice.value - 1
+                ) {
+                  return item;
+                }
+              })
+            )
           );
         } else {
           paginationRender(
-            productList.filter(function (item, index) {
-              if (
-                item.name.toLowerCase().includes(searchValue) &&
-                item.price <= filterPrice.value - 1
-              ) {
-                return item;
-              }
-            })
+            sortByPrice(
+              productList.filter(function (item, index) {
+                if (
+                  item.name.toLowerCase().includes(searchValue) &&
+                  item.price <= filterPrice.value - 1
+                ) {
+                  return item;
+                }
+              })
+            )
           );
         }
       }

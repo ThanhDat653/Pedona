@@ -65,7 +65,55 @@
     </div>
 
     <div id="content" class="content content--mobile">
-      <div id="products-page" class="container container--mobile shadow-wrap products-page">
+      <div class="container">
+        <div class="content__header">
+          <h2 class="header__text">DashBoard</h2>
+        </div>
+        <div class="content__body">
+          <div class="row dashboard center-text">
+            <div class="col l-4">
+              <div class="dashboard-item">
+                <div class="dashboard-item__header">
+                  <h2>Most purchased product</h2>
+                </div>
+                <div id="best-seller" class="dashboard-item__body">
+                  <div class="render-box">
+                    <div class="product-container">
+                      <p class="empty-order__text">HAVEN'T SELL ANYTHING YET </p>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col l-4">
+              <div class="dashboard-item">
+                <div class="dashboard-item__header">
+                  <h2>Money</h2>
+                </div>
+                <div class="dashboard-item__body">
+                  <div class="information-money">
+                    <p class="empty-order__text">HAVEN'T SELL ANYTHING YET </p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col l-4">
+              <div class="dashboard-item">
+                <div class="dashboard-item__header">
+                  <h2>dashboard</h2>
+                </div>
+                <div class="dashboard-item__body">
+                  <div class="render-box"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="products-page" class="container">
         <div class="content__header">
           <h2 class="header__text">products</h2>
         </div>
@@ -108,7 +156,7 @@
         </div>
       </div>
 
-      <div id="users-page" class="container container--mobile shadow-wrap users-page">
+      <div id="users-page" class="container">
         <div class="content__header">
           <h2 class="header__text">users</h2>
         </div>
@@ -136,7 +184,7 @@
           </div>
         </div>
       </div>
-      <div id="orders-page" class="container container--mobile shadow-wrap carts-page">
+      <div id="orders-page" class="container">
         <div class="content__header">
           <h2 class="header__text">orders</h2>
         </div>
@@ -169,7 +217,8 @@
                           <div class="col l-1 m-2 c-2">no.</div>
                           <div class="col l-11 m-2 c-2">orders information</div>
                         </div>
-                        <div id="table__body--orders" class="table__body">
+                        <div id="table__body--orders" class="table__body center-text">
+                          <span class="empty-order__text">THERE ARENT ANY ORDERS YET!!</span>
                         </div>
                 </div>
               </div>
@@ -269,6 +318,7 @@
           <!-- <script type="module" src="./assets/scripts/content/users.js"></script> -->
           <!-- <script type="module" src="./assets/scripts/content/product.js"></script> -->
           <!-- <script type="module" src="./assets/js/form.js"></script> -->
+          <script type="module" src="./assets/js/dashboard.js"></script>
           <script type="module" src="./assets/js/orders.js"></script>
           <script type="module" src="./assets/js/modal.js"></script>
           <script type="module" src="./assets/js/main.js"></script>

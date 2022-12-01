@@ -1,3 +1,4 @@
+import { getTopProduct, renderTopProduct, showMoney } from "./dashboard.js";
 import { tableBodyOrder } from "./main.js";
 
 import { createArr, orderKey } from "./main.js";
@@ -100,8 +101,10 @@ function fullCheck(item, index, button) {
     button.classList.remove("true");
     button.innerHTML = `<i class="fa-solid fa-caret-left fa-xl"></i>`;
   }
+
   sItem(orderKey, orderList);
-  // orderItemCheck();
+  renderTopProduct();
+  showMoney();
 }
 
 function baseRenderOrder(i) {
@@ -149,6 +152,7 @@ function baseRenderOrder(i) {
   );
 }
 const orderList = gItem("orderList");
+
 function renderOrderDetails() {
   const orderView = document.querySelectorAll(".details-view");
   const viewButton = document.querySelectorAll(".order-full");
@@ -216,9 +220,17 @@ function renderOrderDetails() {
           </div>
         </div>`;
         });
-        let h = orderView[indexButton].scrollHeight;
         let i = 0;
-        while (i <= h) {
+        console.log(
+          orderList[parseInt(OrderNumber[indexButton].innerHTML) - 1]
+            .productList.length
+        );
+        while (
+          i <=
+          orderList[parseInt(OrderNumber[indexButton].innerHTML) - 1]
+            .productList.length *
+            403
+        ) {
           orderView[indexButton].style.height = i + "px";
           i += 3;
         }
@@ -261,7 +273,9 @@ export function outputOrders() {
   renderOrderDetails();
   sItem(orderKey, orderList);
 }
-outputOrders();
+if (orderList.length != 0) {
+  outputOrders();
+}
 const searchInput = document.querySelector(".order.search-input");
 function searchOrderList() {
   const searchValue = searchInput.value.toLowerCase().trim();
