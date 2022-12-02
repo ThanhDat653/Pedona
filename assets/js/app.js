@@ -355,11 +355,11 @@ userList.forEach(function (item) {
 
 document.querySelector(".user-name").innerText = userCurrent.name;
 
+// Create a new cart for current user
 let cartOfUserCurrent = userCurrent.carts;
 
 // add new product to productList of userCurrent
 export function addToCart() {
-  // const
   let buyBtn = document.querySelectorAll(".buy-btn > button");
   let quantityInput = document.querySelectorAll(".input-qty");
 
@@ -369,6 +369,7 @@ export function addToCart() {
         openForm();
       } else {
         var amount = parseInt(quantityInput[index].value);
+        // create a new product in cart
         var temp = {
           product: products[item.value],
           amount: amount,
@@ -509,6 +510,9 @@ userList.forEach(function (item) {
 const purchaseButton = document.querySelector(".cart-purchase-btn");
 
 purchaseButton.addEventListener("click", function () {
+  const address = prompt("Your address: ");
+  const phoneNumber = prompt("Your phone number: ");
+
   let today = new Date();
   let date =
     today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
@@ -531,6 +535,8 @@ purchaseButton.addEventListener("click", function () {
     time: date,
     total: total,
     fullyCheck: false,
+    address: address,
+    phone: phoneNumber
   };
 
   // update ordersList
@@ -568,7 +574,10 @@ function renderOrderListOfUserCurrent() {
                 <div class="detail-info">
                     <span class="orders-item__time">Date: ${order.time}</span>
                     <span class="orders-item__total">Total:$ ${order.total}</span>
+                    
                 </div>
+
+
             </div>
 
         </div>
@@ -588,15 +597,17 @@ function renderOrderListOfUserCurrent() {
               <div class="header-info">
                   <span class="orders-item__user-name">${order.name}</span>
                   <span class="orders-item__order-name">Order ID: ${order.orderID}</span>
+                  <span class="orders-item__address">Address: ${order.address}</span>
               </div>
 
               <div class="detail-info">
                   <span class="orders-item__time">Date: ${order.time}</span>
                   <span class="orders-item__total"><mark>Total: $ ${order.total}</mark></span>
+                  <span class="orders-item__phone">Phone: ${order.phone}</span>
               </div>
             </div>
 
-            </div>
+          </div>
 
             <ul class="orders-item_list">
             

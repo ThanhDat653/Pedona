@@ -114,6 +114,7 @@ export function showMoney() {
 }
 
 export function getPreviousPrice() {
+  getTopProduct()
   const oldPrice = document.querySelector(".chart-item__old");
   const newPrice = document.querySelector(".chart-item__new");
   const percentShow = document.querySelector(".percent-amount");
@@ -129,7 +130,7 @@ export function getPreviousPrice() {
       presentPrice += item.product.price;
     }
   });
-  let percent = Math.ceil((presentPrice - previousPrice) / previousPrice / 100);
+  let percent = Math.ceil((presentPrice - previousPrice) / previousPrice * 100);
   if (percent > 0) {
     percentShow.classList.add("up");
     percentShow.classList.remove("down");
