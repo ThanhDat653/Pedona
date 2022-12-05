@@ -138,6 +138,14 @@ function baseRenderOrder(i) {
     orderList[i].total +
     `$</div>
     </div>
+    <div class="row   mt-16 spc-btw">
+    <div class="col ">Address : ` +
+    orderList[i].address +
+    `</div>
+<div class="col ">Phone: ` +
+    orderList[i].phone +
+    `</div>
+  </div>
     </div>
 	<div class="col l-2 l-o-1 ">
     <span class="check ` +

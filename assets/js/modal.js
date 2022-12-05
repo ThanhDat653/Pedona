@@ -259,9 +259,7 @@ function validModal() {
     }
   }
   for (let i = 0; i < productList.length; i++) {
-    if (
-      productList[i].id.toLowerCase().includes(id.value.toLowerCase().trim())
-    ) {
+    if (productList[i].id.toLowerCase() == id.value.toLowerCase().trim()) {
       alert("This ID product is already in the Data");
       return false;
     }
