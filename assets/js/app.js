@@ -499,14 +499,6 @@ const ordersKey = "orderList";
 const ordersList = gItem(ordersKey) || defaultOrders;
 sItem(ordersKey, ordersList);
 
-// find an order of current user
-var ordersOfUserCurrent;
-
-userList.forEach(function (item) {
-  if (item.userID === gItem("userCurrent").userID)
-    ordersOfUserCurrent = item.orders;
-});
-
 const purchaseButton = document.querySelector(".cart-purchase-btn");
 
 purchaseButton.addEventListener("click", function () {
@@ -526,6 +518,8 @@ purchaseButton.addEventListener("click", function () {
   if (ordersList.length != 0)
     ID = JSON.parse(ordersList[ordersList.length - 1].orderID) + 1;
   else ID = 0;
+
+  // add new orders to the order list
 
   ordersList[ordersList.length] = {
     name: userCurrent.name,
@@ -667,7 +661,6 @@ export function orderItemCheck() {
   ordersListOfUserCurrent.forEach(function (order, index) {
     if (order.fullyCheck == true) {
       orderItemHeading[index].classList.add("background-color__checked");
-      // mobileOrderItemHeading[index].classList.add("background-color__checked");
     }
   });
 }
@@ -731,9 +724,7 @@ sideMenu.addEventListener("click", function () {
 });
 
 
-// addToCart();
 renderCartlistOfUserCurrent();
-// setQuantityOfProduct();
 renderOrderListOfUserCurrent();
 orderList();
 
