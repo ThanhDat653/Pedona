@@ -116,6 +116,9 @@ function renderPageNumber(i) {
 export function paginationRender(products) {
   const prevPage = document.querySelector(".pagination-prev ");
   const nextPage = document.querySelector(".pagination-next ");
+  const productGridList = document.querySelector(".list-product__grid");
+  const productListList = document.querySelector(".list-product__list");
+
   let curPage = 1;
   const productPerPage = 6;
   const numberOfProducts = products.length || 0;
@@ -530,7 +533,7 @@ purchaseButton.addEventListener("click", function () {
     total: total,
     fullyCheck: false,
     address: address,
-    phone: phoneNumber
+    phone: phoneNumber,
   };
 
   // update ordersList
@@ -722,7 +725,6 @@ sideMenuLayer.addEventListener("click", function () {
 sideMenu.addEventListener("click", function () {
   ordersListContainerElement.classList.remove("open");
 });
-
 
 renderCartlistOfUserCurrent();
 renderOrderListOfUserCurrent();
